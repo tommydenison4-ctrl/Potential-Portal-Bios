@@ -20,24 +20,37 @@
 <main class="wrap">
   <!-- SPLASH / TITLE VIEW -->
   <section id="view-splash" hidden>
-    <div class="splash-head">
+    <div class="splash-hero">
+      <p class="splash-kicker">Player Evaluation Library</p>
       <h1 class="splash-title">Player Books</h1>
-      <p class="splash-sub">Player evaluation library — every player graded, banded and called in the format of the printed books. Pick a direction to start.</p>
+      <p class="splash-sub">Every player graded, banded and called in the format of the printed books. Pick a direction to start.</p>
+      <div class="splash-stats">
+        <div class="sstat"><span class="sstat-n" id="statPlayers">—</span><span class="sstat-l">Players evaluated</span></div>
+        <div class="sstat"><span class="sstat-n" id="statBooks">—</span><span class="sstat-l">Player Books</span></div>
+        <div class="sstat"><span class="sstat-n">2</span><span class="sstat-l">Directions</span></div>
+      </div>
     </div>
     <div class="splash-choices">
       <a class="choice-card" href="#/up">
         <span class="choice-dir">FCS — Moving Up</span>
+        <span class="choice-count" id="upCount">—</span>
         <span class="choice-desc">FCS players evaluated to move up to G6 / P4 — full Player Book pages: band, pro track on the two baselines, fits, The Call.</span>
         <span class="choice-meta" id="splashUpMeta"></span>
         <span class="choice-go">Enter the directory →</span>
       </a>
       <a class="choice-card" href="#/down">
         <span class="choice-dir">P4 — Moving Down</span>
+        <span class="choice-count" id="downCount">—</span>
         <span class="choice-desc">P4 players evaluated to move down to G6 — the same Player Book format, run in reverse.</span>
         <span class="choice-meta" id="splashDownMeta"></span>
         <span class="choice-go">Enter the directory →</span>
       </a>
     </div>
+    <a class="compare-banner" href="#/compare-conferences">
+      <span class="cb-title">Conference comparison</span>
+      <span class="cb-desc">Who has what, where, at what year — the nine books side by side: conference inventory, the position grid, class years, and the ULM &amp; UTEP room cliffs.</span>
+      <span class="choice-go">Open the comparison →</span>
+    </a>
   </section>
 
   <!-- DOWN EMPTY STATE -->
@@ -55,7 +68,7 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -122,6 +135,15 @@
   <section id="view-compare" hidden>
     <p class="player-tools"><a href="#/up" class="back back-dir">← Back to directory</a><button id="printBtnCmp" class="btn-print" type="button">Print / Save PDF</button></p>
     <div id="compareBody"></div>
+  </section>
+
+  <!-- CONFERENCE COMPARISON VIEW -->
+  <section id="view-comparison" hidden>
+    <div class="dir-head">
+      <h1 class="dir-title">Conference comparison</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a></span>
+    </div>
+    <div id="comparisonBody"></div>
   </section>
 </main>
 

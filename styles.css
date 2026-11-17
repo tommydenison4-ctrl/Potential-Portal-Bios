@@ -135,6 +135,47 @@ table.fits th{text-transform:none;letter-spacing:0;font-size:13px;color:var(--in
 .fits-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 img{max-width:100%}
 
+/* ---------------- splash hero ---------------- */
+.splash-hero{background:linear-gradient(150deg,#0f172a 0%,#1e293b 55%,#334155 100%);border-radius:14px;padding:46px 24px 36px;text-align:center;margin:22px 0 0;color:#fff}
+.splash-kicker{margin:0;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:#2dd4bf}
+.splash-hero .splash-title{font-size:clamp(46px,9vw,74px);font-weight:800;letter-spacing:-.02em;line-height:1.02;color:#fff;margin:10px 0 12px}
+.splash-hero .splash-sub{color:#cbd5e1;max-width:600px;margin:0 auto;font-size:16.5px}
+.splash-stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:30px}
+.sstat{min-width:128px;padding:12px 10px 2px;border-top:2px solid #475569}
+.sstat-n{display:block;font-size:36px;font-weight:800;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums}
+.sstat-l{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:#94a3b8;margin-top:3px}
+.choice-card{padding:26px}
+.choice-dir{font-size:22px}
+.choice-count{display:block;font-size:48px;font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.choice-meta{font-size:14px}
+.compare-banner{display:flex;flex-direction:column;gap:7px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:12px;padding:20px 24px;margin:0 0 30px;color:var(--ink)}
+.compare-banner:hover{border-color:var(--accent2);border-left-color:var(--accent2);text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.cb-title{font-size:19px;font-weight:700;color:var(--accent)}
+.cb-desc{color:var(--mut)}
+
+/* ---------------- conference comparison ---------------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+table.ctable{min-width:680px}
+table.ctable th.ctr,table.ctable td.ctr{text-align:center}
+table.ctable td.ctr{padding:8px 6px}
+.cmp-note{border-left:4px solid var(--accent);background:#f1f5f9;padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0 12px;font-size:14px}
+.roster-tag{color:var(--mut);font-weight:600;font-size:12.5px;white-space:nowrap}
+.grid-n{display:block;font-size:17px;font-weight:700;line-height:1.15}
+.grid-sub{display:block;font-size:11.5px;color:#475569;font-variant-numeric:tabular-nums;white-space:nowrap}
+.heat-empty{color:#cbd5e1}
+.fy-tag{display:inline-block;background:var(--nobg);color:var(--no);border-radius:5px;font-size:10.5px;font-weight:700;padding:1px 6px;vertical-align:1px;white-space:nowrap}
+.stackbar{display:inline-flex;width:110px;height:8px;border-radius:4px;overflow:hidden;background:#e2e8f0;vertical-align:middle}
+.stackbar .sb1{background:#cbd5e1}.stackbar .sb2{background:#94a3b8}.stackbar .sb3{background:#64748b}.stackbar .sb4{background:#334155}
+.mass-cell{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.massbar{display:inline-block;width:64px;height:7px;border-radius:4px;background:#e2e8f0;overflow:hidden}
+.massbar>span{display:block;height:100%;background:var(--hv)}
+.school-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:10px 0 4px}
+.school-tools label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--mut);font-weight:600}
+.school-tools .grow{flex:1 1 220px}
+.school-tools input[type=search]{font:inherit;font-size:14.5px;color:var(--ink);padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;min-width:150px}
+th[data-ssort]{cursor:pointer;user-select:none}
+th[data-ssort]:hover{color:var(--ink)}
+
 /* ---------------- mobile (<=720px) ---------------- */
 @media(max-width:720px){
   .wrap{padding:0 12px}
@@ -191,6 +232,30 @@ img{max-width:100%}
   .pl-rung{min-height:0}
 }
 
+/* ---------------- splash + comparison on mobile ---------------- */
+@media(max-width:720px){
+  .splash-hero{padding:32px 16px 26px;margin-top:14px}
+  .splash-stats{gap:10px;margin-top:22px}
+  .sstat{flex:1 1 0;min-width:0;padding:10px 4px 2px}
+  .sstat-n{font-size:27px}
+  .sstat-l{font-size:13px}
+  .choice-card{padding:20px}
+  .choice-count{font-size:40px}
+  .compare-banner{padding:17px 18px}
+  .cb-title{font-size:18px}
+  /* comparison tables scroll inside their wrappers — the page never scrolls sideways */
+  .tbl-scroll{margin:0 -2px}
+  table.ctable{font-size:14px}
+  .grid-n{font-size:15px}
+  .grid-sub{font-size:11px}
+  .stackbar{width:78px}
+  .massbar{width:44px}
+  .school-tools label{flex:1 1 100%}
+  .school-tools input[type=search]{min-width:0;width:100%;min-height:44px;padding:10px 9px}
+  .school-tools .result-count{margin-left:0}
+  th[data-ssort]{padding-top:12px;padding-bottom:12px}
+}
+
 /* ---------------- print ---------------- */
 @page{margin:13mm}
 @page cmp{size:landscape;margin:11mm}
@@ -206,6 +271,11 @@ img{max-width:100%}
   .chip,.hv,.ulm-badge,.band .rung,.pl-rung,.pl-tag,.pro-note,.verdict{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   table{min-width:0}
   .table-card{overflow:visible}
+  .tbl-scroll{overflow:visible}
+  .splash-hero{background:#fff;color:#000;border:1px solid #94a3b8}
+  .splash-hero .splash-title,.sstat-n{color:#000}
+  .splash-hero .splash-sub{color:#334155}
+  .school-tools{display:none!important}
   .cmp-grid{font-size:11px;border-color:#94a3b8}
   .cmp-label,.cmp-v{border-color:#cbd5e1}
   .cmp-grid,.cmp-label{-webkit-print-color-adjust:exact;print-color-adjust:exact}

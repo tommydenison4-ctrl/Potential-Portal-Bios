@@ -1,5 +1,7 @@
 'use strict';
 let UP = [], DOWN = [];
+let CMP = null;             // conference comparison dataset (comparison.json)
+let schoolQ = '', schoolSortKey = 'n', schoolSortDir = -1; // school table state
 let PLAYERS = [];           // the current direction's dataset
 let byId = {};              // ids in the current dataset
 const byIdAll = {};         // every loaded player, both directions (deep links)
@@ -72,7 +74,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -324,6 +326,191 @@ function renderCompare(players) {
     ).join('') + '</div>';
 }
 
+/* ---------------- conference comparison ---------------- */
+const f1 = x => (x == null ? '—' : Number(x).toFixed(1));
+const bookLabel = b => `${esc(b.book)}${b.is_roster ? ' <span class="roster-tag">(roster)</span>' : ''}`;
+const cmpNote = html => `<div class="cmp-note">${html}</div>`;
+
+function renderConfTable() {
+  const rows = CMP.conference_table.map(b => `
+    <tr>
+      <td><span class="pname">${bookLabel(b)}</span><br><span class="p-sub">${b.schools} school${b.schools === 1 ? '' : 's'} · ${b.offense_n} off / ${b.defense_n} def</span></td>
+      <td class="num">${b.n}</td>
+      <td class="num">${f1(b.median_grade)}</td>
+      <td class="num">${b.p4_likely}</td>
+      <td class="num">${b.p4_starter_likely}</td>
+      <td class="num">${b.pct_elig_remaining}% <span class="p-sub">(${b.elig_remaining})</span></td>
+      <td class="num">${f1(b.final_year_grade_mass_pct)}%</td>
+      <td class="num">${b.hidden_value}</td>
+    </tr>`).join('');
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">The nine books side by side</h2>
+    ${cmpNote('The FCS rows are <b>evaluated cores</b> — the screened, deep-dived players from each Player Book — <b>not full rosters</b>; a conference’s full roster is roughly ten times its core. <b>ULM</b> and <b>UTEP</b> are full evaluated rosters. <b>Grade mass</b> is the sum of headline grades in a group — a concentration proxy that shows where a group’s graded weight sits; it is not a production total.')}
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Book</th><th class="num">Players</th><th class="num">Median grade</th><th class="num">P4 at likely</th><th class="num">P4 starters</th><th class="num">Eligibility remaining</th><th class="num">Final-year grade mass</th><th class="num">Hidden Value</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+    <p class="p-sub">P4 at likely: the band’s likely rung is P4 depth or P4 starter — ${CMP.meta.p4_likely_total} of the 366 banded players, ${CMP.meta.p4_starter_likely_total} of them as P4 starters. The two full rosters sit 9–15 median-grade points below every FCS core; the cores are each conference’s screened top and the rosters are everybody who was evaluated, so the gap measures the screen, not a talent ordering. Eligibility is the qualified determination as printed in the re-issued books.</p></div>`;
+}
+
+function renderGrid() {
+  let maxN = 1;
+  Object.values(CMP.position_grid).forEach(cells => Object.values(cells).forEach(c => { if (c.n > maxN) maxN = c.n; }));
+  const head = CMP.positions.map(p => `<th class="ctr">${p}</th>`).join('');
+  const rows = CMP.books.map(bk => {
+    const b = CMP.conference_table.find(x => x.book === bk);
+    const cells = CMP.positions.map(pos => {
+      const c = (CMP.position_grid[bk] || {})[pos];
+      if (!c) return '<td class="ctr heat-empty">—</td>';
+      const a = (0.05 + 0.23 * (c.n / maxN)).toFixed(3);
+      return `<td class="ctr" style="background:rgba(15,118,110,${a})"><span class="grid-n">${c.n}</span><span class="grid-sub">P4 ${c.p4_likely} · med ${f1(c.median_grade)}</span></td>`;
+    }).join('');
+    return `<tr><td><span class="pname">${bookLabel(b)}</span></td>${cells}</tr>`;
+  }).join('');
+  const posTotals = CMP.positions
+    .map(pos => [pos, CMP.books.reduce((s, bk) => s + (((CMP.position_grid[bk] || {})[pos] || {}).p4_likely || 0), 0)])
+    .sort((a, b2) => b2[1] - a[1]);
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Conference × position — who has what</h2>
+    <p class="p-sub">Each cell: evaluated players at the position, how many project at P4 at likely, and the cell’s median headline grade. Shading deepens with the count. The evaluated universe is 72% defense (302 of 417); LB is the largest group, TE the near-absent one — 7 players of 417, and five books have no evaluated TE at all.</p>
+    <div class="tbl-scroll"><table class="ctable grid">
+      <thead><tr><th>Book</th>${head}</tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="p-sub">The richest cell in the set: <b>Big Sky WR — 13 evaluated, 12 at P4 at likely</b> (3 P4 starter, 9 P4 depth), median grade 75.7. Across all books the P4-at-likely counts run ${posTotals.map(([p, n]) => `${p} ${n}`).join(' · ')}.</p></div>`;
+}
+
+function stackBar(r) {
+  const t = r.total || 1;
+  const seg = (v, cls) => v ? `<span class="${cls}" style="width:${(100 * v / t).toFixed(1)}%"></span>` : '';
+  return `<span class="stackbar">${seg(r.Fr, 'sb1')}${seg(r.So, 'sb2')}${seg(r.Jr, 'sb3')}${seg(r['Sr+'], 'sb4')}</span>`;
+}
+
+function renderYear() {
+  const prow = CMP.year_view.by_position.map(r => `
+    <tr><td><span class="pname">${esc(r.position)}</span></td>
+      <td class="num">${r.Fr}</td><td class="num">${r.So}</td><td class="num">${r.Jr}</td><td class="num">${r['Sr+']}</td>
+      <td>${stackBar(r)}</td>
+      <td class="num">${r.total}</td><td class="num">${r.elig_remaining}</td><td class="num">${r.final_year}</td><td class="num">${r.pct_final_year}%</td></tr>`).join('');
+  const brow = CMP.year_view.by_book.map(b => `
+    <tr><td><span class="pname">${bookLabel(b)}</span></td>
+      <td class="num">${b.Fr}</td><td class="num">${b.So}</td><td class="num">${b.Jr}</td><td class="num">${b['Sr+']}</td>
+      <td>${stackBar(b)}</td>
+      <td class="num">${b.total}</td><td class="num">${b.elig_remaining}</td><td class="num">${b.final_year}</td></tr>`).join('');
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Who has what at what year</h2>
+    ${cmpNote('This view is <b>class standing plus eligibility status</b>. Exact years remaining cannot be counted from the site data: a counted-seasons figure is stated in the eligibility basis for only 36 of the 417 players, and two books carry no basis text at all — so seasons used are shown nowhere here rather than filled in where they are not stated. Sr+ standing and final year are not the same thing; the gap is widest at LB (33 Sr+, 8 final-year) and CB (22 Sr+, 4 final-year).')}
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Position</th><th class="num">Fr</th><th class="num">So</th><th class="num">Jr</th><th class="num">Sr+</th><th>Class mix</th><th class="num">Total</th><th class="num">Elig. remaining</th><th class="num">Final year</th><th class="num">Final-year share</th></tr></thead>
+      <tbody>${prow}</tbody></table></div>
+    <p class="p-sub">Every evaluated quarterback has eligibility remaining — 16 of 16, and 8 of the 16 are Fr/So standing. TE carries the highest final-year share of any position (3 of 7, 43%); DI has the largest final-year count (11).</p>
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Book</th><th class="num">Fr</th><th class="num">So</th><th class="num">Jr</th><th class="num">Sr+</th><th>Class mix</th><th class="num">Total</th><th class="num">Elig. remaining</th><th class="num">Final year</th></tr></thead>
+      <tbody>${brow}</tbody></table></div>
+    <p class="p-sub">CAA is the youngest set by construction: zero Sr+ players, 61% Fr/So, all 36 with eligibility remaining. The full rosters carry their final-year players — UTEP 12 of 35, ULM 10 of 38.</p></div>`;
+}
+
+function roomRow(r) {
+  const fy = (r.final_year_players && r.final_year_players.length)
+    ? `<br><span class="p-sub">Final year: ${r.final_year_players.map(esc).join(' · ')}</span>` : '';
+  const best = r.best_returning ? `${esc(r.best_returning)} (${f1(r.best_returning_grade)})` : '— none —';
+  return `<tr>
+    <td><span class="pname">${esc(r.position)}</span>${fy}</td>
+    <td class="num">${r.n}</td>
+    <td class="num">${f1(r.median_grade)}</td>
+    <td>${esc(r.top_player)} <b>${f1(r.top_grade)}</b>${r.top_final_year ? ' <span class="fy-tag">FINAL YEAR</span>' : ''}</td>
+    <td class="num">${r.final_year_n} of ${r.n}</td>
+    <td><span class="mass-cell"><span class="massbar"><span style="width:${r.grade_mass_final_year_pct || 0}%"></span></span><b>${r.grade_mass_final_year_pct}%</b></span></td>
+    <td>${best}</td></tr>`;
+}
+
+function renderRooms() {
+  const panels = ['ULM', 'UTEP'].map(t => `
+    <div class="card"><h2 class="sec" style="margin-top:2px">${t} — room by room (full roster)</h2>
+      <div class="tbl-scroll"><table class="ctable">
+        <thead><tr><th>Room</th><th class="num">Players</th><th class="num">Median grade</th><th>Top grade</th><th class="num">Final year</th><th>Grade mass in final-year</th><th>Best returning</th></tr></thead>
+        <tbody>${(CMP.team_rooms[t] || []).map(roomRow).join('')}</tbody></table></div></div>`).join('');
+  const pool = {};
+  CMP.pool_context.forEach(r => { (pool[r.scope] = pool[r.scope] || {})[r.position] = r.pool_median; });
+  const roomMed = (t, pos) => { const r = (CMP.team_rooms[t] || []).find(x => x.position === pos); return r ? r.median_grade : null; };
+  const brows = CMP.positions.map(pos => `<tr><td><span class="pname">${pos}</span></td>
+    <td class="num">${f1(roomMed('ULM', pos))}</td><td class="num">${f1((pool['Sun Belt (ULM conf)'] || {})[pos])}</td>
+    <td class="num">${f1(roomMed('UTEP', pos))}</td><td class="num">${f1((pool['Mountain West (UTEP conf)'] || {})[pos])}</td></tr>`).join('');
+  return panels + `<div class="card"><h2 class="sec" style="margin-top:2px">Conference-pool backdrop</h2>
+    <p class="p-sub">Context only: pool medians are every player appearing in the staged 2026 FBS pool at the position, with no volume floor — a backdrop, not the books’ volume-qualified incumbent standard.</p>
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Room</th><th class="num">ULM median</th><th class="num">Sun Belt pool</th><th class="num">UTEP median</th><th class="num">Mountain West pool</th></tr></thead>
+      <tbody>${brows}</tbody></table></div>
+    <p class="p-sub">ULM’s LB room median sits 10.4 points above its conference pool median; UTEP’s CB room 10.9 above its pool. ULM’s QB room median (two players, top grade 56.4) sits 19.2 below the Sun Belt pool median; UTEP’s S room 7.3 below the Mountain West pool median.</p></div>`;
+}
+
+function schoolRows() {
+  const q = schoolQ.trim().toLowerCase();
+  const keyFns = {
+    school: s => s.school.toLowerCase(), book: s => s.book,
+    n: s => s.n, median_grade: s => (s.median_grade == null ? -1 : s.median_grade),
+    top_grade: s => (s.top_grade == null ? -1 : s.top_grade)
+  };
+  const fn = keyFns[schoolSortKey] || keyFns.n;
+  return CMP.schools
+    .filter(s => !q || s.school.toLowerCase().includes(q))
+    .sort((a, b) => { const x = fn(a), y = fn(b); return (x < y ? -1 : x > y ? 1 : 0) * schoolSortDir; });
+}
+
+function renderSchoolBody() {
+  const rows = schoolRows();
+  if (!rows.length) return '<tr><td colspan="7" class="empty">No schools match that search.</td></tr>';
+  return rows.map(s => `<tr>
+    <td><span class="pname">${esc(s.school)}</span></td>
+    <td>${esc(s.book)}</td>
+    <td class="num">${s.n}</td>
+    <td>${esc(s.positions)}</td>
+    <td class="num">${f1(s.median_grade)}</td>
+    <td>${esc(s.top_player)} <span class="p-sub">${esc(s.top_pos)}</span> <b>${f1(s.top_grade)}</b>${s.top_final_year ? ' <span class="fy-tag">FINAL YEAR</span>' : ''}</td>
+    <td class="num">${s.elig_remaining} / ${s.final_year}</td>
+  </tr>`).join('');
+}
+
+function refreshSchools() {
+  const body = $('schoolBody');
+  if (!body || !CMP) return;
+  body.innerHTML = renderSchoolBody();
+  const c = $('schoolCount');
+  if (c) c.textContent = `${schoolRows().length} of ${CMP.schools.length} schools`;
+  document.querySelectorAll('th[data-ssort] .arrow').forEach(a => { a.textContent = ''; });
+  const th = document.querySelector(`th[data-ssort="${schoolSortKey}"] .arrow`);
+  if (th) th.textContent = schoolSortDir === 1 ? '▲' : '▼';
+}
+
+function renderSchools() {
+  const th = (key, label, cls) => `<th data-ssort="${key}"${cls ? ` class="${cls}"` : ''}>${label} <span class="arrow">${schoolSortKey === key ? (schoolSortDir === 1 ? '▲' : '▼') : ''}</span></th>`;
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Schools — where the evaluated players sit</h2>
+    <p class="p-sub">Every school with an evaluated player, across all nine books. The cores are not spread evenly: Stephen F. Austin holds 16 of Southland’s 66; Chattanooga (14) and Tennessee Tech (14) together hold 28 of SoCon’s 60. “Remaining / Final” counts eligibility remaining against final-year players.</p>
+    <div class="school-tools">
+      <label class="grow">Search schools
+        <input id="schoolQ" type="search" placeholder="School name…" autocomplete="off" value="${esc(schoolQ)}">
+      </label>
+      <span class="result-count" id="schoolCount"></span>
+    </div>
+    <div class="tbl-scroll"><table class="ctable" id="schoolTable">
+      <thead><tr>${th('school', 'School')}${th('book', 'Book')}${th('n', 'Players', 'num')}<th>Positions</th>${th('median_grade', 'Median grade', 'num')}<th>Top player</th><th class="num">Remaining / Final</th></tr></thead>
+      <tbody id="schoolBody">${renderSchoolBody()}</tbody></table></div></div>`;
+}
+
+function bindComparison() {
+  const q = $('schoolQ');
+  if (q) q.addEventListener('input', () => { schoolQ = q.value; refreshSchools(); });
+  document.querySelectorAll('th[data-ssort]').forEach(t => t.addEventListener('click', () => {
+    const k = t.dataset.ssort;
+    if (schoolSortKey === k) schoolSortDir *= -1; else { schoolSortKey = k; schoolSortDir = 1; }
+    refreshSchools();
+  }));
+  refreshSchools();
+}
+
+function renderComparison() {
+  if (!CMP) {
+    return `<div class="card empty-state"><h2 class="empty-title">Conference comparison</h2>
+      <p>The comparison data (comparison.json) isn’t part of this build, so this page has nothing to show. The directories and player pages are unaffected.</p>
+      <p><a href="#/up">Browse the FCS — Moving Up directory instead →</a></p></div>`;
+  }
+  return renderConfTable() + renderGrid() + renderYear() + renderRooms() + renderSchools();
+}
+
 function route() {
   const hash = location.hash || '';
   const cm = hash.match(/^#\/compare\/(.+)$/);
@@ -357,6 +544,15 @@ function route() {
       return;
     }
   }
+  if (hash === '#/compare-conferences') {
+    setChrome('up');
+    showView('comparison');
+    $('comparisonBody').innerHTML = renderComparison();
+    bindComparison();
+    document.title = 'Conference comparison — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/up' || hash === '#/down') {
     const dir = hash === '#/down' ? 'down' : 'up';
     if (curDir !== dir) setDataset(dir);
@@ -385,14 +581,28 @@ function loadJson(url) {
     .catch(() => []);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json')]).then(([up, down]) => {
+function loadComparison() {
+  // same failure-tolerant pattern: a missing or malformed comparison.json
+  // degrades to no comparison data, never an error
+  return fetch('comparison.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && Array.isArray(j.conference_table)) ? j : null)
+    .catch(() => null);
+}
+
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison()]).then(([up, down, cmp]) => {
+  CMP = cmp;
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
   DOWN.forEach(p => { if (!byIdAll[p.id]) byIdAll[p.id] = p; });
-  $('splashUpMeta').textContent = `${UP.length} players`;
+  $('statPlayers').textContent = UP.length + DOWN.length;
+  $('statBooks').textContent = new Set([...UP, ...DOWN].map(p => p.conference_book)).size;
+  $('upCount').textContent = UP.length;
+  $('downCount').textContent = DOWN.length ? DOWN.length : '—';
+  $('splashUpMeta').textContent = 'players evaluated';
   $('splashDownMeta').textContent = DOWN.length
-    ? `${DOWN.length} players`
+    ? 'players evaluated'
     : 'First class in build — the screen is running.';
   ['q', 'f-book', 'f-pos', 'f-rung', 'f-elig', 'f-hv', 'f-ulm'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
