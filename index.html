@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Player Books — Player Directory</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#/">Player Books</a>
+    <span class="tagline">Player evaluation library</span>
+    <span class="count-chip" id="totalChip"></span>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- DIRECTORY VIEW -->
+  <section id="view-directory">
+    <div class="controls card">
+      <div class="row">
+        <label class="grow">Search
+          <input id="q" type="search" placeholder="Player name or school…" autocomplete="off">
+        </label>
+        <label>Conference book
+          <select id="f-book"><option value="">All books</option></select>
+        </label>
+        <label>Position
+          <select id="f-pos"><option value="">All positions</option></select>
+        </label>
+        <label>Band — likely
+          <select id="f-rung"><option value="">Any level</option></select>
+        </label>
+        <label>Eligibility (qualified)
+          <select id="f-elig">
+            <option value="">Any</option>
+            <option>Eligible</option>
+            <option>Not eligible</option>
+            <option>Unsettled</option>
+          </select>
+        </label>
+      </div>
+      <div class="row checks">
+        <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
+        <label class="check"><input type="checkbox" id="f-ulm"> Louisiana-Monroe qualifiers only</label>
+        <button id="reset" class="btn-ghost" type="button">Reset filters</button>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <table id="dir">
+        <thead>
+          <tr>
+            <th class="c-photo"></th>
+            <th data-sort="name">Player <span class="arrow"></span></th>
+            <th data-sort="position">Pos <span class="arrow"></span></th>
+            <th data-sort="school">School <span class="arrow"></span></th>
+            <th>Book</th>
+            <th data-sort="grade" class="num">Grade <span class="arrow"></span></th>
+            <th data-sort="rung">Band — likely <span class="arrow"></span></th>
+            <th>Eligibility</th>
+          </tr>
+        </thead>
+        <tbody id="dirBody"></tbody>
+      </table>
+      <p class="empty" id="dirEmpty" hidden>No players match those filters.</p>
+    </div>
+    <p class="foot-note">Grades are each book's headline PFF grade for the 2026 season. Bands and verdicts are as printed in the books; eligibility shows the qualified determination (see each player's page for its basis).</p>
+  </section>
+
+  <!-- PLAYER VIEW -->
+  <section id="view-player" hidden>
+    <p><a href="#/" class="back">← Back to directory</a></p>
+    <div id="playerBody"></div>
+  </section>
+</main>
+
+<footer class="wrap foot">Player Books — evaluation library. Private — do not share.</footer>
+<script src="app.js"></script>
+</body>
+</html>
