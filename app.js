@@ -644,7 +644,7 @@ function renderTeamMatrix(sel) {
   const head1 = sel.map(t => `<th colspan="4" class="mt-team">${t.logo ? `<img class="mt-logo" src="logos/${esc(t.logo)}" alt="">` : ''}<span class="mt-name">${esc(t.name)}</span><span class="mt-sub">${esc(t.conf)} · ${esc(t.level)}</span></th>`).join('');
   const head2 = sel.map(() => '<th class="num">Inc. grade</th><th class="num">vs Conf</th><th class="num">vs G6</th><th class="num">vs P4</th>').join('');
   const rows = gs.map(g => {
-    const grades = sel.map(t => (t.rooms[g].incumbent ? t.rooms[g].inc_grade : null));
+    const grades = sel.map(t => (t.rooms[g].incumbent && !t.rooms[g].below_bar ? t.rooms[g].inc_grade : null));
     const live = grades.filter(v => v != null);
     const best = live.length > 1 ? Math.max(...live) : null;
     const cells = sel.map((t, i) => {
@@ -653,6 +653,7 @@ function renderTeamMatrix(sel) {
       const gc = r.conf_median == null ? null : r.inc_grade - r.conf_median;
       const gg = med[g].g6 == null ? null : r.inc_grade - med[g].g6;
       const gp = med[g].p4 == null ? null : r.inc_grade - med[g].p4;
+      if (r.below_bar) return `<td class="num bb"><b>${f1(r.inc_grade)}*</b></td>` + gapCell(gc) + gapCell(gg) + gapCell(gp);
       const cls = best != null && grades[i] === best ? 'num mt-best' : 'num';
       return `<td class="${cls}"><b>${f1(r.inc_grade)}</b></td>` + gapCell(gc) + gapCell(gg) + gapCell(gp);
     }).join('');
@@ -669,7 +670,7 @@ function renderTeamMatrix(sel) {
   }).join('');
   const stdRows = gs.map(g => `<tr><td><span class="pname">${esc(g)}</span></td><td class="num">${f1(med[g].g6)}</td><td class="num">${f1(med[g].p4)}</td></tr>`).join('');
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Side by side — each team against its conference, the G6 and the P4</h2>
-    ${cmpNote('Every gap is the room’s <b>incumbent grade minus the median of team incumbents</b> for that standard: a positive gap is above the standard, a negative gap below it. <b>vs Conf</b> uses each team’s own conference; <b>vs G6</b> and <b>vs P4</b> use the two level medians, which are the same for every team and are listed under the table. The strongest incumbent grade in a room is shaded. A room with no volume-qualified incumbent in the pool snapshot shows dashes. The pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades.')}
+    ${cmpNote('Every gap is the room’s <b>incumbent grade minus the median of team incumbents</b> for that standard: a positive gap is above the standard, a negative gap below it. <b>vs Conf</b> uses each team’s own conference; <b>vs G6</b> and <b>vs P4</b> use the two level medians, which are the same for every team and are listed under the table. The strongest qualified incumbent grade in a room is shaded. An <b>asterisked grade</b> is a room with no volume-qualified incumbent, carried by its top player by volume and flagged — its gaps print, but no upgrade candidates are computed for it. The pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades.')}
     <div class="mt-chips">${chips}</div>
     <div class="tbl-scroll"><table class="ctable mtable">
       <thead><tr><th rowspan="2">Room</th>${head1}</tr><tr>${head2}</tr></thead>
@@ -700,7 +701,18 @@ function teamRoomRow(t, g) {
   const r = t.rooms[g];
   const candCell = r.candidates_pending
     ? '<td class="num"><span class="p-sub">Pending Δ</span></td>'
-    : `<td class="num">${r.cand_total}</td>`;
+    : r.below_bar
+      ? '<td class="num"><span class="p-sub">—*</span></td>'
+      : `<td class="num">${r.cand_total}</td>`;
+  if (r.below_bar) {
+    return `<tr><td><span class="pname">${esc(g)}</span></td>
+      <td>${esc(r.incumbent)}<br><span class="p-sub">top by volume — ${r.inc_vol} of ${r.vol_bar} ${esc(r.vol_unit)}, below the bar</span></td>
+      <td class="num bb"><b>${f1(r.inc_grade)}*</b></td>
+      <td class="num">—</td>
+      <td class="num">0</td>
+      <td class="num">${f1(r.conf_median)}</td><td class="num">${f1(r.level_median)}</td>
+      <td class="num">—</td>${gapCell(r.gap_conf)}${gapCell(r.gap_level)}${candCell}</tr>`;
+  }
   if (!r.incumbent) {
     return `<tr><td><span class="pname">${esc(g)}</span></td>
       <td><span class="p-sub">— none qualified —</span></td>
@@ -725,6 +737,9 @@ function candBlock(t, g) {
   if (r.candidates_pending) {
     return `<div class="cand-block">${head}<p>Upgrade candidates pending the OL translation delta — no OL fits print before the OL cohort delta exists, so this room shows grades and gaps only.</p></div>`;
   }
+  if (r.below_bar) {
+    return `<div class="cand-block">${head}<p>No volume-qualified incumbent in this room — the line above is its top player by volume, ${esc(r.incumbent)} (${r.inc_vol} of ${r.vol_bar} ${esc(r.vol_unit)}), carried flagged. The strict test needs a qualified bar to clear, so no upgrade candidates are named for this room.</p></div>`;
+  }
   if (!r.incumbent) {
     return `<div class="cand-block">${head}<p>No volume-qualified incumbent in the pool snapshot — the strict test has no bar to clear, so no upgrade candidates are named for this room.</p></div>`;
   }
@@ -740,6 +755,95 @@ function candBlock(t, g) {
   return `<div class="cand-block">${head}
     <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} clear the bar (incumbent ${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
     <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>Book</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th></tr>${rows}</table></div>${more}</div>`;
+}
+
+/* ---------------- team comparison charts ---------------- */
+const TEAM_COLORS = ['#1d4ed8', '#d97706', '#059669', '#dc2626'];
+
+/* Horizontal bars: each room's gap to the team's own level median,
+   biggest deficit first. Below-bar rooms are drawn faded and asterisked. */
+function gapChart(t) {
+  const rows = TEAMS.meta.groups
+    .filter(g => t.rooms[g].incumbent && t.rooms[g].gap_level != null)
+    .map(g => ({ g, v: t.rooms[g].gap_level, bb: !!t.rooms[g].below_bar }))
+    .sort((a, b) => a.v - b.v);
+  if (!rows.length) return '';
+  const W = 660, L = 170, R = 646, rowH = 25, top = 8;
+  const H = top * 2 + rows.length * rowH;
+  const maxAbs = Math.max(6, ...rows.map(r => Math.abs(r.v)));
+  const zero = L + (R - L) / 2;
+  const X = v => zero + (v / maxAbs) * ((R - L) / 2);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Room gaps versus the ${esc(t.level)} median">`;
+  s += `<line x1="${zero}" y1="2" x2="${zero}" y2="${H - 2}" stroke="#9aa3af" stroke-width="1"/>`;
+  rows.forEach((r, i) => {
+    const y = top + i * rowH;
+    const x = X(r.v);
+    const bx = Math.min(zero, x), bw = Math.max(2, Math.abs(x - zero));
+    const fill = r.v >= 0 ? '#1a7f37' : '#c0392b';
+    const lab = r.v >= 0 ? `${x + 6}` : `${x - 6}`;
+    const anch = r.v >= 0 ? 'start' : 'end';
+    s += `<text x="0" y="${y + 15}" class="ch-room">${esc(r.g)}${r.bb ? '*' : ''}</text>`;
+    s += `<rect x="${bx.toFixed(1)}" y="${y + 4}" width="${bw.toFixed(1)}" height="15" rx="2" fill="${fill}"${r.bb ? ' fill-opacity="0.45"' : ''}/>`;
+    s += `<text x="${lab}" y="${y + 16}" text-anchor="${anch}" class="ch-val">${r.v > 0 ? '+' : ''}${r.v.toFixed(1)}</text>`;
+  });
+  s += '</svg>';
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">${esc(t.name)} — room gaps vs the ${esc(t.level)} median</h2>
+    <p class="p-sub">Each bar is the room’s incumbent grade minus the ${esc(t.level)} median incumbent grade, biggest deficit first. Faded, asterisked bars are below-bar rooms — the top player by volume, carried flagged.</p>${s}</div>`;
+}
+
+/* Distribution strips: every FBS team's qualified incumbent grade in the
+   room as a dot, the two level medians as ticks, the selected teams as
+   large coloured dots (hollow when the room is carried below the bar). */
+function distChart(sel) {
+  const med = levelMedians();
+  const gs = TEAMS.meta.groups;
+  const W = 660, L = 46, R = 646, stripH = 38, top = 30;
+  const H = top + gs.length * stripH + 22;
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Where the selected teams sit in each room's national distribution">`;
+  s += `<text x="${L}" y="14" class="ch-leg">● selected team</text>`;
+  s += `<text x="${L + 130}" y="14" class="ch-leg">○ below the volume bar</text>`;
+  s += `<line x1="${L + 268}" y1="4" x2="${L + 268}" y2="16" stroke="#94a3b8" stroke-width="2"/><text x="${L + 274}" y="14" class="ch-leg">G6 median</text>`;
+  s += `<line x1="${L + 352}" y1="4" x2="${L + 352}" y2="16" stroke="#475569" stroke-width="2"/><text x="${L + 358}" y="14" class="ch-leg">P4 median</text>`;
+  gs.forEach((g, gi) => {
+    const vals = [];
+    for (const t of TEAMS.teams) {
+      const r = t.rooms[g];
+      if (r.incumbent && !r.below_bar) vals.push(r.inc_grade);
+    }
+    if (!vals.length) return;
+    let lo = Math.min(...vals, med[g].g6 ?? 999, med[g].p4 ?? 999);
+    let hi = Math.max(...vals, med[g].g6 ?? -999, med[g].p4 ?? -999);
+    lo = Math.floor(lo - 2); hi = Math.ceil(hi + 2);
+    const X = v => L + ((v - lo) / (hi - lo)) * (R - L);
+    const y = top + gi * stripH + stripH / 2;
+    s += `<text x="0" y="${y + 4}" class="ch-room">${esc(g)}</text>`;
+    s += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}" stroke="#e5e9ef" stroke-width="1"/>`;
+    vals.forEach((v, i) => {
+      const jy = y + (((i * 7) % 9) - 4);
+      s += `<circle cx="${X(v).toFixed(1)}" cy="${jy}" r="2.4" fill="#c3cad4"/>`;
+    });
+    if (med[g].g6 != null) s += `<line x1="${X(med[g].g6)}" y1="${y - 10}" x2="${X(med[g].g6)}" y2="${y + 10}" stroke="#94a3b8" stroke-width="2"/>`;
+    if (med[g].p4 != null) s += `<line x1="${X(med[g].p4)}" y1="${y - 10}" x2="${X(med[g].p4)}" y2="${y + 10}" stroke="#475569" stroke-width="2"/>`;
+    sel.forEach((t, ti) => {
+      const r = t.rooms[g];
+      if (!r.incumbent) return;
+      const cx = X(r.inc_grade);
+      s += r.below_bar
+        ? `<circle cx="${cx.toFixed(1)}" cy="${y}" r="5.5" fill="#fff" stroke="${TEAM_COLORS[ti]}" stroke-width="2.5"><title>${esc(t.name)} — ${esc(g)}: ${esc(r.incumbent)}, ${f1(r.inc_grade)} (below the volume bar)</title></circle>`
+        : `<circle cx="${cx.toFixed(1)}" cy="${y}" r="5.5" fill="${TEAM_COLORS[ti]}" stroke="#fff" stroke-width="1.5"><title>${esc(t.name)} — ${esc(g)}: ${esc(r.incumbent)}, ${f1(r.inc_grade)}</title></circle>`;
+    });
+    if (gi === gs.length - 1) {
+      for (const tick of [50, 60, 70, 80, 90]) {
+        if (tick < lo || tick > hi) continue;
+        s += `<text x="${X(tick)}" y="${y + 26}" text-anchor="middle" class="ch-leg">${tick}</text>`;
+      }
+    }
+  });
+  s += '</svg>';
+  const chips = sel.map((t, ti) => `<span class="dist-chip"><span class="dist-dot" style="background:${TEAM_COLORS[ti]}"></span>${esc(t.name)}</span>`).join('');
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Where they sit — every FBS incumbent, room by room</h2>
+    <p class="p-sub">One dot per FBS team’s volume-qualified incumbent in the room; the ticks are the G6 and P4 median incumbent grades. ${chips}</p>${s}
+    <p class="p-sub">A hollow dot is a below-bar room — the team’s top player by volume, carried flagged; he is not part of the dot field, which is qualified incumbents only.</p></div>`;
 }
 
 function renderTeam() {
@@ -758,22 +862,24 @@ function renderTeam() {
   }
   let h = '';
   if (sel.length >= 2) h += renderTeamMatrix(sel);
+  h += distChart(sel);
   h += sel.map(t => teamCard(t)).join('');
   body.innerHTML = h;
 }
 
 function teamCard(t) {
   const gs = teamGroupsOrdered(t);
-  const roomsWith = TEAMS.meta.groups.filter(g => t.rooms[g].incumbent).length;
+  const roomsWith = TEAMS.meta.groups.filter(g => t.rooms[g].incumbent && !t.rooms[g].below_bar).length;
+  const roomsBelow = TEAMS.meta.groups.filter(g => t.rooms[g].below_bar).length;
   const totalCand = TEAMS.meta.groups.reduce((s, g) => s + t.rooms[g].cand_total, 0);
   let h = `<div class="card"><div class="team-head">
     ${t.logo ? `<img class="team-logo" src="logos/${esc(t.logo)}" alt="">` : ''}
     <div>
       <p class="p-name">${esc(t.name)}</p>
       <p class="p-sub">${esc(t.conf)} · ${esc(t.level)}</p>
-      <p class="p-sub">${roomsWith} of ${TEAMS.meta.groups.length} rooms have a volume-qualified incumbent in the pool snapshot · ${totalCand} evaluated players clear one of its bars</p>
+      <p class="p-sub">${roomsWith} of ${TEAMS.meta.groups.length} rooms have a volume-qualified incumbent in the pool snapshot${roomsBelow ? ` · ${roomsBelow} carried below the bar by the top player by volume` : ''} · ${totalCand} evaluated players clear one of its bars</p>
     </div></div>
-    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps); a room with no qualified player shows no incumbent, and no candidates are named for it. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players from the nine books whose benchmark — headline grade plus the position’s translation delta — beats the incumbent: the same strict test the books print.')}
+    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps). A room with no qualified player is <b>carried by its top player by volume</b>, flagged with an asterisk and his volume against the bar — his gaps print, but no candidates are named for that room. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players from the nine books whose benchmark — headline grade plus the position’s translation delta — beats the incumbent: the same strict test the books print.')}
     <div class="team-sort"><span class="kv">Room order</span>
       <button type="button" class="btn-ghost${teamOrder === 'position' ? ' on' : ''}" data-torder="position">Position</button>
       <button type="button" class="btn-ghost${teamOrder === 'priority' ? ' on' : ''}" data-torder="priority">Upgrade priority</button>
@@ -783,6 +889,8 @@ function teamCard(t) {
       <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Room median</th><th class="num">Qualified</th><th class="num">Conf median</th><th class="num">${esc(t.level)} median</th><th class="num">Conf rank</th><th class="num">Gap vs conf</th><th class="num">Gap vs ${esc(t.level)}</th><th class="num">Candidates</th></tr></thead>
       <tbody>${gs.map(g => teamRoomRow(t, g)).join('')}</tbody></table></div>
   </div>`;
+
+  h += gapChart(t);
 
   h += `<div class="card"><h2 class="sec" style="margin-top:2px">Recommended upgrades — room by room</h2>
     <p class="p-sub">For each room, the evaluated players whose benchmark clears ${esc(t.name)}’s incumbent, ranked by benchmark. A name here is the books’ strict test applied to this team — nothing more, nothing less.</p>

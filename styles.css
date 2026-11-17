@@ -332,3 +332,12 @@ th[data-ssort]:hover{color:var(--ink)}
   .cmp-label,.cmp-v{border-color:#cbd5e1}
   .cmp-grid,.cmp-label{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* below-bar carried rooms + team comparison charts */
+.bb b{color:var(--mut)}
+svg.chart{width:100%;height:auto;display:block;margin-top:6px}
+svg.chart .ch-room{font-size:12px;font-weight:600;fill:var(--ink,#1c2733)}
+svg.chart .ch-val{font-size:12px;font-weight:600;fill:var(--ink,#1c2733)}
+svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
+.dist-chip{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-weight:600}
+.dist-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
