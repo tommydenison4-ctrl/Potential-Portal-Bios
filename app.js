@@ -22,25 +22,67 @@ const photo = (p, cls) => p.headshot
   : `<span class="${cls || 'ph-init'}">${esc(initials(p.name))}</span>`;
 const eligChip = e => `<span class="chip ${e === 'Eligible' ? 'ok' : e === 'Not eligible' ? 'no' : 'un'}">${esc(e)}</span>`;
 
-function fillSelect(sel, values) {
-  values.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
+/* -------- directory filters: multi-select dropdown panels --------
+   Each filter is a button (filter name, plus "· N" while selections
+   are active) opening a panel of checkboxes. Ticked values are OR
+   within a filter and AND across filters; nothing ticked = no
+   restriction (the old selects' blank option). */
+const FILTER_DEFS = [
+  { id: 'f-book', name: 'Conference book',
+    values: () => [...new Set(PLAYERS.map(p => p.conference_book))].sort(),
+    test: (p, set) => !set.size || set.has(p.conference_book) },
+  { id: 'f-pos', name: 'Position',
+    values: () => [...new Set(PLAYERS.map(p => p.position))].sort(),
+    test: (p, set) => !set.size || set.has(p.position) },
+  { id: 'f-rung', name: 'Band — likely',
+    values: () => [...new Map(PLAYERS.filter(p => p.band).map(p => [p.band.likely, p.band.likely_rung])).entries()]
+      .sort((a, b) => a[1] - b[1]).map(e => e[0]),
+    test: (p, set) => !set.size || (!!p.band && set.has(p.band.likely)) },
+  { id: 'f-elig', name: 'Eligibility (qualified)',
+    values: () => ['Eligible', 'Not eligible', 'Unsettled'],
+    test: (p, set) => !set.size || set.has(p.elig_qualified) }
+];
+const filterSel = {};
+FILTER_DEFS.forEach(d => { filterSel[d.id] = new Set(); });
+const filterDef = id => FILTER_DEFS.find(d => d.id === id);
+const msWrap = id => document.querySelector(`.ms[data-ms="${id}"]`);
+
+function updateMsButton(def) {
+  const n = filterSel[def.id].size;
+  const btn = $(def.id);
+  btn.innerHTML = `${esc(def.name)}${n ? ` · ${n}` : ''} <span class="ms-caret">▾</span>`;
+  btn.classList.toggle('ms-on', n > 0);
 }
 
-const SELECT_DEFAULTS = { 'f-book': 'All books', 'f-pos': 'All positions', 'f-rung': 'Any level' };
+function buildFilterPanels() {
+  FILTER_DEFS.forEach(def => {
+    msWrap(def.id).querySelector('.ms-opts').innerHTML = def.values().map(v =>
+      `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${filterSel[def.id].has(v) ? ' checked' : ''}> ${esc(v)}</label>`).join('');
+    updateMsButton(def);
+  });
+}
 
-function fillFilterSelects() {
-  for (const id of ['f-book', 'f-pos', 'f-rung']) {
-    const sel = $(id);
-    sel.innerHTML = '';
-    const o = document.createElement('option');
-    o.value = ''; o.textContent = SELECT_DEFAULTS[id];
-    sel.appendChild(o);
-  }
-  fillSelect($('f-book'), [...new Set(PLAYERS.map(p => p.conference_book))].sort());
-  fillSelect($('f-pos'), [...new Set(PLAYERS.map(p => p.position))].sort());
-  const rungs = [...new Map(PLAYERS.filter(p => p.band).map(p => [p.band.likely, p.band.likely_rung])).entries()]
-    .sort((a, b) => a[1] - b[1]).map(e => e[0]);
-  fillSelect($('f-rung'), rungs);
+function clearFilter(id) {
+  filterSel[id].clear();
+  msWrap(id).querySelectorAll('.ms-opt input').forEach(cb => { cb.checked = false; });
+  updateMsButton(filterDef(id));
+}
+
+function clearAllFilters() { FILTER_DEFS.forEach(d => clearFilter(d.id)); }
+
+let openMsId = null;
+function closeMs() {
+  if (!openMsId) return;
+  msWrap(openMsId).querySelector('.ms-panel').hidden = true;
+  $(openMsId).setAttribute('aria-expanded', 'false');
+  openMsId = null;
+}
+function toggleMs(id) {
+  if (openMsId === id) { closeMs(); return; }
+  closeMs();
+  msWrap(id).querySelector('.ms-panel').hidden = false;
+  $(id).setAttribute('aria-expanded', 'true');
+  openMsId = id;
 }
 
 function setDataset(dir) {
@@ -50,9 +92,10 @@ function setDataset(dir) {
   PLAYERS.forEach(p => byId[p.id] = p);
   cmpSel.length = 0;
   renderCmpTray();
-  $('q').value = ''; $('f-elig').value = ''; $('f-hv').checked = false; $('f-ulm').checked = false;
+  $('q').value = ''; clearAllFilters(); $('f-hv').checked = false; $('f-ulm').checked = false;
   sortKey = 'name'; sortDir = 1;
-  fillFilterSelects();
+  closeMs();
+  buildFilterPanels();
   $('dirTitle').textContent = DIRS[dir].label;
   const sw = $('dirSwitch');
   if (dir === 'up') { sw.textContent = 'P4 — Moving Down →'; sw.href = '#/down'; }
@@ -86,8 +129,7 @@ function setBackLinks(dir) {
 function currentFilters() {
   return {
     q: $('q').value.trim().toLowerCase(),
-    book: $('f-book').value, pos: $('f-pos').value, rung: $('f-rung').value,
-    elig: $('f-elig').value, hv: $('f-hv').checked, ulm: $('f-ulm').checked
+    hv: $('f-hv').checked, ulm: $('f-ulm').checked
   };
 }
 
@@ -95,10 +137,7 @@ function applyFilters() {
   const f = currentFilters();
   let rows = PLAYERS.filter(p => {
     if (f.q && !(p.name.toLowerCase().includes(f.q) || (p.school || '').toLowerCase().includes(f.q))) return false;
-    if (f.book && p.conference_book !== f.book) return false;
-    if (f.pos && p.position !== f.pos) return false;
-    if (f.rung && (!p.band || p.band.likely !== f.rung)) return false;
-    if (f.elig && p.elig_qualified !== f.elig) return false;
+    for (const def of FILTER_DEFS) if (!def.test(p, filterSel[def.id])) return false;
     if (f.hv && !p.hidden_value) return false;
     if (f.ulm && !(p.fits && p.fits.ulm_qualifier)) return false;
     return true;
@@ -604,11 +643,25 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('splashDownMeta').textContent = DOWN.length
     ? 'players evaluated'
     : 'First class in build — the screen is running.';
-  ['q', 'f-book', 'f-pos', 'f-rung', 'f-elig', 'f-hv', 'f-ulm'].forEach(id =>
+  ['q', 'f-hv', 'f-ulm'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
+  FILTER_DEFS.forEach(def => {
+    const w = msWrap(def.id);
+    $(def.id).addEventListener('click', () => toggleMs(def.id));
+    w.querySelector('.ms-opts').addEventListener('change', e => {
+      const cb = e.target.closest('input[type=checkbox]');
+      if (!cb) return;
+      if (cb.checked) filterSel[def.id].add(cb.value); else filterSel[def.id].delete(cb.value);
+      updateMsButton(def);
+      applyFilters();
+    });
+    w.querySelector('.ms-clear').addEventListener('click', () => { clearFilter(def.id); applyFilters(); });
+  });
+  document.addEventListener('click', e => { if (openMsId && !e.target.closest('.ms')) closeMs(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMs(); });
   $('reset').addEventListener('click', () => {
-    $('q').value = ''; $('f-book').value = ''; $('f-pos').value = ''; $('f-rung').value = '';
-    $('f-elig').value = ''; $('f-hv').checked = false; $('f-ulm').checked = false; applyFilters();
+    $('q').value = ''; clearAllFilters();
+    $('f-hv').checked = false; $('f-ulm').checked = false; applyFilters();
   });
   document.querySelectorAll('th[data-sort]').forEach(th => th.addEventListener('click', () => {
     const k = th.dataset.sort;

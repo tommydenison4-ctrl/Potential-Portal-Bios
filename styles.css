@@ -22,6 +22,20 @@ a:hover{text-decoration:underline}
 .controls .checks{margin-top:12px;align-items:center}
 .controls label.check{flex-direction:row;align-items:center;gap:6px;font-size:13.5px;color:var(--ink);font-weight:500}
 .btn-ghost{font:inherit;font-size:13px;background:none;border:1px solid var(--line);border-radius:7px;padding:5px 10px;cursor:pointer;color:var(--accent)}
+/* multi-select filter dropdowns */
+.controls .ms-field{display:flex;flex-direction:column}
+.ms{position:relative}
+.ms-btn{font:inherit;font-size:14.5px;color:var(--ink);padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;min-width:150px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;text-align:left}
+.ms-btn:hover{border-color:#cbd5e1}
+.ms-btn.ms-on{border-color:var(--accent2);font-weight:600}
+.ms-caret{color:var(--mut);font-size:11px;flex:none}
+.ms-panel{position:absolute;top:calc(100% + 4px);left:0;z-index:40;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 10px 26px rgba(15,23,42,.14);padding:6px;min-width:100%;width:max-content;max-width:min(280px,calc(100vw - 24px))}
+.ms-opts{max-height:264px;overflow-y:auto}
+.controls .ms-opt{display:flex;flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink);font-weight:500;padding:6px 8px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.controls .ms-opt:hover{background:#f8fafc}
+.ms-opt input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);flex:none;margin:0;cursor:pointer}
+.ms-clear{font:inherit;font-size:13px;font-weight:600;width:100%;margin-top:5px;padding:6px 8px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;color:var(--accent);cursor:pointer}
+.ms-clear:hover{background:#f1f5f9}
 .result-count{margin-left:auto;font-weight:600;color:var(--accent)}
 .table-card{padding:6px 0;overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:760px}
@@ -189,6 +203,13 @@ th[data-ssort]:hover{color:var(--ink)}
   .controls label{flex:1 1 44%}
   .controls .grow{flex:1 1 100%}
   .controls input[type=search],.controls select{min-width:0;width:100%;min-height:44px;padding:10px 9px}
+  /* multi-select filters: two per row like the selects were, panels span
+     the field so they can never push past the viewport edge */
+  .controls .ms-field{flex:1 1 44%}
+  .controls .ms-btn{min-width:0;width:100%;min-height:44px;padding:10px 9px}
+  .ms-panel{width:100%;min-width:0;max-width:none}
+  .controls .ms-opt{min-height:44px;white-space:normal;padding:8px}
+  .ms-clear{min-height:44px}
   .controls label.check{flex:1 1 100%;min-height:44px;font-size:14px;gap:9px}
   .controls input[type=checkbox]{width:20px;height:20px;flex:none}
   .btn-ghost{min-height:44px;padding:10px 14px}

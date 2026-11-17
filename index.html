@@ -75,23 +75,42 @@
         <label class="grow">Search
           <input id="q" type="search" placeholder="Player name or school…" autocomplete="off">
         </label>
-        <label>Conference book
-          <select id="f-book"><option value="">All books</option></select>
-        </label>
-        <label>Position
-          <select id="f-pos"><option value="">All positions</option></select>
-        </label>
-        <label>Band — likely
-          <select id="f-rung"><option value="">Any level</option></select>
-        </label>
-        <label>Eligibility (qualified)
-          <select id="f-elig">
-            <option value="">Any</option>
-            <option>Eligible</option>
-            <option>Not eligible</option>
-            <option>Unsettled</option>
-          </select>
-        </label>
+        <div class="ms-field">
+          <div class="ms" data-ms="f-book">
+            <button type="button" class="ms-btn" id="f-book" aria-haspopup="true" aria-expanded="false">Conference book <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="ms-opts"></div>
+              <button type="button" class="ms-clear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="ms-field">
+          <div class="ms" data-ms="f-pos">
+            <button type="button" class="ms-btn" id="f-pos" aria-haspopup="true" aria-expanded="false">Position <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="ms-opts"></div>
+              <button type="button" class="ms-clear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="ms-field">
+          <div class="ms" data-ms="f-rung">
+            <button type="button" class="ms-btn" id="f-rung" aria-haspopup="true" aria-expanded="false">Band — likely <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="ms-opts"></div>
+              <button type="button" class="ms-clear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="ms-field">
+          <div class="ms" data-ms="f-elig">
+            <button type="button" class="ms-btn" id="f-elig" aria-haspopup="true" aria-expanded="false">Eligibility (qualified) <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="ms-opts"></div>
+              <button type="button" class="ms-clear">Clear</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="row checks">
         <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
