@@ -1,6 +1,10 @@
 'use strict';
 let UP = [], DOWN = [];
 let CMP = null;             // conference comparison dataset (comparison.json)
+let TEAMS = null;           // team comparison dataset (teams.json)
+const teamSet = [];         // selected team names on the team comparison page, in pick order
+const TEAM_CAP = 4;         // side-by-side team comparison cap
+let teamOrder = 'position'; // team page room order: 'position' | 'priority'
 let schoolQ = '', schoolSortKey = 'n', schoolSortDir = -1; // school table state
 let PLAYERS = [];           // the current direction's dataset
 let byId = {};              // ids in the current dataset
@@ -117,7 +121,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -550,6 +554,256 @@ function renderComparison() {
   return renderConfTable() + renderGrid() + renderYear() + renderRooms() + renderSchools();
 }
 
+/* ---------------- team comparison ---------------- */
+function teamBtnLabel() {
+  const btn = $('t-team');
+  btn.innerHTML = teamSet.length
+    ? `Teams — ${teamSet.length} selected <span class="ms-caret">▾</span>`
+    : `Teams <span class="ms-caret">▾</span>`;
+  btn.classList.toggle('ms-on', teamSet.length > 0);
+}
+
+function teamCapNoteSync() {
+  const note = $('teamCapNote');
+  if (note) note.hidden = teamSet.length < TEAM_CAP;
+}
+
+function buildTeamPanel() {
+  const box = $('teamOpts');
+  if (!TEAMS) { box.innerHTML = ''; return; }
+  const q = ($('teamQ').value || '').trim().toLowerCase();
+  let html = '';
+  for (const conf of TEAMS.meta.conference_order) {
+    const ts = TEAMS.teams.filter(t => t.conf === conf && (!q || t.name.toLowerCase().includes(q)));
+    if (!ts.length) continue;
+    html += `<div class="ms-group">${esc(conf)}</div>` + ts.map(t =>
+      `<label class="ms-opt"><input type="checkbox" value="${esc(t.name)}"${teamSet.includes(t.name) ? ' checked' : ''}> ${esc(t.name)}</label>`).join('');
+  }
+  box.innerHTML = html || '<p class="p-sub" style="padding:6px 8px">No teams match that search.</p>';
+  teamCapNoteSync();
+}
+
+function toggleTeam(name, on) {
+  const i = teamSet.indexOf(name);
+  if (on && i < 0) {
+    if (teamSet.length >= TEAM_CAP) { teamCapNoteSync(); return; }
+    teamSet.push(name);
+  } else if (!on && i >= 0) {
+    teamSet.splice(i, 1);
+  } else {
+    return;
+  }
+  teamBtnLabel();
+  teamCapNoteSync();
+  renderTeam();
+}
+
+function clearTeams() {
+  if (!teamSet.length) return;
+  teamSet.length = 0;
+  teamBtnLabel();
+  buildTeamPanel();
+  renderTeam();
+}
+
+/* The two level standards are the same for every team: each room's
+   g6_median is carried in every team's data, and the P4 median is the
+   level_median carried by every P4 team. Derive both per group once. */
+function levelMedians() {
+  const m = {};
+  for (const g of TEAMS.meta.groups) {
+    let g6 = null, p4 = null;
+    for (const t of TEAMS.teams) {
+      const r = t.rooms[g];
+      if (g6 == null && r.g6_median != null) g6 = r.g6_median;
+      if (p4 == null && t.level === 'P4' && r.level_median != null) p4 = r.level_median;
+      if (g6 != null && p4 != null) break;
+    }
+    m[g] = { g6, p4 };
+  }
+  return m;
+}
+
+function teamSummary(t) {
+  const gs = TEAMS.meta.groups;
+  const withInc = gs.filter(g => t.rooms[g].incumbent);
+  const aboveConf = withInc.filter(g => t.rooms[g].gap_conf != null && t.rooms[g].gap_conf >= 0).length;
+  const aboveLvl = withInc.filter(g => t.rooms[g].gap_level != null && t.rooms[g].gap_level >= 0).length;
+  let worst = null;
+  for (const g of withInc) {
+    const v = t.rooms[g].gap_level;
+    if (v != null && (!worst || v < worst.v)) worst = { g, v };
+  }
+  const totalCand = gs.reduce((s, g) => s + t.rooms[g].cand_total, 0);
+  return { n: withInc.length, aboveConf, aboveLvl, worst, totalCand };
+}
+
+function renderTeamMatrix(sel) {
+  const med = levelMedians();
+  const gs = TEAMS.meta.groups;
+  const head1 = sel.map(t => `<th colspan="4" class="mt-team">${t.logo ? `<img class="mt-logo" src="logos/${esc(t.logo)}" alt="">` : ''}<span class="mt-name">${esc(t.name)}</span><span class="mt-sub">${esc(t.conf)} · ${esc(t.level)}</span></th>`).join('');
+  const head2 = sel.map(() => '<th class="num">Inc. grade</th><th class="num">vs Conf</th><th class="num">vs G6</th><th class="num">vs P4</th>').join('');
+  const rows = gs.map(g => {
+    const grades = sel.map(t => (t.rooms[g].incumbent ? t.rooms[g].inc_grade : null));
+    const live = grades.filter(v => v != null);
+    const best = live.length > 1 ? Math.max(...live) : null;
+    const cells = sel.map((t, i) => {
+      const r = t.rooms[g];
+      if (!r.incumbent) return '<td class="num">—</td>' + gapCell(null) + gapCell(null) + gapCell(null);
+      const gc = r.conf_median == null ? null : r.inc_grade - r.conf_median;
+      const gg = med[g].g6 == null ? null : r.inc_grade - med[g].g6;
+      const gp = med[g].p4 == null ? null : r.inc_grade - med[g].p4;
+      const cls = best != null && grades[i] === best ? 'num mt-best' : 'num';
+      return `<td class="${cls}"><b>${f1(r.inc_grade)}</b></td>` + gapCell(gc) + gapCell(gg) + gapCell(gp);
+    }).join('');
+    return `<tr><td><span class="pname">${esc(g)}</span></td>${cells}</tr>`;
+  }).join('');
+  const chips = sel.map(t => {
+    const s = teamSummary(t);
+    const worst = s.worst
+      ? `Biggest deficit vs the ${esc(t.level)} median: ${esc(s.worst.g)} (${s.worst.v > 0 ? '+' : ''}${Number(s.worst.v).toFixed(1)})`
+      : 'No room with a qualified incumbent';
+    return `<div class="mt-chip"><p class="mt-chip-name">${esc(t.name)}</p>
+      <p class="p-sub">${s.aboveConf} of ${s.n} rooms at or above its conference median · ${s.aboveLvl} of ${s.n} at or above the ${esc(t.level)} median</p>
+      <p class="p-sub">${worst} · ${s.totalCand} evaluated players clear one of its bars</p></div>`;
+  }).join('');
+  const stdRows = gs.map(g => `<tr><td><span class="pname">${esc(g)}</span></td><td class="num">${f1(med[g].g6)}</td><td class="num">${f1(med[g].p4)}</td></tr>`).join('');
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Side by side — each team against its conference, the G6 and the P4</h2>
+    ${cmpNote('Every gap is the room’s <b>incumbent grade minus the median of team incumbents</b> for that standard: a positive gap is above the standard, a negative gap below it. <b>vs Conf</b> uses each team’s own conference; <b>vs G6</b> and <b>vs P4</b> use the two level medians, which are the same for every team and are listed under the table. The strongest incumbent grade in a room is shaded. A room with no volume-qualified incumbent in the pool snapshot shows dashes. The pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades.')}
+    <div class="mt-chips">${chips}</div>
+    <div class="tbl-scroll"><table class="ctable mtable">
+      <thead><tr><th rowspan="2">Room</th>${head1}</tr><tr>${head2}</tr></thead>
+      <tbody>${rows}</tbody></table></div>
+    <p class="kv" style="margin-top:14px">The standards — median incumbent grade by room</p>
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Room</th><th class="num">G6 median</th><th class="num">P4 median</th></tr></thead>
+      <tbody>${stdRows}</tbody></table></div>
+    <p class="p-sub">Each team’s full room table — its own conference median, conference rank and room median — and its evaluated upgrade candidates follow below, one card per team.</p>
+  </div>`;
+}
+
+const gapSortKey = r => (r.gap_level == null ? Infinity : r.gap_level);
+
+function teamGroupsOrdered(t) {
+  const gs = TEAMS.meta.groups.slice();
+  if (teamOrder === 'priority') gs.sort((a, b) => gapSortKey(t.rooms[a]) - gapSortKey(t.rooms[b]));
+  return gs;
+}
+
+function gapCell(v) {
+  if (v == null) return '<td class="num">—</td>';
+  const cls = v < 0 ? 'gap-neg' : v > 0 ? 'gap-pos' : '';
+  return `<td class="num ${cls}">${v > 0 ? '+' : ''}${Number(v).toFixed(1)}</td>`;
+}
+
+function teamRoomRow(t, g) {
+  const r = t.rooms[g];
+  const candCell = r.candidates_pending
+    ? '<td class="num"><span class="p-sub">Pending Δ</span></td>'
+    : `<td class="num">${r.cand_total}</td>`;
+  if (!r.incumbent) {
+    return `<tr><td><span class="pname">${esc(g)}</span></td>
+      <td><span class="p-sub">— none qualified —</span></td>
+      <td class="num">—</td><td class="num">—</td><td class="num">0</td>
+      <td class="num">${f1(r.conf_median)}</td><td class="num">${f1(r.level_median)}</td>
+      <td class="num">—</td>${gapCell(null)}${gapCell(null)}${candCell}</tr>`;
+  }
+  return `<tr><td><span class="pname">${esc(g)}</span></td>
+    <td>${esc(r.incumbent)}</td>
+    <td class="num"><b>${f1(r.inc_grade)}</b></td>
+    <td class="num">${f1(r.median)}</td>
+    <td class="num">${r.n}</td>
+    <td class="num">${f1(r.conf_median)}</td>
+    <td class="num">${f1(r.level_median)}</td>
+    <td class="num">${r.conf_rank} of ${r.conf_teams}</td>
+    ${gapCell(r.gap_conf)}${gapCell(r.gap_level)}${candCell}</tr>`;
+}
+
+function candBlock(t, g) {
+  const r = t.rooms[g];
+  const head = `<p class="kv">${esc(g)} — upgrade candidates</p>`;
+  if (r.candidates_pending) {
+    return `<div class="cand-block">${head}<p>Upgrade candidates pending the OL translation delta — no OL fits print before the OL cohort delta exists, so this room shows grades and gaps only.</p></div>`;
+  }
+  if (!r.incumbent) {
+    return `<div class="cand-block">${head}<p>No volume-qualified incumbent in the pool snapshot — the strict test has no bar to clear, so no upgrade candidates are named for this room.</p></div>`;
+  }
+  if (!r.cand_total) {
+    return `<div class="cand-block">${head}<p>No evaluated player clears this room’s bar — the incumbent is ${esc(r.incumbent)} at ${f1(r.inc_grade)}.</p></div>`;
+  }
+  const rows = r.cand.map(c => `<tr>
+    <td><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a></td>
+    <td>${esc(c.book)}</td><td>${esc(c.school)}</td>
+    <td class="num">${f1(c.grade)}</td><td class="num"><b>${f1(c.benchmark)}</b></td></tr>`).join('');
+  const more = r.cand_total > r.cand.length
+    ? `<p class="p-sub">Top ${r.cand.length} shown by benchmark — ${r.cand_total - r.cand.length} more evaluated player${r.cand_total - r.cand.length === 1 ? '' : 's'} also clear${r.cand_total - r.cand.length === 1 ? 's' : ''} the bar.</p>` : '';
+  return `<div class="cand-block">${head}
+    <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} clear the bar (incumbent ${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
+    <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>Book</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th></tr>${rows}</table></div>${more}</div>`;
+}
+
+function renderTeam() {
+  const body = $('teamBody');
+  if (!TEAMS) {
+    body.innerHTML = `<div class="card empty-state"><h2 class="empty-title">Team comparison</h2>
+      <p>The team data (teams.json) isn’t part of this build, so this page has nothing to show. The directories and player pages are unaffected.</p>
+      <p><a href="#/up">Browse the FCS — Moving Up directory instead →</a></p></div>`;
+    return;
+  }
+  const sel = teamSet.map(n => TEAMS.teams.find(x => x.name === n)).filter(Boolean);
+  if (!sel.length) {
+    body.innerHTML = `<div class="card empty-state"><h2 class="empty-title">Pick up to four teams</h2>
+      <p>Tick teams in the picker above — one of the ${TEAMS.teams.length} FBS teams for its full page, or up to four to compare them side by side. Every room is measured against the team’s own conference and against both levels, the G6 and the P4, with the evaluated players who would upgrade each room.</p></div>`;
+    return;
+  }
+  let h = '';
+  if (sel.length >= 2) h += renderTeamMatrix(sel);
+  h += sel.map(t => teamCard(t)).join('');
+  body.innerHTML = h;
+}
+
+function teamCard(t) {
+  const gs = teamGroupsOrdered(t);
+  const roomsWith = TEAMS.meta.groups.filter(g => t.rooms[g].incumbent).length;
+  const totalCand = TEAMS.meta.groups.reduce((s, g) => s + t.rooms[g].cand_total, 0);
+  let h = `<div class="card"><div class="team-head">
+    ${t.logo ? `<img class="team-logo" src="logos/${esc(t.logo)}" alt="">` : ''}
+    <div>
+      <p class="p-name">${esc(t.name)}</p>
+      <p class="p-sub">${esc(t.conf)} · ${esc(t.level)}</p>
+      <p class="p-sub">${roomsWith} of ${TEAMS.meta.groups.length} rooms have a volume-qualified incumbent in the pool snapshot · ${totalCand} evaluated players clear one of its bars</p>
+    </div></div>
+    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps); a room with no qualified player shows no incumbent, and no candidates are named for it. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players from the nine books whose benchmark — headline grade plus the position’s translation delta — beats the incumbent: the same strict test the books print.')}
+    <div class="team-sort"><span class="kv">Room order</span>
+      <button type="button" class="btn-ghost${teamOrder === 'position' ? ' on' : ''}" data-torder="position">Position</button>
+      <button type="button" class="btn-ghost${teamOrder === 'priority' ? ' on' : ''}" data-torder="priority">Upgrade priority</button>
+      <span class="p-sub">Upgrade priority sorts rooms by gap to the ${esc(t.level)} median, biggest deficit first — a gap ranking, not a verdict.</span>
+    </div>
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Room median</th><th class="num">Qualified</th><th class="num">Conf median</th><th class="num">${esc(t.level)} median</th><th class="num">Conf rank</th><th class="num">Gap vs conf</th><th class="num">Gap vs ${esc(t.level)}</th><th class="num">Candidates</th></tr></thead>
+      <tbody>${gs.map(g => teamRoomRow(t, g)).join('')}</tbody></table></div>
+  </div>`;
+
+  h += `<div class="card"><h2 class="sec" style="margin-top:2px">Recommended upgrades — room by room</h2>
+    <p class="p-sub">For each room, the evaluated players whose benchmark clears ${esc(t.name)}’s incumbent, ranked by benchmark. A name here is the books’ strict test applied to this team — nothing more, nothing less.</p>
+    ${gs.map(g => candBlock(t, g)).join('')}</div>`;
+
+  if (t.roster) {
+    const rrows = TEAMS.meta.groups.filter(g => t.roster[g]).map(g => {
+      const r = t.roster[g];
+      const best = r.best_returning ? `${esc(r.best_returning)} (${f1(r.best_returning_grade)})` : '— none —';
+      return `<tr><td><span class="pname">${esc(g)}</span></td>
+        <td class="num">${r.n}</td><td class="num">${r.final_year_n} of ${r.n}</td><td>${best}</td></tr>`;
+    }).join('');
+    h += `<div class="card"><h2 class="sec" style="margin-top:2px">${esc(t.name)} — the book’s roster layer</h2>
+      <p class="p-sub">From ${esc(t.name)}’s own Player Book (the evaluated roster, as carried by the conference comparison): how many of the room’s evaluated players are in their final year, and the best grade coming back. The books predate the OL integration, so this layer covers the nine book groups — no OL row.</p>
+      <div class="tbl-scroll"><table class="ctable">
+        <thead><tr><th>Room</th><th class="num">Evaluated</th><th class="num">Final year</th><th>Best returning</th></tr></thead>
+        <tbody>${rrows}</tbody></table></div></div>`;
+  }
+  return h;
+}
+
 function route() {
   const hash = location.hash || '';
   const cm = hash.match(/^#\/compare\/(.+)$/);
@@ -582,6 +836,14 @@ function route() {
       window.scrollTo(0, 0);
       return;
     }
+  }
+  if (hash === '#/team-comparison') {
+    setChrome(null);
+    showView('teamcmp');
+    renderTeam();
+    document.title = 'Team comparison — Player Books';
+    window.scrollTo(0, 0);
+    return;
   }
   if (hash === '#/compare-conferences') {
     setChrome('up');
@@ -629,14 +891,27 @@ function loadComparison() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison()]).then(([up, down, cmp]) => {
+function loadTeams() {
+  // same failure-tolerant pattern: a missing or malformed teams.json
+  // degrades to no team data, never an error
+  return fetch('teams.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && Array.isArray(j.teams) && j.meta) ? j : null)
+    .catch(() => null);
+}
+
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams()]).then(([up, down, cmp, teams]) => {
   CMP = cmp;
+  TEAMS = teams;
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
   DOWN.forEach(p => { if (!byIdAll[p.id]) byIdAll[p.id] = p; });
   $('statPlayers').textContent = UP.length + DOWN.length;
   $('statBooks').textContent = new Set([...UP, ...DOWN].map(p => p.conference_book)).size;
+  $('statTeams').textContent = TEAMS ? TEAMS.teams.length : '—';
+  $('teamCardCount').textContent = TEAMS ? TEAMS.teams.length : '—';
+  $('splashTeamMeta').textContent = TEAMS ? 'schools in the 2026 pool' : 'team data isn’t part of this build';
   $('upCount').textContent = UP.length;
   $('downCount').textContent = DOWN.length ? DOWN.length : '—';
   $('splashUpMeta').textContent = 'players evaluated';
@@ -658,6 +933,27 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     w.querySelector('.ms-clear').addEventListener('click', () => { clearFilter(def.id); applyFilters(); });
   });
   document.addEventListener('click', e => { if (openMsId && !e.target.closest('.ms')) closeMs(); });
+  // team picker: the same dropdown panel machinery, multi-select up to TEAM_CAP
+  $('teamCount').textContent = TEAMS ? `${TEAMS.teams.length} FBS teams` : '';
+  teamBtnLabel();
+  buildTeamPanel();
+  $('t-team').addEventListener('click', () => toggleMs('t-team'));
+  $('teamOpts').addEventListener('change', e => {
+    const cb = e.target.closest('input[type=checkbox]');
+    if (!cb) return;
+    if (cb.checked && !teamSet.includes(cb.value) && teamSet.length >= TEAM_CAP) {
+      cb.checked = false;
+      teamCapNoteSync();
+      return;
+    }
+    toggleTeam(cb.value, cb.checked);
+  });
+  $('teamClear').addEventListener('click', clearTeams);
+  $('teamQ').addEventListener('input', buildTeamPanel);
+  $('teamBody').addEventListener('click', e => {
+    const b = e.target.closest('[data-torder]');
+    if (b) { teamOrder = b.dataset.torder; renderTeam(); }
+  });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMs(); });
   $('reset').addEventListener('click', () => {
     $('q').value = ''; clearAllFilters();

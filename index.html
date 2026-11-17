@@ -28,6 +28,7 @@
         <div class="sstat"><span class="sstat-n" id="statPlayers">—</span><span class="sstat-l">Players evaluated</span></div>
         <div class="sstat"><span class="sstat-n" id="statBooks">—</span><span class="sstat-l">Player Books</span></div>
         <div class="sstat"><span class="sstat-n">2</span><span class="sstat-l">Directions</span></div>
+        <div class="sstat"><span class="sstat-n" id="statTeams">—</span><span class="sstat-l">Schools compared</span></div>
       </div>
     </div>
     <div class="splash-choices">
@@ -45,11 +46,23 @@
         <span class="choice-meta" id="splashDownMeta"></span>
         <span class="choice-go">Enter the directory →</span>
       </a>
+      <a class="choice-card choice-card-wide" href="#/team-comparison">
+        <span class="choice-dir">Team Comparison</span>
+        <span class="choice-count" id="teamCardCount">—</span>
+        <span class="choice-desc">Compare up to four schools side by side — each against its conference and both levels, G6 and P4 — room by room, with the evaluated players who would upgrade each room.</span>
+        <span class="choice-meta" id="splashTeamMeta"></span>
+        <span class="choice-go">Compare schools →</span>
+      </a>
     </div>
     <a class="compare-banner" href="#/compare-conferences">
       <span class="cb-title">Conference comparison</span>
       <span class="cb-desc">Who has what, where, at what year — the nine books side by side: conference inventory, the position grid, class years, and the ULM &amp; UTEP room cliffs.</span>
       <span class="choice-go">Open the comparison →</span>
+    </a>
+    <a class="compare-banner" href="#/team-comparison">
+      <span class="cb-title">Team comparison</span>
+      <span class="cb-desc">Pick up to four FBS teams and compare them side by side: every position room against its conference, the G6 and the P4, plus the evaluated players who would upgrade each room.</span>
+      <span class="choice-go">Open team comparison →</span>
     </a>
   </section>
 
@@ -68,7 +81,7 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -160,9 +173,35 @@
   <section id="view-comparison" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Conference comparison</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/team-comparison">Team comparison</a></span>
     </div>
     <div id="comparisonBody"></div>
+  </section>
+
+  <!-- TEAM COMPARISON VIEW -->
+  <section id="view-teamcmp" hidden>
+    <div class="dir-head">
+      <h1 class="dir-title">Team comparison</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a></span>
+    </div>
+    <div class="controls card">
+      <div class="row">
+        <div class="ms-field team-field">
+          <div class="ms" data-ms="t-team">
+            <button type="button" class="ms-btn" id="t-team" aria-haspopup="true" aria-expanded="false">Teams <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="team-search"><input id="teamQ" type="search" placeholder="Search teams…" autocomplete="off"></div>
+              <div class="ms-opts" id="teamOpts"></div>
+              <p class="p-sub" id="teamCapNote" hidden style="padding:6px 8px 2px">Up to 4 teams side by side — untick one to swap another in.</p>
+              <button type="button" class="ms-clear" id="teamClear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <span class="result-count" id="teamCount"></span>
+      </div>
+      <p class="p-sub" style="margin:10px 0 0">Pick up to four teams to compare them side by side — every position room’s incumbent grade against its own conference, the G6 and the P4 — or pick one team for its full page, with the evaluated players from the books who would upgrade each room.</p>
+    </div>
+    <div id="teamBody"></div>
   </section>
 </main>
 
