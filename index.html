@@ -12,13 +12,51 @@
   <div class="wrap topbar-in">
     <a class="brand" href="#/">Player Books</a>
     <span class="tagline">Player evaluation library</span>
+    <span class="dir-chip" id="dirChip" hidden></span>
     <span class="count-chip" id="totalChip"></span>
   </div>
 </header>
 
 <main class="wrap">
+  <!-- SPLASH / TITLE VIEW -->
+  <section id="view-splash" hidden>
+    <div class="splash-head">
+      <h1 class="splash-title">Player Books</h1>
+      <p class="splash-sub">Player evaluation library — every player graded, banded and called in the format of the printed books. Pick a direction to start.</p>
+    </div>
+    <div class="splash-choices">
+      <a class="choice-card" href="#/up">
+        <span class="choice-dir">FCS — Moving Up</span>
+        <span class="choice-desc">FCS players evaluated to move up to G6 / P4 — full Player Book pages: band, pro track on the two baselines, fits, The Call.</span>
+        <span class="choice-meta" id="splashUpMeta"></span>
+        <span class="choice-go">Enter the directory →</span>
+      </a>
+      <a class="choice-card" href="#/down">
+        <span class="choice-dir">P4 — Moving Down</span>
+        <span class="choice-desc">P4 players evaluated to move down to G6 — the same Player Book format, run in reverse.</span>
+        <span class="choice-meta" id="splashDownMeta"></span>
+        <span class="choice-go">Enter the directory →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- DOWN EMPTY STATE -->
+  <section id="view-downempty" hidden>
+    <p class="dir-head"><a href="#/" class="back">← Title page</a></p>
+    <div class="card empty-state">
+      <h2 class="empty-title">P4 — Moving Down</h2>
+      <p class="empty-lede">First class in build — the screen is running.</p>
+      <p>No players are listed in this direction yet. When the first P4-down class is evaluated, its players appear here in the same format as the FCS-up books — band, baselines, fits and The Call.</p>
+      <p><a href="#/up">Browse the FCS — Moving Up directory instead →</a></p>
+    </div>
+  </section>
+
   <!-- DIRECTORY VIEW -->
   <section id="view-directory">
+    <div class="dir-head">
+      <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a></span>
+    </div>
     <div class="controls card">
       <div class="row">
         <label class="grow">Search
@@ -50,10 +88,13 @@
       </div>
     </div>
 
+    <div id="compareTray" class="card compare-tray" hidden></div>
+
     <div class="card table-card">
       <table id="dir">
         <thead>
           <tr>
+            <th class="c-cmp"></th>
             <th class="c-photo"></th>
             <th data-sort="name">Player <span class="arrow"></span></th>
             <th data-sort="position">Pos <span class="arrow"></span></th>
@@ -73,8 +114,14 @@
 
   <!-- PLAYER VIEW -->
   <section id="view-player" hidden>
-    <p><a href="#/" class="back">← Back to directory</a></p>
+    <p class="player-tools"><a href="#/up" class="back back-dir">← Back to directory</a><button id="printBtn" class="btn-print" type="button">Print / Save PDF</button></p>
     <div id="playerBody"></div>
+  </section>
+
+  <!-- COMPARE VIEW -->
+  <section id="view-compare" hidden>
+    <p class="player-tools"><a href="#/up" class="back back-dir">← Back to directory</a><button id="printBtnCmp" class="btn-print" type="button">Print / Save PDF</button></p>
+    <div id="compareBody"></div>
   </section>
 </main>
 
