@@ -257,6 +257,53 @@ function proSection(p) {
   return h + '</div>';
 }
 
+function classOf(teamName) {
+  try { return JSON.parse(localStorage.getItem('portalClass:' + teamName) || '{}'); } catch { return {}; }
+}
+function hitDefault() {
+  try { const v = parseFloat(localStorage.getItem('portalHitDefault')); if (!isNaN(v)) return Math.min(1, Math.max(0, v)); } catch {}
+  return champHitDefault;
+}
+function savePlayerToTeam(pid, teamName) {
+  const e = availIdx()[pid];
+  if (!e) return false;
+  const cls = classOf(teamName);
+  if (!cls[pid]) cls[pid] = { g: e._g, hit: hitDefault() };
+  try { localStorage.setItem('portalClass:' + teamName, JSON.stringify(cls)); } catch { return false; }
+  if (teamName === champClassTeam) champClass = cls;
+  return true;
+}
+function saveStrip(p) {
+  if (!CHAMP) return '';
+  const e = availIdx()[p.id];
+  if (!e) {
+    const why = p.elig_qualified === 'Not eligible' ? 'his eligibility is used up under the qualified determination' : 'he carries no projection benchmark in the pool';
+    return `<div class="card"><h2 class="sec" style="margin-top:2px">Save to a school’s class</h2>
+      <p class="p-sub">Not saveable — ${why}, so no school can add him to a class.</p></div>`;
+  }
+  const teams = CHAMP.teams.filter(t => champAvailFor(t, e._g).some(x => x.id === p.id));
+  if (!teams.length) return `<div class="card"><h2 class="sec" style="margin-top:2px">Save to a school’s class</h2>
+    <p class="p-sub">No school can add him — the only rooms he clears are at his own school.</p></div>`;
+  const def = teams.some(t => t.name === champSel) ? champSel : teams[0].name;
+  const has = !!classOf(def)[p.id];
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Save to a school’s class</h2>
+    <div class="save-row">
+      <label>School <select id="saveTeamSel">${teams.map(t => `<option value="${esc(t.name)}"${t.name === def ? ' selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>
+      <button type="button" class="btn-save" data-saveplayer="${esc(p.id)}"${has ? ' disabled' : ''}>${has ? `Saved in ${esc(def)}’s class ✓` : 'Save to this class'}</button>
+      <span class="p-sub" id="saveMsg"></span>
+    </div>
+    <p class="p-sub">Saving puts him on that school’s saved class — the board at the top of its <a href="#/championship-path">championship path</a> page — priced at your menu default. A class is kept per school, in this browser.</p></div>`;
+}
+function updateSaveBtn() {
+  const sel = $('saveTeamSel'), btn = document.querySelector('[data-saveplayer]');
+  if (!sel || !btn) return;
+  const team = sel.value;
+  const has = !!classOf(team)[btn.dataset.saveplayer];
+  btn.disabled = has;
+  btn.textContent = has ? `Saved in ${team}’s class ✓` : 'Save to this class';
+  if (!has) { const m = $('saveMsg'); if (m) m.textContent = ''; }
+}
+
 function renderPlayer(p) {
   const vitals = [
     ['Position', p.position], ['School', p.school], ['Book', p.conference_book],
@@ -273,6 +320,8 @@ function renderPlayer(p) {
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
       </div>
     </div></div>`;
+
+  h += saveStrip(p);
 
   h += `<div class="card"><h2 class="sec" style="margin-top:2px">Eligibility</h2>
     <p><b>Qualified:</b> ${esc(p.elig_qualified)}${p.elig_track ? ` <span class="p-sub">(${esc(p.elig_track)})</span>` : ''}</p>
@@ -1001,7 +1050,7 @@ function champPlayerLine(c) {
     <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b></span>
     <br><span class="p-sub">${nilRange(c) ? `Est. NIL <b>${nilRange(c)}</b> a year` : 'Est. NIL — no estimate'}</span>
     <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
-    <br><button type="button" class="btn-add" data-add="${esc(c.id)}">+ Add to class</button></div></div>`;
+    <br><button type="button" class="btn-add" data-add="${esc(c.id)}">+ Save to class</button></div></div>`;
 }
 
 function champRoomRow(x, confName) {
@@ -1177,6 +1226,7 @@ function slotIn(roster, bench) {
 }
 function loadClass(team) {
   champClassTeam = team;
+  try { const hd = parseFloat(localStorage.getItem('portalHitDefault')); if (!isNaN(hd)) champHitDefault = Math.min(1, Math.max(0, hd)); } catch (err) {}
   try { champClass = JSON.parse(localStorage.getItem('portalClass:' + team) || '{}'); }
   catch (err) { champClass = {}; }
   const idx = availIdx();
@@ -1259,6 +1309,25 @@ function classEffect(t, m) {
 
 const HIT_STOPS = [[0, 'Floor'], [0.25, 'Low'], [0.5, 'Mid'], [0.75, 'High'], [1, 'Ceiling']];
 
+function hitLabel(hit) {
+  for (const [v, lab] of HIT_STOPS) if (Math.abs(hit - v) < 0.001) return lab;
+  return `${Math.round(hit * 100)}% of the way from floor to ceiling`;
+}
+function classMailto(t, m, ct, eff, lines) {
+  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const body = [
+    `${t.name} — saved class · ${date}`,
+    'Built on the championship path page of the Player Books site.',
+    '',
+    ...lines,
+    '',
+    ct.priced ? `Class spend at your marks: ${fmtMoney(ct.spend)} a year (${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling)${ct.priced < ct.n ? ` · ${ct.n - ct.priced} player(s) with no estimate, not counted` : ''}` : 'Class spend: no priced players.',
+    eff ? `Path with this class: ${eff.atAfter} of ${m.rooms.length} rooms at the conference standard (today ${m.atNow}) · ${f1(eff.points)} grade points to the standard (today ${f1(m.points)}).` : '',
+    '',
+    NIL_LABEL,
+  ].filter(x => x !== '').join('\n');
+  return `mailto:?subject=${encodeURIComponent(`Saved class — ${t.name} (championship path)`)}&body=${encodeURIComponent(body)}`;
+}
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
@@ -1270,10 +1339,12 @@ function renderClassBoard(t, m) {
   }
   for (const g of Object.keys(byGroup)) byGroup[g].sort((a, b) => b.e.benchmark - a.e.benchmark);
   let rows = '';
+  const lines = [];
   for (const g of CHAMP.meta.groups) {
     for (const { e, hit } of byGroup[g] || []) {
       const s = slotIn(playedRoom(t.rooms[g]), e.benchmark);
       const price = hitPrice(e, hit);
+      lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
       rows += `<div class="class-row">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>
@@ -1283,28 +1354,33 @@ function renderClassBoard(t, m) {
           ${price != null ? `<span class="hit-ctl"><span class="hit-chips">${HIT_STOPS.map(([v, lab]) =>
             `<button type="button" class="hit-chip${Math.abs(hit - v) < 0.001 ? ' on' : ''}" data-hitpid="${esc(e.id)}" data-hitval="${v}">${lab}</button>`).join('')}</span>
           <input type="range" class="hit-range" min="0" max="100" step="5" value="${Math.round(hit * 100)}" data-hitrange="${esc(e.id)}" aria-label="Where ${esc(e.name)} lands between floor and ceiling">
-          <b class="hit-price" id="hitprice-${esc(e.id)}">${fmtMoney(price)}</b></span>` : ''}
+          <b class="hit-price" id="hitprice-${esc(e.id)}">${fmtMoney(price)}</b></span>
+          <span class="hit-print">Priced at ${esc(hitLabel(hit))} — ${fmtMoney(price)} a year</span>` : ''}
         </div>
         <button type="button" class="btn-remove" data-remove="${esc(e.id)}" aria-label="Remove ${esc(e.name)} from the class">✕</button>
       </div>`;
     }
   }
+  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   return `<div class="card class-board" id="classBoard">
-    <h2 class="sec" style="margin-top:2px">Build the class — ${esc(t.name)}</h2>
-    <p class="p-sub">Drag any player from the lists below into this board, or use his <b>+ Add to class</b> button. Because a band is a range, price each man where <i>you</i> judge he lands between his floor and his ceiling — the spend totals at your marks. New adds are priced at the menu default; adjust each man on his own row. The class is kept per team, in this browser.</p>
+    <div class="print-only class-print-head">Saved class — ${esc(t.name)} · ${esc(date)}</div>
+    <h2 class="sec" style="margin-top:2px">Saved class — ${esc(t.name)}</h2>
+    <p class="p-sub">This is the school's saved list. Drag any player from the lists below into this board, or use his <b>Save</b> button — you can also save a man straight from his player page. Because a band is a range, price each man where <i>you</i> judge he lands between his floor and his ceiling — the spend totals at your marks. New saves are priced at the menu default; adjust each man on his own row. The class is kept per team, in this browser.</p>
     <div class="class-ctl">
-      <label>Price new adds at
+      <label>Price new saves at
         <select data-hitdefault>${HIT_STOPS.map(([v, lab]) => `<option value="${v}"${Math.abs(champHitDefault - v) < 0.001 ? ' selected' : ''}>${lab}</option>`).join('')}</select>
       </label>
       <label class="reg-tgl"><input type="checkbox" data-regional${champRegional ? ' checked' : ''}> Regional replacements only — the lists below show players whose home state is ${t.state ? esc(t.state) : 'the school’s state'} or a bordering state</label>
       ${ct.n ? '<button type="button" class="btn-ghost" data-clearclass>Clear the class</button>' : ''}
+      ${ct.n ? '<button type="button" class="btn-ghost" data-printclass>Print / Save PDF</button>' : ''}
+      ${ct.n ? `<a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Email the class</a>` : ''}
     </div>
     ${ct.n ? `<div class="class-list">${rows}</div>
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
       <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
       <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.priced < ct.n ? ` · ${ct.n - ct.priced} with no estimate, not counted` : ''}</span></p>
     <p class="p-sub">With this class: <b>${eff.atAfter} of ${m.rooms.length} rooms at the standard</b> (today: ${m.atNow}) · <b>${f1(eff.points)} grade points to the standard</b> (today: ${f1(m.points)}). Read the same way as the path summary above — a room counts when its projected top grade, the better of the incumbent and your best class benchmark in it, reaches the conference-best standard.</p>`
-    : '<p class="p-sub class-empty">No players in the class yet — drag a player here, or use his Add button below.</p>'}
+    : '<p class="p-sub class-empty">No players saved yet — drag a player here, use his Save button below, or save him from his player page.</p>'}
     <p class="foot-note">${esc(NIL_LABEL)}</p>
   </div>`;
 }
@@ -1335,7 +1411,7 @@ function renderFullRooms(t, m) {
           <br><span class="p-sub">${slotTxt}</span>
           <br><span class="p-sub">${nilRange(e) ? `Est. NIL <b>${nilRange(e)}</b> a year` : 'Est. NIL — no estimate'} · </span>${eligChip(e.elig)}${e.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
         </div>
-        <button type="button" class="btn-add" data-add="${esc(e.id)}"${inClass ? ' disabled' : ''}>${inClass ? 'In class ✓' : '+ Class'}</button>
+        <button type="button" class="btn-add" data-add="${esc(e.id)}"${inClass ? ' disabled' : ''}>${inClass ? 'Saved ✓' : '+ Save'}</button>
       </div>`;
     }).join('');
     h += `<div class="card room-full">
@@ -1350,7 +1426,7 @@ function renderFullRooms(t, m) {
         <div>
           <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}</h3>
           <div class="avail-scroll">${availRows || '<p class="p-sub">No available players under the current view.</p>'}</div>
-          <p class="p-sub">Every evaluated player with eligibility remaining at this group${t.level === 'G6' ? ', both directions — the Moving Up pool at his book benchmark and the P4 Down pool at his projected G6 grade' : ' at his book benchmark'}, best benchmark first — not only the men who beat the room’s #1. <b>Slot-in</b> ranks his benchmark against the full room’s grades: #2 means he enters behind one man, not that he failed a test. Drag a player to the class builder, or use his button.</p>
+          <p class="p-sub">Every evaluated player with eligibility remaining at this group${t.level === 'G6' ? ', both directions — the Moving Up pool at his book benchmark and the P4 Down pool at his projected G6 grade' : ' at his book benchmark'}, best benchmark first — not only the men who beat the room’s #1. <b>Slot-in</b> ranks his benchmark against the full room’s grades: #2 means he enters behind one man, not that he failed a test. Drag a player to the saved class, or use his Save button.</p>
         </div>
       </div>
     </div>`;
@@ -1608,11 +1684,34 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     renderChamp();
   });
   $('champQ').addEventListener('input', buildChampPanel);
+  $('playerBody').addEventListener('click', e => {
+    const go = e.target.closest('[data-goclass]');
+    if (go) { champSel = go.dataset.goclass; champBtnLabel(); buildChampPanel(); }
+    const sv = e.target.closest('[data-saveplayer]');
+    if (sv) {
+      const sel = $('saveTeamSel');
+      const team = sel ? sel.value : champSel;
+      if (savePlayerToTeam(sv.dataset.saveplayer, team)) {
+        updateSaveBtn();
+        const m = $('saveMsg');
+        if (m) m.innerHTML = `Saved ✓ — <a href="#/championship-path" data-goclass="${esc(team)}">open ${esc(team)}’s saved class</a>`;
+      }
+    }
+  });
+  $('playerBody').addEventListener('change', e => { if (e.target.closest('#saveTeamSel')) updateSaveBtn(); });
   $('champBody').addEventListener('click', e => {
     const add = e.target.closest('[data-add]');
     if (add) { classAdd(add.dataset.add); return; }
     const rem = e.target.closest('[data-remove]');
     if (rem) { classRemove(rem.dataset.remove); return; }
+    if (e.target.closest('[data-printclass]')) {
+      document.body.classList.add('print-class');
+      const donePc = () => { document.body.classList.remove('print-class'); window.removeEventListener('afterprint', donePc); };
+      window.addEventListener('afterprint', donePc);
+      setTimeout(donePc, 2000);
+      try { window.print(); } catch (err) {}
+      return;
+    }
     if (e.target.closest('[data-clearclass]')) {
       champClass = {}; saveClass(); champRestoreScroll = window.scrollY; renderChamp(); return;
     }
@@ -1626,7 +1725,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     const reg = e.target.closest('[data-regional]');
     if (reg) { champRegional = reg.checked; champRestoreScroll = window.scrollY; renderChamp(); return; }
     const hd = e.target.closest('[data-hitdefault]');
-    if (hd) champHitDefault = parseFloat(hd.value);
+    if (hd) { champHitDefault = parseFloat(hd.value); try { localStorage.setItem('portalHitDefault', String(champHitDefault)); } catch (err) {} }
   });
   $('champBody').addEventListener('input', e => {
     const rg = e.target.closest('[data-hitrange]');
