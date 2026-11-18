@@ -398,6 +398,9 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .btn-save{font:inherit;font-size:13px;font-weight:700;background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:7px;padding:6px 12px;cursor:pointer}
 .btn-save:disabled{background:#eef2f7;color:var(--accent2);border-color:var(--line);cursor:default}
 .mail-btn{text-decoration:none;display:inline-block}
+.email-panel{border:1px dashed var(--line);border-radius:9px;background:#f8fafc;padding:12px 14px;margin:10px 0}
+.email-btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+@media print{.email-panel{display:none!important}}
 .hit-print{display:none}
 .class-print-head{font-size:15px;font-weight:700;margin-bottom:8px}
 @media print{

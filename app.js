@@ -1313,7 +1313,7 @@ function hitLabel(hit) {
   for (const [v, lab] of HIT_STOPS) if (Math.abs(hit - v) < 0.001) return lab;
   return `${Math.round(hit * 100)}% of the way from floor to ceiling`;
 }
-function classMailto(t, m, ct, eff, lines) {
+function classEmailText(t, m, ct, eff, lines) {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const body = [
     `${t.name} — saved class · ${date}`,
@@ -1326,7 +1326,130 @@ function classMailto(t, m, ct, eff, lines) {
     '',
     NIL_LABEL,
   ].filter(x => x !== '').join('\n');
-  return `mailto:?subject=${encodeURIComponent(`Saved class — ${t.name} (championship path)`)}&body=${encodeURIComponent(body)}`;
+  return { subject: `Saved class — ${t.name} (championship path)`, body };
+}
+function classMailto(t, m, ct, eff, lines) {
+  const em = classEmailText(t, m, ct, eff, lines);
+  return `mailto:?subject=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
+}
+/* ---- the board as a picture: a canvas rendering of the saved class,
+   drawn from the same snapshot the board prints, so the email carries
+   the look of the screen and not only text. ---- */
+let champBoardSnapshot = null;
+function canShareFiles() {
+  try {
+    if (!navigator.share || !navigator.canShare) return false;
+    return navigator.canShare({ files: [new File(['x'], 'x.png', { type: 'image/png' })] });
+  } catch (err) { return false; }
+}
+function wrapLines(ctx, text, maxW) {
+  const out = [];
+  let cur = '';
+  for (const w of String(text).split(/\s+/)) {
+    const t = cur ? cur + ' ' + w : w;
+    if (cur && ctx.measureText(t).width > maxW) { out.push(cur); cur = w; } else cur = t;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+function fitLine(ctx, text, maxW) {
+  if (ctx.measureText(text).width <= maxW) return text;
+  let t = text;
+  while (t.length && ctx.measureText(t + '…').width > maxW) t = t.slice(0, -1);
+  return t + '…';
+}
+function classBoardCanvas() {
+  const snap = champBoardSnapshot;
+  if (!snap || !snap.items.length) return null;
+  const probe = document.createElement('canvas');
+  const pctx = probe.getContext('2d');
+  if (!pctx) return null;
+  const W = 640, PAD = 28, MAXW = W - PAD * 2, ROWH = 60;
+  const FONT = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  pctx.font = `12.5px ${FONT}`;
+  const effLine = snap.effAt != null ? `With this class: ${snap.effAt} of ${snap.rooms} rooms at the standard (today: ${snap.atNow}) · ${f1(snap.effPoints)} grade points to the standard (today: ${f1(snap.pointsNow)}).` : '';
+  const effLines = effLine ? wrapLines(pctx, effLine, MAXW) : [];
+  pctx.font = `10.5px ${FONT}`;
+  const footLines = wrapLines(pctx, NIL_LABEL, MAXW);
+  const totalsH = 36 + (snap.ct.priced ? 18 : 0) + effLines.length * 18;
+  const tY = 116 + snap.items.length * ROWH;
+  const H = tY + totalsH + 22 + footLines.length * 14 + 12;
+  const S = 2;
+  const cv = document.createElement('canvas');
+  cv.width = W * S; cv.height = H * S;
+  const ctx = cv.getContext('2d');
+  if (!ctx) return null;
+  ctx.scale(S, S);
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#334155'; ctx.fillRect(0, 0, W, 88);
+  ctx.fillStyle = '#ffffff'; ctx.font = `700 20px ${FONT}`;
+  ctx.fillText(fitLine(ctx, `Saved class — ${snap.team}`, MAXW), PAD, 38);
+  ctx.fillStyle = '#cbd5e1'; ctx.font = `12.5px ${FONT}`;
+  ctx.fillText(`${snap.date} · Player Books — championship path`, PAD, 62);
+  let y = 112;
+  for (const it of snap.items) {
+    ctx.fillStyle = '#1e293b'; ctx.font = `700 15px ${FONT}`;
+    ctx.fillText(fitLine(ctx, it.name + `${it.hv ? ' · Hidden Value' : ''}${it.down ? ' · P4 Down' : ''}`, MAXW), PAD, y);
+    ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
+    ctx.fillText(fitLine(ctx, `${it.g} · ${it.school} · benchmark ${f1(it.benchmark)} · slots #${it.rank} of ${it.of} in this room`, MAXW), PAD, y + 19);
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText(fitLine(ctx, it.price != null ? `Priced at ${hitLabel(it.hit)} — ${fmtMoney(it.price)} a year · band ${it.band}` : 'Est. NIL — no estimate (not counted in the spend)', MAXW), PAD, y + 38);
+    y += ROWH;
+    ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(PAD, y - 12); ctx.lineTo(W - PAD, y - 12); ctx.stroke();
+  }
+  ctx.fillStyle = '#f8fafc'; ctx.fillRect(PAD - 8, tY, MAXW + 16, totalsH);
+  ctx.fillStyle = '#1e293b'; ctx.font = `700 14.5px ${FONT}`;
+  ctx.fillText(snap.ct.priced ? `Class spend at your marks: ${fmtMoney(snap.ct.spend)} a year` : 'Class spend: no priced players.', PAD, tY + 24);
+  let ly = tY + 24;
+  if (snap.ct.priced) {
+    ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
+    ly += 18;
+    ctx.fillText(fitLine(ctx, `${fmtMoney(snap.ct.floor)} at everyone's floor · ${fmtMoney(snap.ct.ceiling)} at everyone's ceiling · ${snap.ct.n} player${snap.ct.n > 1 ? 's' : ''}${snap.ct.priced < snap.ct.n ? ` · ${snap.ct.n - snap.ct.priced} with no estimate, not counted` : ''}`, MAXW), PAD, ly);
+  }
+  ctx.fillStyle = '#1e293b'; ctx.font = `12.5px ${FONT}`;
+  for (const L of effLines) { ly += 18; ctx.fillText(L, PAD, ly); }
+  ctx.fillStyle = '#64748b'; ctx.font = `10.5px ${FONT}`;
+  let fy = tY + totalsH + 22;
+  for (const L of footLines) { ctx.fillText(L, PAD, fy); fy += 14; }
+  return cv;
+}
+function classImageBlob(cb) {
+  const cv = classBoardCanvas();
+  if (!cv) { cb(null); return; }
+  if (cv.toBlob) { cv.toBlob(b => cb(b), 'image/png'); return; }
+  try {
+    const bin = atob(cv.toDataURL('image/png').split(',')[1]);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    cb(new Blob([arr], { type: 'image/png' }));
+  } catch (err) { cb(null); }
+}
+function classImageName() {
+  const snap = champBoardSnapshot;
+  return `saved-class-${(snap ? snap.team : 'team').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`;
+}
+function downloadClassImage() {
+  classImageBlob(b => {
+    if (!b) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = classImageName();
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+}
+function shareClassImage() {
+  const snap = champBoardSnapshot;
+  if (!snap || !snap.mail) return;
+  classImageBlob(b => {
+    if (!b) { try { navigator.share({ title: snap.mail.subject, text: snap.mail.body }).catch(() => {}); } catch (err) {} return; }
+    const data = { title: snap.mail.subject, text: snap.mail.body };
+    try {
+      const file = new File([b], classImageName(), { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) data.files = [file];
+    } catch (err) {}
+    try { navigator.share(data).catch(() => {}); } catch (err) {}
+  });
 }
 function renderClassBoard(t, m) {
   const idx = availIdx();
@@ -1340,11 +1463,13 @@ function renderClassBoard(t, m) {
   for (const g of Object.keys(byGroup)) byGroup[g].sort((a, b) => b.e.benchmark - a.e.benchmark);
   let rows = '';
   const lines = [];
+  const items = [];
   for (const g of CHAMP.meta.groups) {
     for (const { e, hit } of byGroup[g] || []) {
       const s = slotIn(playedRoom(t.rooms[g]), e.benchmark);
       const price = hitPrice(e, hit);
       lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
+      items.push({ name: e.name, g, school: e.school, benchmark: e.benchmark, rank: s.rank, of: s.of, price, hit, band: price != null ? nilRange(e) : null, hv: !!e.hv, down: e.dir === 'down' });
       rows += `<div class="class-row">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>
@@ -1362,6 +1487,7 @@ function renderClassBoard(t, m) {
     }
   }
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  champBoardSnapshot = { team: t.name, date, items, ct, effAt: eff ? eff.atAfter : null, effPoints: eff ? eff.points : null, rooms: m.rooms.length, atNow: m.atNow, pointsNow: m.points, mail: classEmailText(t, m, ct, eff, lines) };
   return `<div class="card class-board" id="classBoard">
     <div class="print-only class-print-head">Saved class — ${esc(t.name)} · ${esc(date)}</div>
     <h2 class="sec" style="margin-top:2px">Saved class — ${esc(t.name)}</h2>
@@ -1373,8 +1499,17 @@ function renderClassBoard(t, m) {
       <label class="reg-tgl"><input type="checkbox" data-regional${champRegional ? ' checked' : ''}> Regional replacements only — the lists below show players whose home state is ${t.state ? esc(t.state) : 'the school’s state'} or a bordering state</label>
       ${ct.n ? '<button type="button" class="btn-ghost" data-clearclass>Clear the class</button>' : ''}
       ${ct.n ? '<button type="button" class="btn-ghost" data-printclass>Print / Save PDF</button>' : ''}
-      ${ct.n ? `<a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Email the class</a>` : ''}
+      ${ct.n ? '<button type="button" class="btn-ghost" data-emailclass>Email / share the class</button>' : ''}
     </div>
+    ${ct.n ? `<div class="email-panel" data-emailpanel hidden>
+      <p class="p-sub" style="margin-top:0">The email carries a <b>picture of this board</b> — the class as it looks on screen — with the <b>full text underneath it</b>, so it still reads on a phone even where the picture doesn't load.</p>
+      <div class="email-btns">
+        ${canShareFiles() ? '<button type="button" class="btn-save" data-shareclass>Share — picture + text</button>' : ''}
+        <button type="button" class="btn-ghost" data-dlimg>Download the board picture</button>
+        <a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Open an email draft — text version</a>
+      </div>
+      <p class="p-sub">On a phone, <b>Share</b> drops the picture straight into your mail app with the text under it. On a computer, download the picture and attach it to the draft — a web page can't attach a file to an email by itself.</p>
+    </div>` : ''}
     ${ct.n ? `<div class="class-list">${rows}</div>
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
       <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
@@ -1715,6 +1850,13 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     if (e.target.closest('[data-clearclass]')) {
       champClass = {}; saveClass(); champRestoreScroll = window.scrollY; renderChamp(); return;
     }
+    if (e.target.closest('[data-emailclass]')) {
+      const p = document.querySelector('[data-emailpanel]');
+      if (p) p.hidden = !p.hidden;
+      return;
+    }
+    if (e.target.closest('[data-dlimg]')) { downloadClassImage(); return; }
+    if (e.target.closest('[data-shareclass]')) { shareClassImage(); return; }
     const chip = e.target.closest('[data-hitpid]');
     if (chip && champClass[chip.dataset.hitpid]) {
       champClass[chip.dataset.hitpid].hit = parseFloat(chip.dataset.hitval);
