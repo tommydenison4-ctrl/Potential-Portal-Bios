@@ -345,6 +345,11 @@ th[data-ssort]:hover{color:var(--ink)}
   .print-title{font-size:19px;line-height:23px;margin:0 0 2px;color:#000}
   .print-sub{color:#475569;font-size:11.5px;margin:0 0 12px}
   #view-teamcmp .card{break-inside:auto}
+  /* every block on the team page starts on a fresh printed page:
+     matrix, distribution chart, then per team the room table, the gap
+     chart, the upgrades and the roster layer — nothing bleeds across */
+  #teamBody > .card{break-before:page}
+  #teamBody > .card:first-child{break-before:auto}
   .ctable tr{break-inside:avoid}
   #view-teamcmp h2.sec{break-after:avoid}
   .mt-best,.gap-neg,.gap-pos,.dist-dot,svg.chart{-webkit-print-color-adjust:exact;print-color-adjust:exact}
