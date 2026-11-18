@@ -400,13 +400,16 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .mail-btn{text-decoration:none;display:inline-block}
 .email-panel{border:1px dashed var(--line);border-radius:9px;background:#f8fafc;padding:12px 14px;margin:10px 0}
 .email-btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
-@media print{.email-panel{display:none!important}}
+.shared-strip{border-left:4px solid var(--accent2);background:#f0fdfa;padding:9px 13px;border-radius:0 8px 8px 0;margin:8px 0;font-size:14px}
+.share-fieldwrap{margin:8px 0}
+.share-field{width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--mut)}
+@media print{.email-panel,.shared-strip,.share-fieldwrap{display:none!important}}
 .hit-print{display:none}
 .class-print-head{font-size:15px;font-weight:700;margin-bottom:8px}
 @media print{
   body.print-class #view-champ .dir-head{display:none!important}
   body.print-class #view-champ .card:not(.class-board){display:none!important}
-  body.print-class .class-board .class-ctl,body.print-class .class-board .hit-ctl,body.print-class .class-board .btn-remove{display:none!important}
+  body.print-class .class-board .class-ctl,body.print-class .class-board .hit-ctl,body.print-class .class-board .btn-remove,body.print-class .class-board .shared-strip,body.print-class .class-board .share-fieldwrap{display:none!important}
   body.print-class .class-board{box-shadow:none}
   body.print-class .hit-print{display:block;font-size:12px;font-weight:600;margin-top:3px}
   body.print-class .class-row{break-inside:avoid}
@@ -436,6 +439,7 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
   #view-champ h2.sec{break-after:avoid}
   .getable-more{display:none!important}
   #view-champ .class-ctl{display:none!important}
+  #view-champ .shared-strip,#view-champ .share-fieldwrap{display:none!important}
   #view-champ .hit-chips,#view-champ .hit-range{display:none!important}
   #view-champ .btn-add,#view-champ .btn-remove{display:none!important}
   #view-champ .avail-scroll{max-height:none;overflow:visible;border:0;padding:0}

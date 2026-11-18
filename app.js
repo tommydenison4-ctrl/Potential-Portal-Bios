@@ -1145,6 +1145,13 @@ function renderChamp() {
   champSel = t.name;
   champBtnLabel();
   if (champClassTeam !== t.name) loadClass(t.name);
+  if (champSharedPending && champSharedPending.team === t.name) {
+    // a share link's class replaces the board's class in memory only —
+    // the stored class for this team is not read again and not overwritten
+    champClass = champSharedPending.cls;
+    champSharedView = true;
+    champSharedPending = null;
+  }
   const m = champModel(t, CHAMP.meta.groups);
   const ph = $('champPrintHead');
   if (ph) ph.innerHTML = `<h1 class="print-title">Path to a conference championship — ${esc(t.name)}</h1><p class="print-sub">${esc(t.conf)} · ${esc(t.level)} · pool snapshot Nov 17, 2026 · the standard is the conference-best qualified incumbent grade per room · projected grades are Player Book benchmarks</p>`;
@@ -1194,6 +1201,8 @@ let champRegional = false;
 let champHitDefault = 0.5;
 let champClass = {};          // playerId -> {g, hit} — hit is 0..1 across his NIL band
 let champClassTeam = null;
+let champSharedPending = null;  // {team, cls} decoded from a share link, applied by the next renderChamp
+let champSharedView = false;    // the board is showing an unmodified shared class, not this device's stored one
 let champRestoreScroll = null;
 let AVAIL_IDX = null;
 
@@ -1226,6 +1235,7 @@ function slotIn(roster, bench) {
 }
 function loadClass(team) {
   champClassTeam = team;
+  champSharedView = false;   // (re)reading the stored class ends any shared view
   try { const hd = parseFloat(localStorage.getItem('portalHitDefault')); if (!isNaN(hd)) champHitDefault = Math.min(1, Math.max(0, hd)); } catch (err) {}
   try { champClass = JSON.parse(localStorage.getItem('portalClass:' + team) || '{}'); }
   catch (err) { champClass = {}; }
@@ -1233,6 +1243,11 @@ function loadClass(team) {
   for (const id of Object.keys(champClass)) if (!idx[id]) delete champClass[id];
 }
 function saveClass() {
+  // every mutation path saves through here — from the first change on, a
+  // shared class being viewed is the user's own saved class on this device
+  champSharedView = false;
+  const st = document.querySelector('[data-sharedstrip]');
+  if (st) st.remove();
   try { localStorage.setItem('portalClass:' + champClassTeam, JSON.stringify(champClass)); } catch (err) {}
 }
 function hitPrice(e, hit) {
@@ -1315,6 +1330,7 @@ function hitLabel(hit) {
 }
 function classEmailText(t, m, ct, eff, lines) {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const shareUrl = classShareUrl(t.name, champClass);
   const body = [
     `${t.name} — saved class · ${date}`,
     'Built on the championship path page of the Player Books site.',
@@ -1323,6 +1339,7 @@ function classEmailText(t, m, ct, eff, lines) {
     '',
     ct.priced ? `Class spend at your marks: ${fmtMoney(ct.spend)} a year (${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling)${ct.priced < ct.n ? ` · ${ct.n - ct.priced} player(s) with no estimate, not counted` : ''}` : 'Class spend: no priced players.',
     eff ? `Path with this class: ${eff.atAfter} of ${m.rooms.length} rooms at the conference standard (today ${m.atNow}) · ${f1(eff.points)} grade points to the standard (today ${f1(m.points)}).` : '',
+    shareUrl ? `Open this class live: ${shareUrl}` : '',
     '',
     NIL_LABEL,
   ].filter(x => x !== '').join('\n');
@@ -1335,6 +1352,72 @@ function classMailto(t, m, ct, eff, lines) {
 function gmailCompose(t, m, ct, eff, lines) {
   const em = classEmailText(t, m, ct, eff, lines);
   return `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
+}
+/* ---- shareable class links: the class travels in the URL itself ----
+   #/championship-path/class/<base64url of JSON {t, c: [[id, hit], ...]}>
+   Opening one shows the sender's class on the board without touching
+   the stored class on this device; the first change the viewer makes
+   saves it as their own (every mutation path runs through saveClass). */
+function b64urlEncode(str) {
+  return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function b64urlDecode(s) {
+  const b = String(s).replace(/-/g, '+').replace(/_/g, '/');
+  const pad = b.length % 4 ? '='.repeat(4 - (b.length % 4)) : '';
+  return decodeURIComponent(escape(atob(b + pad)));
+}
+function classShareUrl(teamName, classObj) {
+  if (!CHAMP) return null;
+  const idx = availIdx();
+  const entries = Object.entries(classObj || {}).filter(([id, c]) => c && idx[id]);
+  if (!entries.length) return null;
+  const payload = { t: teamName, c: entries.map(([id, c]) => [id, Math.min(1, Math.max(0, +c.hit || 0))]) };
+  return `${location.origin}${location.pathname}#/championship-path/class/${b64urlEncode(JSON.stringify(payload))}`;
+}
+function parseSharedClass(payloadStr) {
+  if (!CHAMP) return null;
+  try {
+    const obj = JSON.parse(b64urlDecode(payloadStr));
+    if (!obj || typeof obj.t !== 'string' || !Array.isArray(obj.c)) return null;
+    if (!CHAMP.teams.some(x => x.name === obj.t)) return null;
+    const idx = availIdx();
+    const cls = {};
+    for (const pair of obj.c) {
+      if (!Array.isArray(pair)) continue;
+      const e = idx[pair[0]];
+      if (!e) continue;
+      cls[pair[0]] = { g: e._g, hit: Math.min(1, Math.max(0, +pair[1] || 0)) };
+    }
+    return Object.keys(cls).length ? { team: obj.t, cls } : null;
+  } catch (err) { return null; }
+}
+function copyShareLink(btn) {
+  const url = classShareUrl(champClassTeam, champClass);
+  if (!url) return;
+  const done = () => {
+    if (!btn) return;
+    const old = btn.textContent;
+    btn.textContent = 'Link copied ✓';
+    setTimeout(() => { btn.textContent = old; }, 2000);
+  };
+  const fallback = () => {
+    // no clipboard access: surface the link in a selectable field instead
+    const wrap = document.querySelector('[data-sharefieldwrap]');
+    const field = document.querySelector('[data-sharefield]');
+    if (wrap && field) {
+      wrap.hidden = false;
+      field.value = url;
+      try { field.focus(); field.select(); } catch (err) {}
+      try { if (typeof document.execCommand === 'function' && document.execCommand('copy')) done(); } catch (err) {}
+    }
+  };
+  try {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(url).then(done, fallback);
+      return;
+    }
+  } catch (err) {}
+  fallback();
 }
 /* ---- the board as a picture: a canvas rendering of the saved class,
    drawn from the same snapshot the board prints, so the email carries
@@ -1495,6 +1578,7 @@ function renderClassBoard(t, m) {
   return `<div class="card class-board" id="classBoard">
     <div class="print-only class-print-head">Saved class — ${esc(t.name)} · ${esc(date)}</div>
     <h2 class="sec" style="margin-top:2px">Saved class — ${esc(t.name)}</h2>
+    ${champSharedView ? `<div class="shared-strip" data-sharedstrip><b>Shared class.</b> You’re viewing a class sent to you — your own saved class for ${esc(t.name)} is untouched. If you change anything here, this becomes your saved class on this device.</div>` : ''}
     <p class="p-sub">This is the school's saved list. Drag any player from the lists below into this board, or use his <b>Save</b> button — you can also save a man straight from his player page. Because a band is a range, price each man where <i>you</i> judge he lands between his floor and his ceiling — the spend totals at your marks. New saves are priced at the menu default; adjust each man on his own row. The class is kept per team, in this browser.</p>
     <div class="class-ctl">
       <label>Price new saves at
@@ -1504,7 +1588,9 @@ function renderClassBoard(t, m) {
       ${ct.n ? '<button type="button" class="btn-ghost" data-clearclass>Clear the class</button>' : ''}
       ${ct.n ? '<button type="button" class="btn-ghost" data-printclass>Print / Save PDF</button>' : ''}
       ${ct.n ? '<button type="button" class="btn-ghost" data-emailclass>Email / share the class</button>' : ''}
+      ${ct.n ? '<button type="button" class="btn-ghost" data-sharelink>Copy share link</button>' : ''}
     </div>
+    ${ct.n ? '<div class="share-fieldwrap" data-sharefieldwrap hidden><input type="text" readonly data-sharefield class="share-field" aria-label="Share link for this class"></div>' : ''}
     ${ct.n ? `<div class="email-panel" data-emailpanel hidden>
       <p class="p-sub" style="margin-top:0">The email carries a <b>picture of this board</b> — the class as it looks on screen — with the <b>full text underneath it</b>, so it still reads on a phone even where the picture doesn't load.</p>
       <div class="email-btns">
@@ -1687,9 +1773,32 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  const sm = hash.match(/^#\/championship-path\/class\/(.+)$/);
+  if (sm) {
+    setChrome(null);
+    showView('champ');
+    const shared = parseSharedClass(sm[1]);
+    if (shared) {
+      champSel = shared.team;
+      champSharedPending = shared;
+      champBtnLabel();
+      buildChampPanel();
+    }
+    renderChamp();
+    document.title = 'Path to a conference championship — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/championship-path') {
     setChrome(null);
     showView('champ');
+    if (champSharedView || champSharedPending) {
+      // the plain page is the user's own class — drop any shared view
+      // and force the stored class to be re-read on the next render
+      champSharedView = false;
+      champSharedPending = null;
+      champClassTeam = null;
+    }
     renderChamp();
     document.title = 'Path to a conference championship — Player Books';
     window.scrollTo(0, 0);
@@ -1862,6 +1971,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     }
     if (e.target.closest('[data-dlimg]')) { downloadClassImage(); return; }
     if (e.target.closest('[data-shareclass]')) { shareClassImage(); return; }
+    if (e.target.closest('[data-sharelink]')) { copyShareLink(e.target.closest('[data-sharelink]')); return; }
     const chip = e.target.closest('[data-hitpid]');
     if (chip && champClass[chip.dataset.hitpid]) {
       champClass[chip.dataset.hitpid].hit = parseFloat(chip.dataset.hitval);
