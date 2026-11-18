@@ -638,6 +638,36 @@ function teamSummary(t) {
   return { n: withInc.length, aboveConf, aboveLvl, worst, totalCand };
 }
 
+/* CSV export of the room table for the selected teams: one row per room,
+   the same numbers the page prints (gaps vs P4 derived like the matrix). */
+function buildTeamCSV(sel) {
+  const med = levelMedians();
+  const head = ['Team', 'Conference', 'Level', 'Room', 'Incumbent', 'Incumbent grade',
+    'Below bar', 'Volume', 'Volume bar', 'Volume unit', 'Room median', 'Qualified players',
+    'Conference median', 'Conference rank', 'Conference teams', 'Level median',
+    'Gap vs conference', 'Gap vs G6', 'Gap vs P4', 'Gap vs level', 'Upgrade candidates'];
+  const q = v => {
+    if (v == null) return '';
+    const s = String(v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
+  const rows = [head.join(',')];
+  for (const t of sel) {
+    for (const g of TEAMS.meta.groups) {
+      const r = t.rooms[g];
+      if (!r) continue;
+      const gapP4 = (r.inc_grade != null && med[g] && med[g].p4 != null)
+        ? Math.round((r.inc_grade - med[g].p4) * 10) / 10 : null;
+      rows.push([t.name, t.conf, t.level, g, r.incumbent, r.inc_grade,
+        r.below_bar ? 'Y' : '', r.below_bar ? r.inc_vol : '', r.below_bar ? r.vol_bar : '',
+        r.below_bar ? r.vol_unit : '', r.median, r.n, r.conf_median, r.conf_rank,
+        r.conf_teams, r.level_median, r.gap_conf, r.gap_g6, gapP4, r.gap_level,
+        r.cand_total].map(q).join(','));
+    }
+  }
+  return rows.join('\n');
+}
+
 function renderTeamMatrix(sel) {
   const med = levelMedians();
   const gs = TEAMS.meta.groups;
@@ -855,6 +885,12 @@ function renderTeam() {
     return;
   }
   const sel = teamSet.map(n => TEAMS.teams.find(x => x.name === n)).filter(Boolean);
+  const csvBtn = $('csvBtnTeam');
+  if (csvBtn) csvBtn.disabled = !sel.length;
+  const ph = $('teamPrintHead');
+  if (ph) ph.innerHTML = sel.length
+    ? `<h1 class="print-title">Team comparison — ${sel.map(t => esc(t.name)).join(' · ')}</h1><p class="print-sub">Pool snapshot ${esc(TEAMS.meta.snapshot || 'Nov 17, 2026')} · grades are PFF headline grades · conference and level medians are medians of team incumbents · an asterisked grade is a below-bar room carried by its top player by volume</p>`
+    : '';
   if (!sel.length) {
     body.innerHTML = `<div class="card empty-state"><h2 class="empty-title">Pick up to four teams</h2>
       <p>Tick teams in the picker above — one of the ${TEAMS.teams.length} FBS teams for its full page, or up to four to compare them side by side. Every room is measured against the team’s own conference and against both levels, the G6 and the P4, with the evaluated players who would upgrade each room.</p></div>`;
@@ -1109,4 +1145,18 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
 });
 $('printBtn').addEventListener('click', () => window.print());
 $('printBtnCmp').addEventListener('click', () => window.print());
+$('printBtnTeam').addEventListener('click', () => window.print());
+$('csvBtnTeam').addEventListener('click', () => {
+  if (!TEAMS) return;
+  const sel = teamSet.map(n => TEAMS.teams.find(x => x.name === n)).filter(Boolean);
+  if (!sel.length) return;
+  const blob = new Blob([buildTeamCSV(sel)], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'team-comparison.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+});
 window.addEventListener('hashchange', route);

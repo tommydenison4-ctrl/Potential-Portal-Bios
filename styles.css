@@ -308,10 +308,18 @@ th[data-ssort]:hover{color:var(--ink)}
   .team-logo{width:44px;height:44px}
 }
 
+/* team comparison export row + print-only header */
+.team-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.btn-csv{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-csv:hover{background:#eef2f7}
+.print-only{display:none}
+
 /* ---------------- print ---------------- */
 @page{margin:13mm}
 @page cmp{size:landscape;margin:11mm}
 #view-compare{page:cmp}
+@page teamcmp{size:landscape;margin:11mm}
+#view-teamcmp{page:teamcmp}
 @media print{
   body{background:#fff;color:#000;font-size:12.5px}
   .topbar,.foot,.player-tools,.controls,.compare-tray,.foot-note,.dir-head,.team-sort{display:none!important}
@@ -331,6 +339,15 @@ th[data-ssort]:hover{color:var(--ink)}
   .cmp-grid{font-size:11px;border-color:#94a3b8}
   .cmp-label,.cmp-v{border-color:#cbd5e1}
   .cmp-grid,.cmp-label{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* team comparison: landscape page, header naming the selected teams,
+     long team cards may break but tables and headings stay intact */
+  .print-only{display:block!important}
+  .print-title{font-size:19px;line-height:23px;margin:0 0 2px;color:#000}
+  .print-sub{color:#475569;font-size:11.5px;margin:0 0 12px}
+  #view-teamcmp .card{break-inside:auto}
+  .ctable tr{break-inside:avoid}
+  #view-teamcmp h2.sec{break-after:avoid}
+  .mt-best,.gap-neg,.gap-pos,.dist-dot,svg.chart{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 
 /* below-bar carried rooms + team comparison charts */
