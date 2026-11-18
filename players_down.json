@@ -543,7 +543,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 750000,
+  "on3_url": "https://www.on3.com/rivals/keisean-henderson-158794/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "deuce-knight",
@@ -1086,7 +1095,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 1100000,
+  "on3_url": "https://www.on3.com/rivals/deuce-knight-152218/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "ty-hawkins",
@@ -1777,7 +1795,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "karle-lacey-jr",
@@ -2404,7 +2428,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "eli-holstein",
@@ -2859,7 +2889,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 750000,
+  "on3_url": "https://www.on3.com/rivals/eli-holstein-40953/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "chase-jenkins",
@@ -3526,7 +3565,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "luke-carney",
@@ -4133,7 +4178,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "edward-griffin",
@@ -4554,7 +4605,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 33000,
+  "nil_ceiling": 600000,
+  "nil_basis": "G6 starter \u00b7 QB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ej-crowell",
@@ -5140,7 +5197,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 600000,
+  "on3_url": "https://www.on3.com/rivals/ej-crowell-238147/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "harlem-berry",
@@ -5613,7 +5679,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 1000000,
+  "on3_url": "https://www.on3.com/db/harlem-berry-155410/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "lj-martin",
@@ -6186,7 +6261,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 1000000,
+  "on3_url": "https://www.on3.com/rivals/lj-martin-146562/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "kj-edwards",
@@ -6692,7 +6776,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "kewan-lacy",
@@ -7182,7 +7272,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 2000000,
+  "on3_url": "https://www.on3.com/rivals/kewan-lacy-150872/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "james-peoples",
@@ -7593,7 +7692,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "christian-rhodes",
@@ -7973,7 +8078,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "quinten-joyner",
@@ -8329,7 +8440,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 750000,
+  "on3_url": "https://www.on3.com/rivals/quinten-joyner-145533/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "ryelan-morris",
@@ -8656,7 +8776,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "tradarian-ball",
@@ -8974,7 +9100,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "braylen-russell",
@@ -9285,7 +9417,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kevin-riley",
@@ -9582,7 +9720,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "noah-moss",
@@ -10099,7 +10243,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "daniel-bray",
@@ -10587,7 +10737,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "john-hebert",
@@ -11067,7 +11223,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "makhi-frazier",
@@ -11480,7 +11642,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jj-hill",
@@ -11872,7 +12040,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "xavier-ford",
@@ -12258,7 +12432,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "trae-shawn-brown",
@@ -12610,7 +12790,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "arnold-barnes-iii",
@@ -12960,7 +13146,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jalen-dupree",
@@ -13310,7 +13502,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "omar-mabson-ii",
@@ -13644,7 +13842,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "cooper-crosby",
@@ -13973,7 +14177,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "monterrio-elston-jr",
@@ -14299,7 +14509,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "landen-chambers",
@@ -14593,7 +14809,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "nate-palmer",
@@ -14908,7 +15130,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "makhilyn-young",
@@ -15186,7 +15414,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 18000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 RB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "terry-bussey",
@@ -15475,7 +15709,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "dillon-alfred",
@@ -15963,7 +16203,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "corey-barber-jr",
@@ -16414,7 +16660,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "quentin-gibson",
@@ -16807,7 +17059,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jelani-watkins",
@@ -17168,7 +17426,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "malcolm-simmons",
@@ -17532,7 +17796,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 600000,
+  "on3_url": "https://www.on3.com/rivals/malcolm-simmons-147663/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "ivan-carreon",
@@ -17821,7 +18094,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "taron-francis",
@@ -18110,7 +18389,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kelshaun-johnson",
@@ -18383,7 +18668,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "cederian-morgan",
@@ -18648,7 +18939,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ernest-campbell",
@@ -18899,7 +19196,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jordan-clay",
@@ -19135,7 +19438,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "tyreek-robinson",
@@ -19733,7 +20042,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "camden-capehart",
@@ -20220,7 +20535,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "zion-crumpton",
@@ -20631,7 +20952,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "larry-simmons",
@@ -21034,7 +21361,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "charles-taplin",
@@ -21403,7 +21736,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "phillip-wright-iii",
@@ -21773,7 +22112,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jaiven-plummer",
@@ -22046,7 +22391,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "drayden-dickmann",
@@ -22311,7 +22662,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "matt-mayfield",
@@ -22568,7 +22925,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 WR",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "zack-turner",
@@ -23046,7 +23409,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "shamar-easter",
@@ -23498,7 +23867,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "kiotti-armstrong",
@@ -23885,7 +24260,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jack-van-dorselaer",
@@ -24205,7 +24586,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "micah-jones",
@@ -24699,7 +25086,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "parker-almanza",
@@ -25149,7 +25542,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "hunter-andrews",
@@ -25601,7 +26000,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "tripp-riordan",
@@ -26053,7 +26458,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "walter-taylor",
@@ -26495,7 +26906,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "hawkins-polley",
@@ -26946,7 +27363,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "will-loerzel",
@@ -27298,7 +27721,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "zayion-cotton",
@@ -27650,7 +28079,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 16000,
+  "nil_ceiling": 250000,
+  "nil_basis": "G6 starter \u00b7 TE",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "felix-ojo",
@@ -27953,7 +28388,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star",
+  "on3_valuation": 775000,
+  "on3_url": "https://www.on3.com/rivals/felix-ojo-238977/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "ashton-funk",
@@ -28730,7 +29174,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "zaden-krempin",
@@ -29434,7 +29884,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "ian-reed",
@@ -30017,7 +30473,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jaydon-chatman",
@@ -30586,7 +31048,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "casey-poe",
@@ -31145,7 +31613,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "michael-uini",
@@ -31641,7 +32115,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "demetris-dean-ii",
@@ -31934,7 +32414,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "parker-pritchett",
@@ -32193,7 +32679,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "emanuel-faulkner",
@@ -32430,7 +32922,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "day-jon-moore",
@@ -32661,7 +33159,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "carius-curne",
@@ -32909,7 +33413,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 750000,
+  "on3_url": "https://www.on3.com/rivals/carius-curne-179831/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "ethan-fields",
@@ -33614,7 +34127,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "sean-terrell",
@@ -34288,7 +34807,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "tyler-johnson",
@@ -34977,7 +35502,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jordan-coleman",
@@ -35651,7 +36182,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "devin-coleman",
@@ -36250,7 +36787,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "josiah-clemons",
@@ -36752,7 +37295,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jackson-christian",
@@ -37230,7 +37779,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "hayden-ainsworth",
@@ -37692,7 +38247,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "dezmond-schuster",
@@ -38012,7 +38573,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "isaiah-kema",
@@ -38330,7 +38897,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "aaron-wolford",
@@ -38567,7 +39140,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "daniel-sill",
@@ -38821,7 +39400,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "isaiah-bowman",
@@ -39043,7 +39628,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "harrison-cluff",
@@ -39289,7 +39880,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "owen-hollenbeck",
@@ -39511,7 +40108,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 400000,
+  "nil_basis": "G6 starter \u00b7 OL",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "lamar-brown",
@@ -39817,7 +40420,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 1000000,
+  "on3_url": "https://www.on3.com:443/db/lamar-brown-155377/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "kolaj-cobbins",
@@ -40478,7 +41090,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "smith-orogbo",
@@ -41035,7 +41653,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "tyshun-willis",
@@ -41544,7 +42168,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "talib-graham",
@@ -42035,7 +42665,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "carter-buck",
@@ -42476,7 +43112,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "cheta-ofili",
@@ -42878,7 +43520,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "kamauryn-morgan",
@@ -43242,7 +43890,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "cj-woodfork",
@@ -43585,7 +44239,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "obinna-umeh",
@@ -43917,7 +44577,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "sterling-dixon",
@@ -44238,7 +44904,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "hezekiah-harris",
@@ -44559,7 +45231,15 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 250000,
+  "on3_url": "https://www.on3.com/rivals/hezekiah-harris-162655/nil/"
  },
  {
   "id": "nolan-wilson",
@@ -44848,7 +45528,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jamarion-carlton",
@@ -45135,7 +45821,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "darius-washington",
@@ -45797,7 +46489,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "albert-smith-iii",
@@ -46379,7 +47077,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jadyn-ramos",
@@ -46862,7 +47566,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "drew-collins",
@@ -47319,7 +48029,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "hudson-woods",
@@ -47730,7 +48446,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "chima-chineke",
@@ -48115,7 +48837,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "dk-mays",
@@ -48494,7 +49222,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "daemian-wimberly",
@@ -48863,7 +49597,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "keylan-abrams",
@@ -49218,7 +49958,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "amontre-harris",
@@ -49563,7 +50309,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ansel-nedore",
@@ -49915,7 +50667,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "keegan-horn",
@@ -50234,7 +50992,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "chance-bryant",
@@ -50555,7 +51319,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "dalton-knapp",
@@ -50842,7 +51612,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ben-duncum",
@@ -51113,7 +51889,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "tyron-winslow",
@@ -51386,7 +52168,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "sheldon-rice",
@@ -51651,7 +52439,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "brian-alston",
@@ -51914,7 +52708,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 ED",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "richard-anderson",
@@ -52249,7 +53049,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 340000,
+  "on3_url": "https://www.on3.com:443/db/richard-anderson-175348/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "anthony-jones-jr",
@@ -52576,7 +53385,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "malcolm-simpson",
@@ -53269,7 +54084,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "dylan-berymon",
@@ -53824,7 +54645,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jaimeon-winfield",
@@ -54373,7 +55200,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "travis-buhake",
@@ -54744,7 +55577,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "emanuel-ruffin",
@@ -55099,7 +55938,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "dereon-albert",
@@ -55454,7 +56299,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "zion-williams",
@@ -55807,7 +56658,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "reginald-vaughn",
@@ -56158,7 +57015,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "darryus-mckinley",
@@ -56501,7 +57364,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "dj-sanders",
@@ -56836,7 +57705,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kamron-beavers",
@@ -57147,7 +58022,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "nigel-smith-ii",
@@ -57458,7 +58339,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "aaron-bryant",
@@ -57769,7 +58656,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jayden-curtis",
@@ -58326,7 +59219,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "keyshawn-williams",
@@ -58832,7 +59731,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "josiah-pratt",
@@ -59195,7 +60100,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jackson-blackwell",
@@ -59548,7 +60459,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "nygel-farsee",
@@ -59903,7 +60820,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "kaleb-walker",
@@ -60258,7 +61181,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "carnell-jackson-jr",
@@ -60611,7 +61540,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "davon-young",
@@ -60966,7 +61901,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "xavier-fleming",
@@ -61321,7 +62262,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "isaiah-broughton",
@@ -61676,7 +62623,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "maddox-flynt",
@@ -62027,7 +62980,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "omar-khan",
@@ -62370,7 +63329,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "garrett-witherington",
@@ -62705,7 +63670,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "daeshon-morgan",
@@ -63040,7 +64011,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kordae-houston",
@@ -63375,7 +64352,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "mhari-johnson",
@@ -63710,7 +64693,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "savion-barthelemy",
@@ -64037,7 +65026,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "floyd-guidry",
@@ -64364,7 +65359,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jamarion-owens",
@@ -64691,7 +65692,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "tyson-bacon",
@@ -65020,7 +66027,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kaleb-morris",
@@ -65315,7 +66328,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 20000,
+  "nil_ceiling": 300000,
+  "nil_basis": "G6 starter \u00b7 DI",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "christian-brathwaite",
@@ -65800,7 +66819,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "derion-gullette",
@@ -66184,7 +67209,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "gunnar-wilson",
@@ -66749,7 +67780,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "weston-polk",
@@ -67131,7 +68168,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "richmond-ugochukwu",
@@ -67515,7 +68558,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "carson-crawford",
@@ -67897,7 +68946,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "elliott-schaper",
@@ -68281,7 +69336,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jamarion-phillips",
@@ -68600,7 +69661,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 19000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 LB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "john-meredith-iii",
@@ -68870,7 +69937,16 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter",
+  "on3_valuation": 1500000,
+  "on3_url": "https://www.on3.com/rivals/john-meredith-243735/nil/",
+  "on3_flag": "ON3 ABOVE CEILING"
  },
  {
   "id": "michael-turner-jr",
@@ -69578,7 +70654,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "deyjhon-pettaway",
@@ -70255,7 +71337,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "preston-ashley",
@@ -70801,7 +71889,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "s-vioarean-martin",
@@ -71138,7 +72232,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jamarion-vincent",
@@ -71429,7 +72529,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kyle-johnson",
@@ -71704,7 +72810,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ramonz-adams-jr",
@@ -72364,7 +73476,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "caleb-chester",
@@ -73014,7 +74132,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "marcell-gipson-jr",
@@ -73567,7 +74691,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jc-hart",
@@ -74115,7 +75245,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "mojo-williams-jr",
@@ -74515,7 +75651,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "xavier-harmon",
@@ -74906,7 +76048,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "jeremiah-charles",
@@ -75308,7 +76456,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "javion-holiday",
@@ -75678,7 +76832,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "ashton-hampton",
@@ -76053,7 +77213,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jonathan-cunningham",
@@ -76387,7 +77553,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "zadian-gentry",
@@ -76723,7 +77895,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kj-johnson",
@@ -77033,7 +78211,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "carson-williams",
@@ -77337,7 +78521,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jhase-mcmillan",
@@ -77639,7 +78829,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jonathan-kabeya",
@@ -77966,7 +79162,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "deuce-gilbert",
@@ -78254,7 +79456,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "kenzy-west",
@@ -78526,7 +79734,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "javen-holmes",
@@ -78798,7 +80012,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jamaal-shaw",
@@ -79070,7 +80290,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "joseph-smith",
@@ -79340,7 +80566,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "toe-sanders",
@@ -79610,7 +80842,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 CB",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "ryan-yaites",
@@ -80034,7 +81272,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "isaiah-washington",
@@ -80376,7 +81620,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "tylan-wilson",
@@ -80705,7 +81955,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "blaine-bradford",
@@ -81017,7 +82273,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "chance-collins",
@@ -81327,7 +82589,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jaylen-moses",
@@ -81901,7 +83169,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "oliver-miles-iii",
@@ -82299,7 +83573,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Star"
  },
  {
   "id": "abdul-muhammad",
@@ -82675,7 +83955,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "matthew-mcclain",
@@ -83036,7 +84322,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "jordan-davis",
@@ -83365,7 +84657,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "trason-richardson",
@@ -83696,7 +84994,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "maddox-quiller",
@@ -84025,7 +85329,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "braylon-edwards",
@@ -84346,7 +85656,13 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  },
  {
   "id": "markel-ford",
@@ -84651,6 +85967,12 @@
   "deep_dive": null,
   "pro_only": false,
   "spill": false,
-  "conf_in_pool": true
+  "conf_in_pool": true,
+  "nil_status": "priced",
+  "nil_floor": 17000,
+  "nil_ceiling": 200000,
+  "nil_basis": "G6 starter \u00b7 S",
+  "nil_band_basis": "INTERPOLATED",
+  "nil_projection_basis": "tier: G6 Starter"
  }
 ]

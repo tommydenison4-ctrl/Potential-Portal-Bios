@@ -2,6 +2,8 @@
 let UP = [], DOWN = [];
 let CMP = null;             // conference comparison dataset (comparison.json)
 let TEAMS = null;           // team comparison dataset (teams.json)
+let CHAMP = null;           // championship path dataset (championship.json)
+let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
 const teamSet = [];         // selected team names on the team comparison page, in pick order
 const TEAM_CAP = 4;         // side-by-side team comparison cap
 let teamOrder = 'position'; // team page room order: 'position' | 'priority'
@@ -25,6 +27,42 @@ const photo = (p, cls) => p.headshot
   ? `<img class="${cls || 'ph'}" src="headshots/${esc(p.headshot)}" alt="" loading="lazy">`
   : `<span class="${cls || 'ph-init'}">${esc(initials(p.name))}</span>`;
 const eligChip = e => `<span class="chip ${e === 'Eligible' ? 'ok' : e === 'Not eligible' ? 'no' : 'un'}">${esc(e)}</span>`;
+
+/* -------- NIL projection layer --------
+   Every player record carries the NIL layer's fields (joined from
+   portal_scouting/nil_layer/player_nil.csv): nil_status "priced" with
+   nil_floor / nil_ceiling / nil_basis, or "no_estimate" with the reason.
+   NIL_LABEL is the layer's required print label (METHOD.md), verbatim —
+   it prints wherever these figures appear. */
+const NIL_LABEL = 'Estimated NIL projection — modelled from reported market bands [and On3\'s published valuation where shown]. Not a reported deal or an offer for this player.';
+const fmtMoney = v => {
+  if (v == null) return '—';
+  if (v === 0) return '$0';
+  if (v >= 1000000) {
+    const m = v / 1000000;
+    return '$' + (Number.isInteger(m) ? String(m) : m.toFixed(2).replace(/0$/, '')) + 'M';
+  }
+  return '$' + Math.round(v / 1000) + 'K';
+};
+const nilRange = x => x && x.nil_status === 'priced' ? `${fmtMoney(x.nil_floor)}–${fmtMoney(x.nil_ceiling)}` : null;
+
+function nilSection(p) {
+  if (!p.nil_status) return '';
+  let h = `<div class="card"><h2 class="sec" style="margin-top:2px">Estimated NIL projection</h2>`;
+  if (p.nil_status === 'no_estimate') {
+    h += `<p><b>No estimate</b> — ${esc(p.nil_reason || 'no destination projection to price')}.</p>`;
+  } else {
+    h += `<p><span class="grade-big">${fmtMoney(p.nil_floor)}–${fmtMoney(p.nil_ceiling)}</span> <span class="p-sub">a year — floor to ceiling at his projected destination</span></p>`;
+    h += `<p class="p-sub">Basis: ${esc(p.nil_basis || '')}${p.nil_projection_basis ? ` (${esc(p.nil_projection_basis)})` : ''}${p.nil_band_basis ? ` · band evidence: ${esc(p.nil_band_basis.toLowerCase())}` : ''}</p>`;
+    if (p.on3_valuation != null) {
+      const rel = p.on3_flag === 'ON3 ABOVE CEILING' ? ' It sits <b>above</b> this projection’s ceiling — the two figures answer different questions (On3 values his current situation; the band prices his projected role) and are shown side by side, never merged.'
+        : p.on3_flag === 'ON3 BELOW FLOOR' ? ' It sits <b>below</b> this projection’s floor — the two figures answer different questions and are shown side by side, never merged.' : '';
+      h += `<p>On3 published valuation: <b>${fmtMoney(p.on3_valuation)}</b> <span class="p-sub">— On3’s model estimate, shown as a market reference.</span>${rel} ${p.on3_url ? `<a href="${esc(p.on3_url)}" target="_blank" rel="noopener">On3 NIL profile</a>` : ''}</p>`;
+    }
+  }
+  h += `<p class="p-sub">${esc(NIL_LABEL)}</p></div>`;
+  return h;
+}
 
 /* -------- directory filters: multi-select dropdown panels --------
    Each filter is a button (filter name, plus "· N" while selections
@@ -121,7 +159,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -257,6 +295,8 @@ function renderPlayer(p) {
       <div class="rung"><b>Ceiling</b>${esc(p.band.ceiling)}</div></div>
       ${p.projection_plain ? `<p>${esc(p.projection_plain)}</p>` : ''}</div>`;
   }
+
+  h += nilSection(p);
 
   if (p.comps && p.comps.length) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Closest matches</h2><ul class="tight">
@@ -876,6 +916,210 @@ function distChart(sel) {
     <p class="p-sub">A hollow dot is a below-bar room — the team’s top player by volume, carried flagged; he is not part of the dot field, which is qualified incumbents only.</p></div>`;
 }
 
+/* ---------------- championship path ----------------
+   One team, measured room by room against the conference-best standard:
+   the highest volume-qualified incumbent grade at the group in its
+   conference (below-bar rooms never set it; if a conference has no
+   qualified incumbent at the group, the standard is the level best and
+   the table says so). GETABLE players and the bars are computed by
+   build_team_json.py into championship.json — an evaluated player with
+   eligibility remaining whose benchmark clears the room's incumbent
+   under the books' strict test, and not already on the team. The path
+   player is the best getable player; the projected room grade after
+   the path is his benchmark. Each getable entry also carries his NIL
+   projection (nil_floor / nil_ceiling or a no-estimate status), and the
+   header totals the path players' estimated NIL cost — unpriced path
+   players are counted and named as unpriced, never as $0. */
+/* champ-model-begin */
+function champModel(t, groups) {
+  const EPS = 1e-9;
+  const rooms = groups.map(g => {
+    const r = t.rooms[g];
+    const inc = r.inc_grade, bar = r.bar_grade, bb = !!r.below_bar;
+    const gap = (inc != null && bar != null) ? Math.round((inc - bar) * 10) / 10 : null;
+    const atBar = !bb && inc != null && bar != null && inc >= bar - EPS;
+    const path = (r.getable && r.getable.length) ? r.getable[0] : null;
+    let status;
+    if (atBar) status = 'AT STANDARD';
+    else if (!path) status = 'NO GETABLE PLAYER';
+    else if (bar != null && path.benchmark >= bar - EPS) status = 'CLOSES THE GAP';
+    else status = 'PARTIAL';
+    return { g, r, inc, bar, bb, gap, atBar, path, status,
+             projected: path ? path.benchmark : inc,
+             atBarAfter: atBar || status === 'CLOSES THE GAP' };
+  });
+  /* Estimated path cost: the sum of the path players' NIL band floors
+     and ceilings. A path player with no estimate is counted as unpriced
+     and excluded from the sums — never treated as $0. */
+  const pathRooms = rooms.filter(x => x.path);
+  const pricedPaths = pathRooms.filter(x => x.path.nil_status === 'priced');
+  return {
+    rooms,
+    atNow: rooms.filter(x => x.atBar).length,
+    atAfter: rooms.filter(x => x.atBarAfter).length,
+    improved: rooms.filter(x => x.status === 'PARTIAL').length,
+    noGet: rooms.filter(x => x.status === 'NO GETABLE PLAYER').length,
+    points: Math.round(rooms.reduce((s, x) =>
+      s + (x.inc != null && x.bar != null ? Math.max(0, x.bar - x.inc) : 0), 0) * 10) / 10,
+    cost: {
+      floor: pricedPaths.reduce((s, x) => s + x.path.nil_floor, 0),
+      ceiling: pricedPaths.reduce((s, x) => s + x.path.nil_ceiling, 0),
+      priced: pricedPaths.length,
+      total: pathRooms.length,
+      unpriced: pathRooms.length - pricedPaths.length
+    }
+  };
+}
+/* champ-model-end */
+
+function champBtnLabel() {
+  const btn = $('c-team');
+  const t = CHAMP && CHAMP.teams.find(x => x.name === champSel);
+  btn.innerHTML = t ? `Team — ${esc(t.name)} <span class="ms-caret">▾</span>` : `Team <span class="ms-caret">▾</span>`;
+  btn.classList.toggle('ms-on', !!t);
+}
+
+function buildChampPanel() {
+  const box = $('champOpts');
+  if (!CHAMP) { box.innerHTML = ''; return; }
+  const q = ($('champQ').value || '').trim().toLowerCase();
+  let html = '';
+  for (const conf of CHAMP.meta.conference_order) {
+    const ts = CHAMP.teams.filter(t => t.conf === conf && (!q || t.name.toLowerCase().includes(q)));
+    if (!ts.length) continue;
+    html += `<div class="ms-group">${esc(conf)}</div>` + ts.map(t =>
+      `<label class="ms-opt"><input type="radio" name="champTeam" value="${esc(t.name)}"${t.name === champSel ? ' checked' : ''}> ${esc(t.name)}</label>`).join('');
+  }
+  box.innerHTML = html || '<p class="p-sub" style="padding:6px 8px">No teams match that search.</p>';
+}
+
+const CHAMP_STATUS_CLS = { 'AT STANDARD': 'ok', 'CLOSES THE GAP': 'ok', 'PARTIAL': 'un', 'NO GETABLE PLAYER': 'no' };
+
+function champPlayerLine(c) {
+  return `<div class="path-cell">${photo(c)}
+    <div><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}
+    <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b></span>
+    <br><span class="p-sub">${nilRange(c) ? `Est. NIL <b>${nilRange(c)}</b> a year` : 'Est. NIL — no estimate'}</span>
+    <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}</div></div>`;
+}
+
+function champRoomRow(x, confName) {
+  const r = x.r;
+  const incCell = !r.incumbent
+    ? '<span class="p-sub">— none qualified —</span>'
+    : x.bb
+      ? `${esc(r.incumbent)}<br><span class="p-sub">top by volume — ${r.inc_vol} of ${r.vol_bar} ${esc(r.vol_unit)}, below the bar</span>`
+      : esc(r.incumbent);
+  const incGrade = r.incumbent == null ? '<td class="num">—</td>'
+    : x.bb ? `<td class="num bb"><b>${f1(x.inc)}*</b></td>` : `<td class="num"><b>${f1(x.inc)}</b></td>`;
+  const barCell = x.bar == null ? '<td class="num">—</td>'
+    : `<td class="num"><b>${f1(x.bar)}</b><br><span class="p-sub">${r.bar_scope === 'level'
+        ? `no qualified incumbent in the ${esc(confName)} — level best, ${esc(r.bar_team)}`
+        : `set by ${esc(r.bar_team)}`}</span></td>`;
+  let pathCell;
+  if (x.status === 'AT STANDARD' && !x.path) {
+    pathCell = `<span class="chip ok">AT STANDARD</span><br><span class="p-sub">The incumbent already meets the conference-best standard, and no getable player clears him.</span>`;
+  } else if (x.status === 'NO GETABLE PLAYER') {
+    pathCell = `<span class="chip no">NO GETABLE PLAYER</span><br><span class="p-sub">${x.bb
+      ? 'No candidates are named for a below-bar room — the strict test needs a qualified bar to clear.'
+      : r.incumbent == null
+        ? 'No qualified incumbent in the pool snapshot — the strict test has no bar to clear.'
+        : 'No evaluated player with eligibility remaining clears this room.'}</span>`;
+  } else {
+    const c = x.path;
+    const more = r.getable_total > 1 ? `<details class="getable-more"><summary>All getable players (${r.getable_total})</summary>
+      <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th>Est. NIL</th><th>Eligibility</th></tr>
+      ${r.getable.slice(0, 5).map(o => `<tr><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
+      </table></div>${r.getable_total > 5 ? `<p class="p-sub">Top 5 shown by benchmark — ${r.getable_total - 5} more evaluated players also clear this room.</p>` : ''}</details>` : '';
+    pathCell = `${champPlayerLine(c)}<p class="path-status"><span class="chip ${CHAMP_STATUS_CLS[x.status]}">${x.status}</span>${
+      x.status === 'PARTIAL' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — ${f1(Math.round((x.bar - c.benchmark) * 10) / 10)} short of the standard</span>`
+      : x.status === 'CLOSES THE GAP' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — reaches the standard</span>`
+      : `<span class="p-sub"> the room already meets the standard; he clears it too</span>`}</p>${more}`;
+  }
+  return `<tr><td><span class="pname">${esc(x.g)}</span></td>
+    <td>${incCell}</td>${incGrade}${barCell}${gapCell(x.gap)}
+    <td>${pathCell}</td></tr>`;
+}
+
+/* Grouped horizontal bars per room: incumbent vs the conference-best
+   standard vs the projected grade after the path, on one grade scale. */
+function champChart(t, m) {
+  const vals = [];
+  m.rooms.forEach(x => { if (x.inc != null) vals.push(x.inc); if (x.bar != null) vals.push(x.bar); if (x.path) vals.push(x.path.benchmark); });
+  if (!vals.length) return '';
+  let lo = Math.max(0, Math.floor(Math.min(...vals) - 3));
+  let hi = Math.min(100, Math.ceil(Math.max(...vals) + 3));
+  if (hi - lo < 20) { lo = Math.max(0, lo - 5); hi = Math.min(100, hi + 5); }
+  const W = 660, L = 200, R = 646, top = 30, blockH = 37, barH = 8, barGap = 3;
+  const H = top + m.rooms.length * blockH + 22;
+  const X = v => L + ((v - lo) / (hi - lo)) * (R - L);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t.name)} — incumbent, conference-best standard and projected grade after the path, room by room">`;
+  s += `<rect x="${L}" y="6" width="10" height="10" fill="#94a3b8"/><text x="${L + 15}" y="15" class="ch-leg">Incumbent</text>`;
+  s += `<rect x="${L + 96}" y="6" width="10" height="10" fill="#0f172a"/><text x="${L + 111}" y="15" class="ch-leg">Conference-best standard</text>`;
+  s += `<rect x="${L + 268}" y="6" width="10" height="10" fill="#1a7f37"/><text x="${L + 283}" y="15" class="ch-leg">Projected after the path</text>`;
+  m.rooms.forEach((x, i) => {
+    const y0 = top + i * blockH;
+    s += `<text x="0" y="${y0 + 16}" class="ch-room">${esc(x.g)}${x.bb ? '*' : ''}</text>`;
+    const bars = [
+      { v: x.inc, fill: '#94a3b8', faded: x.bb, label: x.inc != null ? f1(x.inc) + (x.bb ? '*' : '') : null },
+      { v: x.bar, fill: '#0f172a', faded: false, label: x.bar != null ? f1(x.bar) : null },
+      { v: x.path ? x.path.benchmark : null, fill: '#1a7f37', faded: false, label: x.path ? f1(x.path.benchmark) : null }
+    ];
+    bars.forEach((b, bi) => {
+      if (b.v == null) return;
+      const y = y0 + bi * (barH + barGap);
+      s += `<rect x="${L}" y="${y}" width="${Math.max(2, X(b.v) - L).toFixed(1)}" height="${barH}" rx="2" fill="${b.fill}"${b.faded ? ' fill-opacity="0.45"' : ''}/>`;
+      s += `<text x="${(X(b.v) + 6).toFixed(1)}" y="${y + barH - 1}" class="ch-val">${b.label}</text>`;
+    });
+    if (i === m.rooms.length - 1) {
+      for (const tick of [40, 50, 60, 70, 80, 90]) {
+        if (tick < lo || tick > hi) continue;
+        s += `<text x="${X(tick)}" y="${y0 + blockH + 12}" text-anchor="middle" class="ch-leg">${tick}</text>`;
+      }
+    }
+  });
+  s += '</svg>';
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">${esc(t.name)} — the path in grades</h2>
+    <p class="p-sub">Per room: the incumbent’s grade, the conference-best standard, and the projected grade after the path (the path player’s benchmark). A faded, asterisked incumbent bar is a below-bar room — its top player by volume, carried flagged; no projected bar is drawn where no player is getable.</p>${s}</div>`;
+}
+
+function renderChamp() {
+  const body = $('champBody');
+  if (!CHAMP) {
+    body.innerHTML = `<div class="card empty-state"><h2 class="empty-title">Path to a conference championship</h2>
+      <p>The championship data (championship.json) isn’t part of this build, so this page has nothing to show. The directories and player pages are unaffected.</p>
+      <p><a href="#/team-comparison">Open the team comparison instead →</a></p></div>`;
+    return;
+  }
+  const t = CHAMP.teams.find(x => x.name === champSel) || CHAMP.teams[0];
+  champSel = t.name;
+  champBtnLabel();
+  const m = champModel(t, CHAMP.meta.groups);
+  const ph = $('champPrintHead');
+  if (ph) ph.innerHTML = `<h1 class="print-title">Path to a conference championship — ${esc(t.name)}</h1><p class="print-sub">${esc(t.conf)} · ${esc(t.level)} · pool snapshot Nov 17, 2026 · the standard is the conference-best qualified incumbent grade per room · projected grades are Player Book benchmarks</p>`;
+  let h = `<div class="card"><div class="team-head">
+    ${t.logo ? `<img class="team-logo" src="logos/${esc(t.logo)}" alt="">` : ''}
+    <div>
+      <p class="p-name">${esc(t.name)}</p>
+      <p class="p-sub">${esc(t.conf)} · ${esc(t.level)}</p>
+      <p class="p-sub">Rooms at the conference-best standard today: <b>${m.atNow} of ${m.rooms.length}</b> · after the path: <b>${m.atAfter} of ${m.rooms.length}</b> · improved but still short: <b>${m.improved}</b> · no getable player: <b>${m.noGet}</b></p>
+      <p class="p-sub">Total grade points to the standard across the ten rooms: <b>${f1(m.points)}</b></p>
+      <p class="p-sub">${m.cost.total === 0
+        ? 'Estimated path cost: <b>—</b> (no path players named)'
+        : `Estimated path cost: <b>${fmtMoney(m.cost.floor)}–${fmtMoney(m.cost.ceiling)}</b> a year · ${m.cost.priced} of ${m.cost.total} path players priced${m.cost.unpriced ? ` · <b>${m.cost.unpriced} path player${m.cost.unpriced > 1 ? 's carry' : ' carries'} no estimate and ${m.cost.unpriced > 1 ? 'are' : 'is'} not counted in the total — never as $0</b>` : ''}`}</p>
+    </div></div>
+    ${cmpNote('How to read this page: the <b>conference-best standard</b> is the highest <b>volume-qualified</b> incumbent grade at the room among the teams in ' + esc(t.conf) + ' — the championship bar for that room. The <b>path</b> names, per room, the single best <b>getable</b> player: an evaluated player from the Player Books who has eligibility remaining, whose benchmark clears this room’s incumbent under the same strict test the books print, and who is not already on ' + esc(t.name) + '. His benchmark is the room’s <b>projected</b> grade after the path. <b>Closes the gap</b> — his benchmark reaches the standard. <b>Partial</b> — he clears the incumbent but not the standard.')}
+  </div>`;
+  h += champChart(t, m);
+  h += `<div class="card"><h2 class="sec" style="margin-top:2px">The path, room by room</h2>
+    <div class="tbl-scroll"><table class="ctable champ-table">
+      <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Conference-best standard</th><th class="num">Gap</th><th>The path — best getable player</th></tr></thead>
+      <tbody>${m.rooms.map(x => champRoomRow(x, t.conf)).join('')}</tbody></table></div>
+    <p class="foot-note">Method, in plain terms. <b>The standard:</b> the highest volume-qualified incumbent grade at the group among all teams in the conference; a room carried below the volume bar never sets it, and if no team in the conference has a qualified incumbent at the group, the standard is the best qualified incumbent grade at the team’s level (G6 or P4) and the table says so. <b>Getable:</b> eligibility remaining under the qualified determination — Unsettled players are shown and flagged “eligibility unsettled” — a benchmark that clears the room’s incumbent under the books’ strict test, and not already on this team. <b>Projected</b> is his benchmark from the Player Book method — headline grade plus the position’s translation delta. <b>NIL:</b> getable is a field test — it means he clears your room and has eligibility; it does not price him. Separately, each path and getable player carries his estimated NIL projection where priced, and the header’s estimated path cost sums the path players’ floors and ceilings; a path player with no estimate is named as unpriced in that count and is never counted as $0. ${esc(NIL_LABEL)} An asterisked incumbent is a room with no volume-qualified player, carried by its top player by volume under the team-comparison ruling; no getable players are named for those rooms. Pool: Nov 17, 2026 in-season snapshot of PFF Ultimate exports; grades are PFF headline grades.</p>
+  </div>`;
+  body.innerHTML = h;
+}
+
 function renderTeam() {
   const body = $('teamBody');
   if (!TEAMS) {
@@ -989,6 +1233,14 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  if (hash === '#/championship-path') {
+    setChrome(null);
+    showView('champ');
+    renderChamp();
+    document.title = 'Path to a conference championship — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/compare-conferences') {
     setChrome('up');
     showView('comparison');
@@ -1044,9 +1296,19 @@ function loadTeams() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams()]).then(([up, down, cmp, teams]) => {
+function loadChamp() {
+  // same failure-tolerant pattern: a missing or malformed
+  // championship.json degrades to no championship data, never an error
+  return fetch('championship.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && Array.isArray(j.teams) && j.meta) ? j : null)
+    .catch(() => null);
+}
+
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp()]).then(([up, down, cmp, teams, champ]) => {
   CMP = cmp;
   TEAMS = teams;
+  CHAMP = champ;
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
@@ -1094,6 +1356,20 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   });
   $('teamClear').addEventListener('click', clearTeams);
   $('teamQ').addEventListener('input', buildTeamPanel);
+  // championship path picker: the same dropdown panel machinery, single-select
+  $('champCount').textContent = CHAMP ? `${CHAMP.teams.length} FBS teams` : '';
+  champBtnLabel();
+  buildChampPanel();
+  $('c-team').addEventListener('click', () => toggleMs('c-team'));
+  $('champOpts').addEventListener('change', e => {
+    const rb = e.target.closest('input[type=radio][name=champTeam]');
+    if (!rb) return;
+    champSel = rb.value;
+    champBtnLabel();
+    closeMs();
+    renderChamp();
+  });
+  $('champQ').addEventListener('input', buildChampPanel);
   $('teamBody').addEventListener('click', e => {
     const b = e.target.closest('[data-torder]');
     if (b) { teamOrder = b.dataset.torder; renderTeam(); }
@@ -1146,6 +1422,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
 $('printBtn').addEventListener('click', () => window.print());
 $('printBtnCmp').addEventListener('click', () => window.print());
 $('printBtnTeam').addEventListener('click', () => window.print());
+$('printBtnChamp').addEventListener('click', () => window.print());
 $('csvBtnTeam').addEventListener('click', () => {
   if (!TEAMS) return;
   const sel = teamSet.map(n => TEAMS.teams.find(x => x.name === n)).filter(Boolean);

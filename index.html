@@ -64,6 +64,11 @@
       <span class="cb-desc">Pick up to four FBS teams and compare them side by side: every position room against its conference, the G6 and the P4, plus the evaluated players who would upgrade each room.</span>
       <span class="choice-go">Open team comparison →</span>
     </a>
+    <a class="compare-banner" href="#/championship-path">
+      <span class="cb-title">Path to a conference championship</span>
+      <span class="cb-desc">Pick one FBS team and see its path: the conference-best standard in every position room, the evaluated players who are getable for that room, and the single best move per room that closes the gap to the standard.</span>
+      <span class="choice-go">Open the championship path →</span>
+    </a>
   </section>
 
   <!-- DOWN EMPTY STATE -->
@@ -81,7 +86,7 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -173,7 +178,7 @@
   <section id="view-comparison" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Conference comparison</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/team-comparison">Team comparison</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <div id="comparisonBody"></div>
   </section>
@@ -182,7 +187,7 @@
   <section id="view-teamcmp" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Team comparison</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -204,6 +209,32 @@
     <p class="player-tools team-tools"><button id="printBtnTeam" class="btn-print" type="button">Print / Save PDF</button><button id="csvBtnTeam" class="btn-print btn-csv" type="button" disabled>Download CSV</button><span class="p-sub">The PDF prints this view in landscape — the side-by-side matrix, the charts and each team’s full card. The CSV is the room table for the selected teams, one row per room.</span></p>
     <div id="teamPrintHead" class="print-only"></div>
     <div id="teamBody"></div>
+  </section>
+
+  <!-- CHAMPIONSHIP PATH VIEW -->
+  <section id="view-champ" hidden>
+    <div class="dir-head">
+      <h1 class="dir-title">Path to a conference championship</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a></span>
+    </div>
+    <div class="controls card">
+      <div class="row">
+        <div class="ms-field team-field">
+          <div class="ms" data-ms="c-team">
+            <button type="button" class="ms-btn" id="c-team" aria-haspopup="true" aria-expanded="false">Team <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="team-search"><input id="champQ" type="search" placeholder="Search teams…" autocomplete="off"></div>
+              <div class="ms-opts" id="champOpts"></div>
+            </div>
+          </div>
+        </div>
+        <span class="result-count" id="champCount"></span>
+      </div>
+      <p class="p-sub" style="margin:10px 0 0">Pick one team. Every position room is measured against the <b>conference-best standard</b> — the highest volume-qualified incumbent grade in its conference — and the page names the evaluated players who are <b>getable</b> for that room and the single best move per room: the path.</p>
+    </div>
+    <p class="player-tools team-tools"><button id="printBtnChamp" class="btn-print" type="button">Print / Save PDF</button><span class="p-sub">The PDF prints this view in landscape — the summary, the room chart and the path table.</span></p>
+    <div id="champPrintHead" class="print-only"></div>
+    <div id="champBody"></div>
   </section>
 </main>
 
