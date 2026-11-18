@@ -1000,7 +1000,8 @@ function champPlayerLine(c) {
     <div><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}
     <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b></span>
     <br><span class="p-sub">${nilRange(c) ? `Est. NIL <b>${nilRange(c)}</b> a year` : 'Est. NIL — no estimate'}</span>
-    <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}</div></div>`;
+    <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
+    <br><button type="button" class="btn-add" data-add="${esc(c.id)}">+ Add to class</button></div></div>`;
 }
 
 function champRoomRow(x, confName) {
@@ -1029,8 +1030,8 @@ function champRoomRow(x, confName) {
     const c = x.path;
     const more = r.getable_total > 1 ? `<details class="getable-more"><summary>All getable players (${r.getable_total})</summary>
       <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th>Est. NIL</th><th>Eligibility</th></tr>
-      ${r.getable.slice(0, 5).map(o => `<tr><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
-      </table></div>${r.getable_total > 5 ? `<p class="p-sub">Top 5 shown by benchmark — ${r.getable_total - 5} more evaluated players also clear this room.</p>` : ''}</details>` : '';
+      ${r.getable.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
+      </table></div></details>` : '';
     pathCell = `${champPlayerLine(c)}<p class="path-status"><span class="chip ${CHAMP_STATUS_CLS[x.status]}">${x.status}</span>${
       x.status === 'PARTIAL' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — ${f1(Math.round((x.bar - c.benchmark) * 10) / 10)} short of the standard</span>`
       : x.status === 'CLOSES THE GAP' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — reaches the standard</span>`
@@ -1094,6 +1095,7 @@ function renderChamp() {
   const t = CHAMP.teams.find(x => x.name === champSel) || CHAMP.teams[0];
   champSel = t.name;
   champBtnLabel();
+  if (champClassTeam !== t.name) loadClass(t.name);
   const m = champModel(t, CHAMP.meta.groups);
   const ph = $('champPrintHead');
   if (ph) ph.innerHTML = `<h1 class="print-title">Path to a conference championship — ${esc(t.name)}</h1><p class="print-sub">${esc(t.conf)} · ${esc(t.level)} · pool snapshot Nov 17, 2026 · the standard is the conference-best qualified incumbent grade per room · projected grades are Player Book benchmarks</p>`;
@@ -1110,6 +1112,7 @@ function renderChamp() {
     </div></div>
     ${cmpNote('How to read this page: the <b>conference-best standard</b> is the highest <b>volume-qualified</b> incumbent grade at the room among the teams in ' + esc(t.conf) + ' — the championship bar for that room. The <b>path</b> names, per room, the single best <b>getable</b> player: an evaluated player from the Player Books who has eligibility remaining, whose benchmark clears this room’s incumbent under the same strict test the books print, and who is not already on ' + esc(t.name) + '. His benchmark is the room’s <b>projected</b> grade after the path. <b>Closes the gap</b> — his benchmark reaches the standard. <b>Partial</b> — he clears the incumbent but not the standard.')}
   </div>`;
+  h += renderClassBoard(t, m);
   h += champChart(t, m);
   h += `<div class="card"><h2 class="sec" style="margin-top:2px">The path, room by room</h2>
     <div class="tbl-scroll"><table class="ctable champ-table">
@@ -1117,7 +1120,237 @@ function renderChamp() {
       <tbody>${m.rooms.map(x => champRoomRow(x, t.conf)).join('')}</tbody></table></div>
     <p class="foot-note">Method, in plain terms. <b>The standard:</b> the highest volume-qualified incumbent grade at the group among all teams in the conference; a room carried below the volume bar never sets it, and if no team in the conference has a qualified incumbent at the group, the standard is the best qualified incumbent grade at the team’s level (G6 or P4) and the table says so. <b>Getable:</b> eligibility remaining under the qualified determination — Unsettled players are shown and flagged “eligibility unsettled” — a benchmark that clears the room’s incumbent under the books’ strict test, and not already on this team. <b>Projected</b> is his benchmark from the Player Book method — headline grade plus the position’s translation delta. <b>NIL:</b> getable is a field test — it means he clears your room and has eligibility; it does not price him. Separately, each path and getable player carries his estimated NIL projection where priced, and the header’s estimated path cost sums the path players’ floors and ceilings; a path player with no estimate is named as unpriced in that count and is never counted as $0. ${esc(NIL_LABEL)} An asterisked incumbent is a room with no volume-qualified player, carried by its top player by volume under the team-comparison ruling; no getable players are named for those rooms. Pool: Nov 17, 2026 in-season snapshot of PFF Ultimate exports; grades are PFF headline grades.</p>
   </div>`;
+  h += renderFullRooms(t, m);
   body.innerHTML = h;
+  if (champRestoreScroll === 'board') { const b = $('classBoard'); if (b) b.scrollIntoView({ block: 'start' }); }
+  else if (typeof champRestoreScroll === 'number') window.scrollTo(0, champRestoreScroll);
+  champRestoreScroll = null;
+}
+
+/* ---------------- championship path: full rooms, regional view, class builder
+   Tommy, Nov 18, 2026: the path above names only the single best getable
+   player per room. The fuller product below it: every room printed in
+   full — the room a transfer would actually enter — and every available
+   player at the position, not just the top five and not only the men who
+   beat the room's #1, each with his slot-in standing against the full
+   room (entering as WR2 is a real outcome). A regional view filters the
+   available lists to players whose home state is the school's state or
+   a bordering one. And a class builder: drag any available player in
+   (or use his Add button) and price him where you judge he lands
+   between his estimated NIL floor and ceiling — the class spend totals
+   at your marks, with the all-floor / all-ceiling bounds beside it. */
+const STATE_ADJ = { AL: ['FL', 'GA', 'MS', 'TN'], AK: [], AZ: ['CA', 'CO', 'NM', 'NV', 'UT'], AR: ['LA', 'MO', 'MS', 'OK', 'TN', 'TX'], CA: ['AZ', 'NV', 'OR'], CO: ['AZ', 'KS', 'NE', 'NM', 'OK', 'UT', 'WY'], CT: ['MA', 'NY', 'RI'], DE: ['MD', 'NJ', 'PA'], DC: ['MD', 'VA'], FL: ['AL', 'GA'], GA: ['AL', 'FL', 'NC', 'SC', 'TN'], HI: [], ID: ['MT', 'NV', 'OR', 'UT', 'WA', 'WY'], IL: ['IN', 'IA', 'KY', 'MO', 'WI'], IN: ['IL', 'KY', 'MI', 'OH'], IA: ['IL', 'MN', 'MO', 'NE', 'SD', 'WI'], KS: ['CO', 'MO', 'NE', 'OK'], KY: ['IL', 'IN', 'MO', 'OH', 'TN', 'VA', 'WV'], LA: ['AR', 'MS', 'TX'], ME: ['NH'], MD: ['DE', 'PA', 'VA', 'WV', 'DC'], MA: ['CT', 'NH', 'NY', 'RI', 'VT'], MI: ['IN', 'OH', 'WI'], MN: ['IA', 'ND', 'SD', 'WI'], MS: ['AL', 'AR', 'LA', 'TN'], MO: ['AR', 'IL', 'IA', 'KS', 'KY', 'NE', 'OK', 'TN'], MT: ['ID', 'ND', 'SD', 'WY'], NE: ['CO', 'IA', 'KS', 'MO', 'SD', 'WY'], NV: ['AZ', 'CA', 'ID', 'OR', 'UT'], NH: ['ME', 'MA', 'VT'], NJ: ['DE', 'NY', 'PA'], NM: ['AZ', 'CO', 'OK', 'TX'], NY: ['CT', 'MA', 'NJ', 'PA', 'VT'], NC: ['GA', 'SC', 'TN', 'VA'], ND: ['MN', 'MT', 'SD'], OH: ['IN', 'KY', 'MI', 'PA', 'WV'], OK: ['AR', 'CO', 'KS', 'MO', 'NM', 'TX'], OR: ['CA', 'ID', 'NV', 'WA'], PA: ['DE', 'MD', 'NJ', 'NY', 'OH', 'WV'], RI: ['CT', 'MA'], SC: ['GA', 'NC'], SD: ['IA', 'MN', 'MT', 'NE', 'ND', 'WY'], TN: ['AL', 'AR', 'GA', 'KY', 'MS', 'MO', 'NC', 'VA'], TX: ['AR', 'LA', 'NM', 'OK'], UT: ['AZ', 'CO', 'ID', 'NV', 'WY'], VT: ['MA', 'NH', 'NY'], VA: ['DC', 'KY', 'MD', 'NC', 'TN', 'WV'], WA: ['ID', 'OR'], WV: ['KY', 'MD', 'OH', 'PA', 'VA'], WI: ['IL', 'IA', 'MI', 'MN'], WY: ['CO', 'ID', 'MT', 'NE', 'SD', 'UT'] };
+
+let champRegional = false;
+let champHitDefault = 0.5;
+let champClass = {};          // playerId -> {g, hit} — hit is 0..1 across his NIL band
+let champClassTeam = null;
+let champRestoreScroll = null;
+let AVAIL_IDX = null;
+
+function availIdx() {
+  if (AVAIL_IDX) return AVAIL_IDX;
+  AVAIL_IDX = {};
+  if (CHAMP && CHAMP.avail) for (const g of Object.keys(CHAMP.avail))
+    for (const e of CHAMP.avail[g]) { e._g = g; AVAIL_IDX[e.id] = e; }
+  return AVAIL_IDX;
+}
+function champOwnBookTeam(book) { return book === 'ULM' ? 'Louisiana-Monroe' : book === 'UTEP' ? 'UTEP' : null; }
+function champAvailFor(t, g) {
+  const all = (CHAMP.avail && CHAMP.avail[g]) || [];
+  return all.filter(e => e.school !== t.name
+    && champOwnBookTeam(e.book) !== t.name
+    && !(t.level === 'P4' && e.dir === 'down'));
+}
+function isRegional(t, e) {
+  if (!e.home_state || !t.state) return false;
+  return e.home_state === t.state || (STATE_ADJ[t.state] || []).includes(e.home_state);
+}
+function slotIn(roster, bench) {
+  let rank = 1, above = null, below = null;
+  for (const p of roster || []) {
+    if (p.grade > bench) { rank++; if (!above || p.grade < above.grade) above = p; }
+    else if (!below || p.grade > below.grade) below = p;
+  }
+  return { rank, of: (roster || []).length + 1, above, below };
+}
+function loadClass(team) {
+  champClassTeam = team;
+  try { champClass = JSON.parse(localStorage.getItem('portalClass:' + team) || '{}'); }
+  catch (err) { champClass = {}; }
+  const idx = availIdx();
+  for (const id of Object.keys(champClass)) if (!idx[id]) delete champClass[id];
+}
+function saveClass() {
+  try { localStorage.setItem('portalClass:' + champClassTeam, JSON.stringify(champClass)); } catch (err) {}
+}
+function hitPrice(e, hit) {
+  return e && e.nil_status === 'priced' ? Math.round(e.nil_floor + hit * (e.nil_ceiling - e.nil_floor)) : null;
+}
+function classTotals() {
+  const idx = availIdx();
+  let spend = 0, floor = 0, ceiling = 0, priced = 0, n = 0;
+  for (const [id, c] of Object.entries(champClass)) {
+    const e = idx[id]; if (!e) continue;
+    n++;
+    const p = hitPrice(e, c.hit);
+    if (p != null) { priced++; spend += p; floor += e.nil_floor; ceiling += e.nil_ceiling; }
+  }
+  return { n, priced, spend, floor, ceiling };
+}
+function updateClassTotals() {
+  const ct = classTotals();
+  const s = $('classSpend'), b = $('classBounds');
+  if (s) s.textContent = ct.priced ? fmtMoney(ct.spend) : '—';
+  if (b) b.textContent = ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : '';
+}
+function syncHitRow(id, sliderEl) {
+  const e0 = availIdx()[id], c = champClass[id];
+  if (!e0 || !c) return;
+  const price = hitPrice(e0, c.hit);
+  const priceEl = document.getElementById('hitprice-' + id);
+  if (priceEl && price != null) priceEl.textContent = fmtMoney(price);
+  const row = priceEl ? priceEl.closest('.class-row') : null;
+  if (row) {
+    const rg = row.querySelector('[data-hitrange]');
+    if (rg && rg !== sliderEl) rg.value = Math.round(c.hit * 100);
+    row.querySelectorAll('[data-hitpid]').forEach(ch =>
+      ch.classList.toggle('on', Math.abs(parseFloat(ch.dataset.hitval) - c.hit) < 0.001));
+  }
+  updateClassTotals();
+}
+function classAdd(id) {
+  const e = availIdx()[id];
+  if (!e || champClass[id]) return;
+  champClass[id] = { g: e._g, hit: champHitDefault };
+  saveClass();
+  champRestoreScroll = 'board';
+  renderChamp();
+}
+function classRemove(id) {
+  if (!champClass[id]) return;
+  delete champClass[id];
+  saveClass();
+  champRestoreScroll = window.scrollY;
+  renderChamp();
+}
+/* The class applied to the path model: per room, the projected grade
+   becomes the better of the incumbent and the best class benchmark in
+   that room; rooms-at-standard is then read the same way the path
+   summary reads it (below-bar rooms never count). */
+function classEffect(t, m) {
+  const idx = availIdx();
+  const best = {};
+  for (const [id, c] of Object.entries(champClass)) {
+    const e = idx[id]; if (!e) continue;
+    if (best[c.g] == null || e.benchmark > best[c.g]) best[c.g] = e.benchmark;
+  }
+  const EPS = 1e-9;
+  let atAfter = 0, points = 0;
+  for (const x of m.rooms) {
+    let proj = x.inc;
+    if (best[x.g] != null) proj = proj == null ? best[x.g] : Math.max(proj, best[x.g]);
+    if (!x.bb && proj != null && x.bar != null && proj >= x.bar - EPS) atAfter++;
+    if (proj != null && x.bar != null) points += Math.max(0, x.bar - proj);
+  }
+  return { atAfter, points: Math.round(points * 10) / 10 };
+}
+
+const HIT_STOPS = [[0, 'Floor'], [0.25, 'Low'], [0.5, 'Mid'], [0.75, 'High'], [1, 'Ceiling']];
+
+function renderClassBoard(t, m) {
+  const idx = availIdx();
+  const ct = classTotals();
+  const eff = ct.n ? classEffect(t, m) : null;
+  const byGroup = {};
+  for (const [id, c] of Object.entries(champClass)) {
+    const e = idx[id]; if (!e) continue;
+    (byGroup[c.g] = byGroup[c.g] || []).push({ e, hit: c.hit });
+  }
+  for (const g of Object.keys(byGroup)) byGroup[g].sort((a, b) => b.e.benchmark - a.e.benchmark);
+  let rows = '';
+  for (const g of CHAMP.meta.groups) {
+    for (const { e, hit } of byGroup[g] || []) {
+      const s = slotIn(t.rooms[g].roster, e.benchmark);
+      const price = hitPrice(e, hit);
+      rows += `<div class="class-row">${photo(e)}
+        <div class="avail-main">
+          <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>
+          <span class="room-tag">${esc(g)}</span>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}
+          <br><span class="p-sub">${esc(e.school)} · benchmark <b>${f1(e.benchmark)}</b> · slots <b>#${s.rank} of ${s.of}</b> in this room</span>
+          <br><span class="p-sub">${price != null ? `Est. NIL ${nilRange(e)} a year` : 'Est. NIL — no estimate (not counted in the spend)'}</span>
+          ${price != null ? `<span class="hit-ctl"><span class="hit-chips">${HIT_STOPS.map(([v, lab]) =>
+            `<button type="button" class="hit-chip${Math.abs(hit - v) < 0.001 ? ' on' : ''}" data-hitpid="${esc(e.id)}" data-hitval="${v}">${lab}</button>`).join('')}</span>
+          <input type="range" class="hit-range" min="0" max="100" step="5" value="${Math.round(hit * 100)}" data-hitrange="${esc(e.id)}" aria-label="Where ${esc(e.name)} lands between floor and ceiling">
+          <b class="hit-price" id="hitprice-${esc(e.id)}">${fmtMoney(price)}</b></span>` : ''}
+        </div>
+        <button type="button" class="btn-remove" data-remove="${esc(e.id)}" aria-label="Remove ${esc(e.name)} from the class">✕</button>
+      </div>`;
+    }
+  }
+  return `<div class="card class-board" id="classBoard">
+    <h2 class="sec" style="margin-top:2px">Build the class — ${esc(t.name)}</h2>
+    <p class="p-sub">Drag any player from the lists below into this board, or use his <b>+ Add to class</b> button. Because a band is a range, price each man where <i>you</i> judge he lands between his floor and his ceiling — the spend totals at your marks. New adds are priced at the menu default; adjust each man on his own row. The class is kept per team, in this browser.</p>
+    <div class="class-ctl">
+      <label>Price new adds at
+        <select data-hitdefault>${HIT_STOPS.map(([v, lab]) => `<option value="${v}"${Math.abs(champHitDefault - v) < 0.001 ? ' selected' : ''}>${lab}</option>`).join('')}</select>
+      </label>
+      <label class="reg-tgl"><input type="checkbox" data-regional${champRegional ? ' checked' : ''}> Regional replacements only — the lists below show players whose home state is ${t.state ? esc(t.state) : 'the school’s state'} or a bordering state</label>
+      ${ct.n ? '<button type="button" class="btn-ghost" data-clearclass>Clear the class</button>' : ''}
+    </div>
+    ${ct.n ? `<div class="class-list">${rows}</div>
+    <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
+      <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
+      <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.priced < ct.n ? ` · ${ct.n - ct.priced} with no estimate, not counted` : ''}</span></p>
+    <p class="p-sub">With this class: <b>${eff.atAfter} of ${m.rooms.length} rooms at the standard</b> (today: ${m.atNow}) · <b>${f1(eff.points)} grade points to the standard</b> (today: ${f1(m.points)}). Read the same way as the path summary above — a room counts when its projected top grade, the better of the incumbent and your best class benchmark in it, reaches the conference-best standard.</p>`
+    : '<p class="p-sub class-empty">No players in the class yet — drag a player here, or use his Add button below.</p>'}
+    <p class="foot-note">${esc(NIL_LABEL)}</p>
+  </div>`;
+}
+
+function renderFullRooms(t, m) {
+  let h = '';
+  for (const x of m.rooms) {
+    const g = x.g, r = x.r;
+    const roster = r.roster || [];
+    const all = champAvailFor(t, g);
+    const reg = all.filter(e => isRegional(t, e));
+    const shown = champRegional ? reg : all;
+    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('');
+    const availRows = shown.map(e => {
+      const s = slotIn(roster, e.benchmark);
+      const inClass = !!champClass[e.id];
+      const slotTxt = roster.length
+        ? `Slots <b>#${s.rank} of ${s.of}</b>${s.above ? ` — behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? ` · ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}`
+        : 'No rostered players at this group in the pool snapshot';
+      return `<div class="avail-row${inClass ? ' in-class' : ''}" draggable="true" data-dragpid="${esc(e.id)}">${photo(e)}
+        <div class="avail-main">
+          <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${isRegional(t, e) ? `<span class="reg-badge">Regional · ${esc(e.home_state)}</span>` : ''}
+          <br><span class="p-sub">${esc(e.school)} · grade ${f1(e.grade)} → benchmark <b>${f1(e.benchmark)}</b></span>
+          <br><span class="p-sub">${slotTxt}</span>
+          <br><span class="p-sub">${nilRange(e) ? `Est. NIL <b>${nilRange(e)}</b> a year` : 'Est. NIL — no estimate'} · </span>${eligChip(e.elig)}${e.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
+        </div>
+        <button type="button" class="btn-add" data-add="${esc(e.id)}"${inClass ? ' disabled' : ''}>${inClass ? 'In class ✓' : '+ Class'}</button>
+      </div>`;
+    }).join('');
+    h += `<div class="card room-full">
+      <h2 class="sec" style="margin-top:2px">${esc(g)} — the room in full, and everyone available</h2>
+      <div class="room-grid">
+        <div>
+          <h3 class="sub-h">The room he enters — ${esc(t.name)} ${esc(g)} (${roster.length})</h3>
+          ${roster.length ? `<div class="tbl-scroll"><table class="fits room-tbl"><thead><tr><th class="num">#</th><th>Player</th><th class="num">Grade</th><th class="num">Volume</th></tr></thead><tbody>${rosterRows}</tbody></table></div>`
+            : '<p class="p-sub">No rostered players at this group in the pool snapshot.</p>'}
+          <p class="p-sub">Every player in the 2026 pool with volume at this group — the full room, not just its top man. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
+        </div>
+        <div>
+          <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}</h3>
+          <div class="avail-scroll">${availRows || '<p class="p-sub">No available players under the current view.</p>'}</div>
+          <p class="p-sub">Every evaluated player with eligibility remaining at this group${t.level === 'G6' ? ', both directions — the Moving Up pool at his book benchmark and the P4 Down pool at his projected G6 grade' : ' at his book benchmark'}, best benchmark first — not only the men who beat the room’s #1. <b>Slot-in</b> ranks his benchmark against the full room’s grades: #2 means he enters behind one man, not that he failed a test. Drag a player to the class builder, or use his button.</p>
+        </div>
+      </div>
+    </div>`;
+  }
+  return h;
 }
 
 function renderTeam() {
@@ -1370,6 +1603,53 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     renderChamp();
   });
   $('champQ').addEventListener('input', buildChampPanel);
+  $('champBody').addEventListener('click', e => {
+    const add = e.target.closest('[data-add]');
+    if (add) { classAdd(add.dataset.add); return; }
+    const rem = e.target.closest('[data-remove]');
+    if (rem) { classRemove(rem.dataset.remove); return; }
+    if (e.target.closest('[data-clearclass]')) {
+      champClass = {}; saveClass(); champRestoreScroll = window.scrollY; renderChamp(); return;
+    }
+    const chip = e.target.closest('[data-hitpid]');
+    if (chip && champClass[chip.dataset.hitpid]) {
+      champClass[chip.dataset.hitpid].hit = parseFloat(chip.dataset.hitval);
+      saveClass(); syncHitRow(chip.dataset.hitpid);
+    }
+  });
+  $('champBody').addEventListener('change', e => {
+    const reg = e.target.closest('[data-regional]');
+    if (reg) { champRegional = reg.checked; champRestoreScroll = window.scrollY; renderChamp(); return; }
+    const hd = e.target.closest('[data-hitdefault]');
+    if (hd) champHitDefault = parseFloat(hd.value);
+  });
+  $('champBody').addEventListener('input', e => {
+    const rg = e.target.closest('[data-hitrange]');
+    if (rg && champClass[rg.dataset.hitrange]) {
+      champClass[rg.dataset.hitrange].hit = parseInt(rg.value, 10) / 100;
+      saveClass(); syncHitRow(rg.dataset.hitrange, rg);
+    }
+  });
+  $('champBody').addEventListener('dragstart', e => {
+    const row = e.target.closest('[data-dragpid]');
+    if (row) { e.dataTransfer.setData('text/plain', row.dataset.dragpid); e.dataTransfer.effectAllowed = 'copy'; }
+  });
+  $('champBody').addEventListener('dragover', e => {
+    const board = $('classBoard');
+    if (board && board.contains(e.target)) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; board.classList.add('drop-on'); }
+  });
+  $('champBody').addEventListener('dragleave', e => {
+    const board = $('classBoard');
+    if (board && !board.contains(e.relatedTarget)) board.classList.remove('drop-on');
+  });
+  $('champBody').addEventListener('drop', e => {
+    const board = $('classBoard');
+    if (board && board.contains(e.target)) {
+      e.preventDefault(); board.classList.remove('drop-on');
+      const id = e.dataTransfer.getData('text/plain');
+      if (id) classAdd(id);
+    }
+  });
   $('teamBody').addEventListener('click', e => {
     const b = e.target.closest('[data-torder]');
     if (b) { teamOrder = b.dataset.torder; renderTeam(); }

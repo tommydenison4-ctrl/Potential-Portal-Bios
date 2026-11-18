@@ -374,6 +374,36 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .getable-more summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--accent2)}
 .getable-more summary:hover{text-decoration:underline}
 .champ-table td{vertical-align:top}
+/* championship path: full rooms, regional view, class builder */
+.room-tag{display:inline-block;background:var(--accent);color:#fff;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
+.down-badge{display:inline-block;background:#e2e8f0;color:#334155;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
+.reg-badge{display:inline-block;background:#dcfce7;color:#166534;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
+.btn-add{font:inherit;font-size:12px;font-weight:600;background:none;border:1px solid var(--line);border-radius:7px;padding:4px 9px;cursor:pointer;color:var(--accent2);white-space:nowrap;flex:none}
+.btn-add:disabled{opacity:.55;cursor:default}
+.btn-remove{font:inherit;background:none;border:none;color:var(--mut);cursor:pointer;font-size:14px;padding:2px 6px;flex:none}
+.avail-row{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-bottom:1px solid var(--line);cursor:grab}
+.avail-row .ph,.avail-row .ph-init{flex:none}
+.avail-row.in-class{background:#f0fdf4}
+.avail-main{flex:1;min-width:0}
+.avail-scroll{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:2px 4px}
+.room-grid{display:grid;grid-template-columns:minmax(260px,1fr) 1.5fr;gap:18px}
+@media (max-width:860px){.room-grid{grid-template-columns:1fr}}
+.sub-h{font-size:13px;font-weight:700;margin:2px 0 8px}
+.room-tbl{width:100%}
+.class-board.drop-on{outline:2px dashed #1a7f37;outline-offset:-6px}
+.class-ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0}
+.class-ctl select{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:none}
+.reg-tgl{font-size:13px;display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.class-row{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-bottom:1px solid var(--line)}
+.class-row .ph,.class-row .ph-init{flex:none}
+.hit-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:5px}
+.hit-chips{display:inline-flex;gap:4px}
+.hit-chip{font:inherit;font-size:11px;font-weight:600;background:none;border:1px solid var(--line);border-radius:999px;padding:2px 8px;cursor:pointer;color:var(--accent)}
+.hit-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.hit-range{width:130px;accent-color:var(--accent)}
+.hit-price{font-size:14px}
+.class-totals{font-size:15px;margin:10px 0 4px}
+.class-empty{padding:6px 0}
 @page champ{size:landscape;margin:11mm}
 #view-champ{page:champ}
 @media print{
@@ -384,4 +414,9 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
   #champBody > .card:first-child{break-before:auto}
   #view-champ h2.sec{break-after:avoid}
   .getable-more{display:none!important}
+  #view-champ .class-ctl{display:none!important}
+  #view-champ .hit-chips,#view-champ .hit-range{display:none!important}
+  #view-champ .btn-add,#view-champ .btn-remove{display:none!important}
+  #view-champ .avail-scroll{max-height:none;overflow:visible;border:0;padding:0}
+  #view-champ .avail-row{cursor:default}
 }
