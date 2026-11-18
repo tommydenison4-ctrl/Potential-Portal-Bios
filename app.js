@@ -24,7 +24,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const initials = n => n.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
 const photo = (p, cls) => p.headshot
-  ? `<img class="${cls || 'ph'}" src="headshots/${esc(p.headshot)}" alt="" loading="lazy">`
+  ? `<img class="${cls || 'ph'}" src="headshots/${esc(String(p.headshot).replace(/^headshots\//, ''))}" alt="" loading="lazy">`
   : `<span class="${cls || 'ph-init'}">${esc(initials(p.name))}</span>`;
 const eligChip = e => `<span class="chip ${e === 'Eligible' ? 'ok' : e === 'Not eligible' ? 'no' : 'un'}">${esc(e)}</span>`;
 
