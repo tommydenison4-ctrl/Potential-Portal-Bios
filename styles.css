@@ -390,6 +390,8 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 @media (max-width:860px){.room-grid{grid-template-columns:1fr}}
 .sub-h{font-size:13px;font-weight:700;margin:2px 0 8px}
 .room-tbl{width:100%}
+.roster-div td{font-size:11px;font-weight:700;color:var(--mut);background:#f8fafc;padding-top:8px}
+.vol0 td{color:var(--mut)}
 .class-board.drop-on{outline:2px dashed #1a7f37;outline-offset:-6px}
 .class-ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0}
 .class-ctl select{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:none}

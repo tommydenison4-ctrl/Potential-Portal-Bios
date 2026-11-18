@@ -1166,6 +1166,7 @@ function isRegional(t, e) {
   if (!e.home_state || !t.state) return false;
   return e.home_state === t.state || (STATE_ADJ[t.state] || []).includes(e.home_state);
 }
+function playedRoom(r) { return ((r && r.roster) || []).filter(p => p.vol > 0); }
 function slotIn(roster, bench) {
   let rank = 1, above = null, below = null;
   for (const p of roster || []) {
@@ -1271,7 +1272,7 @@ function renderClassBoard(t, m) {
   let rows = '';
   for (const g of CHAMP.meta.groups) {
     for (const { e, hit } of byGroup[g] || []) {
-      const s = slotIn(t.rooms[g].roster, e.benchmark);
+      const s = slotIn(playedRoom(t.rooms[g]), e.benchmark);
       const price = hitPrice(e, hit);
       rows += `<div class="class-row">${photo(e)}
         <div class="avail-main">
@@ -1312,17 +1313,21 @@ function renderFullRooms(t, m) {
   let h = '';
   for (const x of m.rooms) {
     const g = x.g, r = x.r;
-    const roster = r.roster || [];
+    const rosterAll = r.roster || [];
+    const roster = rosterAll.filter(p => p.vol > 0);
+    const zeroVol = rosterAll.filter(p => !(p.vol > 0));
     const all = champAvailFor(t, g);
     const reg = all.filter(e => isRegional(t, e));
     const shown = champRegional ? reg : all;
-    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('');
+    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
+      + (zeroVol.length ? `<tr class="roster-div"><td colspan="4">Also in the data — no recorded ${esc(r.vol_unit || 'volume')} in the snapshot</td></tr>`
+        + zeroVol.map(p => `<tr class="vol0"><td class="num">—</td><td>${esc(p.name)}</td><td class="num">${f1(p.grade)}</td><td class="num">0 ${esc(r.vol_unit || '')}</td></tr>`).join('') : '');
     const availRows = shown.map(e => {
       const s = slotIn(roster, e.benchmark);
       const inClass = !!champClass[e.id];
       const slotTxt = roster.length
         ? `Slots <b>#${s.rank} of ${s.of}</b>${s.above ? ` — behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? ` · ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}`
-        : 'No rostered players at this group in the pool snapshot';
+        : 'No player with recorded volume in this room in the pool snapshot';
       return `<div class="avail-row${inClass ? ' in-class' : ''}" draggable="true" data-dragpid="${esc(e.id)}">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${isRegional(t, e) ? `<span class="reg-badge">Regional · ${esc(e.home_state)}</span>` : ''}
@@ -1338,9 +1343,9 @@ function renderFullRooms(t, m) {
       <div class="room-grid">
         <div>
           <h3 class="sub-h">The room he enters — ${esc(t.name)} ${esc(g)} (${roster.length})</h3>
-          ${roster.length ? `<div class="tbl-scroll"><table class="fits room-tbl"><thead><tr><th class="num">#</th><th>Player</th><th class="num">Grade</th><th class="num">Volume</th></tr></thead><tbody>${rosterRows}</tbody></table></div>`
+          ${rosterAll.length ? `<div class="tbl-scroll"><table class="fits room-tbl"><thead><tr><th class="num">#</th><th>Player</th><th class="num">Grade</th><th class="num">Volume</th></tr></thead><tbody>${rosterRows}</tbody></table></div>`
             : '<p class="p-sub">No rostered players at this group in the pool snapshot.</p>'}
-          <p class="p-sub">Every player in the 2026 pool with volume at this group — the full room, not just its top man. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
+          <p class="p-sub">Every player with a report row at this group — the rotation first (with volume), then the rostered names with no recorded ${esc(r.vol_unit || 'volume')} in the snapshot; those carry a grade on a snap or two and do not count in slot-in standing. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
         </div>
         <div>
           <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}</h3>
