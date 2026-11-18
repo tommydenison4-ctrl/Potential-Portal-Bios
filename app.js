@@ -1332,6 +1332,10 @@ function classMailto(t, m, ct, eff, lines) {
   const em = classEmailText(t, m, ct, eff, lines);
   return `mailto:?subject=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
 }
+function gmailCompose(t, m, ct, eff, lines) {
+  const em = classEmailText(t, m, ct, eff, lines);
+  return `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
+}
 /* ---- the board as a picture: a canvas rendering of the saved class,
    drawn from the same snapshot the board prints, so the email carries
    the look of the screen and not only text. ---- */
@@ -1507,8 +1511,9 @@ function renderClassBoard(t, m) {
         ${canShareFiles() ? '<button type="button" class="btn-save" data-shareclass>Share — picture + text</button>' : ''}
         <button type="button" class="btn-ghost" data-dlimg>Download the board picture</button>
         <a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Open an email draft — text version</a>
+        <a class="btn-ghost mail-btn" href="${gmailCompose(t, m, ct, eff, lines)}" target="_blank" rel="noopener">Open in Gmail — text version</a>
       </div>
-      <p class="p-sub">On a phone, <b>Share</b> drops the picture straight into your mail app with the text under it. On a computer, download the picture and attach it to the draft — a web page can't attach a file to an email by itself.</p>
+      <p class="p-sub">On a phone, <b>Share</b> drops the picture straight into your mail app — Apple Mail, the Gmail app, whichever you pick — with the text under it. On a computer, download the picture and attach it to the draft (in Gmail, just drag the picture into the compose window) — a web page can't attach a file to an email by itself.</p>
     </div>` : ''}
     ${ct.n ? `<div class="class-list">${rows}</div>
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
