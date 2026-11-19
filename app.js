@@ -118,6 +118,20 @@ const fmtMoney = v => {
 };
 const nilRange = x => x && x.nil_status === 'priced' ? `${fmtMoney(x.nil_floor)}–${fmtMoney(x.nil_ceiling)}` : null;
 
+/* -------- overpay note (Tommy's ruling, Nov 18, 2026) --------
+   When the latest valuation prices a player as an overpay — his price's
+   percentile inside his position pool runs at least 30 points above his
+   grade's percentile (steady value at or below −30) — the player page
+   says so plainly beside the band, and the Value Board flags him. The
+   valuation prices his projected destination, not his play; the note
+   keeps that visible wherever the dollar figure prints. */
+const OVERPAY_LINE = -30;
+const isOverpay = p => !!(p && p.value && p.value.steady_value <= OVERPAY_LINE);
+const overpayLine = p => {
+  const v = p.value;
+  return `<p class="overpay-note"><b>Priced as an overpay.</b> This band prices him at the ${f1(v.price_pct)} percentile of ${esc(v.position)} prices while his grade sits at the ${f1(v.grade_pct)} percentile — a ${f1(-v.steady_value)}-point gap. The valuation prices his projected destination, not his play.</p>`;
+};
+
 function nilSection(p) {
   if (!p.nil_status) return '';
   let h = `<div class="card"><h2 class="sec" style="margin-top:2px">Estimated NIL projection</h2>`;
@@ -126,6 +140,7 @@ function nilSection(p) {
   } else {
     h += `<p><span class="grade-big">${fmtMoney(p.nil_floor)}–${fmtMoney(p.nil_ceiling)}</span> <span class="p-sub">a year — floor to ceiling at his projected destination</span></p>`;
     h += `<p class="p-sub">Basis: ${esc(p.nil_basis || '')}${p.nil_projection_basis ? ` (${esc(p.nil_projection_basis)})` : ''}${p.nil_band_basis ? ` · band evidence: ${esc(p.nil_band_basis.toLowerCase())}` : ''}</p>`;
+    if (isOverpay(p)) h += overpayLine(p);
     if (p.on3_valuation != null) {
       const rel = p.on3_flag === 'ON3 ABOVE CEILING' ? ' It sits <b>above</b> this projection’s ceiling — the two figures answer different questions (On3 values his current situation; the band prices his projected role) and are shown side by side, never merged.'
         : p.on3_flag === 'ON3 BELOW FLOOR' ? ' It sits <b>below</b> this projection’s floor — the two figures answer different questions and are shown side by side, never merged.' : '';
@@ -294,7 +309,7 @@ function applyFilters() {
     <tr data-id="${esc(p.id)}">
       <td class="cmp-cell"><input type="checkbox" class="cmp-check" data-cmp="${esc(p.id)}" ${cmpSel.includes(p.id) ? 'checked' : ''} aria-label="Select ${esc(p.name)} to compare"></td>
       <td>${photo(p)}</td>
-      <td><span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}</td>
+      <td><span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}${tagBadges(p.id)}</td>
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
@@ -2197,7 +2212,7 @@ function renderValue() {
     const v = p.value;
     return `<tr data-id="${esc(p.id)}">
       <td class="num">${i + 1}</td>
-      <td><a class="pname" href="#/player/${encodeURIComponent(p.id)}">${esc(p.name)}</a></td>
+      <td><a class="pname" href="#/player/${encodeURIComponent(p.id)}">${esc(p.name)}</a>${isOverpay(p) ? '<span class="overpay-chip">OVERPAY</span>' : ''}</td>
       <td>${esc(p.school)}</td>
       <td>${esc(v.position)}</td>
       <td class="num">${f1(v.grade_used)}</td>
