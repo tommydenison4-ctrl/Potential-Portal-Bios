@@ -552,7 +552,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 750000,
   "on3_url": "https://www.on3.com/rivals/keisean-henderson-158794/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Keisean Henderson",
+   "school": "Houston",
+   "position": "QB",
+   "grade_used": 75.7,
+   "grade_pct": 81.2,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 47.9,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "deuce-knight",
@@ -1104,7 +1119,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 1100000,
   "on3_url": "https://www.on3.com/rivals/deuce-knight-152218/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Deuce Knight",
+   "school": "Ole Miss",
+   "position": "QB",
+   "grade_used": 74.3,
+   "grade_pct": 77.1,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 43.7,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "ty-hawkins",
@@ -1801,7 +1831,22 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter \u00b7 QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ty Hawkins",
+   "school": "SMU",
+   "position": "QB",
+   "grade_used": 93.3,
+   "grade_pct": 97.9,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 64.6,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "karle-lacey-jr",
@@ -2434,7 +2479,22 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter \u00b7 QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Karle Lacey Jr.",
+   "school": "Texas",
+   "position": "QB",
+   "grade_used": 83.1,
+   "grade_pct": 89.6,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 56.2,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "eli-holstein",
@@ -2898,7 +2958,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 750000,
   "on3_url": "https://www.on3.com/rivals/eli-holstein-40953/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Eli Holstein",
+   "school": "Virginia",
+   "position": "QB",
+   "grade_used": 70.2,
+   "grade_pct": 64.6,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 31.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 29.2,
+   "ceiling_value": -4.2,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "chase-jenkins",
@@ -3571,7 +3646,22 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter \u00b7 QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Chase Jenkins",
+   "school": "Kansas",
+   "position": "QB",
+   "grade_used": 87.9,
+   "grade_pct": 93.8,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 60.4,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "luke-carney",
@@ -4184,7 +4274,22 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter \u00b7 QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Luke Carney",
+   "school": "Houston",
+   "position": "QB",
+   "grade_used": 81.6,
+   "grade_pct": 85.4,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 52.1,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 12.5,
+   "ceiling_value": -20.8,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "edward-griffin",
@@ -4611,7 +4716,22 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter \u00b7 QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Edward Griffin",
+   "school": "Baylor",
+   "position": "QB",
+   "grade_used": 69.2,
+   "grade_pct": 60.4,
+   "price_mid": 316500,
+   "price_pct": 33.3,
+   "steady_value": 27.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 29.2,
+   "ceiling_value": -4.2,
+   "nil_low": 33000,
+   "nil_high": 600000
+  }
  },
  {
   "id": "ej-crowell",
@@ -5206,7 +5326,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 600000,
   "on3_url": "https://www.on3.com/rivals/ej-crowell-238147/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "EJ Crowell",
+   "school": "Alabama",
+   "position": "RB",
+   "grade_used": 90.8,
+   "grade_pct": 99.1,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 67.9,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "harlem-berry",
@@ -5688,7 +5823,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 1000000,
   "on3_url": "https://www.on3.com/db/harlem-berry-155410/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Harlem Berry",
+   "school": "LSU",
+   "position": "RB",
+   "grade_used": 82.7,
+   "grade_pct": 84.0,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 52.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "lj-martin",
@@ -6282,7 +6432,22 @@
     "stat": "7.0 yds/carry (95th pct), 2.20 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "LJ Martin",
+   "school": "BYU",
+   "position": "RB",
+   "grade_used": 87.1,
+   "grade_pct": 97.2,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 66.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "kj-edwards",
@@ -6801,7 +6966,22 @@
     "stat": "6.0 yds/carry (83rd pct), 2.30 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "KJ Edwards",
+   "school": "Texas A&M",
+   "position": "RB",
+   "grade_used": 84.7,
+   "grade_pct": 93.4,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 62.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "kewan-lacy",
@@ -7300,7 +7480,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 2000000,
   "on3_url": "https://www.on3.com/rivals/kewan-lacy-150872/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Kewan Lacy",
+   "school": "Ole Miss",
+   "position": "RB",
+   "grade_used": 83.8,
+   "grade_pct": 89.6,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 58.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "james-peoples",
@@ -7717,7 +7912,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "James Peoples",
+   "school": "Penn State",
+   "position": "RB",
+   "grade_used": 80.0,
+   "grade_pct": 72.6,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 41.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "christian-rhodes",
@@ -8103,7 +8313,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Christian Rhodes",
+   "school": "SMU",
+   "position": "RB",
+   "grade_used": 78.7,
+   "grade_pct": 65.1,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 34.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "quinten-joyner",
@@ -8468,7 +8693,22 @@
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 750000,
   "on3_url": "https://www.on3.com/rivals/quinten-joyner-145533/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Quinten Joyner",
+   "school": "Texas Tech",
+   "position": "RB",
+   "grade_used": 75.9,
+   "grade_pct": 46.2,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 15.1,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "ryelan-morris",
@@ -8813,7 +9053,22 @@
     "stat": "6.1 yds/carry (85th pct), 1.90 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Ryelan Morris",
+   "school": "Baylor",
+   "position": "RB",
+   "grade_used": 75.5,
+   "grade_pct": 43.4,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 12.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "tradarian-ball",
@@ -9137,7 +9392,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Tradarian Ball",
+   "school": "Oregon",
+   "position": "RB",
+   "grade_used": 75.4,
+   "grade_pct": 40.6,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 9.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "braylen-russell",
@@ -9454,7 +9724,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Braylen Russell",
+   "school": "Arkansas",
+   "position": "RB",
+   "grade_used": 74.9,
+   "grade_pct": 37.7,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 6.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "kevin-riley",
@@ -9757,7 +10042,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kevin Riley",
+   "school": "Alabama",
+   "position": "RB",
+   "grade_used": 74.7,
+   "grade_pct": 33.0,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 1.9,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "noah-moss",
@@ -10280,7 +10580,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Noah Moss",
+   "school": "NC State",
+   "position": "RB",
+   "grade_used": 85.6,
+   "grade_pct": 95.3,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 64.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "daniel-bray",
@@ -10791,7 +11106,22 @@
     "stat": "8.6 yds/carry (99th pct), 3.20 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Daniel Bray",
+   "school": "Utah",
+   "position": "RB",
+   "grade_used": 83.5,
+   "grade_pct": 87.7,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 56.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "john-hebert",
@@ -11277,7 +11607,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "John Hebert",
+   "school": "Houston",
+   "position": "RB",
+   "grade_used": 83.0,
+   "grade_pct": 85.8,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 54.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "makhi-frazier",
@@ -11696,7 +12041,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Makhi Frazier",
+   "school": "Ole Miss",
+   "position": "RB",
+   "grade_used": 80.2,
+   "grade_pct": 75.5,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 44.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "jj-hill",
@@ -12094,7 +12454,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "J.J. Hill",
+   "school": "Mississippi State",
+   "position": "RB",
+   "grade_used": 80.2,
+   "grade_pct": 75.5,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 44.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "xavier-ford",
@@ -12486,7 +12861,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Xavier Ford",
+   "school": "Minnesota",
+   "position": "RB",
+   "grade_used": 79.8,
+   "grade_pct": 70.8,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 39.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 48.1,
+   "ceiling_value": 17.0,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "trae-shawn-brown",
@@ -12844,7 +13234,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Trae'shawn Brown",
+   "school": "Alabama",
+   "position": "RB",
+   "grade_used": 77.4,
+   "grade_pct": 59.4,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 28.3,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "arnold-barnes-iii",
@@ -13200,7 +13605,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Arnold Barnes III",
+   "school": "Iowa State",
+   "position": "RB",
+   "grade_used": 77.0,
+   "grade_pct": 55.7,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 24.5,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "jalen-dupree",
@@ -13556,7 +13976,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jalen Dupree",
+   "school": "Kansas",
+   "position": "RB",
+   "grade_used": 76.6,
+   "grade_pct": 53.8,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 22.6,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "omar-mabson-ii",
@@ -13896,7 +14331,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Omar Mabson II",
+   "school": "Auburn",
+   "position": "RB",
+   "grade_used": 76.2,
+   "grade_pct": 50.9,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 19.8,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "cooper-crosby",
@@ -14231,7 +14681,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Cooper Crosby",
+   "school": "Mississippi State",
+   "position": "RB",
+   "grade_used": 76.0,
+   "grade_pct": 48.1,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 17.0,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 5.7,
+   "ceiling_value": -25.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "monterrio-elston-jr",
@@ -14563,7 +15028,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Monterrio Elston Jr.",
+   "school": "Kansas State",
+   "position": "RB",
+   "grade_used": 75.5,
+   "grade_pct": 43.4,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 12.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "landen-chambers",
@@ -14863,7 +15343,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Landen Chambers",
+   "school": "UCF",
+   "position": "RB",
+   "grade_used": 74.8,
+   "grade_pct": 34.9,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 3.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "nate-palmer",
@@ -15184,7 +15679,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Nate Palmer",
+   "school": "Wisconsin",
+   "position": "RB",
+   "grade_used": 74.6,
+   "grade_pct": 31.1,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": 0.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "makhilyn-young",
@@ -15468,7 +15978,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Makhilyn Young",
+   "school": "Vanderbilt",
+   "position": "RB",
+   "grade_used": 73.3,
+   "grade_pct": 19.8,
+   "price_mid": 134000,
+   "price_pct": 31.1,
+   "steady_value": -11.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 22.6,
+   "ceiling_value": -8.5,
+   "nil_low": 18000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "terry-bussey",
@@ -15763,7 +16288,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Terry Bussey",
+   "school": "Texas A&M",
+   "position": "WR",
+   "grade_used": 66.5,
+   "grade_pct": 55.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 40.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dillon-alfred",
@@ -16257,7 +16797,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Dillon Alfred",
+   "school": "Ole Miss",
+   "position": "WR",
+   "grade_used": 75.7,
+   "grade_pct": 90.0,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 75.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "corey-barber-jr",
@@ -16714,7 +17269,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Corey Barber Jr.",
+   "school": "LSU",
+   "position": "WR",
+   "grade_used": 74.0,
+   "grade_pct": 88.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 74.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "quentin-gibson",
@@ -17113,7 +17683,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Quentin Gibson",
+   "school": "Colorado",
+   "position": "WR",
+   "grade_used": 72.4,
+   "grade_pct": 83.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 68.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jelani-watkins",
@@ -17480,7 +18065,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jelani Watkins",
+   "school": "Arkansas",
+   "position": "WR",
+   "grade_used": 69.7,
+   "grade_pct": 72.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 58.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "malcolm-simmons",
@@ -17853,7 +18453,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 600000,
   "on3_url": "https://www.on3.com/rivals/malcolm-simmons-147663/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Malcolm Simmons",
+   "school": "Texas Tech",
+   "position": "WR",
+   "grade_used": 69.6,
+   "grade_pct": 71.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 56.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "ivan-carreon",
@@ -18148,7 +18763,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Ivan Carreon",
+   "school": "Oklahoma",
+   "position": "WR",
+   "grade_used": 67.1,
+   "grade_pct": 60.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 46.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "taron-francis",
@@ -18443,7 +19073,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "TaRon Francis",
+   "school": "West Virginia",
+   "position": "WR",
+   "grade_used": 66.8,
+   "grade_pct": 56.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 42.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kelshaun-johnson",
@@ -18722,7 +19367,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kelshaun Johnson",
+   "school": "Texas A&M",
+   "position": "WR",
+   "grade_used": 66.3,
+   "grade_pct": 53.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 38.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "cederian-morgan",
@@ -18993,7 +19653,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Cederian Morgan",
+   "school": "Alabama",
+   "position": "WR",
+   "grade_used": 65.2,
+   "grade_pct": 47.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 32.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "ernest-campbell",
@@ -19250,7 +19925,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Ernest Campbell",
+   "school": "Colorado",
+   "position": "WR",
+   "grade_used": 64.5,
+   "grade_pct": 42.0,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 27.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jordan-clay",
@@ -19492,7 +20182,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jordan Clay",
+   "school": "Washington",
+   "position": "WR",
+   "grade_used": 64.2,
+   "grade_pct": 36.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 22.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "tyreek-robinson",
@@ -20096,7 +20801,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Tyreek Robinson",
+   "school": "Pittsburgh",
+   "position": "WR",
+   "grade_used": 81.0,
+   "grade_pct": 96.0,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 81.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "camden-capehart",
@@ -20589,7 +21309,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Camden Capehart",
+   "school": "Mississippi State",
+   "position": "WR",
+   "grade_used": 76.1,
+   "grade_pct": 91.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 76.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "zion-crumpton",
@@ -21006,7 +21741,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Zion Crumpton",
+   "school": "Mississippi State",
+   "position": "WR",
+   "grade_used": 73.1,
+   "grade_pct": 87.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 72.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "larry-simmons",
@@ -21415,7 +22165,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Larry Simmons",
+   "school": "Utah",
+   "position": "WR",
+   "grade_used": 72.7,
+   "grade_pct": 84.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 70.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "charles-taplin",
@@ -21790,7 +22555,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Charles Taplin",
+   "school": "Michigan State",
+   "position": "WR",
+   "grade_used": 70.3,
+   "grade_pct": 75.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 60.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "phillip-wright-iii",
@@ -22166,7 +22946,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Phillip Wright III",
+   "school": "LSU",
+   "position": "WR",
+   "grade_used": 70.2,
+   "grade_pct": 74.0,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 59.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 20.7,
+   "ceiling_value": 6.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jaiven-plummer",
@@ -22445,7 +23240,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jaiven Plummer",
+   "school": "Georgia Tech",
+   "position": "WR",
+   "grade_used": 66.3,
+   "grade_pct": 53.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 38.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "drayden-dickmann",
@@ -22723,7 +23533,22 @@
     "stat": "YAC/rec 8.6 (96th pct)",
     "proxy": false
    }
-  ]
+  ],
+  "value": {
+   "name": "Drayden Dickmann",
+   "school": "Wake Forest",
+   "position": "WR",
+   "grade_used": 65.3,
+   "grade_pct": 48.7,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 34.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "matt-mayfield",
@@ -22986,7 +23811,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Matt Mayfield",
+   "school": "Mississippi State",
+   "position": "WR",
+   "grade_used": 64.9,
+   "grade_pct": 45.3,
+   "price_mid": 158500,
+   "price_pct": 14.7,
+   "steady_value": 30.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 6.7,
+   "ceiling_value": -8.0,
+   "nil_low": 17000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "zack-turner",
@@ -23470,7 +24310,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Zack Turner",
+   "school": "SMU",
+   "position": "TE",
+   "grade_used": 81.3,
+   "grade_pct": 90.6,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 46.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "shamar-easter",
@@ -23928,7 +24783,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Shamar Easter",
+   "school": "North Carolina",
+   "position": "TE",
+   "grade_used": 78.7,
+   "grade_pct": 84.4,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 40.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "kiotti-armstrong",
@@ -24321,7 +25191,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Kiotti Armstrong",
+   "school": "Texas A&M",
+   "position": "TE",
+   "grade_used": 69.7,
+   "grade_pct": 46.9,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 3.1,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 15.6,
+   "ceiling_value": -28.1,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "jack-van-dorselaer",
@@ -24647,7 +25532,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jack Van Dorselaer",
+   "school": "Oklahoma",
+   "position": "TE",
+   "grade_used": 64.0,
+   "grade_pct": 9.4,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": -34.4,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 15.6,
+   "ceiling_value": -28.1,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "micah-jones",
@@ -25147,7 +26047,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Micah Jones",
+   "school": "Florida",
+   "position": "TE",
+   "grade_used": 83.8,
+   "grade_pct": 96.9,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 53.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "parker-almanza",
@@ -25603,7 +26518,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Parker Almanza",
+   "school": "Baylor",
+   "position": "TE",
+   "grade_used": 77.9,
+   "grade_pct": 78.1,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 34.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "hunter-andrews",
@@ -26061,7 +26991,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Hunter Andrews",
+   "school": "Utah",
+   "position": "TE",
+   "grade_used": 77.8,
+   "grade_pct": 71.9,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 28.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "tripp-riordan",
@@ -26519,7 +27464,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Tripp Riordan",
+   "school": "SMU",
+   "position": "TE",
+   "grade_used": 77.4,
+   "grade_pct": 65.6,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 21.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "walter-taylor",
@@ -26967,7 +27927,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Walter Taylor",
+   "school": "Vanderbilt",
+   "position": "TE",
+   "grade_used": 76.0,
+   "grade_pct": 59.4,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 15.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 59.4,
+   "ceiling_value": 15.6,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "hawkins-polley",
@@ -27424,7 +28399,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Hawkins Polley",
+   "school": "Baylor",
+   "position": "TE",
+   "grade_used": 73.9,
+   "grade_pct": 53.1,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": 9.4,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 15.6,
+   "ceiling_value": -28.1,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "will-loerzel",
@@ -27782,7 +28772,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Will Loerzel",
+   "school": "Wake Forest",
+   "position": "TE",
+   "grade_used": 65.8,
+   "grade_pct": 31.2,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": -12.5,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 15.6,
+   "ceiling_value": -28.1,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "zayion-cotton",
@@ -28140,7 +29145,22 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Zayion Cotton",
+   "school": "Mississippi State",
+   "position": "TE",
+   "grade_used": 65.5,
+   "grade_pct": 21.9,
+   "price_mid": 133000,
+   "price_pct": 43.8,
+   "steady_value": -21.9,
+   "ceiling_level": "G6 depth",
+   "ceiling_pct": 15.6,
+   "ceiling_value": -28.1,
+   "nil_low": 16000,
+   "nil_high": 250000
+  }
  },
  {
   "id": "felix-ojo",
@@ -28452,7 +29472,22 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 775000,
   "on3_url": "https://www.on3.com/rivals/felix-ojo-238977/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Felix Ojo",
+   "school": "Texas Tech",
+   "position": "OL",
+   "grade_used": 66.1,
+   "grade_pct": 69.1,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -5.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "ashton-funk",
@@ -29235,7 +30270,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ashton Funk",
+   "school": "Texas A&M",
+   "position": "OL",
+   "grade_used": 89.8,
+   "grade_pct": 99.6,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 24.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "zaden-krempin",
@@ -29945,7 +30995,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Zaden Krempin",
+   "school": "Texas A&M",
+   "position": "OL",
+   "grade_used": 79.1,
+   "grade_pct": 98.1,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 23.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "ian-reed",
@@ -30534,7 +31599,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ian Reed",
+   "school": "Clemson",
+   "position": "OL",
+   "grade_used": 74.2,
+   "grade_pct": 92.0,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 17.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "jaydon-chatman",
@@ -31109,7 +32189,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jaydon Chatman",
+   "school": "Texas",
+   "position": "OL",
+   "grade_used": 73.9,
+   "grade_pct": 91.2,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 16.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "casey-poe",
@@ -31674,7 +32769,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Casey Poe",
+   "school": "Alabama",
+   "position": "OL",
+   "grade_used": 73.5,
+   "grade_pct": 90.5,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 15.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "michael-uini",
@@ -32176,7 +33286,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Michael Uini",
+   "school": "Georgia",
+   "position": "OL",
+   "grade_used": 69.8,
+   "grade_pct": 83.6,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 8.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "demetris-dean-ii",
@@ -32482,7 +33607,22 @@
     "stat": "Gap share 54% (82nd pct) + impact blocks 15.4% (95th pct) among non-center OL",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Demetris Dean II",
+   "school": "Houston",
+   "position": "OL",
+   "grade_used": 65.3,
+   "grade_pct": 63.0,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -11.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "parker-pritchett",
@@ -32747,7 +33887,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Parker Pritchett",
+   "school": "Auburn",
+   "position": "OL",
+   "grade_used": 63.9,
+   "grade_pct": 53.4,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -21.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 57.6,
+   "ceiling_value": -17.2,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "emanuel-faulkner",
@@ -32990,7 +34145,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Emanuel Faulkner",
+   "school": "Ole Miss",
+   "position": "OL",
+   "grade_used": 62.4,
+   "grade_pct": 40.8,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -34.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "day-jon-moore",
@@ -33227,7 +34397,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Day'Jon Moore",
+   "school": "Maryland",
+   "position": "OL",
+   "grade_used": 61.3,
+   "grade_pct": 31.3,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -43.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 57.6,
+   "ceiling_value": -17.2,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "carius-curne",
@@ -33484,7 +34669,22 @@
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 750000,
   "on3_url": "https://www.on3.com/rivals/carius-curne-179831/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Carius Curne",
+   "school": "Ole Miss",
+   "position": "OL",
+   "grade_used": 61.2,
+   "grade_pct": 30.2,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -44.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 57.6,
+   "ceiling_value": -17.2,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "ethan-fields",
@@ -34195,7 +35395,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ethan Fields",
+   "school": "Alabama",
+   "position": "OL",
+   "grade_used": 78.2,
+   "grade_pct": 97.3,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 22.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "sean-terrell",
@@ -34875,7 +36090,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Sean Terrell",
+   "school": "Houston",
+   "position": "OL",
+   "grade_used": 78.0,
+   "grade_pct": 96.6,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 21.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "tyler-johnson",
@@ -35570,7 +36800,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Tyler Johnson",
+   "school": "Kansas State",
+   "position": "OL",
+   "grade_used": 77.6,
+   "grade_pct": 95.8,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 21.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "jordan-coleman",
@@ -36257,7 +37502,22 @@
     "stat": "Gap share 55% (83rd pct) + impact blocks 18.2% (99th pct) among non-center OL",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Jordan Coleman",
+   "school": "Texas",
+   "position": "OL",
+   "grade_used": 76.9,
+   "grade_pct": 94.3,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 19.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "devin-coleman",
@@ -36862,7 +38122,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Devin Coleman",
+   "school": "Texas",
+   "position": "OL",
+   "grade_used": 74.8,
+   "grade_pct": 92.7,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 17.9,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "josiah-clemons",
@@ -37377,7 +38652,22 @@
     "stat": "Gap share 60% (91st pct) + impact blocks 20.0% (100th pct) among non-center OL",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Josiah Clemons",
+   "school": "Arkansas",
+   "position": "OL",
+   "grade_used": 70.5,
+   "grade_pct": 87.0,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 12.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "jackson-christian",
@@ -37861,7 +39151,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jackson Christian",
+   "school": "Texas",
+   "position": "OL",
+   "grade_used": 69.9,
+   "grade_pct": 84.4,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 9.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "hayden-ainsworth",
@@ -38329,7 +39634,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Hayden Ainsworth",
+   "school": "Nebraska",
+   "position": "OL",
+   "grade_used": 69.7,
+   "grade_pct": 82.8,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": 8.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "dezmond-schuster",
@@ -38655,7 +39975,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Dezmond Schuster",
+   "school": "Illinois",
+   "position": "OL",
+   "grade_used": 66.1,
+   "grade_pct": 69.1,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -5.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "isaiah-kema",
@@ -38979,7 +40314,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Isaiah Kema",
+   "school": "Utah",
+   "position": "OL",
+   "grade_used": 66.0,
+   "grade_pct": 67.6,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -7.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "aaron-wolford",
@@ -39222,7 +40572,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Aaron Wolford",
+   "school": "Houston",
+   "position": "OL",
+   "grade_used": 63.2,
+   "grade_pct": 45.4,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -29.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 57.6,
+   "ceiling_value": -17.2,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "daniel-sill",
@@ -39482,7 +40847,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Daniel Sill",
+   "school": "Texas Tech",
+   "position": "OL",
+   "grade_used": 63.1,
+   "grade_pct": 44.7,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -30.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "isaiah-bowman",
@@ -39710,7 +41090,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Isaiah Bowman",
+   "school": "Oklahoma State",
+   "position": "OL",
+   "grade_used": 61.5,
+   "grade_pct": 34.4,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -40.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "harrison-cluff",
@@ -39962,7 +41357,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Harrison Cluff",
+   "school": "Baylor",
+   "position": "OL",
+   "grade_used": 61.4,
+   "grade_pct": 32.8,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -42.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 25.2,
+   "ceiling_value": -49.6,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "owen-hollenbeck",
@@ -40190,7 +41600,22 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Owen Hollenbeck",
+   "school": "Oklahoma",
+   "position": "OL",
+   "grade_used": 61.0,
+   "grade_pct": 27.9,
+   "price_mid": 209500,
+   "price_pct": 74.8,
+   "steady_value": -46.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 57.6,
+   "ceiling_value": -17.2,
+   "nil_low": 19000,
+   "nil_high": 400000
+  }
  },
  {
   "id": "lamar-brown",
@@ -40512,7 +41937,22 @@
     "stat": "Sacks are 40% of his pressures (97th pct) at 282 lb (group median 244)",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Lamar Brown",
+   "school": "LSU",
+   "position": "ED",
+   "grade_used": 67.6,
+   "grade_pct": 58.6,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 13.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kolaj-cobbins",
@@ -41179,7 +42619,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Kolaj Cobbins",
+   "school": "LSU",
+   "position": "ED",
+   "grade_used": 98.4,
+   "grade_pct": 99.2,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 53.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "smith-orogbo",
@@ -41742,7 +43197,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Smith Orogbo",
+   "school": "Texas",
+   "position": "ED",
+   "grade_used": 85.9,
+   "grade_pct": 96.1,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 50.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "tyshun-willis",
@@ -42257,7 +43727,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Tyshun Willis",
+   "school": "Mississippi State",
+   "position": "ED",
+   "grade_used": 80.5,
+   "grade_pct": 93.0,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 47.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "talib-graham",
@@ -42754,7 +44239,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Talib Graham",
+   "school": "Ole Miss",
+   "position": "ED",
+   "grade_used": 79.8,
+   "grade_pct": 91.4,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 46.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "carter-buck",
@@ -43201,7 +44701,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Carter Buck",
+   "school": "TCU",
+   "position": "ED",
+   "grade_used": 75.6,
+   "grade_pct": 86.7,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 41.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "cheta-ofili",
@@ -43609,7 +45124,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Cheta Ofili",
+   "school": "TCU",
+   "position": "ED",
+   "grade_used": 73.0,
+   "grade_pct": 80.5,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 35.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kamauryn-morgan",
@@ -43979,7 +45509,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Kamauryn Morgan",
+   "school": "Missouri",
+   "position": "ED",
+   "grade_used": 71.4,
+   "grade_pct": 75.8,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 30.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "cj-woodfork",
@@ -44328,7 +45873,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "CJ Woodfork",
+   "school": "TCU",
+   "position": "ED",
+   "grade_used": 70.8,
+   "grade_pct": 72.7,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 27.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "obinna-umeh",
@@ -44666,7 +46226,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Obinna Umeh",
+   "school": "Duke",
+   "position": "ED",
+   "grade_used": 69.6,
+   "grade_pct": 68.0,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 22.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "sterling-dixon",
@@ -44993,7 +46568,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Sterling Dixon",
+   "school": "NC State",
+   "position": "ED",
+   "grade_used": 69.2,
+   "grade_pct": 64.1,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 18.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "hezekiah-harris",
@@ -45322,7 +46912,22 @@
   "nil_band_basis": "INTERPOLATED",
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 250000,
-  "on3_url": "https://www.on3.com/rivals/hezekiah-harris-162655/nil/"
+  "on3_url": "https://www.on3.com/rivals/hezekiah-harris-162655/nil/",
+  "value": {
+   "name": "Hezekiah Harris",
+   "school": "Tennessee",
+   "position": "ED",
+   "grade_used": 68.1,
+   "grade_pct": 60.2,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 14.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "nolan-wilson",
@@ -45617,7 +47222,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Nolan Wilson",
+   "school": "Alabama",
+   "position": "ED",
+   "grade_used": 66.4,
+   "grade_pct": 55.5,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 10.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jamarion-carlton",
@@ -45910,7 +47530,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jamarion Carlton",
+   "school": "Texas",
+   "position": "ED",
+   "grade_used": 66.1,
+   "grade_pct": 53.9,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 8.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "darius-washington",
@@ -46578,7 +48213,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Darius Washington",
+   "school": "Houston",
+   "position": "ED",
+   "grade_used": 95.2,
+   "grade_pct": 97.7,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 52.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "albert-smith-iii",
@@ -47178,7 +48828,22 @@
     "stat": "Win rate 18.3% (94th pct) at 232 lb (group median 244)",
     "proxy": true
    }
-  ]
+  ],
+  "value": {
+   "name": "Albert Smith III",
+   "school": "Arizona State",
+   "position": "ED",
+   "grade_used": 85.2,
+   "grade_pct": 94.5,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 49.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jadyn-ramos",
@@ -47667,7 +49332,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jadyn Ramos",
+   "school": "USC",
+   "position": "ED",
+   "grade_used": 78.5,
+   "grade_pct": 89.8,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 44.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "drew-collins",
@@ -48130,7 +49810,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Drew Collins",
+   "school": "South Carolina",
+   "position": "ED",
+   "grade_used": 76.3,
+   "grade_pct": 88.3,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 43.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "hudson-woods",
@@ -48547,7 +50242,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Hudson Woods",
+   "school": "SMU",
+   "position": "ED",
+   "grade_used": 74.6,
+   "grade_pct": 85.2,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 39.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "chima-chineke",
@@ -48938,7 +50648,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Chima Chineke",
+   "school": "Iowa",
+   "position": "ED",
+   "grade_used": 73.4,
+   "grade_pct": 82.8,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 37.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dk-mays",
@@ -49323,7 +51048,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "DK Mays",
+   "school": "Houston",
+   "position": "ED",
+   "grade_used": 72.7,
+   "grade_pct": 78.9,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 33.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "daemian-wimberly",
@@ -49698,7 +51438,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Daemian Wimberly",
+   "school": "Baylor",
+   "position": "ED",
+   "grade_used": 72.5,
+   "grade_pct": 77.3,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 32.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "keylan-abrams",
@@ -50059,7 +51814,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Keylan Abrams",
+   "school": "TCU",
+   "position": "ED",
+   "grade_used": 70.9,
+   "grade_pct": 74.2,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 28.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "amontre-harris",
@@ -50410,7 +52180,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Amontre Harris",
+   "school": "SMU",
+   "position": "ED",
+   "grade_used": 70.6,
+   "grade_pct": 71.1,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 25.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "ansel-nedore",
@@ -50768,7 +52553,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Ansel Nedore",
+   "school": "Texas Tech",
+   "position": "ED",
+   "grade_used": 69.7,
+   "grade_pct": 69.5,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 24.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "keegan-horn",
@@ -51093,7 +52893,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Keegan Horn",
+   "school": "Cincinnati",
+   "position": "ED",
+   "grade_used": 69.4,
+   "grade_pct": 66.4,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 21.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "chance-bryant",
@@ -51420,7 +53235,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Chance Bryant",
+   "school": "Houston",
+   "position": "ED",
+   "grade_used": 69.2,
+   "grade_pct": 64.1,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 18.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 50.0,
+   "ceiling_value": 4.7,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dalton-knapp",
@@ -51713,7 +53543,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Dalton Knapp",
+   "school": "Kansas State",
+   "position": "ED",
+   "grade_used": 66.0,
+   "grade_pct": 52.3,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 7.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "ben-duncum",
@@ -51990,7 +53835,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Ben Duncum",
+   "school": "Kentucky",
+   "position": "ED",
+   "grade_used": 65.3,
+   "grade_pct": 50.8,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 5.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "tyron-winslow",
@@ -52269,7 +54129,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Tyron Winslow",
+   "school": "SMU",
+   "position": "ED",
+   "grade_used": 64.9,
+   "grade_pct": 49.2,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 3.9,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "sheldon-rice",
@@ -52540,7 +54415,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Sheldon Rice",
+   "school": "Houston",
+   "position": "ED",
+   "grade_used": 64.8,
+   "grade_pct": 46.9,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 1.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "brian-alston",
@@ -52809,7 +54699,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Brian Alston",
+   "school": "Arkansas",
+   "position": "ED",
+   "grade_used": 64.8,
+   "grade_pct": 46.9,
+   "price_mid": 160000,
+   "price_pct": 45.3,
+   "steady_value": 1.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 5.5,
+   "ceiling_value": -39.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "richard-anderson",
@@ -53153,7 +55058,22 @@
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 340000,
   "on3_url": "https://www.on3.com:443/db/richard-anderson-175348/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "Richard Anderson",
+   "school": "LSU",
+   "position": "DI",
+   "grade_used": 62.9,
+   "grade_pct": 46.7,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -7.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "anthony-jones-jr",
@@ -53486,7 +55406,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Anthony Jones Jr.",
+   "school": "Oregon",
+   "position": "DI",
+   "grade_used": 61.8,
+   "grade_pct": 39.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -14.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "malcolm-simpson",
@@ -54185,7 +56120,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Malcolm Simpson",
+   "school": "Nebraska",
+   "position": "DI",
+   "grade_used": 96.9,
+   "grade_pct": 99.5,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 45.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dylan-berymon",
@@ -54746,7 +56696,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Dylan Berymon",
+   "school": "Nebraska",
+   "position": "DI",
+   "grade_used": 72.3,
+   "grade_pct": 92.9,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 39.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jaimeon-winfield",
@@ -55301,7 +57266,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jaimeon Winfield",
+   "school": "USC",
+   "position": "DI",
+   "grade_used": 72.2,
+   "grade_pct": 91.8,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 37.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "travis-buhake",
@@ -55678,7 +57658,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Travis Buhake",
+   "school": "Houston",
+   "position": "DI",
+   "grade_used": 65.2,
+   "grade_pct": 73.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 19.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "emanuel-ruffin",
@@ -56039,7 +58034,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Emanuel Ruffin",
+   "school": "Ohio State",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dereon-albert",
@@ -56400,7 +58410,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Dereon Albert",
+   "school": "Tennessee",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "zion-williams",
@@ -56759,7 +58784,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Zion Williams",
+   "school": "Texas",
+   "position": "DI",
+   "grade_used": 63.7,
+   "grade_pct": 57.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 3.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "reginald-vaughn",
@@ -57116,7 +59156,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Reginald Vaughn",
+   "school": "Arkansas",
+   "position": "DI",
+   "grade_used": 63.3,
+   "grade_pct": 52.7,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -1.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "darryus-mckinley",
@@ -57465,7 +59520,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Darryus McKinley",
+   "school": "Ohio State",
+   "position": "DI",
+   "grade_used": 63.1,
+   "grade_pct": 50.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -3.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "dj-sanders",
@@ -57806,7 +59876,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "DJ Sanders",
+   "school": "Texas A&M",
+   "position": "DI",
+   "grade_used": 63.0,
+   "grade_pct": 48.4,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -5.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kamron-beavers",
@@ -58123,7 +60208,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kamron Beavers",
+   "school": "Ole Miss",
+   "position": "DI",
+   "grade_used": 60.7,
+   "grade_pct": 29.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -24.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "nigel-smith-ii",
@@ -58440,7 +60540,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Nigel Smith II",
+   "school": "Oklahoma",
+   "position": "DI",
+   "grade_used": 60.5,
+   "grade_pct": 26.4,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -27.5,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "aaron-bryant",
@@ -58757,7 +60872,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Aaron Bryant",
+   "school": "Vanderbilt",
+   "position": "DI",
+   "grade_used": 60.4,
+   "grade_pct": 24.2,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -29.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jayden-curtis",
@@ -59320,7 +61450,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jayden Curtis",
+   "school": "Ole Miss",
+   "position": "DI",
+   "grade_used": 72.9,
+   "grade_pct": 94.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 40.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "keyshawn-williams",
@@ -59832,7 +61977,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Keyshawn Williams",
+   "school": "Texas Tech",
+   "position": "DI",
+   "grade_used": 68.3,
+   "grade_pct": 83.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 29.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "josiah-pratt",
@@ -60201,7 +62361,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Josiah Pratt",
+   "school": "Wake Forest",
+   "position": "DI",
+   "grade_used": 64.6,
+   "grade_pct": 72.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 18.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jackson-blackwell",
@@ -60560,7 +62735,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jackson Blackwell",
+   "school": "Baylor",
+   "position": "DI",
+   "grade_used": 64.2,
+   "grade_pct": 69.2,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 15.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "nygel-farsee",
@@ -60921,7 +63111,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Nygel Farsee",
+   "school": "Oklahoma State",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kaleb-walker",
@@ -61282,7 +63487,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Kaleb Walker",
+   "school": "Houston",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "carnell-jackson-jr",
@@ -61641,7 +63861,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Carnell Jackson Jr.",
+   "school": "Kansas State",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "davon-young",
@@ -62002,7 +64237,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Davon Young",
+   "school": "Mississippi State",
+   "position": "DI",
+   "grade_used": 63.9,
+   "grade_pct": 62.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "xavier-fleming",
@@ -62363,7 +64613,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Xavier Fleming",
+   "school": "Houston",
+   "position": "DI",
+   "grade_used": 63.7,
+   "grade_pct": 57.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 3.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "isaiah-broughton",
@@ -62724,7 +64989,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Isaiah Broughton",
+   "school": "Houston",
+   "position": "DI",
+   "grade_used": 63.6,
+   "grade_pct": 55.5,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": 1.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "maddox-flynt",
@@ -63081,7 +65361,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Maddox Flynt",
+   "school": "TCU",
+   "position": "DI",
+   "grade_used": 63.3,
+   "grade_pct": 52.7,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -1.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "omar-khan",
@@ -63430,7 +65725,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Omar Khan",
+   "school": "Washington",
+   "position": "DI",
+   "grade_used": 63.2,
+   "grade_pct": 51.1,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -2.7,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "garrett-witherington",
@@ -63771,7 +66081,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Garrett Witherington",
+   "school": "Virginia Tech",
+   "position": "DI",
+   "grade_used": 63.0,
+   "grade_pct": 48.4,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -5.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "daeshon-morgan",
@@ -64112,7 +66437,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Daeshon Morgan",
+   "school": "Arizona State",
+   "position": "DI",
+   "grade_used": 62.6,
+   "grade_pct": 45.6,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -8.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kordae-houston",
@@ -64453,7 +66793,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kordae Houston",
+   "school": "Syracuse",
+   "position": "DI",
+   "grade_used": 62.4,
+   "grade_pct": 43.4,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -10.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "mhari-johnson",
@@ -64794,7 +67149,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Mhari Johnson",
+   "school": "Alabama",
+   "position": "DI",
+   "grade_used": 62.3,
+   "grade_pct": 42.3,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -11.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "savion-barthelemy",
@@ -65127,7 +67497,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Savion Barthelemy",
+   "school": "Oklahoma State",
+   "position": "DI",
+   "grade_used": 61.9,
+   "grade_pct": 41.2,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -12.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "floyd-guidry",
@@ -65460,7 +67845,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Floyd Guidry",
+   "school": "TCU",
+   "position": "DI",
+   "grade_used": 61.8,
+   "grade_pct": 39.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -14.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "jamarion-owens",
@@ -65793,7 +68193,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jamarion Owens",
+   "school": "Ole Miss",
+   "position": "DI",
+   "grade_used": 61.8,
+   "grade_pct": 39.0,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -14.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "tyson-bacon",
@@ -66128,7 +68543,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Tyson Bacon",
+   "school": "Miami (FL)",
+   "position": "DI",
+   "grade_used": 61.3,
+   "grade_pct": 35.7,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -18.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 19.8,
+   "ceiling_value": -34.1,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "kaleb-morris",
@@ -66429,7 +68859,22 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kaleb Morris",
+   "school": "Mississippi State",
+   "position": "DI",
+   "grade_used": 60.1,
+   "grade_pct": 20.9,
+   "price_mid": 160000,
+   "price_pct": 53.8,
+   "steady_value": -33.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 62.6,
+   "ceiling_value": 8.8,
+   "nil_low": 20000,
+   "nil_high": 300000
+  }
  },
  {
   "id": "christian-brathwaite",
@@ -66920,7 +69365,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Christian Brathwaite",
+   "school": "Houston",
+   "position": "LB",
+   "grade_used": 69.7,
+   "grade_pct": 79.9,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": 32.3,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "derion-gullette",
@@ -67310,7 +69770,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Derion Gullette",
+   "school": "Mississippi State",
+   "position": "LB",
+   "grade_used": 63.0,
+   "grade_pct": 46.3,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": -1.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "gunnar-wilson",
@@ -67881,7 +70356,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Gunnar Wilson",
+   "school": "Oklahoma State",
+   "position": "LB",
+   "grade_used": 75.7,
+   "grade_pct": 95.7,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": 48.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "weston-polk",
@@ -68269,7 +70759,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Weston Polk",
+   "school": "Kansas State",
+   "position": "LB",
+   "grade_used": 63.4,
+   "grade_pct": 48.2,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": 0.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "richmond-ugochukwu",
@@ -68659,7 +71164,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Richmond Ugochukwu",
+   "school": "Houston",
+   "position": "LB",
+   "grade_used": 63.0,
+   "grade_pct": 46.3,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": -1.2,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "carson-crawford",
@@ -69047,7 +71567,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Carson Crawford",
+   "school": "Colorado",
+   "position": "LB",
+   "grade_used": 62.9,
+   "grade_pct": 44.5,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": -3.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "elliott-schaper",
@@ -69437,7 +71972,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Elliott Schaper",
+   "school": "Duke",
+   "position": "LB",
+   "grade_used": 62.7,
+   "grade_pct": 42.7,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": -4.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jamarion-phillips",
@@ -69762,7 +72312,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jamarion Phillips",
+   "school": "Baylor",
+   "position": "LB",
+   "grade_used": 60.3,
+   "grade_pct": 27.4,
+   "price_mid": 109500,
+   "price_pct": 47.6,
+   "steady_value": -20.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 53.0,
+   "ceiling_value": 5.5,
+   "nil_low": 19000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "john-meredith-iii",
@@ -70041,7 +72606,22 @@
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 1500000,
   "on3_url": "https://www.on3.com/rivals/john-meredith-243735/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "value": {
+   "name": "John Meredith III",
+   "school": "Texas",
+   "position": "CB",
+   "grade_used": 67.0,
+   "grade_pct": 47.8,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 11.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "michael-turner-jr",
@@ -70755,7 +73335,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Michael Turner Jr.",
+   "school": "LSU",
+   "position": "CB",
+   "grade_used": 84.9,
+   "grade_pct": 99.5,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 63.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "deyjhon-pettaway",
@@ -71438,7 +74033,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Deyjhon Pettaway",
+   "school": "Texas A&M",
+   "position": "CB",
+   "grade_used": 82.2,
+   "grade_pct": 98.4,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 62.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "preston-ashley",
@@ -71990,7 +74600,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Preston Ashley",
+   "school": "Colorado",
+   "position": "CB",
+   "grade_used": 76.3,
+   "grade_pct": 87.6,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 51.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "s-vioarean-martin",
@@ -72333,7 +74958,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "S'Vioarean Martin",
+   "school": "Texas Tech",
+   "position": "CB",
+   "grade_used": 69.4,
+   "grade_pct": 65.6,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 29.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jamarion-vincent",
@@ -72630,7 +75270,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jamarion Vincent",
+   "school": "Michigan",
+   "position": "CB",
+   "grade_used": 67.8,
+   "grade_pct": 50.5,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 14.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "kyle-johnson",
@@ -72911,7 +75566,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kyle Johnson",
+   "school": "Mississippi State",
+   "position": "CB",
+   "grade_used": 65.8,
+   "grade_pct": 36.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 0.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "ramonz-adams-jr",
@@ -73577,7 +76247,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ramonz Adams Jr.",
+   "school": "Washington",
+   "position": "CB",
+   "grade_used": 80.2,
+   "grade_pct": 97.3,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 61.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "caleb-chester",
@@ -74233,7 +76918,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Caleb Chester",
+   "school": "Arizona State",
+   "position": "CB",
+   "grade_used": 79.2,
+   "grade_pct": 96.2,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 60.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "marcell-gipson-jr",
@@ -74792,7 +77492,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Marcell Gipson Jr.",
+   "school": "Clemson",
+   "position": "CB",
+   "grade_used": 76.6,
+   "grade_pct": 90.9,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 54.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jc-hart",
@@ -75346,7 +78061,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "JC Hart",
+   "school": "Utah",
+   "position": "CB",
+   "grade_used": 76.5,
+   "grade_pct": 89.2,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 53.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "mojo-williams-jr",
@@ -75752,7 +78482,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Mojo Williams Jr.",
+   "school": "Colorado",
+   "position": "CB",
+   "grade_used": 72.1,
+   "grade_pct": 79.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 43.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "xavier-harmon",
@@ -76149,7 +78894,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Xavier Harmon",
+   "school": "Stanford",
+   "position": "CB",
+   "grade_used": 71.5,
+   "grade_pct": 78.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 41.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jeremiah-charles",
@@ -76557,7 +79317,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jeremiah Charles",
+   "school": "Nebraska",
+   "position": "CB",
+   "grade_used": 71.4,
+   "grade_pct": 76.9,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 40.9,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "javion-holiday",
@@ -76933,7 +79708,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Javion Holiday",
+   "school": "SMU",
+   "position": "CB",
+   "grade_used": 70.9,
+   "grade_pct": 73.7,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 37.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "ashton-hampton",
@@ -77314,7 +80104,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Ashton Hampton",
+   "school": "Texas Tech",
+   "position": "CB",
+   "grade_used": 70.0,
+   "grade_pct": 70.4,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 34.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jonathan-cunningham",
@@ -77654,7 +80459,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jonathan Cunningham",
+   "school": "Texas",
+   "position": "CB",
+   "grade_used": 69.3,
+   "grade_pct": 64.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 28.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 40.3,
+   "ceiling_value": 4.3,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "zadian-gentry",
@@ -77996,7 +80816,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Zadian Gentry",
+   "school": "SMU",
+   "position": "CB",
+   "grade_used": 69.0,
+   "grade_pct": 62.4,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 26.3,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "kj-johnson",
@@ -78312,7 +81147,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "KJ Johnson",
+   "school": "South Carolina",
+   "position": "CB",
+   "grade_used": 68.5,
+   "grade_pct": 58.1,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 22.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "carson-williams",
@@ -78622,7 +81472,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Carson Williams",
+   "school": "Indiana",
+   "position": "CB",
+   "grade_used": 68.4,
+   "grade_pct": 56.5,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 20.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jhase-mcmillan",
@@ -78930,7 +81795,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jhase McMillan",
+   "school": "UCLA",
+   "position": "CB",
+   "grade_used": 68.3,
+   "grade_pct": 54.8,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 18.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jonathan-kabeya",
@@ -79263,7 +82143,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jonathan Kabeya",
+   "school": "BYU",
+   "position": "CB",
+   "grade_used": 68.3,
+   "grade_pct": 54.8,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 18.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "deuce-gilbert",
@@ -79557,7 +82452,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Deuce Gilbert",
+   "school": "SMU",
+   "position": "CB",
+   "grade_used": 67.8,
+   "grade_pct": 50.5,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 14.5,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "kenzy-west",
@@ -79835,7 +82745,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Kenzy West",
+   "school": "Houston",
+   "position": "CB",
+   "grade_used": 66.8,
+   "grade_pct": 46.2,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 10.2,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "javen-holmes",
@@ -80113,7 +83038,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Javen Holmes",
+   "school": "Houston",
+   "position": "CB",
+   "grade_used": 66.7,
+   "grade_pct": 44.1,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 8.1,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jamaal-shaw",
@@ -80391,7 +83331,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jamaal Shaw",
+   "school": "Houston",
+   "position": "CB",
+   "grade_used": 65.8,
+   "grade_pct": 36.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 0.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "joseph-smith",
@@ -80667,7 +83622,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Joseph Smith",
+   "school": "Arizona State",
+   "position": "CB",
+   "grade_used": 65.8,
+   "grade_pct": 36.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 0.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "toe-sanders",
@@ -80943,7 +83913,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Toe Sanders",
+   "school": "Iowa State",
+   "position": "CB",
+   "grade_used": 65.8,
+   "grade_pct": 36.0,
+   "price_mid": 108500,
+   "price_pct": 36.0,
+   "steady_value": 0.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.1,
+   "ceiling_value": -19.9,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "ryan-yaites",
@@ -81373,7 +84358,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Ryan Yaites",
+   "school": "TCU",
+   "position": "S",
+   "grade_used": 70.1,
+   "grade_pct": 91.7,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 42.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "isaiah-washington",
@@ -81721,7 +84721,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Isaiah Washington",
+   "school": "LSU",
+   "position": "S",
+   "grade_used": 65.4,
+   "grade_pct": 69.4,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 20.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.7,
+   "ceiling_value": -32.4,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "tylan-wilson",
@@ -82056,7 +85071,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Tylan Wilson",
+   "school": "Texas A&M",
+   "position": "S",
+   "grade_used": 64.0,
+   "grade_pct": 56.5,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 7.4,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.7,
+   "ceiling_value": -32.4,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "blaine-bradford",
@@ -82374,7 +85404,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Blaine Bradford",
+   "school": "Ohio State",
+   "position": "S",
+   "grade_used": 61.2,
+   "grade_pct": 43.5,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": -5.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "chance-collins",
@@ -82690,7 +85735,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Chance Collins",
+   "school": "Texas A&M",
+   "position": "S",
+   "grade_used": 61.1,
+   "grade_pct": 41.7,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": -7.4,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jaylen-moses",
@@ -83270,7 +86330,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Jaylen Moses",
+   "school": "SMU",
+   "position": "S",
+   "grade_used": 77.9,
+   "grade_pct": 97.2,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 48.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "oliver-miles-iii",
@@ -83674,7 +86749,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "value": {
+   "name": "Oliver Miles III",
+   "school": "Texas Tech",
+   "position": "S",
+   "grade_used": 68.4,
+   "grade_pct": 86.1,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 37.0,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "abdul-muhammad",
@@ -84056,7 +87146,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Abdul Muhammad",
+   "school": "SMU",
+   "position": "S",
+   "grade_used": 67.1,
+   "grade_pct": 78.7,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 29.6,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "matthew-mcclain",
@@ -84423,7 +87528,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Matthew McClain",
+   "school": "Iowa State",
+   "position": "S",
+   "grade_used": 66.3,
+   "grade_pct": 73.1,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 24.1,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "jordan-davis",
@@ -84758,7 +87878,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Jordan Davis",
+   "school": "Baylor",
+   "position": "S",
+   "grade_used": 64.7,
+   "grade_pct": 66.7,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 17.6,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.7,
+   "ceiling_value": -32.4,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "trason-richardson",
@@ -85095,7 +88230,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Trason Richardson",
+   "school": "Minnesota",
+   "position": "S",
+   "grade_used": 64.6,
+   "grade_pct": 63.9,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 14.8,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.7,
+   "ceiling_value": -32.4,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "maddox-quiller",
@@ -85430,7 +88580,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Maddox Quiller",
+   "school": "Texas Tech",
+   "position": "S",
+   "grade_used": 64.3,
+   "grade_pct": 61.1,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 12.0,
+   "ceiling_level": "G6 starter",
+   "ceiling_pct": 16.7,
+   "ceiling_value": -32.4,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "braylon-edwards",
@@ -85757,7 +88922,22 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Braylon Edwards",
+   "school": "Colorado",
+   "position": "S",
+   "grade_used": 63.0,
+   "grade_pct": 51.9,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": 2.8,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  },
  {
   "id": "markel-ford",
@@ -86068,6 +89248,21 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter \u00b7 S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "value": {
+   "name": "Markel Ford",
+   "school": "Oklahoma",
+   "position": "S",
+   "grade_used": 61.3,
+   "grade_pct": 45.4,
+   "price_mid": 108500,
+   "price_pct": 49.1,
+   "steady_value": -3.7,
+   "ceiling_level": "G6 all-conference",
+   "ceiling_pct": 54.6,
+   "ceiling_value": 5.6,
+   "nil_low": 17000,
+   "nil_high": 200000
+  }
  }
 ]

@@ -12,6 +12,7 @@
   <div class="wrap topbar-in">
     <a class="brand" href="#/">Player Books</a>
     <span class="tagline">Player evaluation library</span>
+    <a class="topbar-link" href="#/value">Value Board</a>
     <span class="dir-chip" id="dirChip" hidden></span>
     <label class="myteam-lbl">My team
       <select id="myTeamSel" aria-label="My team — the school the site frames itself around"><option value="">No team set</option></select>
@@ -72,6 +73,11 @@
       <span class="cb-desc">Pick one FBS team and see its path: the conference-best standard in every position room, the evaluated players who are getable for that room, and the single best move per room that closes the gap to the standard.</span>
       <span class="choice-go">Open the championship path →</span>
     </a>
+    <a class="compare-banner" href="#/value">
+      <span class="cb-title">Value Board</span>
+      <span class="cb-desc">Every priced player ranked inside his own position — his benchmark grade against his estimated price, in steady and ceiling lenses, with his NIL band printed beside every score.</span>
+      <span class="choice-go">Open the value board →</span>
+    </a>
     <a class="compare-banner" href="#/changes">
       <span class="cb-title">What changed</span>
       <span class="cb-desc">The newest players, books and features, week by week.</span>
@@ -94,7 +100,7 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/changes">What changed</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -275,6 +281,53 @@
     </div>
     <p class="p-sub" style="margin:10px 0 0">The newest players, books and features, week by week — newest first. The pool is re-screened every Tuesday; each week's changes are posted here.</p>
     <div id="changesBody"></div>
+  </section>
+
+  <!-- VALUE BOARD VIEW -->
+  <section id="view-value" hidden>
+    <div class="dir-head">
+      <h1 class="dir-title">Value Board</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/changes">What changed</a></span>
+    </div>
+    <div class="controls card">
+      <div class="row">
+        <div class="lens-switch" role="group" aria-label="Value lens">
+          <button type="button" class="btn-ghost lens-btn" id="valueSteadyBtn">Steady value</button>
+          <button type="button" class="btn-ghost lens-btn" id="valueCeilingBtn">Ceiling value</button>
+        </div>
+        <div class="ms-field">
+          <div class="ms" data-ms="v-pos">
+            <button type="button" class="ms-btn" id="v-pos" aria-haspopup="true" aria-expanded="false">Position <span class="ms-caret">▾</span></button>
+            <div class="ms-panel" hidden>
+              <div class="ms-opts" id="valuePosOpts"></div>
+              <button type="button" class="ms-clear" id="valuePosClear">Clear</button>
+            </div>
+          </div>
+        </div>
+        <span class="result-count" id="valueCount"></span>
+      </div>
+      <p class="p-sub" style="margin:10px 0 0">Every priced player ranked inside his own position pool — one market per position, up and down sides pooled. <b>Steady value</b> is his benchmark grade’s percentile minus his price’s percentile: what he is now against what he costs. <b>Ceiling value</b> swaps the grade for his band ceiling’s percentile; it runs in tie blocks by construction, breaks its ties by the steady score, and should be read beside the steady column, never alone. His actual NIL band prints beside every score — 79 players sit in bands with a $0 floor, where the midpoint price is half the band ceiling and the score runs high on the model’s cheapest cell. The band is the context the score needs. The 83 players with no NIL estimate (pro-only, no destination to price) are not on the board.</p>
+    </div>
+    <div class="card table-card">
+      <table id="valueTable">
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>Player</th>
+            <th>School</th>
+            <th>Pos</th>
+            <th class="num">Benchmark</th>
+            <th>Band ceiling</th>
+            <th class="num">Est. NIL band</th>
+            <th class="num">Steady</th>
+            <th class="num">Ceiling value</th>
+          </tr>
+        </thead>
+        <tbody id="valueBody"></tbody>
+      </table>
+      <p class="empty" id="valueEmpty" hidden>No priced players at the ticked positions.</p>
+    </div>
+    <p class="foot-note" id="valueLabel"></p>
   </section>
 </main>
 

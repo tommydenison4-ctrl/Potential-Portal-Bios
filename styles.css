@@ -13,6 +13,8 @@ a:hover{text-decoration:underline}
 .brand{color:#fff;font-weight:700;font-size:20px;letter-spacing:.2px}
 .brand:hover{text-decoration:none}
 .tagline{color:#cbd5e1;font-size:13px}
+.topbar-link{color:#fff;font-weight:600;font-size:14px;white-space:nowrap}
+.topbar-link:hover{text-decoration:underline}
 .count-chip{margin-left:auto;background:#475569;color:#fff;border-radius:999px;padding:2px 10px;font-size:12.5px}
 .myteam-lbl{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#e2e8f0;white-space:nowrap}
 .myteam-lbl select{font:inherit;font-size:13px;font-weight:500;color:var(--ink);background:#fff;border:1px solid #475569;border-radius:7px;padding:3px 6px;max-width:200px}
@@ -24,6 +26,9 @@ a:hover{text-decoration:underline}
 .controls .checks{margin-top:12px;align-items:center}
 .controls label.check{flex-direction:row;align-items:center;gap:6px;font-size:13.5px;color:var(--ink);font-weight:500}
 .btn-ghost{font:inherit;font-size:13px;background:none;border:1px solid var(--line);border-radius:7px;padding:5px 10px;cursor:pointer;color:var(--accent)}
+.lens-switch{display:inline-flex;gap:8px;align-items:center}
+.lens-btn.on{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+#valueTable td.v-on{font-weight:700}
 /* multi-select filter dropdowns */
 .controls .ms-field{display:flex;flex-direction:column}
 .ms{position:relative}

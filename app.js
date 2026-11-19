@@ -236,7 +236,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -2011,6 +2011,70 @@ function teamCard(t) {
   return h;
 }
 
+/* -------- Value Board (#/value) --------
+   Every priced player (683) ranked inside his position pool by value:
+   steady value = benchmark-grade percentile − price percentile;
+   ceiling value = ceiling-rung percentile − price percentile (the
+   percentile of the band ceiling rung's ladder index inside the pool —
+   no rung-to-grade conversion exists; see VALUE_METHOD.md). Records
+   carry the layer's "value" field (value_join.py, joined from
+   data/value_board.json); the 83 NO ESTIMATE players carry none and
+   are not on the board. Every row prints the player's actual NIL band
+   beside his scores — 79 players sit in $0-floor cells, and a score is
+   never shown without its band. Both scores print under both lenses;
+   the ceiling lens breaks its tie blocks by the steady score. */
+let valueLens = 'steady';            // 'steady' | 'ceiling'
+const valuePosSel = new Set();       // positions ticked on the board (OR within the filter)
+
+const valuePool = () => [...UP, ...DOWN].filter(p => p.value);
+
+function valuePosBtnLabel() {
+  const btn = $('v-pos');
+  if (!btn) return;
+  const n = valuePosSel.size;
+  btn.innerHTML = `Position${n ? ` · ${n}` : ''} <span class="ms-caret">▾</span>`;
+  btn.classList.toggle('ms-on', n > 0);
+}
+
+function buildValuePosPanel() {
+  const box = $('valuePosOpts');
+  if (!box) return;
+  const counts = {};
+  for (const p of valuePool()) counts[p.value.position] = (counts[p.value.position] || 0) + 1;
+  box.innerHTML = Object.keys(counts).sort().map(n =>
+    `<label class="ms-opt"><input type="checkbox" value="${esc(n)}"${valuePosSel.has(n) ? ' checked' : ''}> ${esc(n)} (${counts[n]})</label>`).join('');
+  valuePosBtnLabel();
+}
+
+function renderValue() {
+  const pool = valuePool();
+  const rows = pool.filter(p => !valuePosSel.size || valuePosSel.has(p.value.position));
+  const bySteady = (a, b) => (b.value.steady_value - a.value.steady_value)
+    || (b.value.ceiling_value - a.value.ceiling_value) || a.name.localeCompare(b.name);
+  const byCeiling = (a, b) => (b.value.ceiling_value - a.value.ceiling_value)
+    || (b.value.steady_value - a.value.steady_value) || a.name.localeCompare(b.name);
+  rows.sort(valueLens === 'ceiling' ? byCeiling : bySteady);
+  $('valueCount').textContent = `${rows.length} of ${pool.length} priced players`;
+  $('valueSteadyBtn').classList.toggle('on', valueLens === 'steady');
+  $('valueCeilingBtn').classList.toggle('on', valueLens === 'ceiling');
+  $('valueBody').innerHTML = rows.map((p, i) => {
+    const v = p.value;
+    return `<tr data-id="${esc(p.id)}">
+      <td class="num">${i + 1}</td>
+      <td><a class="pname" href="#/player/${encodeURIComponent(p.id)}">${esc(p.name)}</a></td>
+      <td>${esc(p.school)}</td>
+      <td>${esc(v.position)}</td>
+      <td class="num">${f1(v.grade_used)}</td>
+      <td>${esc(v.ceiling_level)}</td>
+      <td class="num">${fmtMoney(v.nil_low)}–${fmtMoney(v.nil_high)}</td>
+      <td class="num${valueLens === 'steady' ? ' v-on' : ''}">${f1(v.steady_value)}</td>
+      <td class="num${valueLens === 'ceiling' ? ' v-on' : ''}">${f1(v.ceiling_value)}</td>
+    </tr>`;
+  }).join('');
+  $('valueEmpty').hidden = rows.length > 0;
+  $('valueLabel').textContent = NIL_LABEL;
+}
+
 function route() {
   const hash = location.hash || '';
   const cm = hash.match(/^#\/compare\/(.+)$/);
@@ -2098,6 +2162,14 @@ function route() {
     showView('changes');
     $('changesBody').innerHTML = renderChanges();
     document.title = 'What changed — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (hash === '#/value') {
+    setChrome(null);
+    showView('value');
+    renderValue();
+    document.title = 'Value Board — Player Books';
     window.scrollTo(0, 0);
     return;
   }
@@ -2263,6 +2335,24 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     champRestoreScroll = window.scrollY;
     renderChamp();
   });
+  // Value Board: lens switch + position multi-select (the directory's
+  // panel machinery under its own ids, bound like the champ panel)
+  buildValuePosPanel();
+  $('v-pos').addEventListener('click', () => toggleMs('v-pos'));
+  $('valuePosOpts').addEventListener('change', e => {
+    const cb = e.target.closest('input[type=checkbox]');
+    if (!cb) return;
+    if (cb.checked) valuePosSel.add(cb.value); else valuePosSel.delete(cb.value);
+    valuePosBtnLabel();
+    renderValue();
+  });
+  $('valuePosClear').addEventListener('click', () => {
+    valuePosSel.clear();
+    buildValuePosPanel();
+    renderValue();
+  });
+  $('valueSteadyBtn').addEventListener('click', () => { valueLens = 'steady'; renderValue(); });
+  $('valueCeilingBtn').addEventListener('click', () => { valueLens = 'ceiling'; renderValue(); });
   $('playerBody').addEventListener('click', e => {
     const go = e.target.closest('[data-goclass]');
     if (go) { champSel = go.dataset.goclass; champPicked = true; champBtnLabel(); buildChampPanel(); }
