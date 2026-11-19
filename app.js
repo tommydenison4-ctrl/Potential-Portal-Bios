@@ -72,6 +72,73 @@ let traitFlash = false;     // include limited-action flashes in trait filtering
 const traitsOf = p => (p && TRAITS_BY_ID[p.id]) || [];
 const traitEntry = (p, key) => traitsOf(p).find(e => e.key === key) || null;
 
+/* -------- plain-language display map for the skills surfaces --------
+   Presentation only (Tommy, Nov 19, 2026: the readers are coaches, not
+   analysts — "these guys get confused we lose a contract"). The trait
+   machinery is untouched: TRAIT_DISPLAY only renames a trait for print
+   and adds a one-line plain gloss of what it measures. A percentile
+   prints as a "Top X%" headline (X = 100 - pct, clamped to 1..50) with
+   the exact percentile small beside it. */
+const TRAIT_DISPLAY = {
+  btt_rate:      { name: 'Big-time throws', gloss: 'Share of his throws that are big-time throws — the deep, tight-window completions few quarterbacks make.' },
+  passer_rating: { name: 'Passer rating', gloss: 'His passer rating for the season.' },
+  qb_rush_yds:   { name: 'Rushing yards', gloss: 'Yards he gained running the ball himself — designed runs and scrambles.' },
+  yco_per_att:   { name: 'Yards after contact', gloss: 'Yards per carry after the first defender gets a hand on him.' },
+  mtf_rate:      { name: 'Tacklers made to miss', gloss: 'How often he makes a would-be tackler miss, per carry.' },
+  ypc:           { name: 'Yards per carry', gloss: 'What he averages every time he carries the ball.' },
+  ybc_per_att:   { name: 'Yards before contact', gloss: 'Yards per carry before a defender touches him — the room the blocking and the play call give him.' },
+  rb_catches:    { name: 'Catches', gloss: 'Balls he caught out of the backfield.' },
+  rb_targets:    { name: 'Targets', gloss: 'Throws sent his way out of the backfield.' },
+  drop_rate:     { name: 'Drop rate', gloss: 'How rarely he drops a catchable ball — a low drop rate ranks high here.' },
+  ypr:           { name: 'Yards per catch', gloss: 'What he averages every time he catches the ball.' },
+  first_down_rate: { name: 'First-down rate', gloss: 'Share of his catches that move the chains.' },
+  contested_rate: { name: 'Contested-catch rate', gloss: 'How often he wins the ball with a defender right on him.' },
+  contested_catches: { name: 'Contested catches', gloss: 'Catches he made with a defender right on him.' },
+  catches:       { name: 'Catches', gloss: 'Balls he caught this season.' },
+  yac_per_rec:   { name: 'Yards after the catch', gloss: 'Yards he adds after each catch.' },
+  win_rate:      { name: 'Pass-rush win rate', gloss: 'How often he beats his blocker when he rushes the passer.' },
+  pressure_rate: { name: 'Pressure rate', gloss: 'How often his rush hurries, hits or sacks the quarterback.' },
+  sack_share:    { name: 'Sack finish', gloss: 'Share of his pressures that end in a sack — how often he finishes the rush.' },
+  rtg_allowed:   { name: 'Passer rating allowed', gloss: 'The passer rating quarterbacks manage throwing at him — a low number ranks high here.' },
+  comp_allowed:  { name: 'Completions allowed', gloss: 'Share of throws at him that get caught — a low number ranks high here.' },
+  ballhawk_rate: { name: 'Plays on the ball', gloss: 'Interceptions plus pass break-ups, per throw at him.' },
+  finc:          { name: 'Forced incompletions', gloss: 'Throws at him that fall incomplete because of his coverage.' },
+  press_share:   { name: 'Press coverage', gloss: 'Share of his coverage snaps lined up in press, on the receiver at the snap.' },
+  zone_share:    { name: 'Zone-blocking share', gloss: 'Share of his run blocks that come on zone plays — the fit read for a zone-scheme team.' },
+  gap_share:     { name: 'Gap-blocking share', gloss: 'Share of his run blocks that come on gap and power plays — the fit read for a gap-scheme team.' },
+  impact_rblk:   { name: 'Impact blocks', gloss: 'Share of his run blocks that take a defender out of the play.' },
+  rblk_grade:    { name: 'Run-block grade', gloss: 'His overall run-blocking grade for the season.' },
+  pblk_grade:    { name: 'Pass-block grade', gloss: 'His overall pass-blocking grade for the season.' },
+};
+const traitName = e => (TRAIT_DISPLAY[e.key] || {}).name || e.label;
+const traitGloss = e => (TRAIT_DISPLAY[e.key] || {}).gloss || '';
+const TAG_GLOSS = {
+  'Pure Rusher': 'Beats his blocker and pressures the quarterback as well as anyone in his group.',
+  'Speed Rusher': 'A lighter edge rusher who wins with speed off the edge.',
+  'Power Rusher': 'A heavier rusher whose pressures turn into sacks.',
+  'YAC Threat': 'Does the damage after the catch.',
+  'Speed Back': 'Produces before contact — speed through the hole.',
+  'Power Back': 'Gains the hard yards after contact.',
+  'Third-Down Back': 'Catches the ball and holds up in pass protection on passing downs.',
+  'Zone Blocker': 'His run blocking comes in a zone scheme.',
+  'Gap / Power Blocker': 'His run blocking comes in a gap and power scheme.',
+  'Pulling Lineman': 'A guard or tackle who pulls and lands impact blocks on gap runs.',
+  'Coverage': 'Hard to throw on — quarterbacks rate poorly against him.',
+  'Ballhawk': 'Gets his hands on the ball — interceptions and pass break-ups.',
+  'Press / Jam': 'Lines up in press and disrupts the receiver’s release.',
+  'Sure-Handed': 'Almost never drops a catchable ball.',
+  'Vertical Stretch': 'Wins downfield — big yards per catch and first downs.',
+  'Contested Catch': 'Wins the ball with a defender right on him.',
+  'Deep Ball': 'Throws an accurate, dangerous deep ball.',
+  'Dual Threat': 'Hurts teams with his legs as well as his arm.',
+  'Verified Speed': 'Speed backed by an official track time — not a reported forty-yard dash.',
+};
+const GROUP_PLAIN = { QB: 'Quarterbacks', RB: 'Running backs', WR: 'Wide receivers', TE: 'Tight ends', OL: 'Offensive linemen', ED: 'Edge rushers', DI: 'Interior defensive linemen', LB: 'Linebackers', CB: 'Cornerbacks', S: 'Safeties' };
+const groupPlural = g => (GROUP_PLAIN[g] || g).toLowerCase();
+const topShare = pct => Math.min(50, Math.max(1, Math.round(100 - pct)));
+const topHtml = pct => `Top ${topShare(pct)}% <span class="badge-sub">${ord(Math.round(pct))} pct</span>`;
+const flashBadgeHtml = e => `<span class="flash-badge">Limited action — ${esc(traitName(e))} · ${topHtml(e.pct)} · on just ${esc(e.volume)} ${esc(e.volume_label)}</span>`;
+
 /* -------- flash layer ("limited action" skills) --------
    The flash layer (build_flashes.py -> flashes.json) carries the same
    29 traits at roughly half the standard volume floors, strictly for
@@ -86,9 +153,9 @@ const flashesOf = p => (p && FLASHES_BY_ID[p.id]) || [];
 const flashEntry = (p, key) => flashesOf(p).find(e => e.key === key) || null;
 const ord = n => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
 const flashBadges = id => {
-  const fs = flashesOf(byIdAll[id]);
+  const fs = flashesOf(byIdAll[id]).slice().sort((a, b) => b.pct - a.pct);
   if (!fs.length) return '';
-  return ' ' + fs.map(e => `<span class="flash-badge">Limited action — ${esc(e.label)} · ${ord(Math.round(e.pct))} pct · on ${esc(e.volume)} ${esc(e.volume_label)}</span>`).join('');
+  return ' ' + fs.map(flashBadgeHtml).join('');
 };
 
 function passesTraits(p) {
@@ -121,17 +188,21 @@ function buildTraitPanel() {
   const secs = TRAIT_GROUP_ORDER.map(g => {
     const keys = Object.keys(TRAIT_REG).filter(k => (TRAIT_REG[k].groups || []).includes(g));
     if (!keys.length) return '';
-    const rowsHtml = keys.map(k => {
-      const r = TRAIT_REG[k], n = counts[k + '|' + g] || 0, fn = fcounts[k + '|' + g] || 0;
-      return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} in this directory${fn ? ` · ${fn} more on flashes` : ''}</span><input type="number" class="trait-bar" data-trait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}"${n || (traitFlash && fn) ? '' : ' disabled'} aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
-    }).join('');
-    return `<div class="trait-group"><h3 class="trait-gh">${g}</h3>${rowsHtml}</div>`;
+    const rowsHtml = keys
+      .map(k => ({ k, n: counts[k + '|' + g] || 0, fn: fcounts[k + '|' + g] || 0 }))
+      .sort((a, b) => b.n - a.n || b.fn - a.fn || traitName({ key: a.k, label: TRAIT_REG[a.k].label }).localeCompare(traitName({ key: b.k, label: TRAIT_REG[b.k].label })))
+      .map(({ k, n, fn }) => {
+        const r = TRAIT_REG[k], d = TRAIT_DISPLAY[k] || {};
+        const name = d.name || r.label;
+        return `<label class="trait-row"><span class="trait-main"><span class="trait-name">${esc(name)}${r.proxy ? ' <span class="tag-proxy">stand-in stat</span>' : ''}</span>${d.gloss ? `<span class="trait-gloss">${esc(d.gloss)}</span>` : ''}</span><span class="trait-count">${n} ${groupPlural(g)} in this directory show this${fn ? ` · ${fn} more in limited action` : ''}</span><input type="number" class="trait-bar" data-trait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}"${n || (traitFlash && fn) ? '' : ' disabled'} aria-label="Cut-off for ${esc(name)}"></label>`;
+      }).join('');
+    return `<div class="trait-group"><h3 class="trait-gh">${GROUP_PLAIN[g] || g}</h3>${rowsHtml}</div>`;
   }).join('');
   el.innerHTML = `<div class="card trait-card">
-    <h2 class="sec" style="margin-top:2px">Skill traits — percentile bars</h2>
-    <p class="p-sub">Set a percentile bar on any trait and the directory keeps only the players whose trait sits at or above it in his level-and-position pool. A player with no entry for a set trait is below its volume floor and drops out. Bars combine: every set bar applies at once. A trait marked <b>proxy</b> is measured through a stand-in stat, as on the archetype tags.</p>
-    <label class="check trait-lean"><input type="checkbox" id="t-lean"${valueLean ? ' checked' : ''}> <span><b>Value lean</b> — with the lean on, a set trait only counts when it sits at the 60th percentile or better <b>and</b> runs at least 30 points ahead of his price percentile in his position pool: a real skill, bought cheap. Players with no NIL price can’t carry the lean and drop out while it’s on.</span></label>
-    <label class="check trait-lean"><input type="checkbox" id="t-flash"${traitFlash ? ' checked' : ''}> <span><b>Include limited-action flashes</b> — with this on, a player below a trait’s volume floor can still clear its bar on a <b>flash</b>: the same trait, the same pool, at a lower floor, printed red with its sample size wherever it shows. Off (the standard behaviour), only full-volume trait entries count.</span></label>
+    <h2 class="sec" style="margin-top:2px">Skills — filter by what he does best</h2>
+    <p class="p-sub"><b>How the bars work:</b> type a number in a bar to keep only the players in that top slice for the skill — 75 keeps the top quarter, 90 keeps the top tenth, 50 keeps the top half. A player has to clear every bar you set, and he only counts under a skill once he has enough plays on record for it. Skills marked <b>stand-in stat</b> are read off a related stat rather than measured directly.</p>
+    <label class="check trait-lean"><input type="checkbox" id="t-lean"${valueLean ? ' checked' : ''}> <span><b>Value lean</b> — only keep players whose skill outruns their price: the skill has to sit in the <b>top 40%</b> at his position <b>and</b> run at least 30 points ahead of where his price ranks in his position group — a real skill, bought cheap. Players with no NIL price can’t carry the lean and drop out while it’s on.</span></label>
+    <label class="check trait-lean"><input type="checkbox" id="t-flash"${traitFlash ? ' checked' : ''}> <span><b>Include limited-action flashes</b> — also count skills that showed up on a smaller run of plays; they print red, with the number of plays on them, wherever they show. A player short on plays can clear a bar this way. Off, only full-sample skills count.</span></label>
     ${secs}</div>`;
   el.querySelectorAll('.trait-bar').forEach(inp => inp.addEventListener('input', () => {
     const v = parseFloat(inp.value);
@@ -435,6 +506,9 @@ const FILTER_DEFS = [
   { id: 'f-elig', name: 'Eligibility (qualified)',
     values: () => ['Eligible', 'Not eligible', 'Unsettled'],
     test: (p, set) => !set.size || set.has(p.elig_qualified) },
+  { id: 'f-offer', name: 'Offer',
+    values: () => ['NIL', 'Scholarship only', 'Walk-on'],
+    test: (p, set) => !set.size || offerMatches(p, set) },
   { id: 'f-arch', name: 'What he does best',
     values: () => [...new Set(PLAYERS.flatMap(p => tagsOf(p).map(t => t.tag)))].sort(),
     label: v => `${v} (${PLAYERS.reduce((n, p) => n + (tagsOf(p).some(t => t.tag === v) ? 1 : 0), 0)})`,
@@ -459,6 +533,7 @@ function buildFilterPanels() {
       `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${filterSel[def.id].has(v) ? ' checked' : ''}> ${esc(def.label ? def.label(v) : v)}</label>`).join('');
     updateMsButton(def);
   });
+  syncOfferNote();
 }
 
 function clearFilter(id) {
@@ -585,6 +660,80 @@ function fitsMyTeam(p, teamName) {
   if (f.ulm_fit && f.ulm_fit.school === teamName) return true;
   if (teamName === 'Louisiana-Monroe' && f.ulm_qualifier) return true;
   return [...(f.g6 || []), ...(f.p4 || []), ...(f.depth_g6 || []), ...(f.depth_p4 || [])].some(r => r.school === teamName);
+}
+
+/* -------- offer tiers on fits (Tommy, Nov 19, 2026) --------
+   Every fit row carries move (Up / Lateral / Down, against the
+   player's current level) and offer — the offer the school should
+   make on that fit: "NIL" (his band applies), "Scholarship only",
+   or "Walk-on" (a defined tier that activates only with FCS
+   destination rooms; no FBS fit carries it yet). The stamps are
+   computed by apply_fits_levels_join.py; the rule is stated in
+   portal_scouting/nil_layer/VALUE_METHOD.md and on the player-page
+   fits intro. No dollar amount ever attaches to Scholarship only —
+   the tier's job is to be filtered on, and to price at $0 in the
+   class builder and Budget Report. */
+const LVL_RANK = { FCS: 0, G6: 1, P4: 2 };
+function offerTierAt(p, teamName) {
+  const f = p && p.fits;
+  if (!f || !teamName) return null;
+  if (f.ulm_fit && f.ulm_fit.school === teamName) return f.ulm_fit.offer || 'NIL';
+  for (const r of [...(f.g6 || []), ...(f.p4 || [])])
+    if (r.school === teamName) return r.offer || 'NIL';
+  for (const r of [...(f.depth_g6 || []), ...(f.depth_p4 || [])])
+    if (r.school === teamName) return r.offer || null;
+  return null;
+}
+/* The Offer filter (directories + Prototype): with My Team set, the
+   tier AT that school decides; without it, any fit at a ticked tier
+   anywhere matches. syncOfferNote keeps the active reading printed
+   beside the control so the list is never misread. */
+function offerMatches(p, set) {
+  if (!set.size) return true;
+  if (myTeam) {
+    const t = offerTierAt(p, myTeam);
+    return t != null && set.has(t);
+  }
+  const f = p.fits || {};
+  const rows = [...(f.g6 || []), ...(f.p4 || []), ...(f.depth_g6 || []), ...(f.depth_p4 || [])];
+  if (f.ulm_fit) rows.push(f.ulm_fit);
+  return rows.some(r => r.offer && set.has(r.offer));
+}
+function syncOfferNote() {
+  const txt = myTeam
+    ? `Offer reads at ${myTeam} — the offer your school would make him on his fit there.`
+    : 'Offer reads anywhere — a player matches when any school he fits would make him that offer. Set “My team” in the bar above to read the offer at your school.';
+  const n = $('offerModeNote'); if (n) n.textContent = txt;
+  const pn = $('p-offer-note'); if (pn) pn.textContent = txt;
+}
+/* The offer tier of a championship avail/getable entry at a team,
+   read off the player's fit rows at that school. Where he carries
+   no fit row there: a getable entry's starter flag marks the
+   starter tier ("NIL") and a depth entry falls back to the stamped
+   rule applied from his band; an entry with neither prices from his
+   band as before (null tier). */
+function offerTierForEntry(e, teamName) {
+  const p = byIdAll[e.id];
+  const t = p ? offerTierAt(p, teamName) : null;
+  if (t) return t;
+  if (e.nil_status !== 'priced') return null;
+  if (e.starter) return 'NIL';
+  if (e.starter == null) return null;
+  const team = (CHAMP && CHAMP.teams.find(x => x.name === teamName))
+    || (TEAMS && TEAMS.teams.find(x => x.name === teamName));
+  const dest = team && team.level;
+  const bandLvl = p && p.nil_level;
+  if (e.nil_floor === 0) return 'Scholarship only';
+  if (bandLvl && dest && LVL_RANK[dest] < LVL_RANK[bandLvl]) return 'Scholarship only';
+  return 'NIL';
+}
+const isScholarshipTier = t => t === 'Scholarship only' || t === 'Walk-on';
+/* Price of an avail/getable entry at a team and mark: a
+   scholarship-tier add is not an NIL spend — $0 at every mark. */
+function tierPrice(e, hit, teamName) {
+  const tier = offerTierForEntry(e, teamName);
+  if (isScholarshipTier(tier)) return { price: 0, tier };
+  return { price: hitPrice(e, hit), tier };
 }
 
 function currentFilters() {
@@ -781,10 +930,18 @@ function logoImg(r) {
   return r && r.logo ? `<img class="fit-logo" src="logos/${esc(r.logo)}" alt="">` : '';
 }
 
+/* The offer on a fit row: NIL prints plain (his band applies);
+   Scholarship only and Walk-on print bold — they are the tiers a
+   coach filters for, and neither ever carries a dollar figure. */
+const offerCell = r => r.offer === 'Scholarship only' ? '<b>Scholarship only</b>'
+  : r.offer === 'Walk-on' ? '<b>Walk-on</b>'
+  : r.offer ? esc(r.offer) : '';
+const moveCell = r => r.move ? esc(r.move) : '';
+
 function fitsTable(title, rows) {
   if (!rows || !rows.length) return '';
-  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th></tr>
-    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr>
+    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
 }
 
 /* Depth-tier fits (Tommy, Nov 19, 2026): the rooms whose lowest
@@ -797,23 +954,32 @@ function fitsTable(title, rows) {
    a grade. */
 function fitsDepthTable(title, rows) {
   if (!rows || !rows.length) return '';
-  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest graded man in the room</th><th class="num">His grade</th></tr>
-    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_ungraded ? 'no grade on record' : r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest graded man in the room</th><th class="num">His grade</th><th>Move</th><th>Offer</th></tr>
+    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_ungraded ? 'no grade on record' : r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
 }
 
 /* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
    archetype tags and his strongest standard traits in the standard
    styling, his flashes beside them in red — each flash labelled
-   "Limited action" with its percentile and its sample volume. */
+   "Limited action" with its sample volume printed. Plain-language
+   pass (Nov 19, 2026): one explainer line up top, percentiles print
+   as "Top X%" headlines with the exact percentile small beside them,
+   and every pill shown gets a one-line plain gloss underneath. */
 function skillsStrip(p) {
   const tags = tagsOf(p);
   const traits = traitsOf(p).slice().sort((a, b) => b.pct - a.pct).slice(0, 4);
-  const flashes = flashesOf(p);
+  const flashes = flashesOf(p).slice().sort((a, b) => b.pct - a.pct);
   if (!tags.length && !traits.length && !flashes.length) return '';
-  const tagHtml = tags.map(t => `<span class="tag-badge${t.proxy ? ' proxy' : ''}">${esc(t.tag)}${t.proxy ? ' · proxy' : ''}</span>`).join('');
-  const traitHtml = traits.map(e => `<span class="trait-badge">${esc(e.label)} · ${ord(Math.round(e.pct))} pct</span>`).join('');
-  const flashHtml = flashes.map(e => `<span class="flash-badge">Limited action — ${esc(e.label)} · ${ord(Math.round(e.pct))} pct · on ${esc(e.volume)} ${esc(e.volume_label)}</span>`).join('');
-  return `<div class="skills-strip"><span class="skills-label">Skills</span>${tagHtml}${traitHtml}${flashHtml}</div>`;
+  const tagHtml = tags.map(t => `<span class="tag-badge${t.proxy ? ' proxy' : ''}">${esc(t.tag)}${t.proxy ? ' · stand-in' : ''}</span>`).join('');
+  const traitHtml = traits.map(e => `<span class="trait-badge">${esc(traitName(e))} · ${topHtml(e.pct)}</span>`).join('');
+  const flashHtml = flashes.map(flashBadgeHtml).join('');
+  const glossLine = (name, gloss) => gloss ? `<span class="skills-gloss"><b>${esc(name)}</b> — ${esc(gloss)}</span>` : '';
+  const glosses = [
+    ...tags.map(t => glossLine(t.tag, TAG_GLOSS[t.tag])),
+    ...traits.map(e => glossLine(traitName(e), traitGloss(e))),
+    ...flashes.map(e => glossLine(traitName(e), traitGloss(e))),
+  ].filter(Boolean).join('');
+  return `<div class="skills-strip"><span class="skills-label">Skills — what he does best</span><p class="skills-explainer">Every skill is measured against the other players at his position and his level in this library — “Top 10%” means he sits in the best tenth of that group. Red skills showed up in limited action: the number is real, the sample is small, and the sample is printed on the pill.</p><div class="skills-pills">${tagHtml}${traitHtml}${flashHtml}</div>${glosses ? `<div class="skills-glosses">${glosses}</div>` : ''}</div>`;
 }
 
 const PRO_LADDER = ['No verified look', 'Showcase invite', 'Signed', 'Practice squad', 'Roster appearance', 'NFL starter'];
@@ -882,12 +1048,27 @@ function buildMyTeamSelect() {
 }
 function syncMyTeamToggle() {
   const wrap = $('f-myteam-wrap'), hint = $('f-myteam-hint'), cb = $('f-myteam'), nm = $('f-myteam-name');
-  if (!wrap || !cb) return;
-  const on = !!myTeam;
-  wrap.hidden = !on;
-  if (hint) hint.hidden = on;
-  if (nm) nm.textContent = on ? `— ${myTeam}` : '';
-  if (!on && cb.checked) { cb.checked = false; if (curDir) applyFilters(); }
+  if (wrap && cb) {
+    const on = !!myTeam;
+    wrap.hidden = !on;
+    if (hint) hint.hidden = on;
+    if (nm) nm.textContent = on ? `— ${myTeam}` : '';
+    if (!on && cb.checked) { cb.checked = false; if (curDir) applyFilters(); }
+  }
+  syncSplashTeam();
+}
+/* the landing page's slim My Team line: names the school when one is
+   set (with its championship path), otherwise invites setting it */
+function syncSplashTeam() {
+  const nm = $('splashTeamName'), link = $('splashTeamLink');
+  if (!nm || !link) return;
+  if (myTeam) {
+    nm.textContent = `Your team — ${myTeam}.`;
+    link.hidden = false;
+  } else {
+    nm.textContent = 'Set “My team” in the bar above and the site frames itself around your school.';
+    link.hidden = true;
+  }
 }
 function setMyTeam(name) {
   myTeam = name && CHAMP && CHAMP.teams.some(t => t.name === name) ? name : null;
@@ -895,6 +1076,7 @@ function setMyTeam(name) {
   const sel = $('myTeamSel');
   if (sel) sel.value = myTeam || '';
   syncMyTeamToggle();
+  syncOfferNote();
   const hash = location.hash || '';
   if (hash.startsWith('#/player/')) route();   // re-render so the For card and the save default apply
   else if ((hash === '#/up' || hash === '#/down') && $('f-myteam') && $('f-myteam').checked) applyFilters();
@@ -1074,10 +1256,12 @@ function renderPlayer(p) {
 
   if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit || (p.fits.depth_g6 && p.fits.depth_g6.length) || (p.fits.depth_p4 && p.fits.depth_p4.length))) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Fits — rooms he would upgrade</h2>
-      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room without clearing its top man — the bottom player is replaceable whatever his snap count, and where the room's bottom man has no grade on record the row says so.</p>` : ''}
+      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room without clearing its top man — the bottom player is replaceable whatever his snap count, and where the room's bottom man has no grade on record the row says so.</p>
+      <p class="p-sub">Every row also carries the <b>move</b> it is from where he plays now — Up, Lateral or Down — and the <b>offer</b> the school should make on that fit. The offer rule: on a starter-tier fit his NIL band applies. On a depth-tier fit the offer is <b>Scholarship only</b> where no NIL is projected for him there — his band floor is $0, or the school sits below the level his band prices — and his NIL band otherwise. <b>Walk-on</b> is the tier below scholarship only; it applies to FCS rooms and arrives with the FCS books' site integration, so no fit here carries it yet.</p>
+      ${p.direction === 'down' ? `<p class="p-sub">His P4 fits are read off his headline grade, ${Number(p.headline_grade).toFixed(1)} — same level, no translation adjustment.</p>` : ''}` : ''}
       ${fitsTable('Top G6 fits', p.fits.g6)}
       ${fitsTable(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits', p.fits.p4)}
-      ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td></tr></table></div>` : ''}
+      ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td><td>${moveCell(p.fits.ulm_fit)}</td><td>${offerCell(p.fits.ulm_fit)}</td></tr></table></div>` : ''}
       ${fitsDepthTable('Also improves the depth at — G6', p.fits.depth_g6)}
       ${fitsDepthTable('Also improves the depth at — P4', p.fits.depth_p4)}
     </div>`;
@@ -1993,8 +2177,8 @@ function budgetModel(t, m) {
       ? Math.round(Math.max(0, x.bar - x.inc) * 10) / 10 : null;
     let cheapest = null;
     for (const c of getable) {
-      const price = hitPrice(c, hit);
-      if (price != null && (!cheapest || price < cheapest.price)) cheapest = { c, price };
+      const tp = tierPrice(c, hit, t.name);
+      if (tp.price != null && (!cheapest || tp.price < cheapest.price)) cheapest = { c, price: tp.price, tier: tp.tier };
     }
     return { g: x.g, x, gapPts, getable, cheapest,
              fixable: gapPts != null && gapPts > 0 && getable.length > 0 };
@@ -2008,13 +2192,15 @@ function budgetModel(t, m) {
     const picks = [], skipped = [];
     for (const r of ranked) {
       if (!r.fixable || doneRooms.has(r.g)) continue;
-      const pick = r.getable.find(c => !usedIds.has(c.id) && hitPrice(c, hit) <= remaining);
+      const pick = r.getable.find(c => !usedIds.has(c.id) && (tierPrice(c, hit, t.name).price ?? Infinity) <= remaining);
       if (pick) {
-        const price = hitPrice(pick, hit);
-        picks.push({ g: r.g, c: pick, price, floor: pick.nil_floor, ceiling: pick.nil_ceiling });
+        const tp = tierPrice(pick, hit, t.name);
+        picks.push({ g: r.g, c: pick, price: tp.price, tier: tp.tier,
+                     floor: isScholarshipTier(tp.tier) ? 0 : pick.nil_floor,
+                     ceiling: isScholarshipTier(tp.tier) ? 0 : pick.nil_ceiling });
         usedIds.add(pick.id);
         doneRooms.add(r.g);
-        remaining -= price;
+        remaining -= tp.price;
       } else skipped.push(r.g);
     }
     return { budget, picks, skipped,
@@ -2058,7 +2244,7 @@ function renderBudgetReport(t, m) {
     }
     const c = r.cheapest.c;
     return `<a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}${c.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}
-      <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b> · <b>${fmtMoney(r.cheapest.price)}</b> at ${esc(mark)}</span>
+      <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b> · ${isScholarshipTier(r.cheapest.tier) ? `<b>${esc(r.cheapest.tier)}</b> — no NIL spend` : `<b>${fmtMoney(r.cheapest.price)}</b> at ${esc(mark)}`}</span>
       <br><span class="p-sub">Band ${nilRange(c)} a year</span>${r.x.atBar ? '<br><span class="p-sub">This room is already at the standard — no fix needed; this is its cheapest getable player.</span>' : ''}`;
   };
   const rows = bm.ranked.map(r => {
@@ -2080,7 +2266,7 @@ function renderBudgetReport(t, m) {
       <td><a href="#/player/${esc(encodeURIComponent(p.c.id))}"><span class="pname">${esc(p.c.name)}</span></a>${p.c.hv ? '<span class="hv">Hidden Value</span>' : ''}
       <br><span class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in the room · ${pairText({ off: p.off, worth: p.worth })}</span></td>
       <td>${esc(p.c.school)}</td><td class="num"><b>${f1(p.c.benchmark)}</b></td>
-      <td class="num"><b>${fmtMoney(p.price)}</b></td><td>${nilRange(p.c)}</td></tr>`;
+      <td class="num"><b>${isScholarshipTier(p.tier) ? esc(p.tier) : fmtMoney(p.price)}</b></td><td>${nilRange(p.c)}</td></tr>`;
     }).join('');
     return `<div class="budget-block" data-budget="${k.budget}">
       <h3 class="sub-h">${fmtMoney(k.budget)} class — ${k.picks.length} fix${k.picks.length > 1 ? 'es' : ''}</h3>
@@ -2103,7 +2289,7 @@ function renderBudgetReport(t, m) {
     <h3 class="sub-h" style="margin-top:16px">Three classes, built to a budget</h3>
     <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Each pick also pushes the bottom man in that room off — the path works from the bottom of the room up toward its median, the bottom player is replaceable whatever his snap count, and a man with no grade on record is the first to fall off; the pick’s worth, printed on his row, is his benchmark minus the replaced man’s grade, and no point-worth is claimed against an ungraded man. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
     ${bm.classes.map(classBlock).join('')}
-    <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume — the depth test still applies to the room, so a fix can be named for it. <b>Getable</b> is the depth test under the path replacement doctrine: the path works from the bottom of the room up toward its median, so an evaluated player with eligibility remaining is getable when his benchmark beats the room’s lowest-graded man — the bottom player is replaceable whatever his snap count — or when he slots into the room above a man with no grade on record, who is the first to fall off; a fix marked “Beats your starter” also clears the room’s top man. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
+    <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume — the depth test still applies to the room, so a fix can be named for it. <b>Getable</b> is the depth test under the path replacement doctrine: the path works from the bottom of the room up toward its median, so an evaluated player with eligibility remaining is getable when his benchmark beats the room’s lowest-graded man — the bottom player is replaceable whatever his snap count — or when he slots into the room above a man with no grade on record, who is the first to fall off; a fix marked “Beats your starter” also clears the room’s top man. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Scholarship only:</b> a fix whose offer at this school is Scholarship only is not an NIL spend — it prints the label instead of a price and counts $0 in every class total at every mark. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
   </div>`;
 }
 
@@ -2220,19 +2406,22 @@ function hitPrice(e, hit) {
 }
 function classTotals() {
   const idx = availIdx();
-  let spend = 0, floor = 0, ceiling = 0, priced = 0, n = 0;
+  let spend = 0, floor = 0, ceiling = 0, priced = 0, n = 0, sch = 0;
   for (const [id, c] of Object.entries(champClass)) {
     const e = idx[id]; if (!e) continue;
     n++;
+    /* a scholarship-tier add at this school is not an NIL spend:
+       $0 to the spend and to both bounds, at every mark */
+    if (isScholarshipTier(offerTierForEntry(e, champClassTeam))) { sch++; continue; }
     const p = hitPrice(e, c.hit);
     if (p != null) { priced++; spend += p; floor += e.nil_floor; ceiling += e.nil_ceiling; }
   }
-  return { n, priced, spend, floor, ceiling };
+  return { n, priced, spend, floor, ceiling, sch };
 }
 function updateClassTotals() {
   const ct = classTotals();
   const s = $('classSpend'), b = $('classBounds');
-  if (s) s.textContent = ct.priced ? fmtMoney(ct.spend) : '—';
+  if (s) s.textContent = (ct.priced || ct.sch) ? fmtMoney(ct.spend) : '—';
   if (b) b.textContent = ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : '';
 }
 function syncHitRow(id, sliderEl) {
@@ -2360,7 +2549,7 @@ function classEmailText(t, m, ct, eff, lines) {
     '',
     ...lines,
     '',
-    ct.priced ? `Class spend at your marks: ${fmtMoney(ct.spend)} a year (${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling)${ct.priced < ct.n ? ` · ${ct.n - ct.priced} player(s) with no estimate, not counted` : ''}` : 'Class spend: no priced players.',
+    (ct.priced || ct.sch) ? `Class spend at your marks: ${fmtMoney(ct.spend)} a year (${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling)${ct.sch ? ` · ${ct.sch} add(s) at Scholarship only — $0 NIL, not counted in the spend` : ''}${ct.n - ct.priced - ct.sch > 0 ? ` · ${ct.n - ct.priced - ct.sch} player(s) with no estimate, not counted` : ''}` : 'Class spend: no priced players.',
     eff ? `Path with this class: ${eff.atAfter} of ${m.rooms.length} rooms at the conference standard (today ${m.atNow}) · ${f1(eff.points)} grade points to the standard (today ${f1(m.points)}).` : '',
     shareUrl ? `Open this class live: ${shareUrl}` : '',
     '',
@@ -2481,7 +2670,7 @@ function classBoardCanvas() {
   const effLines = effLine ? wrapLines(pctx, effLine, MAXW) : [];
   pctx.font = `10.5px ${FONT}`;
   const footLines = wrapLines(pctx, NIL_LABEL, MAXW);
-  const totalsH = 36 + (snap.ct.priced ? 18 : 0) + effLines.length * 18;
+  const totalsH = 36 + ((snap.ct.priced || snap.ct.sch) ? 18 : 0) + effLines.length * 18;
   const tY = 116 + snap.items.length * ROWH;
   const H = tY + totalsH + 22 + footLines.length * 14 + 12;
   const S = 2;
@@ -2503,18 +2692,18 @@ function classBoardCanvas() {
     ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
     ctx.fillText(fitLine(ctx, `${it.g} · ${it.school} · benchmark ${f1(it.benchmark)} · slots #${it.rank} of ${it.of} in this room`, MAXW), PAD, y + 19);
     ctx.fillStyle = '#1e293b';
-    ctx.fillText(fitLine(ctx, it.price != null ? `Priced at ${hitLabel(it.hit)} — ${fmtMoney(it.price)} a year · band ${it.band}` : 'Est. NIL — no estimate (not counted in the spend)', MAXW), PAD, y + 38);
+    ctx.fillText(fitLine(ctx, it.tier ? `${it.tier} — no NIL spend at this school` : it.price != null ? `Priced at ${hitLabel(it.hit)} — ${fmtMoney(it.price)} a year · band ${it.band}` : 'Est. NIL — no estimate (not counted in the spend)', MAXW), PAD, y + 38);
     y += ROWH;
     ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(PAD, y - 12); ctx.lineTo(W - PAD, y - 12); ctx.stroke();
   }
   ctx.fillStyle = '#f8fafc'; ctx.fillRect(PAD - 8, tY, MAXW + 16, totalsH);
   ctx.fillStyle = '#1e293b'; ctx.font = `700 14.5px ${FONT}`;
-  ctx.fillText(snap.ct.priced ? `Class spend at your marks: ${fmtMoney(snap.ct.spend)} a year` : 'Class spend: no priced players.', PAD, tY + 24);
+  ctx.fillText((snap.ct.priced || snap.ct.sch) ? `Class spend at your marks: ${fmtMoney(snap.ct.spend)} a year` : 'Class spend: no priced players.', PAD, tY + 24);
   let ly = tY + 24;
-  if (snap.ct.priced) {
+  if (snap.ct.priced || snap.ct.sch) {
     ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
     ly += 18;
-    ctx.fillText(fitLine(ctx, `${fmtMoney(snap.ct.floor)} at everyone's floor · ${fmtMoney(snap.ct.ceiling)} at everyone's ceiling · ${snap.ct.n} player${snap.ct.n > 1 ? 's' : ''}${snap.ct.priced < snap.ct.n ? ` · ${snap.ct.n - snap.ct.priced} with no estimate, not counted` : ''}`, MAXW), PAD, ly);
+    ctx.fillText(fitLine(ctx, `${snap.ct.priced ? `${fmtMoney(snap.ct.floor)} at everyone's floor · ${fmtMoney(snap.ct.ceiling)} at everyone's ceiling · ` : ''}${snap.ct.n} player${snap.ct.n > 1 ? 's' : ''}${snap.ct.sch ? ` · ${snap.ct.sch} at Scholarship only — $0 NIL` : ''}${snap.ct.n - snap.ct.priced - snap.ct.sch > 0 ? ` · ${snap.ct.n - snap.ct.priced - snap.ct.sch} with no estimate, not counted` : ''}`, MAXW), PAD, ly);
   }
   ctx.fillStyle = '#1e293b'; ctx.font = `12.5px ${FONT}`;
   for (const L of effLines) { ly += 18; ctx.fillText(L, PAD, ly); }
@@ -2607,21 +2796,25 @@ function renderClassBoard(t, m) {
   for (const g of CHAMP.meta.groups) {
     for (const { e, hit } of byGroup[g] || []) {
       const s = slotIn((t.rooms[g] || {}).roster || [], e.benchmark);
-      const price = hitPrice(e, hit);
-      lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${pairTextPlain(pairings.get(e.id))} — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
-      items.push({ name: e.name, g, school: e.school, benchmark: e.benchmark, rank: s.rank, of: s.of, price, hit, band: price != null ? nilRange(e) : null, hv: !!e.hv, down: e.dir === 'down' });
+      const tier = offerTierForEntry(e, t.name);
+      const schTier = isScholarshipTier(tier);
+      const price = schTier ? 0 : hitPrice(e, hit);
+      lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${pairTextPlain(pairings.get(e.id))} — ${schTier ? `${tier} at ${t.name} — no NIL spend` : price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
+      items.push({ name: e.name, g, school: e.school, benchmark: e.benchmark, rank: s.rank, of: s.of, price, hit, tier: schTier ? tier : null, band: price != null ? nilRange(e) : null, hv: !!e.hv, down: e.dir === 'down' });
       rows += `<div class="class-row">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>
           <span class="room-tag">${esc(g)}</span>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}
           <br><span class="p-sub">${esc(e.school)} · benchmark <b>${f1(e.benchmark)}</b> · slots <b>#${s.rank} of ${s.of}</b> in this room</span>
           <br><span class="p-sub">${pairText(pairings.get(e.id))}</span>
-          <br><span class="p-sub">${price != null ? `Est. NIL ${nilRange(e)} a year` : 'Est. NIL — no estimate (not counted in the spend)'}</span>
+          ${schTier ? `<br><span class="p-sub">${nilRange(e) ? `Est. NIL ${nilRange(e)} a year — ` : ''}<b>${esc(tier)}</b> at ${esc(t.name)}: no NIL spend here</span>
+          <span class="hit-print">${esc(tier)} — no NIL spend</span>`
+          : `<br><span class="p-sub">${price != null ? `Est. NIL ${nilRange(e)} a year` : 'Est. NIL — no estimate (not counted in the spend)'}</span>
           ${price != null ? `<span class="hit-ctl"><span class="hit-chips">${HIT_STOPS.map(([v, lab]) =>
             `<button type="button" class="hit-chip${Math.abs(hit - v) < 0.001 ? ' on' : ''}" data-hitpid="${esc(e.id)}" data-hitval="${v}">${lab}</button>`).join('')}</span>
           <input type="range" class="hit-range" min="0" max="100" step="5" value="${Math.round(hit * 100)}" data-hitrange="${esc(e.id)}" aria-label="Where ${esc(e.name)} lands between floor and ceiling">
           <b class="hit-price" id="hitprice-${esc(e.id)}">${fmtMoney(price)}</b></span>
-          <span class="hit-print">Priced at ${esc(hitLabel(hit))} — ${fmtMoney(price)} a year</span>` : ''}
+          <span class="hit-print">Priced at ${esc(hitLabel(hit))} — ${fmtMoney(price)} a year</span>` : ''}`}
         </div>
         <button type="button" class="btn-remove" data-remove="${esc(e.id)}" aria-label="Remove ${esc(e.name)} from the class">✕</button>
       </div>`;
@@ -2661,9 +2854,9 @@ function renderClassBoard(t, m) {
       </div>
     </div>` : ''}
     ${ct.n ? `<div class="class-list">${rows}</div>
-    <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
+    <p class="class-totals">Class spend at your marks: <b id="classSpend">${(ct.priced || ct.sch) ? fmtMoney(ct.spend) : '—'}</b> a year
       <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
-      <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.priced < ct.n ? ` · ${ct.n - ct.priced} with no estimate, not counted` : ''}</span></p>
+      <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.sch ? ` · ${ct.sch} at Scholarship only — no NIL spend` : ''}${ct.n - ct.priced - ct.sch > 0 ? ` · ${ct.n - ct.priced - ct.sch} with no estimate, not counted` : ''}</span></p>
     <p class="p-sub">Points gained over the players replaced: <b>${fmtWorth(worthTotal)} pts</b> in total — each saved player’s benchmark against the man he pushes off the bottom of his room, named on his row; the pairing works from the bottom of the room up, snaps aside.${ungradedPairs.length ? ` ${ungradedPairs.length} pairing${ungradedPairs.length > 1 ? 's replace' : ' replaces'} a man with no grade on record (${ungradedPairs.map(esc).join('; ')}) — no point-worth is claimed for ${ungradedPairs.length > 1 ? 'those' : 'that'} pairing${ungradedPairs.length > 1 ? 's' : ''}, and the total above sums the graded pairings only.` : ''}${unpairedN ? ` ${unpairedN} saved player${unpairedN > 1 ? 's have' : ' has'} no player left to fall off and count${unpairedN > 1 ? '' : 's'} as no gain.` : ''}</p>
     <p class="p-sub">With this class: <b>${eff.atAfter} of ${m.rooms.length} rooms at the standard</b> (today: ${m.atNow}) · <b>${f1(eff.points)} grade points to the standard</b> (today: ${f1(m.points)}). Read the same way as the path summary above — a room counts when its projected top grade, the better of the incumbent and your best class benchmark in it, reaches the conference-best standard.</p>`
     : '<p class="p-sub class-empty">No players saved yet — drag a player here, use his Save button below, or save him from his player page.</p>'}
@@ -2774,7 +2967,7 @@ function teamCard(t) {
       <p class="p-sub">${esc(t.conf)} · ${esc(t.level)}</p>
       <p class="p-sub">${roomsWith} of ${TEAMS.meta.groups.length} rooms have a volume-qualified incumbent in the pool snapshot${roomsBelow ? ` · ${roomsBelow} carried below the bar by the top player by volume` : ''} · ${totalCand} evaluated players clear one of its bars</p>
     </div></div>
-    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps). A room with no qualified player is <b>carried by its top player by volume</b>, flagged with an asterisk and his volume against the bar — his gaps print, but no candidates are named for that room. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players from the nine books whose benchmark — headline grade plus the position’s translation delta — beats the incumbent: the same strict test the books print.')}
+    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps). A room with no qualified player is <b>carried by its top player by volume</b>, flagged with an asterisk and his volume against the bar — his gaps print, but no candidates are named for that room. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players — the nine conference books and the P4 Down book — who clear the room under the depth test: his benchmark beats the room’s lowest-graded man, and a candidate flagged as beating the incumbent also clears the room’s top man. A P4 Down player’s benchmark is his headline grade at a P4 room (same level, no translation adjustment) and his projected grade at a G6 room.')}
     <div class="team-sort"><span class="kv">Room order</span>
       <button type="button" class="btn-ghost${teamOrder === 'position' ? ' on' : ''}" data-torder="position">Position</button>
       <button type="button" class="btn-ghost${teamOrder === 'priority' ? ' on' : ''}" data-torder="priority">Upgrade priority</button>
@@ -3074,12 +3267,18 @@ function buildProtoTraits() {
   const pool = [...UP, ...DOWN].filter(p => (p.screen_position || p.position) === pos);
   const keys = Object.keys(TRAIT_REG).filter(k => (TRAIT_REG[k].groups || []).includes(pos));
   if (!keys.length) { el.innerHTML = '<p class="p-sub">No skill traits at this position.</p>'; return; }
-  el.innerHTML = keys.map(k => {
-    const r = TRAIT_REG[k];
-    const n = pool.reduce((acc, p) => acc + (traitEntry(p, k) ? 1 : 0), 0);
-    const fn = pool.reduce((acc, p) => acc + (flashEntry(p, k) ? 1 : 0), 0);
-    return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} carriers${fn ? ` · ${fn} flashes` : ''}</span><input type="number" class="trait-bar" data-prototrait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}" aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
-  }).join('');
+  el.innerHTML = keys
+    .map(k => ({
+      k,
+      n: pool.reduce((acc, p) => acc + (traitEntry(p, k) ? 1 : 0), 0),
+      fn: pool.reduce((acc, p) => acc + (flashEntry(p, k) ? 1 : 0), 0),
+    }))
+    .sort((a, b) => b.n - a.n || b.fn - a.fn)
+    .map(({ k, n, fn }) => {
+      const r = TRAIT_REG[k], d = TRAIT_DISPLAY[k] || {};
+      const name = d.name || r.label;
+      return `<label class="trait-row"><span class="trait-main"><span class="trait-name">${esc(name)}${r.proxy ? ' <span class="tag-proxy">stand-in stat</span>' : ''}</span>${d.gloss ? `<span class="trait-gloss">${esc(d.gloss)}</span>` : ''}</span><span class="trait-count">${n} ${groupPlural(pos)} in this library show this${fn ? ` · ${fn} more in limited action` : ''}</span><input type="number" class="trait-bar" data-prototrait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}" aria-label="Cut-off for ${esc(name)}"></label>`;
+    }).join('');
 }
 
 function protoSaveCell(p) {
@@ -3094,6 +3293,7 @@ function protoSaveCell(p) {
 function runPrototype() {
   const body = $('protoBody');
   if (!body) return;
+  syncOfferNote();
   const pos = $('p-pos').value;
   const dirKey = $('p-dir').value;
   const pool = protoPool().filter(p => (p.screen_position || p.position) === pos);
@@ -3105,9 +3305,14 @@ function runPrototype() {
   const bMin = numOrNull($('p-bench-min').value), bMax = numOrNull($('p-bench-max').value);
   const nilMax = numOrNull($('p-nil-max').value), nilBasis = $('p-nil-basis').value;
   const eligOnly = $('p-elig').checked;
+  const offerSel = new Set();
+  if ($('p-offer-nil').checked) offerSel.add('NIL');
+  if ($('p-offer-sch').checked) offerSel.add('Scholarship only');
+  if ($('p-offer-wo').checked) offerSel.add('Walk-on');
   const rows = pool.filter(p => {
     if (!protoBuildTest(p, bf, pool, dirKey + ':' + pos)) return false;
     if (mapSel.size && !mapSel.has(mapKeyOf(p))) return false;
+    if (offerSel.size && !offerMatches(p, offerSel)) return false;
     if (protoArchSel.size && !(protoArchAll ? holdsAllTags(p, protoArchSel) : holdsAnyTag(p, protoArchSel))) return false;
     if (!passesTraits(p)) return false;
     const bench = protoBench(p);
@@ -3666,6 +3871,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('p-pos').addEventListener('change', () => { buildProtoTraits(); runPrototype(); });
   ['p-ht-min', 'p-ht-max', 'p-wt-min', 'p-wt-max', 'p-bench-min', 'p-bench-max', 'p-nil-max'].forEach(id => $(id).addEventListener('input', runPrototype));
   $('p-elig').addEventListener('change', runPrototype);
+  ['p-offer-nil', 'p-offer-sch', 'p-offer-wo'].forEach(id => $(id).addEventListener('change', runPrototype));
   $('p-arch-all').addEventListener('change', e => { protoArchAll = e.target.checked; runPrototype(); });
   $('p-lean').addEventListener('change', e => { valueLean = e.target.checked; runPrototype(); });
   $('p-flash').addEventListener('change', e => { traitFlash = e.target.checked; runPrototype(); });
@@ -3711,6 +3917,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     ['p-ht-min', 'p-ht-max', 'p-wt-min', 'p-wt-max', 'p-bench-min', 'p-bench-max', 'p-nil-max'].forEach(id => { $(id).value = ''; });
     $('p-build').value = 'any';
     $('p-elig').checked = false;
+    ['p-offer-nil', 'p-offer-sch', 'p-offer-wo'].forEach(id => { $(id).checked = false; });
     protoArchSel.clear(); protoArchAll = false; $('p-arch-all').checked = false;
     mapSel.clear();
     traitBars = {}; valueLean = false; traitFlash = false;
