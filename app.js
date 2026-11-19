@@ -30,6 +30,76 @@ const photo = (p, cls) => p.headshot
   : `<span class="${cls || 'ph-init'}">${esc(initials(p.name))}</span>`;
 const eligChip = e => `<span class="chip ${e === 'Eligible' ? 'ok' : e === 'Not eligible' ? 'no' : 'un'}">${esc(e)}</span>`;
 
+/* -------- archetype tags ("what he does best") --------
+   Tagged records carry a "tags" field joined from data/tags.json
+   (tags_join.py): [{tag, stat, proxy}] — the archetype name, the printed
+   evidence line, and the proxy flag for the five proxy-defined tags.
+   Untagged records carry no field at all. */
+const tagsOf = p => (p && p.tags) || [];
+const tagBadges = id => {
+  const ts = tagsOf(byIdAll[id]);
+  if (!ts.length) return '';
+  return ' ' + ts.map(t => `<span class="tag-badge${t.proxy ? ' proxy' : ''}">${esc(t.tag)}${t.proxy ? ' · proxy' : ''}</span>`).join('');
+};
+const holdsAnyTag = (p, set) => tagsOf(p).some(t => set.has(t.tag));
+
+function bestSection(p) {
+  const ts = tagsOf(p);
+  if (!ts.length) return '';
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">What he does best</h2>
+    <ul class="tight">${ts.map(t => `<li><b>${esc(t.tag)}</b>${t.proxy ? ' <span class="tag-proxy">proxy</span>' : ''} — ${esc(t.stat)}</li>`).join('')}</ul>
+    <p class="p-sub">Archetype tags from his 2026 report lines: each tag is a number against the pool at his level and position group — the primary stat in the top quartile, the secondary at or above the pool median. A tag marked <b>proxy</b> is defined through a stand-in stat, because the direct measure is not in the PFF export.</p></div>`;
+}
+
+/* -------- hometown line --------
+   Up records carry hometown as "City, Fla." / "City, Ohio" / "City, MD";
+   down records carry hometown_city + hometown_state. The line prints
+   "City, ST" — the state normalised to its USPS code where it is a US
+   state; anything else (France, Nigeria, American Samoa) prints as the
+   record carries it. Nothing prints where neither city nor state is
+   known, and no city is ever invented. */
+const US_STATE = (() => {
+  const m = {};
+  const add = (code, ...names) => names.forEach(n => { m[n.replace(/[.\s'’]/g, '').toLowerCase()] = code; });
+  add('AL', 'Alabama', 'Ala'); add('AK', 'Alaska'); add('AZ', 'Arizona', 'Ariz');
+  add('AR', 'Arkansas', 'Ark'); add('CA', 'California', 'Calif'); add('CO', 'Colorado', 'Colo');
+  add('CT', 'Connecticut', 'Conn'); add('DE', 'Delaware', 'Del'); add('DC', 'District of Columbia');
+  add('FL', 'Florida', 'Fla'); add('GA', 'Georgia', 'Ga'); add('HI', 'Hawaii');
+  add('ID', 'Idaho'); add('IL', 'Illinois', 'Ill'); add('IN', 'Indiana', 'Ind');
+  add('IA', 'Iowa'); add('KS', 'Kansas', 'Kan', 'Kans'); add('KY', 'Kentucky', 'Ky');
+  add('LA', 'Louisiana', 'La'); add('ME', 'Maine'); add('MD', 'Maryland', 'Md');
+  add('MA', 'Massachusetts', 'Mass', 'Ma'); add('MI', 'Michigan', 'Mich'); add('MN', 'Minnesota', 'Minn');
+  add('MS', 'Mississippi', 'Miss'); add('MO', 'Missouri', 'Mo'); add('MT', 'Montana', 'Mont');
+  add('NE', 'Nebraska', 'Neb'); add('NV', 'Nevada', 'Nev'); add('NH', 'New Hampshire');
+  add('NJ', 'New Jersey'); add('NM', 'New Mexico'); add('NY', 'New York');
+  add('NC', 'North Carolina'); add('ND', 'North Dakota'); add('OH', 'Ohio');
+  add('OK', 'Oklahoma', 'Okla'); add('OR', 'Oregon', 'Ore'); add('PA', 'Pennsylvania', 'Pa');
+  add('RI', 'Rhode Island'); add('SC', 'South Carolina'); add('SD', 'South Dakota');
+  add('TN', 'Tennessee', 'Tenn'); add('TX', 'Texas', 'Tex'); add('UT', 'Utah');
+  add('VT', 'Vermont'); add('VA', 'Virginia', 'Va'); add('WA', 'Washington', 'Wash');
+  add('WV', 'West Virginia', 'WVa'); add('WI', 'Wisconsin', 'Wis'); add('WY', 'Wyoming', 'Wyo');
+  return m;
+})();
+const USPS_CODES = new Set(['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']);
+function hometownLine(p) {
+  if (!p) return null;
+  if (p.hometown_city || p.hometown_state) {
+    const city = String(p.hometown_city || '').trim(), st = String(p.hometown_state || '').trim();
+    if (city && st) return `${city}, ${st}`;
+    return city || st || null;
+  }
+  const h = String(p.hometown || '').trim();
+  if (!h) return null;
+  const i = h.lastIndexOf(',');
+  if (i < 0) return h;
+  const city = h.slice(0, i).trim(), rest = h.slice(i + 1).trim();
+  if (!city) return rest || null;
+  if (!rest) return city;
+  const code = US_STATE[rest.replace(/[.\s'’]/g, '').toLowerCase()]
+    || (/^[A-Z]{2}$/.test(rest) && USPS_CODES.has(rest) ? rest : null);
+  return `${city}, ${code || rest}`;
+}
+
 /* -------- NIL projection layer --------
    Every player record carries the NIL layer's fields (joined from
    portal_scouting/nil_layer/player_nil.csv): nil_status "priced" with
@@ -84,7 +154,11 @@ const FILTER_DEFS = [
     test: (p, set) => !set.size || (!!p.band && set.has(p.band.likely)) },
   { id: 'f-elig', name: 'Eligibility (qualified)',
     values: () => ['Eligible', 'Not eligible', 'Unsettled'],
-    test: (p, set) => !set.size || set.has(p.elig_qualified) }
+    test: (p, set) => !set.size || set.has(p.elig_qualified) },
+  { id: 'f-arch', name: 'What he does best',
+    values: () => [...new Set(PLAYERS.flatMap(p => tagsOf(p).map(t => t.tag)))].sort(),
+    label: v => `${v} (${PLAYERS.reduce((n, p) => n + (tagsOf(p).some(t => t.tag === v) ? 1 : 0), 0)})`,
+    test: (p, set) => !set.size || holdsAnyTag(p, set) }
 ];
 const filterSel = {};
 FILTER_DEFS.forEach(d => { filterSel[d.id] = new Set(); });
@@ -101,7 +175,7 @@ function updateMsButton(def) {
 function buildFilterPanels() {
   FILTER_DEFS.forEach(def => {
     msWrap(def.id).querySelector('.ms-opts').innerHTML = def.values().map(v =>
-      `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${filterSel[def.id].has(v) ? ' checked' : ''}> ${esc(v)}</label>`).join('');
+      `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${filterSel[def.id].has(v) ? ' checked' : ''}> ${esc(def.label ? def.label(v) : v)}</label>`).join('');
     updateMsButton(def);
   });
 }
@@ -417,13 +491,14 @@ function updateSaveBtn() {
 function renderPlayer(p) {
   const vitals = [
     ['Position', p.position], ['School', p.school], ['Book', p.conference_book],
-    ['Class', p.listed_class], ['Height', p.height], ['Weight', p.weight],
-    ['Hometown', p.hometown]
+    ['Class', p.listed_class], ['Height', p.height], ['Weight', p.weight]
   ].filter(v => v[1] !== null && v[1] !== undefined && v[1] !== '');
+  const home = hometownLine(p);
   let h = `<div class="card">
     <div class="p-head">${photo(p)}
       <div>
         <p class="p-name">${esc(p.name)}${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LOUISIANA-MONROE QUALIFIER</span>' : ''}</p>
+        ${home ? `<p class="p-home">Hometown: <b>${esc(home)}</b></p>` : ''}
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
@@ -448,6 +523,8 @@ function renderPlayer(p) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Strengths &amp; weaknesses</h2><div class="cols">
       <div>${listSection('Strengths', p.strengths)}</div><div>${listSection('Weaknesses', p.weaknesses)}</div></div></div>`;
   }
+
+  h += bestSection(p);
 
   if (p.band) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Projection band</h2><div class="band">
@@ -1109,18 +1186,22 @@ function distChart(sel) {
 /* champ-model-begin */
 function champModel(t, groups) {
   const EPS = 1e-9;
+  const archOn = champArchSel.size > 0;
   const rooms = groups.map(g => {
     const r = t.rooms[g];
     const inc = r.inc_grade, bar = r.bar_grade, bb = !!r.below_bar;
     const gap = (inc != null && bar != null) ? Math.round((inc - bar) * 10) / 10 : null;
     const atBar = !bb && inc != null && bar != null && inc >= bar - EPS;
-    const path = (r.getable && r.getable.length) ? r.getable[0] : null;
+    /* with archetypes ticked, the room's getable list is cut to the
+       players holding one — the path player is the best of those */
+    const getableShown = archOn ? (r.getable || []).filter(c => archMatchId(c.id)) : (r.getable || []);
+    const path = getableShown.length ? getableShown[0] : null;
     let status;
     if (atBar) status = 'AT STANDARD';
     else if (!path) status = 'NO GETABLE PLAYER';
     else if (bar != null && path.benchmark >= bar - EPS) status = 'CLOSES THE GAP';
     else status = 'PARTIAL';
-    return { g, r, inc, bar, bb, gap, atBar, path, status,
+    return { g, r, inc, bar, bb, gap, atBar, path, status, getableShown, archOn,
              projected: path ? path.benchmark : inc,
              atBarAfter: atBar || status === 'CLOSES THE GAP' };
   });
@@ -1171,9 +1252,38 @@ function buildChampPanel() {
 
 const CHAMP_STATUS_CLS = { 'AT STANDARD': 'ok', 'CLOSES THE GAP': 'ok', 'PARTIAL': 'un', 'NO GETABLE PLAYER': 'no' };
 
+/* the path's archetype panel: the same 19 tags as the directory filter,
+   counted over the available (getable-universe) players */
+function champArchBtnLabel() {
+  const btn = $('c-arch');
+  if (!btn) return;
+  const n = champArchSel.size;
+  btn.innerHTML = `What he does best${n ? ` · ${n}` : ''} <span class="ms-caret">▾</span>`;
+  btn.classList.toggle('ms-on', n > 0);
+}
+
+function buildChampArchPanel() {
+  const box = $('champArchOpts');
+  if (!box) return;
+  const counts = {};
+  const seen = new Set();
+  if (CHAMP && CHAMP.avail) for (const g of Object.keys(CHAMP.avail)) {
+    for (const e of CHAMP.avail[g]) {
+      if (seen.has(e.id)) continue;
+      seen.add(e.id);
+      for (const t of tagsOf(byIdAll[e.id])) counts[t.tag] = (counts[t.tag] || 0) + 1;
+    }
+  }
+  const names = Object.keys(counts).sort();
+  box.innerHTML = names.length ? names.map(n =>
+    `<label class="ms-opt"><input type="checkbox" value="${esc(n)}"${champArchSel.has(n) ? ' checked' : ''}> ${esc(n)} (${counts[n]})</label>`).join('')
+    : '<p class="p-sub" style="padding:6px 8px">No archetype tags in this build.</p>';
+  champArchBtnLabel();
+}
+
 function champPlayerLine(c) {
   return `<div class="path-cell">${photo(c)}
-    <div><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}
+    <div><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}${tagBadges(c.id)}
     <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b></span>
     <br><span class="p-sub">${nilRange(c) ? `Est. NIL <b>${nilRange(c)}</b> a year` : 'Est. NIL — no estimate'}</span>
     <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
@@ -1201,12 +1311,15 @@ function champRoomRow(x, confName) {
       ? 'No candidates are named for a below-bar room — the strict test needs a qualified bar to clear.'
       : r.incumbent == null
         ? 'No qualified incumbent in the pool snapshot — the strict test has no bar to clear.'
-        : 'No evaluated player with eligibility remaining clears this room.'}</span>`;
+        : x.archOn && r.getable_total > 0
+          ? 'Getable players clear this room, but none of them holds a ticked archetype — untick “What he does best” above to see them all.'
+          : 'No evaluated player with eligibility remaining clears this room.'}</span>`;
   } else {
     const c = x.path;
-    const more = r.getable_total > 1 ? `<details class="getable-more"><summary>All getable players (${r.getable_total})</summary>
+    const shownGet = x.getableShown || r.getable || [];
+    const more = shownGet.length > 1 || (x.archOn && r.getable_total > 0) ? `<details class="getable-more"><summary>${x.archOn ? `Getable players holding a ticked archetype (${shownGet.length} of ${r.getable_total})` : `All getable players (${r.getable_total})`}</summary>
       <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th>Est. NIL</th><th>Eligibility</th></tr>
-      ${r.getable.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
+      ${shownGet.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}${tagBadges(o.id)}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
       </table></div></details>` : '';
     pathCell = `${champPlayerLine(c)}<p class="path-status"><span class="chip ${CHAMP_STATUS_CLS[x.status]}">${x.status}</span>${
       x.status === 'PARTIAL' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — ${f1(Math.round((x.bar - c.benchmark) * 10) / 10)} short of the standard</span>`
@@ -1333,6 +1446,11 @@ function renderChamp() {
 const STATE_ADJ = { AL: ['FL', 'GA', 'MS', 'TN'], AK: [], AZ: ['CA', 'CO', 'NM', 'NV', 'UT'], AR: ['LA', 'MO', 'MS', 'OK', 'TN', 'TX'], CA: ['AZ', 'NV', 'OR'], CO: ['AZ', 'KS', 'NE', 'NM', 'OK', 'UT', 'WY'], CT: ['MA', 'NY', 'RI'], DE: ['MD', 'NJ', 'PA'], DC: ['MD', 'VA'], FL: ['AL', 'GA'], GA: ['AL', 'FL', 'NC', 'SC', 'TN'], HI: [], ID: ['MT', 'NV', 'OR', 'UT', 'WA', 'WY'], IL: ['IN', 'IA', 'KY', 'MO', 'WI'], IN: ['IL', 'KY', 'MI', 'OH'], IA: ['IL', 'MN', 'MO', 'NE', 'SD', 'WI'], KS: ['CO', 'MO', 'NE', 'OK'], KY: ['IL', 'IN', 'MO', 'OH', 'TN', 'VA', 'WV'], LA: ['AR', 'MS', 'TX'], ME: ['NH'], MD: ['DE', 'PA', 'VA', 'WV', 'DC'], MA: ['CT', 'NH', 'NY', 'RI', 'VT'], MI: ['IN', 'OH', 'WI'], MN: ['IA', 'ND', 'SD', 'WI'], MS: ['AL', 'AR', 'LA', 'TN'], MO: ['AR', 'IL', 'IA', 'KS', 'KY', 'NE', 'OK', 'TN'], MT: ['ID', 'ND', 'SD', 'WY'], NE: ['CO', 'IA', 'KS', 'MO', 'SD', 'WY'], NV: ['AZ', 'CA', 'ID', 'OR', 'UT'], NH: ['ME', 'MA', 'VT'], NJ: ['DE', 'NY', 'PA'], NM: ['AZ', 'CO', 'OK', 'TX'], NY: ['CT', 'MA', 'NJ', 'PA', 'VT'], NC: ['GA', 'SC', 'TN', 'VA'], ND: ['MN', 'MT', 'SD'], OH: ['IN', 'KY', 'MI', 'PA', 'WV'], OK: ['AR', 'CO', 'KS', 'MO', 'NM', 'TX'], OR: ['CA', 'ID', 'NV', 'WA'], PA: ['DE', 'MD', 'NJ', 'NY', 'OH', 'WV'], RI: ['CT', 'MA'], SC: ['GA', 'NC'], SD: ['IA', 'MN', 'MT', 'NE', 'ND', 'WY'], TN: ['AL', 'AR', 'GA', 'KY', 'MS', 'MO', 'NC', 'VA'], TX: ['AR', 'LA', 'NM', 'OK'], UT: ['AZ', 'CO', 'ID', 'NV', 'WY'], VT: ['MA', 'NH', 'NY'], VA: ['DC', 'KY', 'MD', 'NC', 'TN', 'WV'], WA: ['ID', 'OR'], WV: ['KY', 'MD', 'OH', 'PA', 'VA'], WI: ['IL', 'IA', 'MI', 'MN'], WY: ['CO', 'ID', 'MT', 'NE', 'SD', 'UT'] };
 
 let champRegional = false;
+let champArchSel = new Set();   // archetypes ticked on the championship path — a getable/available player matches if he holds ANY of them
+function archMatchId(id) {
+  if (!champArchSel.size) return true;
+  return holdsAnyTag(byIdAll[id], champArchSel);
+}
 let champHitDefault = 0.5;
 let champClass = {};          // playerId -> {g, hit} — hit is 0..1 across his NIL band
 let champClassTeam = null;
@@ -1780,7 +1898,8 @@ function renderFullRooms(t, m) {
     const zeroVol = rosterAll.filter(p => !(p.vol > 0));
     const all = champAvailFor(t, g);
     const reg = all.filter(e => isRegional(t, e));
-    const shown = champRegional ? reg : all;
+    let shown = champRegional ? reg : all;
+    if (champArchSel.size) shown = shown.filter(e => archMatchId(e.id));
     const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
       + (zeroVol.length ? `<tr class="roster-div"><td colspan="4">Also in the data — no recorded ${esc(r.vol_unit || 'volume')} in the snapshot</td></tr>`
         + zeroVol.map(p => `<tr class="vol0"><td class="num">—</td><td>${esc(p.name)}</td><td class="num">${f1(p.grade)}</td><td class="num">0 ${esc(r.vol_unit || '')}</td></tr>`).join('') : '');
@@ -1792,7 +1911,7 @@ function renderFullRooms(t, m) {
         : 'No player with recorded volume in this room in the pool snapshot';
       return `<div class="avail-row${inClass ? ' in-class' : ''}" draggable="true" data-dragpid="${esc(e.id)}">${photo(e)}
         <div class="avail-main">
-          <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${isRegional(t, e) ? `<span class="reg-badge">Regional · ${esc(e.home_state)}</span>` : ''}
+          <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${isRegional(t, e) ? `<span class="reg-badge">Regional · ${esc(e.home_state)}</span>` : ''}${tagBadges(e.id)}
           <br><span class="p-sub">${esc(e.school)} · grade ${f1(e.grade)} → benchmark <b>${f1(e.benchmark)}</b></span>
           <br><span class="p-sub">${slotTxt}</span>
           <br><span class="p-sub">${nilRange(e) ? `Est. NIL <b>${nilRange(e)}</b> a year` : 'Est. NIL — no estimate'} · </span>${eligChip(e.elig)}${e.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
@@ -1810,7 +1929,7 @@ function renderFullRooms(t, m) {
           <p class="p-sub">Every player with a report row at this group — the rotation first (with volume), then the rostered names with no recorded ${esc(r.vol_unit || 'volume')} in the snapshot; those carry a grade on a snap or two and do not count in slot-in standing. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
         </div>
         <div>
-          <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}</h3>
+          <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}${champArchSel.size ? ' (archetype filter on — ticked tags only)' : ''}</h3>
           <div class="avail-scroll">${availRows || '<p class="p-sub">No available players under the current view.</p>'}</div>
           <p class="p-sub">Every evaluated player with eligibility remaining at this group${t.level === 'G6' ? ', both directions — the Moving Up pool at his book benchmark and the P4 Down pool at his projected G6 grade' : ' at his book benchmark'}, best benchmark first — not only the men who beat the room’s #1. <b>Slot-in</b> ranks his benchmark against the full room’s grades: #2 means he enters behind one man, not that he failed a test. Drag a player to the saved class, or use his Save button.</p>
         </div>
@@ -2125,6 +2244,25 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     renderChamp();
   });
   $('champQ').addEventListener('input', buildChampPanel);
+  // championship path archetype cut: the directory's tag set, applied to
+  // the getable and available lists (the panel lives in the static
+  // controls card, so it survives renderChamp's rebuild of champBody)
+  buildChampArchPanel();
+  $('c-arch').addEventListener('click', () => toggleMs('c-arch'));
+  $('champArchOpts').addEventListener('change', e => {
+    const cb = e.target.closest('input[type=checkbox]');
+    if (!cb) return;
+    if (cb.checked) champArchSel.add(cb.value); else champArchSel.delete(cb.value);
+    champArchBtnLabel();
+    champRestoreScroll = window.scrollY;
+    renderChamp();
+  });
+  $('champArchClear').addEventListener('click', () => {
+    champArchSel.clear();
+    buildChampArchPanel();
+    champRestoreScroll = window.scrollY;
+    renderChamp();
+  });
   $('playerBody').addEventListener('click', e => {
     const go = e.target.closest('[data-goclass]');
     if (go) { champSel = go.dataset.goclass; champPicked = true; champBtnLabel(); buildChampPanel(); }

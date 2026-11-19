@@ -6270,7 +6270,19 @@
   "nil_projection_basis": "tier: G6 Star",
   "on3_valuation": 1000000,
   "on3_url": "https://www.on3.com/rivals/lj-martin-146562/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 10.3 (80th pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "7.0 yds/carry (95th pct), 2.20 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kj-edwards",
@@ -6782,7 +6794,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "6.0 yds/carry (83rd pct), 2.30 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kewan-lacy",
@@ -8782,7 +8801,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.20 (91st pct), 185 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.1 yds/carry (85th pct), 1.90 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "tradarian-ball",
@@ -10743,7 +10774,24 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter \u00b7 RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 10.1 (76th pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 5.10 (98th pct), 180 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "8.6 yds/carry (99th pct), 3.20 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "john-hebert",
@@ -22668,7 +22716,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Starter"
+  "nil_projection_basis": "tier: G6 Starter",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 8.6 (96th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "matt-mayfield",
@@ -32420,7 +32475,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 54% (82nd pct) + impact blocks 15.4% (95th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "parker-pritchett",
@@ -36188,7 +36250,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 55% (83rd pct) + impact blocks 18.2% (99th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "devin-coleman",
@@ -37301,7 +37370,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter \u00b7 OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 60% (91st pct) + impact blocks 20.0% (100th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jackson-christian",
@@ -40429,7 +40505,14 @@
   "nil_projection_basis": "tier: G6 Starter",
   "on3_valuation": 1000000,
   "on3_url": "https://www.on3.com:443/db/lamar-brown-155377/nil/",
-  "on3_flag": "ON3 ABOVE CEILING"
+  "on3_flag": "ON3 ABOVE CEILING",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 40% of his pressures (97th pct) at 282 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kolaj-cobbins",
@@ -47083,7 +47166,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter \u00b7 ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "tier: G6 Star"
+  "nil_projection_basis": "tier: G6 Star",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 18.3% (94th pct), pressure rate 15.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 18.3% (94th pct) at 232 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jadyn-ramos",

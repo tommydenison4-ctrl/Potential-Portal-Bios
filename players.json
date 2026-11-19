@@ -245,7 +245,14 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter · QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Deep Ball",
+    "stat": "Big-time throw rate 5.9% (82nd pct), RTG 101.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "frankie-weaver",
@@ -741,7 +748,14 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter · QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Dual Threat",
+    "stat": "525 rushing yards (88th pct) on 110 carries",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "de-von-thomas",
@@ -982,7 +996,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "5.5 yds/carry (77th pct), 2.60 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jameer-reeder",
@@ -1445,7 +1466,24 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 11.6 (88th pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.40 (93rd pct), 215 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.4 yds/carry (89th pct), 2.00 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kamerin-mcdowell-moore",
@@ -1688,7 +1726,24 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 9.7 (79th pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.30 (92nd pct), 183 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.5 yds/carry (91st pct), 2.20 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "aaron-enterline",
@@ -1931,7 +1986,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.3% (83rd pct), 58 catches on 60 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 57% (83rd pct), 8 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jacob-zollar",
@@ -2343,7 +2410,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "17.8 yds/catch (93rd pct), first-down rate 70%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "tavahri-groves",
@@ -2563,7 +2637,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.1% (86th pct), 29 catches on 32 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 62% (92nd pct), 5 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tra-neal",
@@ -3031,7 +3117,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 16.2% (96th pct), pressure rate 16.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 16.2% (96th pct) at 215 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "cadricus-stanley",
@@ -3272,7 +3370,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 50% of his pressures (95th pct) at 325 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "dawson-james",
@@ -3505,7 +3610,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 33% of his pressures (89th pct) at 305 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "chris-williams",
@@ -3988,7 +4100,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 15.3% (92nd pct), pressure rate 15.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "drake-lusk",
@@ -6369,7 +6488,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.24 (95th pct), 1 INT + 9 PBU on 41 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "nyair-domnie",
@@ -6835,7 +6961,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 58.5 (84th pct), comp% allowed 43.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "phillip-harris",
@@ -7082,7 +7215,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 61.6 (79th pct), comp% allowed 43.6%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "remington-moss",
@@ -7322,7 +7462,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 34% (84th pct), 125 press snaps on 371 coverage snaps, rating allowed 81.9",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tj-sands",
@@ -8263,7 +8410,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 64.6 (81st pct), comp% allowed 50.0%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "victor-holt",
@@ -8504,7 +8658,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 44.1 (96th pct), comp% allowed 60.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 6% (99th pct), 17 press snaps on 271 coverage snaps, rating allowed 44.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "andre-oben",
@@ -9655,7 +9821,14 @@
   "nil_ceiling": 1000000,
   "nil_basis": "P4 starter · OL",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (86th pct), RBLK grade 71.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "gregory-celestin-jr",
@@ -9933,7 +10106,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (88th pct), RBLK grade 58.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jadon-lafontant",
@@ -10556,7 +10736,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 71% of run blocks (97th pct), RBLK grade 62.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "mehki-cousar",
@@ -10963,7 +11150,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (87th pct), RBLK grade 78.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "noah-okoye",
@@ -11347,7 +11541,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (85th pct), RBLK grade 63.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "will-tellers",
@@ -11575,7 +11776,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (85th pct), RBLK grade 70.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "wyatt-whalen",
@@ -11810,7 +12018,14 @@
   "nil_ceiling": 1000000,
   "nil_basis": "P4 starter · OL",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 64% of run blocks (88th pct), RBLK grade 78.2",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "devin-lippold",
@@ -12266,7 +12481,14 @@
   "nil_ceiling": 750000,
   "nil_basis": "P4 rotation-depth · QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Deep Ball",
+    "stat": "Big-time throw rate 6.9% (90th pct), RTG 109.2",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "brennan-carroll",
@@ -12506,7 +12728,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "5.8 yds/carry (81st pct), 2.90 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "broderick-taylor",
@@ -12748,7 +12977,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.20 (89th pct), 185 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "9.0 yds/carry (99th pct), 4.80 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "speedy-jones",
@@ -12989,7 +13230,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.90 (97th pct), 178 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "7.0 yds/carry (96th pct), 2.10 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kyree-paul",
@@ -13427,7 +13680,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 3.60 (77th pct), 220 lb",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "clayton-wayland",
@@ -13634,7 +13894,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "18.3 yds/catch (96th pct), first-down rate 63%",
+    "proxy": true
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 50% (76th pct), 7 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "dkhai-joseph",
@@ -14098,7 +14370,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.4 (80th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "curtis-deville",
@@ -14280,7 +14559,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "15.4 yds/catch (80th pct), first-down rate 80%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "isaiah-champagne",
@@ -14463,7 +14749,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 1.9% (91st pct), 51 catches on 53 catchable",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "micah-simpson",
@@ -14691,7 +14984,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 1.6% (91st pct), 58 catches on 61 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.9 (87th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "emmanuel-harris",
@@ -14868,7 +15173,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.7% (82nd pct), pressure rate 11.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 11.7% (82nd pct) at 242 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "lowote-jurkin",
@@ -15107,7 +15424,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 15.3% (94th pct), pressure rate 14.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tim-muhammad",
@@ -15273,7 +15597,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 12.8% (87th pct), pressure rate 9.8%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "a-amear-walton",
@@ -15512,7 +15843,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.6% (90th pct), pressure rate 8.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.6% (90th pct) at 263 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "calvin-kalu-alexander",
@@ -15751,7 +16094,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.0% (86th pct), pressure rate 8.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.0% (86th pct) at 262 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "isaiah-hare",
@@ -16230,7 +16585,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.6% (90th pct), pressure rate 5.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.6% (90th pct) at 255 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jaydon-eason",
@@ -16469,7 +16836,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 6.7% (78th pct), pressure rate 11.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 6.7% (78th pct) at 285 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "k-mard-kimble",
@@ -16952,7 +17331,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 6.5% (77th pct), pressure rate 6.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 6.5% (77th pct) at 256 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "alijah-alexander",
@@ -19360,7 +19751,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 52.3 (91st pct), comp% allowed 54.2%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.21 (92nd pct), 1 INT + 4 PBU on 24 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jaiydyn-johnson",
@@ -19854,7 +20257,24 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 24.1 (99th pct), comp% allowed 40.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.24 (95th pct), 5 INT + 5 PBU on 42 targets",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 40% (88th pct), 105 press snaps on 264 coverage snaps, rating allowed 24.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "safir-stills-bey",
@@ -20298,7 +20718,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 63.0 (76th pct), comp% allowed 50.0%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "chance-sautter",
@@ -20779,7 +21206,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 65.0 (80th pct), comp% allowed 57.1%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.29 (98th pct), 1 INT + 5 PBU on 21 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "bryce-mcdonald",
@@ -21741,7 +22180,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 68.3 (76th pct), comp% allowed 50.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.23 (89th pct), 1 INT + 5 PBU on 26 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jaylen-jenkins",
@@ -21983,7 +22434,24 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 10.3 (84th pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.30 (92nd pct), 196 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.0 yds/carry (85th pct), 1.80 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "amaaz-eugene",
@@ -22204,7 +22672,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "15.8 yds/catch (83rd pct), first-down rate 64%",
+    "proxy": true
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 9.5 (99th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "bugs-mortimer",
@@ -22315,7 +22795,24 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 0.0% (96th pct), 40 catches on 40 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 62% (92nd pct), 5 contested catches",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 7.8 (93rd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "andrew-huff",
@@ -22540,7 +23037,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 12.7% (87th pct), pressure rate 12.2%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 12.7% (87th pct) at 230 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "withchiel-filamar",
@@ -22874,7 +23383,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.3% (97th pct), pressure rate 8.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 11.3% (97th pct) at 231 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kemarion-ivory",
@@ -23116,7 +23637,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 6.5% (77th pct), pressure rate 6.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 6.5% (77th pct) at 280 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "chris-campbell",
@@ -23227,7 +23760,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 9.9% (94th pct), pressure rate 7.4%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kamari-federick",
@@ -23466,7 +24006,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 7.0% (82nd pct), pressure rate 6.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 7.0% (82nd pct) at 270 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "eli-ennis",
@@ -24882,7 +25434,14 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · LB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.7% (77th pct), pressure rate 14.9%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "luke-williams",
@@ -25361,7 +25920,14 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.17 (84th pct), 1 INT + 7 PBU on 47 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "mason-edwards",
@@ -25606,7 +26172,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.25 (96th pct), 0 INT + 12 PBU on 48 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "lanar-kelley",
@@ -25839,7 +26412,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 60.8 (80th pct), comp% allowed 43.2%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "richard-mckneely",
@@ -26553,7 +27133,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 59.2 (88th pct), comp% allowed 57.1%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "alex-haralson",
@@ -26999,7 +27586,19 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 59% of run blocks (88th pct), impact blocks 10.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 59% (88th pct) + impact blocks 10.4% (91st pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "anfernee-crease",
@@ -27754,7 +28353,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 78% of run blocks (100th pct), impact blocks 13.9%",
+    "proxy": false
+   },
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 78% (100th pct) + impact blocks 13.9% (99th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "erik-gray",
@@ -29860,7 +30471,19 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 65% of run blocks (95th pct), impact blocks 11.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 65% (95th pct) + impact blocks 11.4% (94th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "malik-ellis",
@@ -30260,7 +30883,19 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 55% of run blocks (77th pct), impact blocks 11.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 55% (77th pct) + impact blocks 11.4% (94th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "trevanti-davis",
@@ -30927,7 +31562,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 5.90 (99th pct), 205 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "9.2 yds/carry (99th pct), 3.30 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "zechariah-prince",
@@ -31608,7 +32255,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.3 (78th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "dylan-lord",
@@ -31850,7 +32504,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.6% (81st pct), 52 catches on 55 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 60% (88th pct), 9 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jaxon-potter",
@@ -32329,7 +32995,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.3% (84th pct), 57 catches on 61 catchable",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "camron-miller",
@@ -32550,7 +33223,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 29% of his pressures (87th pct) at 250 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "dexter-niekamp",
@@ -32956,7 +33636,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.1% (78th pct), pressure rate 10.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "cameron-daniels",
@@ -33198,7 +33885,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 7.3% (83rd pct), pressure rate 7.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "ryan-mccall",
@@ -33686,7 +34380,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.22 (93rd pct), 0 INT + 7 PBU on 32 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "key-crowell",
@@ -33935,7 +34636,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.16 (80th pct), 1 INT + 4 PBU on 32 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "rett-hemphill",
@@ -34404,7 +35112,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 all-conference"
+  "nil_projection_basis": "band likely: G6 all-conference",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 56.4 (87th pct), comp% allowed 32.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.16 (80th pct), 0 INT + 4 PBU on 25 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "grant-noland",
@@ -34652,7 +35372,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 all-conference"
+  "nil_projection_basis": "band likely: G6 all-conference",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 54.6 (89th pct), comp% allowed 40.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.21 (92nd pct), 0 INT + 13 PBU on 62 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jaylen-boehm-peterson",
@@ -34901,7 +35633,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 58.3 (85th pct), comp% allowed 38.5%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "rj-stewart",
@@ -35617,7 +36356,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "5.4 yds/carry (75th pct), 2.50 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "tennel-bryant",
@@ -35839,7 +36585,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "20.6 yds/catch (99th pct), first-down rate 62%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ebony-curry-jr",
@@ -36017,7 +36770,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 12.1% (84th pct), pressure rate 10.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "lance-rucker",
@@ -36186,7 +36946,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 14.8% (94th pct), pressure rate 16.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 14.8% (94th pct) at 244 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jayden-childers",
@@ -36426,7 +37198,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.7% (82nd pct), pressure rate 11.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "john-starman",
@@ -36665,7 +37444,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.8% (98th pct), pressure rate 11.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "wade-abrams",
@@ -37031,7 +37817,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 30% (75th pct), 57 press snaps on 193 coverage snaps, rating allowed 84.4",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "xavian-andrews",
@@ -37382,7 +38175,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.15 (79th pct), 0 INT + 6 PBU on 39 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "ben-wallace",
@@ -37575,7 +38375,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 80% of run blocks (100th pct), RBLK grade 60.2",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "brayden-jellison",
@@ -37790,7 +38597,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 81% of run blocks (100th pct), RBLK grade 62.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "brendon-crispe",
@@ -38006,7 +38820,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 67% of run blocks (92nd pct), RBLK grade 59.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "daz-galloway",
@@ -38111,7 +38932,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 65% of run blocks (95th pct), impact blocks 10.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 65% (95th pct) + impact blocks 10.0% (89th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "desmeal-leigh",
@@ -38431,7 +39264,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 62% of run blocks (83rd pct), RBLK grade 61.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jackson-kerstin",
@@ -38659,7 +39499,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 62% of run blocks (84th pct), RBLK grade 68.4",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jake-utley",
@@ -38868,7 +39715,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 69% of run blocks (93rd pct), RBLK grade 61.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "john-pica",
@@ -38973,7 +39827,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 67% of run blocks (92nd pct), RBLK grade 79.5",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kenyon-bigbow",
@@ -39159,7 +40020,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 71% of run blocks (96th pct), RBLK grade 60.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "lance-berends",
@@ -39431,7 +40299,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 80% of run blocks (99th pct), RBLK grade 65.2",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "lucas-feldkamp",
@@ -39660,7 +40535,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 67% of run blocks (91st pct), RBLK grade 65.8",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "matthew-keeley",
@@ -40211,7 +41093,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 65% of run blocks (90th pct), RBLK grade 71.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "shane-keenan",
@@ -40548,7 +41437,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 65% of run blocks (90th pct), RBLK grade 68.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tyrese-smith",
@@ -41404,7 +42300,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Third-Down Back",
+    "stat": "Receiving: 24 catches (86th pct among RBs) on 28 targets; PBLK grade 87.4 on 56 pass-block snaps",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kenveon-stone",
@@ -41644,7 +42547,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.20 (89th pct), 220 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "7.2 yds/carry (97th pct), 3.00 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "spencer-ferguson",
@@ -41884,7 +42799,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.20 (89th pct), 200 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.9 yds/carry (94th pct), 2.70 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "tytan-mason",
@@ -42124,7 +43051,19 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 3.60 (77th pct), 215 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "7.0 yds/carry (96th pct), 3.40 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jaden-green",
@@ -42363,7 +43302,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "5.8 yds/carry (81st pct), 2.30 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "misa-paiau",
@@ -42799,7 +43745,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "14.7 yds/catch (76th pct), first-down rate 61%",
+    "proxy": true
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 60% (88th pct), 9 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "carter-dahlke",
@@ -43045,7 +44003,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.8% (79th pct), 50 catches on 52 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 8.5 (96th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "darnell-o-quinn",
@@ -43263,7 +44233,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.7% (80th pct), 30 catches on 27 catchable",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "noah-kjar",
@@ -43504,7 +44481,14 @@
   "nil_ceiling": 800000,
   "nil_basis": "P4 starter · WR",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "14.7 yds/catch (76th pct), first-down rate 67%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "nolan-mcwilliams",
@@ -43745,7 +44729,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.7 (84th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "dane-steel",
@@ -43984,7 +44975,24 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.6% (82nd pct), 54 catches on 56 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 62% (92nd pct), 5 contested catches",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.9 (87th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "david-spjut",
@@ -44165,7 +45173,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 7.8 (93rd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "drew-carlson",
@@ -44532,7 +45547,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 50% (76th pct), 5 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "trey-olsen",
@@ -44710,7 +45732,14 @@
   "nil_ceiling": 800000,
   "nil_basis": "P4 starter · WR",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 8.1 (94th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "noah-west-baranco",
@@ -44954,7 +45983,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter · TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.3 (83rd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "rocky-lencioni",
@@ -45198,7 +46234,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "G6 starter · TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 5.8 (76th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jalonn-booth",
@@ -45429,7 +46472,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 15.6% (95th pct), pressure rate 16.9%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 15.6% (95th pct) at 230 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kaleb-pleis",
@@ -45800,7 +46855,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 15.6% (95th pct), pressure rate 13.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 15.6% (95th pct) at 214 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "trehsyn-fesili",
@@ -46482,7 +47549,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 6.2% (75th pct), pressure rate 7.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 25% of his pressures (78th pct) at 295 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "zion-finau",
@@ -46959,7 +48038,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.6% (90th pct), pressure rate 5.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.6% (90th pct) at 255 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "daylen-love",
@@ -49606,7 +50697,14 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 31.3 (97th pct), comp% allowed 40.0%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jakobi-spence",
@@ -50579,7 +51677,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 47.8 (93rd pct), comp% allowed 51.8%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "ambrose-marsh",
@@ -51987,7 +53092,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 64.6 (81st pct), comp% allowed 50.0%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jayden-mayberry",
@@ -52226,7 +53338,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 52.6 (93rd pct), comp% allowed 56.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 1% (80th pct), 3 press snaps on 227 coverage snaps, rating allowed 52.6",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "keali-i-ah-yat",
@@ -52775,7 +53899,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Speed Back",
+    "stat": "5.9 yds/carry (83rd pct), 2.40 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "joey-stout",
@@ -53001,7 +54132,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.2 (77th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "terence-loville",
@@ -53405,7 +54543,24 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 0.0% (93rd pct), 37 catches on 39 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 62% (88th pct), 5 contested catches",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.0 (80th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "dominic-butts",
@@ -53623,7 +54778,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 16.5% (96th pct), pressure rate 16.5%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "levi-little",
@@ -53862,7 +55024,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 9.1% (92nd pct), pressure rate 8.0%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "collin-lewis",
@@ -54341,7 +55510,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 9.6% (93rd pct), pressure rate 13.3%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "hunter-sharbono",
@@ -56699,7 +57875,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.15 (76th pct), 2 INT + 6 PBU on 55 targets",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 33% (80th pct), 140 press snaps on 427 coverage snaps, rating allowed 55.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "colter-petre",
@@ -57620,7 +58808,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 62% of run blocks (82nd pct), RBLK grade 59.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "braden-zimmer",
@@ -57854,7 +59049,14 @@
   "nil_ceiling": 1000000,
   "nil_basis": "P4 starter · OL",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 69% of run blocks (94th pct), RBLK grade 91.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "carter-lavrusky",
@@ -59576,7 +60778,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 58% (86th pct) + impact blocks 9.2% (85th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kamani-fifita",
@@ -59791,7 +61000,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (85th pct), RBLK grade 67.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "krush-sowers",
@@ -59962,7 +61178,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 59% of run blocks (79th pct), RBLK grade 59.6",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "layton-vining",
@@ -61042,7 +62265,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 59% of run blocks (79th pct), RBLK grade 59.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "titan-fleischmann",
@@ -61140,7 +62370,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 69% of run blocks (95th pct), RBLK grade 69.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "torin-jeske",
@@ -61560,7 +62797,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Gap / Power Blocker",
+    "stat": "Gap share 57% of run blocks (83rd pct), impact blocks 6.6%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tyler-skinner",
@@ -62076,7 +63320,24 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 60.6 (81st pct), comp% allowed 44.2%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.19 (87th pct), 2 INT + 6 PBU on 43 targets",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 32% (78th pct), 91 press snaps on 287 coverage snaps, rating allowed 60.6",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "nigel-gay",
@@ -62570,7 +63831,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.17 (83rd pct), 1 INT + 4 PBU on 30 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "cole-walker",
@@ -62815,7 +64083,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.23 (94th pct), 0 INT + 9 PBU on 40 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "isaiah-harvey",
@@ -63056,7 +64331,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.5% (97th pct), pressure rate 11.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 11.5% (97th pct) at 261 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ean-johnson-kelley",
@@ -63297,7 +64584,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 13.5% (99th pct), pressure rate 11.9%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "joseph-polite",
@@ -63775,7 +65069,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 14.5% (100th pct), pressure rate 9.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 14.5% (100th pct) at 270 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "c-j-smith",
@@ -63886,7 +65192,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 13.2% (89th pct), pressure rate 11.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 13.2% (89th pct) at 243 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ryan-bell",
@@ -64220,7 +65538,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.7% (82nd pct), pressure rate 12.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 11.7% (82nd pct) at 230 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ayden-guess",
@@ -64424,7 +65754,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 17.4% (97th pct), pressure rate 16.5%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 17.4% (97th pct) at 238 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "trevor-short",
@@ -64664,7 +66006,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 11.7% (82nd pct), pressure rate 13.5%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tyrese-whitaker",
@@ -64831,7 +66180,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 10.9% (76th pct), pressure rate 9.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 10.9% (76th pct) at 233 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jake-thorner",
@@ -67553,7 +68914,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · RB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 3.80 (82nd pct), 215 lb",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jaden-nelson",
@@ -69121,7 +70489,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "16.1 yds/catch (85th pct), first-down rate 62%",
+    "proxy": true
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 7.7 (92nd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "d-j-adams",
@@ -69366,7 +70746,19 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 15.6 (99th pct), comp% allowed 38.9%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.31 (100th pct), 3 INT + 8 PBU on 36 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "martez-cooksey-jr",
@@ -69829,7 +71221,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 all-conference"
+  "nil_projection_basis": "band likely: G6 all-conference",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 48.3 (93rd pct), comp% allowed 44.2%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.16 (81st pct), 1 INT + 6 PBU on 43 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jameson-wharton",
@@ -70077,7 +71481,24 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 13.0 (100th pct), comp% allowed 29.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.29 (99th pct), 2 INT + 7 PBU on 31 targets",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 38% (87th pct), 71 press snaps on 189 coverage snaps, rating allowed 13.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kehinde-akintunde",
@@ -70315,7 +71736,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.1% (87th pct), pressure rate 8.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.1% (87th pct) at 285 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jamarr-jones",
@@ -70556,7 +71989,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 10.4% (95th pct), pressure rate 7.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 10.4% (95th pct) at 241 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "mckenzie-hazzard",
@@ -70668,7 +72113,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 33% of his pressures (89th pct) at 299 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jacob-moore",
@@ -70835,7 +72287,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.2% (88th pct), pressure rate 10.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 26% of his pressures (82nd pct) at 303 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "orlando-daniels",
@@ -71038,7 +72502,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 13.1% (88th pct), pressure rate 14.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 13.1% (88th pct) at 242 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "hudson-tucker",
@@ -71148,7 +72624,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 16.8% (96th pct), pressure rate 15.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 16.8% (96th pct) at 242 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kristian-ozane",
@@ -72817,7 +74305,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Third-Down Back",
+    "stat": "Receiving: 20 catches (81st pct among RBs) on 25 targets; PBLK grade 44.3 on 35 pass-block snaps",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "qua-ashley",
@@ -72930,7 +74425,24 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 9.9 (81st pct)",
+    "proxy": false
+   },
+   {
+    "tag": "Power Back",
+    "stat": "Yds after contact/att 4.70 (96th pct), 191 lb",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Back",
+    "stat": "6.9 yds/carry (94th pct), 2.20 yds before contact/att",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "kam-baah-slay",
@@ -73164,7 +74676,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.26 (95th pct), 3 INT + 3 PBU on 23 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "eli-campbell",
@@ -73403,7 +74922,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 59.7 (87th pct), comp% allowed 54.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.20 (80th pct), 2 INT + 5 PBU on 35 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jacobi-hatter",
@@ -74025,7 +75556,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 8.3 (95th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "brayden-smith",
@@ -74270,7 +75808,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "15.1 yds/catch (78th pct), first-down rate 57%",
+    "proxy": true
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 7.5 (90th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "eric-weatherly",
@@ -74453,7 +76003,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 70% (98th pct), 7 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "gabe-nunez",
@@ -74563,7 +76120,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.8 (85th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "clayton-hixon",
@@ -74662,7 +76226,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 63% of run blocks (87th pct), RBLK grade 60.1",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "devin-lively",
@@ -75093,7 +76664,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pulling Lineman",
+    "stat": "Gap share 55% (76th pct) + impact blocks 18.0% (100th pct) among non-center OL",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "j-von-lindsey",
@@ -76188,7 +77766,14 @@
   "nil_ceiling": 400000,
   "nil_basis": "G6 starter · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 61% of run blocks (81st pct), RBLK grade 69.0",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "reggie-houston",
@@ -76388,7 +77973,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 59% of run blocks (78th pct), RBLK grade 66.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "renard-smith",
@@ -78528,7 +80120,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 30% of his pressures (85th pct) at 290 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "dashawn-fields",
@@ -78767,7 +80366,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 10.4% (95th pct), pressure rate 10.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 10.4% (95th pct) at 275 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "marquacious-wright",
@@ -79008,7 +80619,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.7% (91st pct), pressure rate 8.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.7% (91st pct) at 240 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "rodney-mills",
@@ -79176,7 +80799,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.3% (89th pct), pressure rate 11.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.3% (89th pct) at 230 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "asher-wilson",
@@ -79417,7 +81052,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 10.0% (94th pct), pressure rate 10.7%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 10.0% (94th pct) at 240 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "aaziah-scott",
@@ -79658,7 +81305,19 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.0% (86th pct), pressure rate 8.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.0% (86th pct) at 265 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jordan-gaston",
@@ -79898,7 +81557,14 @@
   "nil_ceiling": 250000,
   "nil_basis": "P4 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 25% of his pressures (78th pct) at 320 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "teddy-mcduffie-jr",
@@ -80067,7 +81733,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 13.5% (90th pct), pressure rate 11.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 13.5% (90th pct) at 230 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jacob-staton",
@@ -81751,7 +83429,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.20 (80th pct), 0 INT + 4 PBU on 20 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "dallas-harper",
@@ -82477,7 +84162,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "P4 rotation-depth · TE",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "12.6 yds/catch (75th pct), first-down rate 79%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ryan-petras",
@@ -82697,7 +84389,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 3.1% (86th pct), 29 catches on 32 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 50% (76th pct), 6 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "d-arious-reed",
@@ -83321,7 +85025,14 @@
   "nil_ceiling": 800000,
   "nil_basis": "P4 starter · WR",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "16.7 yds/catch (89th pct), first-down rate 65%",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "shawn-corchado",
@@ -83510,7 +85221,14 @@
   "nil_ceiling": 800000,
   "nil_basis": "P4 starter · WR",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 50% (76th pct), 5 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "chris-jean",
@@ -83749,7 +85467,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 58.8 (83rd pct), comp% allowed 50.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.21 (91st pct), 2 INT + 5 PBU on 34 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "mekhi-kilburn",
@@ -84232,7 +85962,19 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 52.6 (90th pct), comp% allowed 39.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 48% (97th pct), 151 press snaps on 312 coverage snaps, rating allowed 52.6",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "tahseen-howard",
@@ -84823,7 +86565,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 7.8% (85th pct), pressure rate 6.4%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 7.8% (85th pct) at 280 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ravon-johnson",
@@ -85167,7 +86921,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 10.8% (76th pct), pressure rate 10.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 10.8% (76th pct) at 240 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "malachi-mapp",
@@ -86377,7 +88143,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 0.0% (96th pct), 33 catches on 33 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.6 (82nd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "nate-burleson-ii",
@@ -86555,7 +88333,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "18.6 yds/catch (97th pct), first-down rate 62%",
+    "proxy": true
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 6.9 (87th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "anthony-massa",
@@ -87571,7 +89361,14 @@
   "nil_ceiling": 19000,
   "nil_basis": "G6 rotation-depth · OL",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Zone Blocker",
+    "stat": "Zone share 70% of run blocks (96th pct), RBLK grade 59.3",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "riley-piper",
@@ -88265,7 +90062,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 all-conference"
+  "nil_projection_basis": "band likely: G6 all-conference",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 60.6 (81st pct), comp% allowed 46.7%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "byron-davis",
@@ -88487,7 +90291,14 @@
   "nil_ceiling": 700000,
   "nil_basis": "P4 starter · CB",
   "nil_band_basis": "SURVEY",
-  "nil_projection_basis": "band likely: P4 starter"
+  "nil_projection_basis": "band likely: P4 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.16 (81st pct), 0 INT + 5 PBU on 31 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jalen-labranche",
@@ -88936,7 +90747,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 12.0% (98th pct), pressure rate 13.6%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 12.0% (98th pct) at 245 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "jamie-williamson",
@@ -89901,7 +91724,14 @@
   "nil_ceiling": 20000,
   "nil_basis": "G6 rotation-depth · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 depth"
+  "nil_projection_basis": "band likely: G6 depth",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 25% of his pressures (78th pct) at 290 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "duston-chavis",
@@ -90558,7 +92388,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 14.8% (94th pct), pressure rate 14.8%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 14.8% (94th pct) at 240 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "brandon-mcdonald",
@@ -91280,7 +93122,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · S",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.25 (92nd pct), 3 INT + 3 PBU on 24 targets",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "nigel-lucas",
@@ -91981,7 +93830,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Vertical Stretch",
+    "stat": "16.3 yds/catch (87th pct), first-down rate 72%",
+    "proxy": true
+   },
+   {
+    "tag": "Contested Catch",
+    "stat": "Contested catch rate 58% (85th pct), 14 contested catches",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "anthony-taylor",
@@ -92828,7 +94689,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Coverage",
+    "stat": "Rating allowed 49.2 (92nd pct), comp% allowed 53.7%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "preston-hamilton",
@@ -92940,7 +94808,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.0% (86th pct), pressure rate 11.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 29% of his pressures (85th pct) at 300 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "andrew-zook",
@@ -93183,7 +95063,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · DI",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 33% of his pressures (89th pct) at 292 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "ashtin-rustemeyer",
@@ -93296,7 +95183,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 9.0% (91st pct), pressure rate 8.0%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 9.0% (91st pct) at 281 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "trey-weems",
@@ -93539,7 +95438,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "G6 starter · ED",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 14.4% (92nd pct), pressure rate 13.3%",
+    "proxy": false
+   },
+   {
+    "tag": "Power Rusher",
+    "stat": "Sacks are 36% of his pressures (95th pct) at 245 lb (group median 244)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "steve-zayachkowsky",
@@ -96102,7 +98013,19 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter · QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Verified Speed",
+    "stat": "100m 10.56",
+    "proxy": false
+   },
+   {
+    "tag": "Dual Threat",
+    "stat": "526 rushing yards (86th pct) on 81 carries",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "don-chaney",
@@ -96242,7 +98165,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Verified Speed",
+    "stat": "100m 10.77",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "zach-palmer-smith",
@@ -96559,7 +98489,19 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 2.4% (86th pct), 40 catches on 41 catchable",
+    "proxy": false
+   },
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 9.7 (99th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "derrick-jameson",
@@ -97013,7 +98955,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 8.6 (96th pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "cj-phillip",
@@ -97551,7 +99500,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Verified Speed",
+    "stat": "100m 10.99",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "parker-fulghum",
@@ -97722,7 +99678,14 @@
   "nil_ceiling": 300000,
   "nil_basis": "P4 rotation-depth · WR",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Verified Speed",
+    "stat": "40y 4.40",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "bryce-anderson",
@@ -98035,7 +99998,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 8.3% (83rd pct), pressure rate 11.1%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 8.3% (83rd pct) at 250 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "carl-fauntroy",
@@ -98899,7 +100874,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 16.3% (89th pct), pressure rate 11.4%",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kevontay-wells",
@@ -99029,7 +101011,19 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Pure Rusher",
+    "stat": "Win rate 15.5% (99th pct), pressure rate 14.2%",
+    "proxy": false
+   },
+   {
+    "tag": "Speed Rusher",
+    "stat": "Win rate 15.5% (99th pct) at 255 lb (group median 286)",
+    "proxy": true
+   }
+  ]
  },
  {
   "id": "marcus-ross",
@@ -99883,7 +101877,14 @@
   "nil_ceiling": 150000,
   "nil_basis": "P4 rotation-depth · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: P4 depth"
+  "nil_projection_basis": "band likely: P4 depth",
+  "tags": [
+   {
+    "tag": "Verified Speed",
+    "stat": "100m 10.88 (wind +2.1 (over +2.0 limit - wind-aided))",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jabari-tiller",
@@ -104553,7 +106554,19 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Ballhawk",
+    "stat": "(INT+PBU) per target 0.24 (96th pct), 0 INT + 5 PBU on 21 targets",
+    "proxy": false
+   },
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 62% (98th pct), 102 press snaps on 164 coverage snaps, rating allowed 70.7",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "derek-burns",
@@ -105934,7 +107947,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "Sure-Handed",
+    "stat": "Drop rate 2.4% (86th pct), 39 catches on 41 catchable",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "jayden-wilson",
@@ -107262,7 +109282,14 @@
   "nil_ceiling": 200000,
   "nil_basis": "G6 starter · CB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Press / Jam",
+    "stat": "Press share 61% (98th pct), 126 press snaps on 206 coverage snaps, rating allowed 68.9",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kam-thomas",
@@ -107382,7 +109409,14 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "tags": [
+   {
+    "tag": "YAC Threat",
+    "stat": "YAC/rec 7.8 (92nd pct)",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "kode-lowe",
@@ -108526,7 +110560,14 @@
   "nil_ceiling": 600000,
   "nil_basis": "G6 starter · QB",
   "nil_band_basis": "INTERPOLATED",
-  "nil_projection_basis": "band likely: G6 starter"
+  "nil_projection_basis": "band likely: G6 starter",
+  "tags": [
+   {
+    "tag": "Dual Threat",
+    "stat": "817 rushing yards (96th pct) on 85 carries",
+    "proxy": false
+   }
+  ]
  },
  {
   "id": "royce-wilson",
