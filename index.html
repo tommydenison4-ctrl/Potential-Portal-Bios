@@ -45,75 +45,63 @@
 <main class="wrap">
   <!-- SPLASH / TITLE VIEW -->
   <section id="view-splash" hidden>
-    <div class="splash-hero">
-      <p class="splash-kicker">Player Evaluation Library</p>
-      <h1 class="splash-title">Player Books</h1>
-      <p class="splash-sub">Every player graded, banded and called in the format of the printed books. Pick a direction to start.</p>
-      <div class="splash-stats">
-        <div class="sstat"><span class="sstat-n" id="statPlayers">—</span><span class="sstat-l">Players evaluated</span></div>
-        <div class="sstat"><span class="sstat-n" id="statBooks">—</span><span class="sstat-l">Player Books</span></div>
-        <div class="sstat"><span class="sstat-n">2</span><span class="sstat-l">Directions</span></div>
-        <div class="sstat"><span class="sstat-n" id="statTeams">—</span><span class="sstat-l">Schools compared</span></div>
+    <div class="splash-in">
+      <div class="splash-hero2">
+        <p class="splash-kicker">Player Evaluation Library</p>
+        <h1 class="splash-title">The portal,<br>evaluated.</h1>
+        <p class="splash-sub">Every player in the library is graded and given a verdict — The Call — in the format of the printed books. Two directions. One standard.</p>
+        <div class="splash-stats">
+          <div class="sstat"><span class="sstat-n" id="statPlayers">—</span><span class="sstat-l">Players evaluated</span></div>
+          <div class="sstat"><span class="sstat-n" id="statBooks">—</span><span class="sstat-l">Player Books</span></div>
+          <div class="sstat"><span class="sstat-n" id="statTeams">—</span><span class="sstat-l">FBS schools</span></div>
+        </div>
       </div>
+      <div class="splash-choices">
+        <a class="choice-card" href="#/up">
+          <span class="choice-dir">FCS — Moving Up</span>
+          <span class="choice-count" id="upCount">—</span>
+          <span class="choice-meta" id="splashUpMeta"></span>
+          <span class="choice-desc">FCS players evaluated to move up to G6 and P4 — full Player Book pages: band, fits, pro track, The Call.</span>
+          <span class="choice-go">Enter the directory →</span>
+        </a>
+        <a class="choice-card" href="#/down">
+          <span class="choice-dir">P4 — Moving Down</span>
+          <span class="choice-count" id="downCount">—</span>
+          <span class="choice-meta" id="splashDownMeta"></span>
+          <span class="choice-desc">P4 players evaluated to move down to G6 — the same Player Book format, run in reverse.</span>
+          <span class="choice-go">Enter the directory →</span>
+        </a>
+      </div>
+      <p class="splash-team"><span id="splashTeamName"></span> <a id="splashTeamLink" href="#/championship-path" hidden>See its championship path →</a></p>
+      <div class="splash-more">
+        <a class="stile" href="#/prototype">
+          <span class="stile-t">Prototype search <span class="stile-go">→</span></span>
+          <span class="stile-d">Build the player you want — size, hometown, ability, price — and get the matches.</span>
+        </a>
+        <a class="stile" href="#/championship-path">
+          <span class="stile-t">Championship path <span class="stile-go">→</span></span>
+          <span class="stile-d">One team — every room measured against its conference-best standard, and the moves that close the gap.</span>
+        </a>
+        <a class="stile" href="#/value">
+          <span class="stile-t">Value Board <span class="stile-go">→</span></span>
+          <span class="stile-d">Every priced player ranked inside his own position — his grade against his price.</span>
+        </a>
+        <a class="stile" href="#/map">
+          <span class="stile-t">Map <span class="stile-go">→</span></span>
+          <span class="stile-d">Every player placed by the hometown on his record. Click a state, or tick the list.</span>
+        </a>
+        <a class="stile" href="#/prospects">
+          <span class="stile-t">Prospect list <span class="stile-go">→</span></span>
+          <span class="stile-d">The players you have starred, kept in one place.</span>
+        </a>
+        <a class="stile" href="#/team-comparison">
+          <span class="stile-t">Team comparison <span class="stile-go">→</span></span>
+          <span class="stile-d">Up to four schools side by side — every room against its conference and both levels.</span>
+          <span class="stile-count"><span id="teamCardCount">—</span> <span id="splashTeamMeta"></span></span>
+        </a>
+      </div>
+      <p class="splash-foot">Grades are each book’s headline PFF grade for the 2026 season. Bands, prices and verdicts are as printed in the books.</p>
     </div>
-    <div class="splash-choices">
-      <a class="choice-card" href="#/up">
-        <span class="choice-dir">FCS — Moving Up</span>
-        <span class="choice-count" id="upCount">—</span>
-        <span class="choice-desc">FCS players evaluated to move up to G6 / P4 — full Player Book pages: band, pro track on the two baselines, fits, The Call.</span>
-        <span class="choice-meta" id="splashUpMeta"></span>
-        <span class="choice-go">Enter the directory →</span>
-      </a>
-      <a class="choice-card" href="#/down">
-        <span class="choice-dir">P4 — Moving Down</span>
-        <span class="choice-count" id="downCount">—</span>
-        <span class="choice-desc">P4 players evaluated to move down to G6 — the same Player Book format, run in reverse.</span>
-        <span class="choice-meta" id="splashDownMeta"></span>
-        <span class="choice-go">Enter the directory →</span>
-      </a>
-      <a class="choice-card choice-card-wide" href="#/team-comparison">
-        <span class="choice-dir">Team Comparison</span>
-        <span class="choice-count" id="teamCardCount">—</span>
-        <span class="choice-desc">Compare up to four schools side by side — each against its conference and both levels, G6 and P4 — room by room, with the evaluated players who would upgrade each room.</span>
-        <span class="choice-meta" id="splashTeamMeta"></span>
-        <span class="choice-go">Compare schools →</span>
-      </a>
-    </div>
-    <a class="compare-banner" href="#/compare-conferences">
-      <span class="cb-title">Conference comparison</span>
-      <span class="cb-desc">Who has what, where, at what year — the nine books side by side: conference inventory, the position grid, class years, and the ULM &amp; UTEP room cliffs.</span>
-      <span class="choice-go">Open the comparison →</span>
-    </a>
-    <a class="compare-banner" href="#/team-comparison">
-      <span class="cb-title">Team comparison</span>
-      <span class="cb-desc">Pick up to four FBS teams and compare them side by side: every position room against its conference, the G6 and the P4, plus the evaluated players who would upgrade each room.</span>
-      <span class="choice-go">Open team comparison →</span>
-    </a>
-    <a class="compare-banner" href="#/championship-path">
-      <span class="cb-title">Path to a conference championship</span>
-      <span class="cb-desc">Pick one FBS team and see its path: the conference-best standard in every position room, the evaluated players who are getable for that room, and the single best move per room that closes the gap to the standard.</span>
-      <span class="choice-go">Open the championship path →</span>
-    </a>
-    <a class="compare-banner" href="#/value">
-      <span class="cb-title">Value Board</span>
-      <span class="cb-desc">Every priced player ranked inside his own position — his benchmark grade against his estimated price, in steady and ceiling lenses, with his NIL band printed beside every score.</span>
-      <span class="choice-go">Open the value board →</span>
-    </a>
-    <a class="compare-banner" href="#/changes">
-      <span class="cb-title">What changed</span>
-      <span class="cb-desc">The newest players, books and features, week by week.</span>
-      <span class="choice-go">See what changed →</span>
-    </a>
-    <a class="compare-banner" href="#/map">
-      <span class="cb-title">Map — players by home state</span>
-      <span class="cb-desc">Every evaluated player placed by the hometown on his record: click states on the map — Canada drawn as one region, the rest of the world under the globe — or tick them off the alphabetical list.</span>
-      <span class="choice-go">Open the map →</span>
-    </a>
-    <a class="compare-banner" href="#/prototype">
-      <span class="cb-title">Prototype search</span>
-      <span class="cb-desc">Build the player you want — position, size (with a one-click optimal size for the position), hometown geography, ability, price — and get back the evaluated players who match, ready to star or save to a class.</span>
-      <span class="choice-go">Open the prototype search →</span>
-    </a>
   </section>
 
   <!-- DOWN EMPTY STATE -->
@@ -186,7 +174,17 @@
               </div>
             </div>
           </div>
+          <div class="ms-field">
+            <div class="ms" data-ms="f-offer">
+              <button type="button" class="ms-btn" id="f-offer" aria-haspopup="true" aria-expanded="false">Offer <span class="ms-caret">▾</span></button>
+              <div class="ms-panel" hidden>
+                <div class="ms-opts"></div>
+                <button type="button" class="ms-clear">Clear</button>
+              </div>
+            </div>
+          </div>
         </div>
+        <p class="p-sub" id="offerModeNote"></p>
         <div class="row checks">
           <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
           <label class="check"><input type="checkbox" id="f-ulm"> Louisiana-Monroe qualifiers only</label>
@@ -500,10 +498,10 @@
           <div class="geo-list proto-geo" id="protoArch"></div>
         </div>
         <div class="proto-col">
-          <h3 class="trait-gh">Skill traits — percentile bars</h3>
-          <p class="p-sub">The directory’s own skills filter: bars set here are the bars on the directories’ Skills tab, and the two toggles are shared the same way.</p>
-          <label class="check trait-lean"><input type="checkbox" id="p-lean"> <span><b>Value lean</b> — a set trait counts only at the 60th percentile or better and at least 30 points ahead of his price percentile.</span></label>
-          <label class="check trait-lean"><input type="checkbox" id="p-flash"> <span><b>Include limited-action flashes</b> — a player below a trait’s volume floor can clear its bar on a flash (same trait, same pool, lower floor, sample printed).</span></label>
+          <h3 class="trait-gh">Skills — filter by what he does best</h3>
+          <p class="p-sub">The same skills filter as the Skills tab on the directories — the bars and both switches below are shared with it. A bar keeps only the players in that top slice for the skill: 75 keeps the top quarter, 90 the top tenth.</p>
+          <label class="check trait-lean"><input type="checkbox" id="p-lean"> <span><b>Value lean</b> — a set skill counts only when it sits in the top 40% at his position and at least 30 points ahead of his price ranking.</span></label>
+          <label class="check trait-lean"><input type="checkbox" id="p-flash"> <span><b>Include limited-action flashes</b> — a player short on plays can clear a bar on a skill that showed up in limited action (it prints red, with the number of plays on it).</span></label>
           <div id="protoTraits"></div>
         </div>
       </div>
@@ -519,6 +517,13 @@
           <input id="p-nil-max" class="build-in" type="number" min="0" placeholder="any">
         </label>
         <span class="p-sub">A max price keeps only priced players under it, on the basis picked.</span>
+      </div>
+      <div class="row build-row">
+        <span class="build-label">Offer</span>
+        <label class="check"><input type="checkbox" id="p-offer-nil"> NIL</label>
+        <label class="check"><input type="checkbox" id="p-offer-sch"> Scholarship only</label>
+        <label class="check"><input type="checkbox" id="p-offer-wo"> Walk-on</label>
+        <span class="p-sub" id="p-offer-note"></span>
       </div>
       <div class="row checks">
         <button id="p-reset" class="btn-ghost" type="button">Reset</button>
