@@ -406,6 +406,7 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .room-tag{display:inline-block;background:var(--accent);color:#fff;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
 .down-badge{display:inline-block;background:#e2e8f0;color:#334155;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
 .reg-badge{display:inline-block;background:#dcfce7;color:#166534;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
+.starter-badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
 .btn-add{font:inherit;font-size:12px;font-weight:600;background:none;border:1px solid var(--line);border-radius:7px;padding:4px 9px;cursor:pointer;color:var(--accent2);white-space:nowrap;flex:none}
 .btn-add:disabled{opacity:.55;cursor:default}
 .btn-remove{font:inherit;background:none;border:none;color:var(--mut);cursor:pointer;font-size:14px;padding:2px 6px;flex:none}
