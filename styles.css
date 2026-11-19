@@ -553,6 +553,21 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .ribbon-panel .trait-card{border:0;box-shadow:none;padding:0;margin:0}
 .geo-list{columns:3;column-gap:26px;max-height:300px;overflow:auto}
 .geo-list .map-opt{break-inside:avoid}
+/* Hometown tab: list + map projection + Done (Nov 19, 2026) */
+.geo-layout{display:flex;gap:20px;align-items:flex-start}
+.geo-layout #geoPanel{flex:1 1 auto;min-width:0}
+.geo-layout #geoMap{flex:0 0 348px;min-width:0}
+.geo-svg .map-lab{font-size:20px}
+.geo-svg .map-lab-can{font-size:27px}
+.geo-svg .map-callout{font-size:19px}
+.geo-blocks{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.geo-block{display:flex;align-items:center;gap:7px;font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);border-radius:9px;padding:6px 10px;cursor:pointer;background:#fff;color:var(--accent)}
+.geo-block:hover{border-color:var(--accent2)}
+.geo-block .map-globe{width:20px;height:20px;flex:none;margin-top:0}
+.geo-block.sel{border-color:var(--accent2);box-shadow:inset 0 0 0 1px var(--accent2);color:var(--accent2)}
+.geo-mapnote{margin-top:7px}
+.geo-foot{display:flex;align-items:center;gap:12px;margin-top:12px;border-top:1px solid var(--line);padding-top:11px}
+.geo-foot .btn-save{margin-left:auto;padding:7px 24px}
 .proto-cols{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
 .proto-col{flex:1 1 280px;min-width:250px}
 .proto-geo{columns:2;max-height:260px}
@@ -560,4 +575,6 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 @media (max-width:760px){
   .geo-list{columns:2}
   .ribbon-strip .result-count{margin-left:0}
+  .geo-layout{flex-direction:column}
+  .geo-layout #geoMap{flex:1 1 auto;width:100%}
 }
