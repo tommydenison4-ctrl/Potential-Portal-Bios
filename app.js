@@ -1437,6 +1437,7 @@ function renderPlayer(p) {
         ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
+        ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
       </div>
     </div></div>`;
@@ -3816,10 +3817,25 @@ function loadTeams() {
 
 function loadChamp() {
   // same failure-tolerant pattern: a missing or malformed
-  // championship.json degrades to no championship data, never an error
-  return fetch('championship.json')
+  // championship.json degrades to no championship data, never an error.
+  // The payload ships in two parts (championship.json + championship_b.json,
+  // split by split_championship.py to stay under the host's file-size wall);
+  // the teams lists merge by team name, later part winning, so the page sees
+  // one dataset. A missing second part degrades to part one alone.
+  const get = url => fetch(url)
     .then(r => (r.ok ? r.json() : null))
-    .then(j => (j && !Array.isArray(j) && Array.isArray(j.teams) && j.meta) ? j : null)
+    .catch(() => null);
+  return Promise.all([get('championship.json'), get('championship_b.json')])
+    .then(([a, b]) => {
+      if (!a || Array.isArray(a) || !Array.isArray(a.teams) || !a.meta) return null;
+      if (b && Array.isArray(b.teams)) {
+        const byName = new Map();
+        for (const t of a.teams) byName.set(t.name, t);
+        for (const t of b.teams) byName.set(t.name, t);
+        a.teams = [...byName.values()];
+      }
+      return a;
+    })
     .catch(() => null);
 }
 
