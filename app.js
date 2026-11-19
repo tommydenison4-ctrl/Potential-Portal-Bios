@@ -6,6 +6,9 @@ let CHAMP = null;           // championship path dataset (championship.json)
 let CHANGES = null;         // what-changed log (changes.json), newest week first
 let TRAITS_BY_ID = {};      // trait layer (traits.json): player id -> [trait percentile entries]
 let TRAIT_REG = {};         // trait layer registry: trait key -> {label, groups, report, proxy, floor}
+let FLASHES_BY_ID = {};     // flash layer (flashes.json): player id -> [limited-action flash entries]
+let FLASH_REG = {};         // flash registry: trait key -> {label, groups, floor, flash_floor}
+let OPTIMAL_SIZE = {};      // optimal size bands (optimal_size.json): group -> {ht_min, ht_max, wt_min, wt_max, ...}
 let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
 let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
 let PROSPECTS = [];         // Prospect List: highlighted player ids (localStorage portalProspects)
@@ -64,14 +67,39 @@ const holdsAllTags = (p, set) => [...set].every(t => tagsOf(p).some(x => x.tag =
 const TRAIT_GROUP_ORDER = ['QB', 'RB', 'WR', 'TE', 'OL', 'ED', 'DI', 'LB', 'CB', 'S'];
 let traitBars = {};         // trait key -> percentile bar (number)
 let valueLean = false;
+let traitFlash = false;     // include limited-action flashes in trait filtering (Stage 2a, default off)
 
 const traitsOf = p => (p && TRAITS_BY_ID[p.id]) || [];
 const traitEntry = (p, key) => traitsOf(p).find(e => e.key === key) || null;
 
+/* -------- flash layer ("limited action" skills) --------
+   The flash layer (build_flashes.py -> flashes.json) carries the same
+   29 traits at roughly half the standard volume floors, strictly for
+   players BELOW the standard floor, at or above the 75th percentile
+   of the same pool — so a flash percentile means what a trait
+   percentile means, on a sample that always prints beside the claim.
+   A player never carries both a trait entry and a flash entry for
+   the same trait. Flashes surface in the skills strip, as red badges
+   in the directories, and in trait filtering only while the
+   include-flashes toggle is on. */
+const flashesOf = p => (p && FLASHES_BY_ID[p.id]) || [];
+const flashEntry = (p, key) => flashesOf(p).find(e => e.key === key) || null;
+const ord = n => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+const flashBadges = id => {
+  const fs = flashesOf(byIdAll[id]);
+  if (!fs.length) return '';
+  return ' ' + fs.map(e => `<span class="flash-badge">Limited action — ${esc(e.label)} · ${ord(Math.round(e.pct))} pct · on ${esc(e.volume)} ${esc(e.volume_label)}</span>`).join('');
+};
+
 function passesTraits(p) {
   for (const key of Object.keys(traitBars)) {
-    const e = traitEntry(p, key);
-    if (!e || e.pct < traitBars[key]) return false;
+    const bar = traitBars[key];
+    let e = traitEntry(p, key);
+    if ((!e || e.pct < bar) && traitFlash) {
+      const fe = flashEntry(p, key);
+      if (fe && fe.pct >= bar) e = fe;   // the flash satisfies the bar — the lean below reads off it too
+    }
+    if (!e || e.pct < bar) return false;
     if (valueLean) {
       if (e.pct < 60) return false;
       const v = p.value;
@@ -88,12 +116,14 @@ function buildTraitPanel() {
   if (!Object.keys(TRAIT_REG).length) { el.innerHTML = ''; return; }
   const counts = {};
   for (const p of PLAYERS) for (const e of traitsOf(p)) counts[e.key + '|' + e.group] = (counts[e.key + '|' + e.group] || 0) + 1;
+  const fcounts = {};
+  for (const p of PLAYERS) for (const e of flashesOf(p)) fcounts[e.key + '|' + e.group] = (fcounts[e.key + '|' + e.group] || 0) + 1;
   const secs = TRAIT_GROUP_ORDER.map(g => {
     const keys = Object.keys(TRAIT_REG).filter(k => (TRAIT_REG[k].groups || []).includes(g));
     if (!keys.length) return '';
     const rowsHtml = keys.map(k => {
-      const r = TRAIT_REG[k], n = counts[k + '|' + g] || 0;
-      return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} in this directory</span><input type="number" class="trait-bar" data-trait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}"${n ? '' : ' disabled'} aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
+      const r = TRAIT_REG[k], n = counts[k + '|' + g] || 0, fn = fcounts[k + '|' + g] || 0;
+      return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} in this directory${fn ? ` · ${fn} more on flashes` : ''}</span><input type="number" class="trait-bar" data-trait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}"${n || (traitFlash && fn) ? '' : ' disabled'} aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
     }).join('');
     return `<div class="trait-group"><h3 class="trait-gh">${g}</h3>${rowsHtml}</div>`;
   }).join('');
@@ -101,6 +131,7 @@ function buildTraitPanel() {
     <h2 class="sec" style="margin-top:2px">Skill traits — percentile bars</h2>
     <p class="p-sub">Set a percentile bar on any trait and the directory keeps only the players whose trait sits at or above it in his level-and-position pool. A player with no entry for a set trait is below its volume floor and drops out. Bars combine: every set bar applies at once. A trait marked <b>proxy</b> is measured through a stand-in stat, as on the archetype tags.</p>
     <label class="check trait-lean"><input type="checkbox" id="t-lean"${valueLean ? ' checked' : ''}> <span><b>Value lean</b> — with the lean on, a set trait only counts when it sits at the 60th percentile or better <b>and</b> runs at least 30 points ahead of his price percentile in his position pool: a real skill, bought cheap. Players with no NIL price can’t carry the lean and drop out while it’s on.</span></label>
+    <label class="check trait-lean"><input type="checkbox" id="t-flash"${traitFlash ? ' checked' : ''}> <span><b>Include limited-action flashes</b> — with this on, a player below a trait’s volume floor can still clear its bar on a <b>flash</b>: the same trait, the same pool, at a lower floor, printed red with its sample size wherever it shows. Off (the standard behaviour), only full-volume trait entries count.</span></label>
     ${secs}</div>`;
   el.querySelectorAll('.trait-bar').forEach(inp => inp.addEventListener('input', () => {
     const v = parseFloat(inp.value);
@@ -113,6 +144,8 @@ function buildTraitPanel() {
   }));
   const lean = $('t-lean');
   if (lean) lean.addEventListener('change', () => { valueLean = lean.checked; applyFilters(); });
+  const fl = $('t-flash');
+  if (fl) fl.addEventListener('change', () => { traitFlash = fl.checked; buildTraitPanel(); applyFilters(); });
 }
 
 /* -------- build filters (height / weight / build for his position) --------
@@ -438,7 +471,9 @@ function clearAllFilters() {
   FILTER_DEFS.forEach(d => clearFilter(d.id));
   archModeAll = false;
   const aa = $('f-arch-all'); if (aa) aa.checked = false;
-  traitBars = {}; valueLean = false;
+  traitBars = {}; valueLean = false; traitFlash = false;
+  dirGeoSel.clear();
+  buildGeoPanel();
   ['b-ht-min', 'b-ht-max', 'b-wt-min', 'b-wt-max'].forEach(id => { const el = $(id); if (el) el.value = ''; });
   const bs = $('b-build'); if (bs) bs.value = 'any';
   buildTraitPanel();
@@ -472,6 +507,7 @@ function setDataset(dir) {
   closeMs();
   buildFilterPanels();
   buildTraitPanel();
+  buildGeoPanel();
   $('dirTitle').textContent = DIRS[dir].label;
   const sw = $('dirSwitch');
   if (dir === 'up') { sw.textContent = 'P4 — Moving Down →'; sw.href = '#/down'; }
@@ -493,7 +529,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value', 'prospects', 'map']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value', 'prospects', 'map', 'prototype']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -513,7 +549,7 @@ function fitsMyTeam(p, teamName) {
   if (!f || !teamName) return false;
   if (f.ulm_fit && f.ulm_fit.school === teamName) return true;
   if (teamName === 'Louisiana-Monroe' && f.ulm_qualifier) return true;
-  return [...(f.g6 || []), ...(f.p4 || [])].some(r => r.school === teamName);
+  return [...(f.g6 || []), ...(f.p4 || []), ...(f.depth_g6 || []), ...(f.depth_p4 || [])].some(r => r.school === teamName);
 }
 
 function currentFilters() {
@@ -523,11 +559,71 @@ function currentFilters() {
   };
 }
 
+/* -------- directory hometown filter + the filter ribbon --------
+   Stage 4 (Tommy, Nov 19, 2026): the directory's controls live in a
+   ribbon — a slim tab strip (Search / Size / Hometown / Archetypes /
+   Skills, one tab per search dimension) over an expandable panel,
+   collapsed on load so the player list owns the page. The strip
+   always carries the result count, a "filter groups active"
+   indicator and Clear all, so a collapsed ribbon never hides that
+   the list is filtered. Containment only: every control keeps its
+   id, behaviour and filter logic.
+   The Hometown tab is a real filter group of its own: the map view's
+   buckets (states + Canada / International / Hometown not on record)
+   as a multi-select over the home_state / home_country fields every
+   record carries, counted in the current directory. A player with no
+   hometown on record matches only the not-on-record bucket. */
+let dirGeoSel = new Set();   // directory hometown selection (map keys)
+let ribbonTab = null;        // the open ribbon tab, or null (collapsed)
+
+function buildGeoPanel() {
+  const el = $('geoPanel');
+  if (!el) return;
+  const counts = {};
+  for (const p of PLAYERS) { const k = mapKeyOf(p); counts[k] = (counts[k] || 0) + 1; }
+  const row = k => `<label class="map-opt"><input type="checkbox" data-geocheck="${k}"${dirGeoSel.has(k) ? ' checked' : ''}> <span class="map-opt-name">${esc(mapKeyLabel(k))}</span> <span class="map-opt-n">${counts[k] || 0}</span></label>`;
+  const stateCodes = Object.keys(STATE_PATHS).sort((a, b) => (STATE_NAMES[a] || a).localeCompare(STATE_NAMES[b] || b));
+  el.innerHTML = `<p class="p-sub" style="margin-top:0">Filter this directory by the hometown on each player’s record — the same buckets as the map view, counted in this directory. Tick as many as you like; a player matches when his hometown bucket is ticked. A player with no hometown on record matches only “Hometown not on record”.</p><div class="geo-list">${stateCodes.map(row).join('')}<div class="map-opt-sep"></div>${['CANADA', 'INTL', 'UNKNOWN'].map(row).join('')}</div>`;
+}
+
+function activeFilterGroups() {
+  const f = currentFilters();
+  const groups = [];
+  if (f.q || f.hv || f.ulm || f.mt || FILTER_DEFS.some(d => d.id !== 'f-arch' && filterSel[d.id].size)) groups.push('search');
+  if (buildFilterActive(buildFilterState())) groups.push('size');
+  if (dirGeoSel.size) groups.push('hometown');
+  if (filterSel['f-arch'].size || archModeAll) groups.push('archetypes');
+  if (Object.keys(traitBars).length || valueLean || traitFlash) groups.push('skills');
+  return groups;
+}
+
+function syncRibbon() {
+  const ind = $('ribbonActive');
+  if (!ind) return;
+  const groups = activeFilterGroups();
+  ind.hidden = !groups.length;
+  ind.textContent = groups.length ? `${groups.length} filter group${groups.length === 1 ? '' : 's'} active` : '';
+  document.querySelectorAll('.ribbon-tab').forEach(b => {
+    b.classList.toggle('open', ribbonTab === b.dataset.rtab);
+    b.classList.toggle('has-active', groups.includes(b.dataset.rtab));
+    b.setAttribute('aria-expanded', ribbonTab === b.dataset.rtab ? 'true' : 'false');
+  });
+  const chev = $('ribbonChev');
+  if (chev) chev.hidden = !ribbonTab;
+}
+
+function setRibbonTab(tab) {
+  ribbonTab = tab;
+  document.querySelectorAll('.ribbon-panel').forEach(pn => { pn.hidden = pn.dataset.rpanel !== tab; });
+  syncRibbon();
+}
+
 function applyFilters() {
   const f = currentFilters();
   let rows = PLAYERS.filter(p => {
     if (f.q && !(p.name.toLowerCase().includes(f.q) || (p.school || '').toLowerCase().includes(f.q))) return false;
     for (const def of FILTER_DEFS) if (!def.test(p, filterSel[def.id])) return false;
+    if (dirGeoSel.size && !dirGeoSel.has(mapKeyOf(p))) return false;
     if (!passesTraits(p)) return false;
     if (f.hv && !p.hidden_value) return false;
     if (f.ulm && !(p.fits && p.fits.ulm_qualifier)) return false;
@@ -564,12 +660,13 @@ function applyFilters() {
   const th = document.querySelector(`th[data-sort="${sortKey}"] .arrow`);
   if (th) th.textContent = sortDir === 1 ? '▲' : '▼';
   $('resultCount').textContent = `${rows.length} of ${PLAYERS.length} players${missingNote}`;
+  syncRibbon();
   $('dirEmpty').hidden = rows.length > 0;
   $('dirBody').innerHTML = rows.map(p => `
     <tr data-id="${esc(p.id)}">
       <td class="cmp-cell"><input type="checkbox" class="cmp-check" data-cmp="${esc(p.id)}" ${cmpSel.includes(p.id) ? 'checked' : ''} aria-label="Select ${esc(p.name)} to compare"></td>
       <td>${photo(p)}</td>
-      <td>${prospectStar(p)}<span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}${tagBadges(p.id)}</td>
+      <td>${prospectStar(p)}<span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}${tagBadges(p.id)}${flashBadges(p.id)}</td>
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
@@ -592,6 +689,31 @@ function fitsTable(title, rows) {
   if (!rows || !rows.length) return '';
   return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th></tr>
     ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+}
+
+/* Depth-tier fits (Tommy, Nov 19, 2026): the rooms whose lowest played
+   man his benchmark beats without clearing the room's top man — the
+   second tier under the printed starter-tier fits, stamped onto the
+   records by apply_fits_depth_join.py as fits.depth_g6 / depth_p4. */
+function fitsDepthTable(title, rows) {
+  if (!rows || !rows.length) return '';
+  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest man in the rotation</th><th class="num">His grade</th></tr>
+    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+}
+
+/* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
+   archetype tags and his strongest standard traits in the standard
+   styling, his flashes beside them in red — each flash labelled
+   "Limited action" with its percentile and its sample volume. */
+function skillsStrip(p) {
+  const tags = tagsOf(p);
+  const traits = traitsOf(p).slice().sort((a, b) => b.pct - a.pct).slice(0, 4);
+  const flashes = flashesOf(p);
+  if (!tags.length && !traits.length && !flashes.length) return '';
+  const tagHtml = tags.map(t => `<span class="tag-badge${t.proxy ? ' proxy' : ''}">${esc(t.tag)}${t.proxy ? ' · proxy' : ''}</span>`).join('');
+  const traitHtml = traits.map(e => `<span class="trait-badge">${esc(e.label)} · ${ord(Math.round(e.pct))} pct</span>`).join('');
+  const flashHtml = flashes.map(e => `<span class="flash-badge">Limited action — ${esc(e.label)} · ${ord(Math.round(e.pct))} pct · on ${esc(e.volume)} ${esc(e.volume_label)}</span>`).join('');
+  return `<div class="skills-strip"><span class="skills-label">Skills</span>${tagHtml}${traitHtml}${flashHtml}</div>`;
 }
 
 const PRO_LADDER = ['No verified look', 'Showcase invite', 'Signed', 'Practice squad', 'Roster appearance', 'NFL starter'];
@@ -791,6 +913,7 @@ function renderPlayer(p) {
         ${portalRankLine(p)}
         ${home ? `<p class="p-home">Hometown: <b>${esc(home)}</b></p>` : ''}
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
+        ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
@@ -847,12 +970,14 @@ function renderPlayer(p) {
     </div>`;
   }
 
-  if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit)) {
+  if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit || (p.fits.depth_g6 && p.fits.depth_g6.length) || (p.fits.depth_p4 && p.fits.depth_p4.length))) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Fits — rooms he would upgrade</h2>
-      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent.</p>` : ''}
+      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room's played rotation without clearing its top man.</p>` : ''}
       ${fitsTable('Top G6 fits', p.fits.g6)}
       ${fitsTable(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits', p.fits.p4)}
       ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td></tr></table></div>` : ''}
+      ${fitsDepthTable('Also improves the depth at — G6', p.fits.depth_g6)}
+      ${fitsDepthTable('Also improves the depth at — P4', p.fits.depth_p4)}
     </div>`;
   }
 
@@ -1360,16 +1485,16 @@ function candBlock(t, g) {
     return `<div class="cand-block">${head}<p>No volume-qualified incumbent in the pool snapshot — the strict test has no bar to clear, so no upgrade candidates are named for this room.</p></div>`;
   }
   if (!r.cand_total) {
-    return `<div class="cand-block">${head}<p>No evaluated player clears this room’s bar — the incumbent is ${esc(r.incumbent)} at ${f1(r.inc_grade)}.</p></div>`;
+    return `<div class="cand-block">${head}<p>No evaluated player beats the lowest man in this room’s rotation under the depth test — the incumbent is ${esc(r.incumbent)} at ${f1(r.inc_grade)}.</p></div>`;
   }
   const rows = r.cand.map(c => `<tr>
-    <td><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a></td>
+    <td><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}</td>
     <td>${esc(c.book)}</td><td>${esc(c.school)}</td>
     <td class="num">${f1(c.grade)}</td><td class="num"><b>${f1(c.benchmark)}</b></td></tr>`).join('');
   const more = r.cand_total > r.cand.length
-    ? `<p class="p-sub">Top ${r.cand.length} shown by benchmark — ${r.cand_total - r.cand.length} more evaluated player${r.cand_total - r.cand.length === 1 ? '' : 's'} also clear${r.cand_total - r.cand.length === 1 ? 's' : ''} the bar.</p>` : '';
+    ? `<p class="p-sub">Top ${r.cand.length} shown by benchmark — ${r.cand_total - r.cand.length} more evaluated player${r.cand_total - r.cand.length === 1 ? '' : 's'} also beat${r.cand_total - r.cand.length === 1 ? 's' : ''} the rotation’s lowest man.</p>` : '';
   return `<div class="cand-block">${head}
-    <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} clear the bar (incumbent ${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
+    <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} beat the lowest man in this room’s rotation under the depth test; a player flagged “Beats your starter” also clears the incumbent (${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
     <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>Book</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th></tr>${rows}</table></div>${more}</div>`;
 }
 
@@ -2717,6 +2842,166 @@ function renderMap() {
   </div>`;
 }
 
+/* ---------------- prototype search (build-a-player) ----------------
+   Tommy, Nov 19, 2026: describe the player you want — position, size,
+   hometown geography, ability, price — and get back the evaluated
+   players who match, each row linking to his page and carrying the
+   Prospect star and a Save-to-class action that write to the same
+   localStorage stores as everywhere else. Every input is optional
+   except position. The skills state (trait bars, the value lean, the
+   include-flashes toggle) is the directory's own — one skills filter
+   across the site — and the geography is the map view's own selection
+   (mapSel): ticking a state here ticks it there. "Optimal size" is
+   computed from the library itself by build_optimal_size.py: the
+   height and weight interquartile ranges of the top-quartile
+   benchmark players at the position (the group's full range when
+   that set is under 20 players, with the basis printed). */
+let protoArchSel = new Set();
+let protoArchAll = false;
+let protoCompCache = {};    // pool key -> {player id -> build composite | null}
+
+const protoBench = p => {
+  const b = (p.fits || {}).benchmark;
+  return b != null ? b : (p.proj != null ? p.proj : null);
+};
+
+function protoPool() {
+  const d = $('p-dir').value;
+  return d === 'up' ? UP : d === 'down' ? DOWN : [...UP, ...DOWN];
+}
+
+function protoComposite(p, pool, key) {
+  if (!protoCompCache[key]) {
+    const byGroup = {};
+    for (const q of pool) (byGroup[q.screen_position || q.position] = byGroup[q.screen_position || q.position] || []).push(q);
+    const map = {};
+    for (const g of Object.keys(byGroup)) {
+      const hs = [], ws = [];
+      for (const q of byGroup[g]) {
+        const h = heightInches(q.height); if (h != null) hs.push(h);
+        if (q.weight != null) ws.push(q.weight);
+      }
+      hs.sort((a, b) => a - b); ws.sort((a, b) => a - b);
+      for (const q of byGroup[g]) {
+        const h = heightInches(q.height);
+        map[q.id] = (h != null && q.weight != null && hs.length && ws.length)
+          ? (midPct(hs, h) + midPct(ws, q.weight)) / 2 : null;
+      }
+    }
+    protoCompCache[key] = map;
+  }
+  const c = protoCompCache[key][p.id];
+  return c === undefined ? null : c;
+}
+
+function protoBuildTest(p, bf, pool, key) {
+  const h = heightInches(p.height), w = p.weight == null ? null : p.weight;
+  if (bf.htMin != null && (h == null || h < bf.htMin)) return false;
+  if (bf.htMax != null && (h == null || h > bf.htMax)) return false;
+  if (bf.wtMin != null && (w == null || w < bf.wtMin)) return false;
+  if (bf.wtMax != null && (w == null || w > bf.wtMax)) return false;
+  if (bf.build !== 'any') {
+    const c = protoComposite(p, pool, key);
+    if (c == null) return false;
+    if (bf.build === 'half' && c < 50) return false;
+    if (bf.build === 'quartile' && c < 75) return false;
+  }
+  return true;
+}
+
+function buildProtoPanels() {
+  const counts = mapCounts();
+  const geoRow = k => `<label class="map-opt"><input type="checkbox" data-protogeo="${k}"${mapSel.has(k) ? ' checked' : ''}> <span class="map-opt-name">${esc(mapKeyLabel(k))}</span> <span class="map-opt-n">${counts[k] || 0}</span></label>`;
+  const stateCodes = Object.keys(STATE_PATHS).sort((a, b) => (STATE_NAMES[a] || a).localeCompare(STATE_NAMES[b] || b));
+  $('protoGeo').innerHTML = stateCodes.map(geoRow).join('') + '<div class="map-opt-sep"></div>' + ['CANADA', 'INTL', 'UNKNOWN'].map(geoRow).join('');
+  const mt = myTeamObj();
+  const regBtn = $('p-regional');
+  if (regBtn) {
+    regBtn.hidden = !(mt && mt.state);
+    if (mt && mt.state) regBtn.textContent = `Regional to my team — ${STATE_NAMES[mt.state] || mt.state} + bordering states`;
+  }
+  const tagCounts = {};
+  for (const p of [...UP, ...DOWN]) for (const t of tagsOf(p)) tagCounts[t.tag] = (tagCounts[t.tag] || 0) + 1;
+  $('protoArch').innerHTML = Object.keys(tagCounts).sort().map(t =>
+    `<label class="map-opt"><input type="checkbox" data-protoarch="${esc(t)}"${protoArchSel.has(t) ? ' checked' : ''}> <span class="map-opt-name">${esc(t)}</span> <span class="map-opt-n">${tagCounts[t]}</span></label>`).join('');
+  buildProtoTraits();
+}
+
+function buildProtoTraits() {
+  const el = $('protoTraits');
+  if (!el) return;
+  const pos = $('p-pos').value;
+  const pool = [...UP, ...DOWN].filter(p => (p.screen_position || p.position) === pos);
+  const keys = Object.keys(TRAIT_REG).filter(k => (TRAIT_REG[k].groups || []).includes(pos));
+  if (!keys.length) { el.innerHTML = '<p class="p-sub">No skill traits at this position.</p>'; return; }
+  el.innerHTML = keys.map(k => {
+    const r = TRAIT_REG[k];
+    const n = pool.reduce((acc, p) => acc + (traitEntry(p, k) ? 1 : 0), 0);
+    const fn = pool.reduce((acc, p) => acc + (flashEntry(p, k) ? 1 : 0), 0);
+    return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} carriers${fn ? ` · ${fn} flashes` : ''}</span><input type="number" class="trait-bar" data-prototrait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}" aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
+  }).join('');
+}
+
+function protoSaveCell(p) {
+  const e = availIdx()[p.id];
+  if (!e || !CHAMP) return '<span class="p-sub">Not saveable</span>';
+  const teams = CHAMP.teams.filter(t => champAvailFor(t, e._g).some(x => x.id === p.id));
+  if (!teams.length) return '<span class="p-sub">Not saveable</span>';
+  const def = teams.some(t => t.name === myTeam) ? myTeam : teams[0].name;
+  return `<span class="proto-save"><select data-psave-sel="${esc(p.id)}" aria-label="School whose class saves ${esc(p.name)}">${teams.map(t => `<option value="${esc(t.name)}"${t.name === def ? ' selected' : ''}>${esc(t.name)}</option>`).join('')}</select> <button type="button" class="btn-save" data-psave="${esc(p.id)}">Save</button></span>`;
+}
+
+function runPrototype() {
+  const body = $('protoBody');
+  if (!body) return;
+  const pos = $('p-pos').value;
+  const dirKey = $('p-dir').value;
+  const pool = protoPool().filter(p => (p.screen_position || p.position) === pos);
+  const bf = {
+    htMin: heightInches($('p-ht-min').value), htMax: heightInches($('p-ht-max').value),
+    wtMin: numOrNull($('p-wt-min').value), wtMax: numOrNull($('p-wt-max').value),
+    build: $('p-build').value
+  };
+  const bMin = numOrNull($('p-bench-min').value), bMax = numOrNull($('p-bench-max').value);
+  const nilMax = numOrNull($('p-nil-max').value), nilBasis = $('p-nil-basis').value;
+  const eligOnly = $('p-elig').checked;
+  const rows = pool.filter(p => {
+    if (!protoBuildTest(p, bf, pool, dirKey + ':' + pos)) return false;
+    if (mapSel.size && !mapSel.has(mapKeyOf(p))) return false;
+    if (protoArchSel.size && !(protoArchAll ? holdsAllTags(p, protoArchSel) : holdsAnyTag(p, protoArchSel))) return false;
+    if (!passesTraits(p)) return false;
+    const bench = protoBench(p);
+    if (bMin != null && (bench == null || bench < bMin)) return false;
+    if (bMax != null && (bench == null || bench > bMax)) return false;
+    if (nilMax != null) {
+      if (p.nil_status !== 'priced') return false;
+      const v = nilBasis === 'ceiling' ? p.nil_ceiling : (p.nil_floor + p.nil_ceiling) / 2;
+      if (v == null || v > nilMax) return false;
+    }
+    if (eligOnly && p.elig_qualified !== 'Eligible') return false;
+    return true;
+  });
+  rows.sort((a, b) => {
+    const x = protoBench(a), y = protoBench(b);
+    if (x == null && y == null) return a.name.localeCompare(b.name);
+    if (x == null) return 1;
+    if (y == null) return -1;
+    return y - x || a.name.localeCompare(b.name);
+  });
+  $('protoCount').textContent = `${rows.length} of ${pool.length} ${pos} players match`;
+  body.innerHTML = rows.length ? `<div class="card table-card"><div class="tbl-scroll"><table class="ctable"><thead><tr><th>Player</th><th>Pos</th><th>School</th><th>Book</th><th class="num">Benchmark</th><th>Size</th><th>Hometown</th><th>Est. NIL band</th><th>Save to a class</th></tr></thead><tbody>
+    ${rows.map(p => `<tr>
+      <td>${prospectStar(p)}<a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a>${tagBadges(p.id)}${flashBadges(p.id)}</td>
+      <td>${esc(p.position)}</td><td>${esc(p.school)}</td><td>${esc(p.conference_book)}${p.direction === 'down' ? ' · P4 Down' : ''}</td>
+      <td class="num"><b>${protoBench(p) == null ? '—' : f1(protoBench(p))}</b></td>
+      <td>${esc(p.height || '—')} · ${p.weight == null ? '—' : esc(p.weight) + ' lb'}</td>
+      <td>${esc(hometownLine(p) || 'Not on record')}</td>
+      <td>${nilRange(p) || 'no estimate'}</td>
+      <td>${protoSaveCell(p)}</td></tr>`).join('')}
+    </tbody></table></div></div>`
+    : `<div class="card"><p class="empty">No players match that prototype — loosen an input or reset.</p></div>`;
+}
+
 function route() {
   const hash = location.hash || '';
   const cm = hash.match(/^#\/compare\/(.+)$/);
@@ -2831,6 +3116,15 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  if (hash === '#/prototype') {
+    setChrome(null);
+    showView('prototype');
+    buildProtoPanels();
+    runPrototype();
+    document.title = 'Prototype search — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/up' || hash === '#/down') {
     const dir = hash === '#/down' ? 'down' : 'up';
     if (curDir !== dir) setDataset(dir);
@@ -2897,6 +3191,26 @@ function loadTraits() {
     .catch(() => null);
 }
 
+function loadFlashes() {
+  // same failure-tolerant pattern: a missing or malformed flashes.json
+  // degrades to no flash layer, never an error. The file is the
+  // build_flashes.py output: a "_registry" object plus one entry list
+  // per player id, in traits.json's shape family.
+  return fetch('flashes.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && j._registry) ? j : null)
+    .catch(() => null);
+}
+
+function loadOptimal() {
+  // same failure-tolerant pattern: a missing optimal_size.json
+  // degrades to no Optimal-size button data, never an error.
+  return fetch('optimal_size.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j)) ? j : null)
+    .catch(() => null);
+}
+
 function loadChanges() {
   // same failure-tolerant pattern: a missing or malformed changes.json
   // degrades to no changes posted, never an error. The file is a plain
@@ -2908,7 +3222,7 @@ function loadChanges() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits()]).then(([up, down, cmp, teams, champ, changes, traits]) => {
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits(), loadFlashes(), loadOptimal()]).then(([up, down, cmp, teams, champ, changes, traits, flashes, optimal]) => {
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
@@ -2918,6 +3232,12 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   if (traits) for (const id of Object.keys(traits)) {
     if (id !== '_registry' && Array.isArray(traits[id])) TRAITS_BY_ID[id] = traits[id];
   }
+  FLASH_REG = (flashes && flashes._registry) || {};
+  FLASHES_BY_ID = {};
+  if (flashes) for (const id of Object.keys(flashes)) {
+    if (id !== '_registry' && Array.isArray(flashes[id])) FLASHES_BY_ID[id] = flashes[id];
+  }
+  OPTIMAL_SIZE = optimal || {};
   // My Team: a returning user's saved school seeds the championship
   // path's selected team here at boot. After boot the page keeps
   // following the setting (renderChamp) until the user makes an
@@ -3164,6 +3484,95 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('reset').addEventListener('click', () => {
     $('q').value = ''; clearAllFilters();
     $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; applyFilters();
+  });
+  // the filter ribbon: tabs open one panel at a time; the active tab
+  // or the chevron collapses back to the strip; Clear all in the
+  // strip resets every control across all tabs (the same reset as
+  // the Search panel's button).
+  document.querySelectorAll('.ribbon-tab').forEach(b => b.addEventListener('click', () => {
+    setRibbonTab(ribbonTab === b.dataset.rtab ? null : b.dataset.rtab);
+  }));
+  $('ribbonChev').addEventListener('click', () => setRibbonTab(null));
+  $('ribbonClear').addEventListener('click', () => {
+    $('q').value = ''; clearAllFilters();
+    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; applyFilters();
+  });
+  $('geoPanel').addEventListener('change', e => {
+    const cb = e.target.closest('[data-geocheck]');
+    if (!cb) return;
+    if (cb.checked) dirGeoSel.add(cb.dataset.geocheck); else dirGeoSel.delete(cb.dataset.geocheck);
+    applyFilters();
+  });
+  // prototype search controls
+  ['p-dir', 'p-build', 'p-nil-basis'].forEach(id => $(id).addEventListener('change', runPrototype));
+  $('p-pos').addEventListener('change', () => { buildProtoTraits(); runPrototype(); });
+  ['p-ht-min', 'p-ht-max', 'p-wt-min', 'p-wt-max', 'p-bench-min', 'p-bench-max', 'p-nil-max'].forEach(id => $(id).addEventListener('input', runPrototype));
+  $('p-elig').addEventListener('change', runPrototype);
+  $('p-arch-all').addEventListener('change', e => { protoArchAll = e.target.checked; runPrototype(); });
+  $('p-lean').addEventListener('change', e => { valueLean = e.target.checked; runPrototype(); });
+  $('p-flash').addEventListener('change', e => { traitFlash = e.target.checked; runPrototype(); });
+  $('protoGeo').addEventListener('change', e => {
+    const cb = e.target.closest('[data-protogeo]');
+    if (!cb) return;
+    if (cb.checked) mapSel.add(cb.dataset.protogeo); else mapSel.delete(cb.dataset.protogeo);
+    runPrototype();
+  });
+  $('protoArch').addEventListener('change', e => {
+    const cb = e.target.closest('[data-protoarch]');
+    if (!cb) return;
+    if (cb.checked) protoArchSel.add(cb.dataset.protoarch); else protoArchSel.delete(cb.dataset.protoarch);
+    runPrototype();
+  });
+  $('protoTraits').addEventListener('input', e => {
+    const inp = e.target.closest('[data-prototrait]');
+    if (!inp) return;
+    const v = parseFloat(inp.value);
+    if (inp.value.trim() === '' || !Number.isFinite(v)) delete traitBars[inp.dataset.prototrait];
+    else traitBars[inp.dataset.prototrait] = v;
+    runPrototype();
+  });
+  $('p-optimal').addEventListener('click', () => {
+    const pos = $('p-pos').value;
+    const band = OPTIMAL_SIZE[pos];
+    const note = $('p-optimal-note');
+    if (!band) { if (note) note.textContent = 'No optimal band computed for this position.'; return; }
+    $('p-ht-min').value = band.ht_min_label; $('p-ht-max').value = band.ht_max_label;
+    $('p-wt-min').value = band.wt_min; $('p-wt-max').value = band.wt_max;
+    if (note) note.textContent = `Optimal for ${pos}: ${band.ht_min_label}–${band.ht_max_label}, ${band.wt_min}–${band.wt_max} lb — from ${band.n} players (${band.basis}).`;
+    runPrototype();
+  });
+  $('p-regional').addEventListener('click', () => {
+    const mt = myTeamObj();
+    if (!mt || !mt.state) return;
+    mapSel = new Set([mt.state, ...(STATE_ADJ[mt.state] || [])]);
+    buildProtoPanels();
+    runPrototype();
+  });
+  $('p-reset').addEventListener('click', () => {
+    $('p-dir').value = 'both';
+    ['p-ht-min', 'p-ht-max', 'p-wt-min', 'p-wt-max', 'p-bench-min', 'p-bench-max', 'p-nil-max'].forEach(id => { $(id).value = ''; });
+    $('p-build').value = 'any';
+    $('p-elig').checked = false;
+    protoArchSel.clear(); protoArchAll = false; $('p-arch-all').checked = false;
+    mapSel.clear();
+    traitBars = {}; valueLean = false; traitFlash = false;
+    $('p-lean').checked = false; $('p-flash').checked = false;
+    const note = $('p-optimal-note'); if (note) note.textContent = '';
+    buildProtoPanels();
+    runPrototype();
+  });
+  $('protoBody').addEventListener('click', e => {
+    const star = e.target.closest('[data-prospect]');
+    if (star) { toggleProspect(star.dataset.prospect); return; }
+    const sv = e.target.closest('[data-psave]');
+    if (sv) {
+      const sel = document.querySelector(`[data-psave-sel="${sv.dataset.psave}"]`);
+      const team = sel ? sel.value : null;
+      if (team && savePlayerToTeam(sv.dataset.psave, team)) {
+        sv.textContent = `Saved in ${team}’s class ✓`;
+        sv.disabled = true;
+      }
+    }
   });
   document.querySelectorAll('th[data-sort]').forEach(th => th.addEventListener('click', () => {
     const k = th.dataset.sort;
