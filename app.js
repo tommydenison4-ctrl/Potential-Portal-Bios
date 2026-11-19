@@ -584,6 +584,67 @@ function buildGeoPanel() {
   const row = k => `<label class="map-opt"><input type="checkbox" data-geocheck="${k}"${dirGeoSel.has(k) ? ' checked' : ''}> <span class="map-opt-name">${esc(mapKeyLabel(k))}</span> <span class="map-opt-n">${counts[k] || 0}</span></label>`;
   const stateCodes = Object.keys(STATE_PATHS).sort((a, b) => (STATE_NAMES[a] || a).localeCompare(STATE_NAMES[b] || b));
   el.innerHTML = `<p class="p-sub" style="margin-top:0">Filter this directory by the hometown on each player’s record — the same buckets as the map view, counted in this directory. Tick as many as you like; a player matches when his hometown bucket is ticked. A player with no hometown on record matches only “Hometown not on record”.</p><div class="geo-list">${stateCodes.map(row).join('')}<div class="map-opt-sep"></div>${['CANADA', 'INTL', 'UNKNOWN'].map(row).join('')}</div>`;
+  buildGeoMap();
+}
+
+/* The Hometown tab's map projection (Tommy, Nov 19, 2026): the state
+   list projects onto a compact rendering of the site's own map — the
+   same geometry, Canada block and globe block as the Map view, drawn
+   smaller beside the list. List and map are ONE selection (dirGeoSel):
+   ticking a state lights it on the map, clicking a state on the map
+   ticks its box, and the filtering is live either way. "Done" at the
+   panel's foot collapses the ribbon back to the strip, which then
+   shows the Hometown group active with the number of places selected.
+   Scope: the ribbon's Hometown tab on the directory views only — the
+   standalone Map page keeps its own selection and behaviour. */
+function buildGeoMap() {
+  const el = $('geoMap');
+  if (!el) return;
+  const counts = {};
+  for (const p of PLAYERS) { const k = mapKeyOf(p); counts[k] = (counts[k] || 0) + 1; }
+  let svg = `<svg class="map-svg geo-svg" viewBox="${MAP_VIEWBOX}" role="group" aria-label="Map of Canada and the United States — click a state to tick it in the list">`;
+  svg += `<path class="map-region${dirGeoSel.has('CANADA') ? ' sel' : ''}" data-geokey="CANADA" d="${CANADA_PATH}"><title>Canada — ${counts.CANADA || 0} players in this directory</title></path>`;
+  for (const code of Object.keys(STATE_PATHS))
+    svg += `<path class="map-region${dirGeoSel.has(code) ? ' sel' : ''}" data-geokey="${code}" d="${STATE_PATHS[code]}"><title>${esc(STATE_NAMES[code] || code)} — ${counts[code] || 0} players in this directory</title></path>`;
+  for (const [code, pt] of Object.entries(MAP_LABELS)) {
+    if (MAP_CALLOUTS[code]) continue;
+    svg += code === 'CANADA'
+      ? `<text class="map-lab map-lab-can" x="${pt[0]}" y="${pt[1]}">CANADA</text>`
+      : `<text class="map-lab" x="${pt[0]}" y="${pt[1]}">${code}</text>`;
+  }
+  for (const [code, pt] of Object.entries(MAP_CALLOUTS)) {
+    if (code === '_x') continue;
+    const lp = MAP_LABELS[code] || [0, 0];
+    svg += `<line class="map-leader" x1="${lp[0]}" y1="${lp[1]}" x2="${pt[0] - 4}" y2="${pt[1]}"/><text class="map-callout${dirGeoSel.has(code) ? ' sel' : ''}" data-geokey="${code}" x="${pt[0]}" y="${pt[1]}">${code}</text>`;
+  }
+  svg += '</svg>';
+  el.innerHTML = `${svg}
+    <div class="geo-blocks">
+      <button type="button" class="geo-block${dirGeoSel.has('INTL') ? ' sel' : ''}" data-geokey="INTL" aria-pressed="${dirGeoSel.has('INTL')}">${GLOBE_SVG}<span>International · ${counts.INTL || 0}</span></button>
+      <button type="button" class="geo-block${dirGeoSel.has('UNKNOWN') ? ' sel' : ''}" data-geokey="UNKNOWN" aria-pressed="${dirGeoSel.has('UNKNOWN')}"><span>Hometown not on record · ${counts.UNKNOWN || 0}</span></button>
+    </div>
+    <p class="p-sub geo-mapnote">The map and the list are the same selection — tick a place in either one and it lights up in both. When you are done selecting, press <b>Done</b> and the map goes away; the strip keeps the count.</p>`;
+  syncGeoNote();
+}
+
+function syncGeoNote() {
+  const n = $('geoSelNote');
+  if (!n) return;
+  n.textContent = dirGeoSel.size
+    ? `${dirGeoSel.size} place${dirGeoSel.size === 1 ? '' : 's'} selected — the directory below is filtered to ${dirGeoSel.size === 1 ? 'it' : 'them'}.`
+    : 'No places selected — the whole directory shows.';
+}
+
+/* Keep the list, the mini-map and the foot note in step after a toggle
+   from either side, without rebuilding (a rebuild would lose the
+   list's scroll position). */
+function syncGeoUI() {
+  document.querySelectorAll('#geoPanel [data-geocheck]').forEach(cb => { cb.checked = dirGeoSel.has(cb.dataset.geocheck); });
+  document.querySelectorAll('#geoMap [data-geokey]').forEach(k => {
+    k.classList.toggle('sel', dirGeoSel.has(k.dataset.geokey));
+    if (k.hasAttribute('aria-pressed')) k.setAttribute('aria-pressed', dirGeoSel.has(k.dataset.geokey) ? 'true' : 'false');
+  });
+  syncGeoNote();
 }
 
 function activeFilterGroups() {
@@ -602,7 +663,7 @@ function syncRibbon() {
   if (!ind) return;
   const groups = activeFilterGroups();
   ind.hidden = !groups.length;
-  ind.textContent = groups.length ? `${groups.length} filter group${groups.length === 1 ? '' : 's'} active` : '';
+  ind.textContent = groups.length ? `${groups.length} filter group${groups.length === 1 ? '' : 's'} active${groups.includes('hometown') ? ` — Hometown: ${dirGeoSel.size} place${dirGeoSel.size === 1 ? '' : 's'} selected` : ''}` : '';
   document.querySelectorAll('.ribbon-tab').forEach(b => {
     b.classList.toggle('open', ribbonTab === b.dataset.rtab);
     b.classList.toggle('has-active', groups.includes(b.dataset.rtab));
@@ -691,14 +752,18 @@ function fitsTable(title, rows) {
     ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
 }
 
-/* Depth-tier fits (Tommy, Nov 19, 2026): the rooms whose lowest played
-   man his benchmark beats without clearing the room's top man — the
-   second tier under the printed starter-tier fits, stamped onto the
-   records by apply_fits_depth_join.py as fits.depth_g6 / depth_p4. */
+/* Depth-tier fits (Tommy, Nov 19, 2026): the rooms whose lowest
+   graded man his benchmark beats without clearing the room's top
+   man — the second tier under the printed starter-tier fits, stamped
+   onto the records by apply_fits_depth_join.py as fits.depth_g6 /
+   depth_p4. The depth bar reads under the path replacement doctrine:
+   the room's lowest graded man, snaps aside; a row whose man has no
+   grade on record carries depth_ungraded and prints that instead of
+   a grade. */
 function fitsDepthTable(title, rows) {
   if (!rows || !rows.length) return '';
-  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest man in the rotation</th><th class="num">His grade</th></tr>
-    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest graded man in the room</th><th class="num">His grade</th></tr>
+    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_ungraded ? 'no grade on record' : r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td></tr>`).join('')}</table></div>`;
 }
 
 /* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
@@ -823,8 +888,8 @@ function myTeamCard(p) {
       const entry = (room.roster || []).find(x => x.name === p.name);
       const grade = entry ? entry.grade : (e ? e.grade : p.headline_grade);
       if (grade != null) {
-        const s = slotIn(playedRoom(room).filter(x => x.name !== p.name), grade);
-        h += `<p class="p-sub">His grade (${f1(grade)}) ranks <b>#${s.rank} of ${s.of}</b> against the ${esc(g)} room’s played roster.</p>`;
+        const s = slotIn((room.roster || []).filter(x => x.name !== p.name), grade);
+        h += `<p class="p-sub">His grade (${f1(grade)}) ranks <b>#${s.rank} of ${s.of}</b> against the ${esc(g)} room’s full roster.</p>`;
       }
     }
     return h + '</div>';
@@ -844,10 +909,12 @@ function myTeamCard(p) {
     h += ge
       ? ge.starter
         ? `<p><b>Getable for ${esc(t.name)}</b> — he beats your room’s top man: he clears your starter.</p>`
-        : `<p><b>Getable for ${esc(t.name)}</b> — he beats the lowest man in your room’s rotation under the depth test; he improves your depth without clearing your top man.</p>`
-      : `<p>Not getable for ${esc(t.name)} — he does not beat the lowest man in your room’s rotation under the depth test.</p>`;
-    const s = slotIn(playedRoom(room), e.benchmark);
-    h += `<p class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in your ${esc(g)} room — his benchmark against the room’s played roster${s.above ? `, behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? `, ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}.</p>`;
+        : ge.depth_ungraded
+          ? `<p><b>Getable for ${esc(t.name)}</b> — he slots into your room above a man with no grade on record under the depth test; he improves your depth without clearing your top man.</p>`
+          : `<p><b>Getable for ${esc(t.name)}</b> — he beats the lowest graded man in your room under the depth test; he improves your depth without clearing your top man.</p>`
+      : `<p>Not getable for ${esc(t.name)} — he does not beat the lowest graded man in your room under the depth test, and your room’s bottom carries no ungraded man for him to replace.</p>`;
+    const s = slotIn(room.roster || [], e.benchmark);
+    h += `<p class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in your ${esc(g)} room — his benchmark against the room’s full roster${s.above ? `, behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? `, ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}.</p>`;
   } else {
     h += `<p class="p-sub">No ${esc(g)} room for ${esc(t.name)} in the championship pool.</p>`;
   }
@@ -972,7 +1039,7 @@ function renderPlayer(p) {
 
   if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit || (p.fits.depth_g6 && p.fits.depth_g6.length) || (p.fits.depth_p4 && p.fits.depth_p4.length))) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Fits — rooms he would upgrade</h2>
-      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room's played rotation without clearing its top man.</p>` : ''}
+      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room without clearing its top man — the bottom player is replaceable whatever his snap count, and where the room's bottom man has no grade on record the row says so.</p>` : ''}
       ${fitsTable('Top G6 fits', p.fits.g6)}
       ${fitsTable(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits', p.fits.p4)}
       ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td></tr></table></div>` : ''}
@@ -1485,16 +1552,16 @@ function candBlock(t, g) {
     return `<div class="cand-block">${head}<p>No volume-qualified incumbent in the pool snapshot — the strict test has no bar to clear, so no upgrade candidates are named for this room.</p></div>`;
   }
   if (!r.cand_total) {
-    return `<div class="cand-block">${head}<p>No evaluated player beats the lowest man in this room’s rotation under the depth test — the incumbent is ${esc(r.incumbent)} at ${f1(r.inc_grade)}.</p></div>`;
+    return `<div class="cand-block">${head}<p>No evaluated player beats the lowest graded man in this room under the depth test — the incumbent is ${esc(r.incumbent)} at ${f1(r.inc_grade)}.</p></div>`;
   }
   const rows = r.cand.map(c => `<tr>
-    <td><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}</td>
+    <td><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${c.depth_ungraded ? '<span class="p-sub">replaces an ungraded man</span>' : ''}</td>
     <td>${esc(c.book)}</td><td>${esc(c.school)}</td>
     <td class="num">${f1(c.grade)}</td><td class="num"><b>${f1(c.benchmark)}</b></td></tr>`).join('');
   const more = r.cand_total > r.cand.length
-    ? `<p class="p-sub">Top ${r.cand.length} shown by benchmark — ${r.cand_total - r.cand.length} more evaluated player${r.cand_total - r.cand.length === 1 ? '' : 's'} also beat${r.cand_total - r.cand.length === 1 ? 's' : ''} the rotation’s lowest man.</p>` : '';
+    ? `<p class="p-sub">Top ${r.cand.length} shown by benchmark — ${r.cand_total - r.cand.length} more evaluated player${r.cand_total - r.cand.length === 1 ? '' : 's'} also beat${r.cand_total - r.cand.length === 1 ? 's' : ''} the room’s lowest graded man.</p>` : '';
   return `<div class="cand-block">${head}
-    <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} beat the lowest man in this room’s rotation under the depth test; a player flagged “Beats your starter” also clears the incumbent (${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
+    <p class="p-sub">${r.cand_total} evaluated player${r.cand_total === 1 ? '' : 's'} beat the lowest graded man in this room under the depth test — the bottom player is replaceable whatever his snap count; a player flagged “Beats your starter” also clears the incumbent (${esc(r.incumbent)}, ${f1(r.inc_grade)}).</p>
     <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>Book</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th></tr>${rows}</table></div>${more}</div>`;
 }
 
@@ -1595,8 +1662,12 @@ function distChart(sel) {
    the table says so). GETABLE players and the bars are computed by
    build_team_json.py into championship.json — an evaluated player with
    eligibility remaining whose benchmark beats the lowest-graded man
-   in the room's played rotation (the depth test, Tommy, Nov 19, 2026;
-   the zero-volume tail never counts), and not already on the team. A
+   in the room (the depth test under the path replacement doctrine,
+   Tommy, Nov 19, 2026: the path works from the bottom of the room up
+   toward its median, the bottom player is replaceable whatever his
+   snap count, and a man with no grade on record is the first to fall
+   off — a player who slots in only above an ungraded bottom man is
+   getable too, flagged depth_ungraded), and not already on the team. A
    getable entry with starter set also beats the room's top man — the
    old strict test, kept as the flagged top tier. The path player is
    the best getable player; the projected room grade after the path is
@@ -1619,7 +1690,7 @@ function champModel(t, groups) {
     const path = getableShown.length ? getableShown[0] : null;
     /* Statuses under the depth test: a path player who beats the
        room's top man is PARTIAL (or CLOSES THE GAP when his benchmark
-       reaches the standard); one who beats only the rotation's bottom
+       reaches the standard); one who beats only the room's bottom
        man is DEPTH — he improves the room without moving its top
        grade, so the projection stays the incumbent's. A below-bar
        room never counts at the standard, so its path caps at PARTIAL. */
@@ -1733,26 +1804,28 @@ function champRoomRow(x, confName) {
         : `set by ${esc(r.bar_team)}`}</span></td>`;
   let pathCell;
   if (x.status === 'AT STANDARD' && !x.path) {
-    pathCell = `<span class="chip ok">AT STANDARD</span><br><span class="p-sub">The incumbent already meets the conference-best standard, and no getable player beats the bottom of its rotation.</span>`;
+    pathCell = `<span class="chip ok">AT STANDARD</span><br><span class="p-sub">The incumbent already meets the conference-best standard, and no getable player beats the bottom of its room.</span>`;
   } else if (x.status === 'NO GETABLE PLAYER') {
-    pathCell = `<span class="chip no">NO GETABLE PLAYER</span><br><span class="p-sub">${r.depth_grade == null
-      ? 'No player with recorded volume in this room in the pool snapshot — the depth test has no man for an add to beat.'
+    pathCell = `<span class="chip no">NO GETABLE PLAYER</span><br><span class="p-sub">${r.depth_grade == null && !r.depth_ungraded_name
+      ? 'No rostered player in this room in the pool snapshot — the depth test has no man for an add to beat.'
       : x.archOn && r.getable_total > 0
-        ? 'Getable players beat this room’s rotation, but none of them holds a ticked archetype — untick “What he does best” above to see them all.'
-        : 'No evaluated player with eligibility remaining beats the lowest man in this room’s rotation.'}</span>`;
+        ? 'Getable players improve this room’s depth, but none of them holds a ticked archetype — untick “What he does best” above to see them all.'
+        : 'No evaluated player with eligibility remaining beats the lowest graded man in this room, and the room’s bottom carries no ungraded man for an add to replace.'}</span>`;
   } else {
     const c = x.path;
     const shownGet = x.getableShown || r.getable || [];
     const more = shownGet.length > 1 || (x.archOn && r.getable_total > 0) ? `<details class="getable-more"><summary>${x.archOn ? `Getable players holding a ticked archetype (${shownGet.length} of ${r.getable_total})` : `All getable players (${r.getable_total})`}</summary>
       <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th>Est. NIL</th><th>Eligibility</th></tr>
-      ${shownGet.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}${o.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${tagBadges(o.id)}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
+      ${shownGet.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}${o.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${o.depth_ungraded ? '<span class="p-sub">replaces an ungraded man</span>' : ''}${tagBadges(o.id)}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
       </table></div></details>` : '';
     pathCell = `${champPlayerLine(c)}<p class="path-status"><span class="chip ${CHAMP_STATUS_CLS[x.status]}">${x.status}</span>${
       x.status === 'PARTIAL' ? (x.bar != null && c.benchmark >= x.bar - 1e-9
         ? `<span class="p-sub"> benchmark ${f1(c.benchmark)} — past the standard’s grade, but this room is carried below the volume bar and does not count at the standard</span>`
         : `<span class="p-sub"> projected ${f1(c.benchmark)} — ${f1(Math.round((x.bar - c.benchmark) * 10) / 10)} short of the standard</span>`)
       : x.status === 'CLOSES THE GAP' ? `<span class="p-sub"> projected ${f1(c.benchmark)} — reaches the standard</span>`
-      : x.status === 'DEPTH' ? `<span class="p-sub"> benchmark ${f1(c.benchmark)} — beats ${esc(r.depth_name)} (${f1(r.depth_grade)}), the lowest man in the room’s rotation; the top of the room is unchanged</span>`
+      : x.status === 'DEPTH' ? (c.depth_ungraded
+        ? `<span class="p-sub"> benchmark ${f1(c.benchmark)} — he slots into the room above ${esc(r.depth_ungraded_name || r.depth_name || 'a man with no grade on record')} (no grade on record), the room’s bottom man; the top of the room is unchanged</span>`
+        : `<span class="p-sub"> benchmark ${f1(c.benchmark)} — beats ${esc(r.depth_name)} (${f1(r.depth_grade)}), the lowest graded man in the room; the top of the room is unchanged</span>`)
       : `<span class="p-sub"> the room already meets the standard; ${c.starter ? 'he clears its top man too' : 'he improves its depth'}</span>`}</p>${more}`;
   }
   return `<tr><td><span class="pname">${esc(x.g)}</span></td>
@@ -1844,7 +1917,7 @@ function renderChamp() {
         ? 'Estimated path cost: <b>—</b> (no path players named)'
         : `Estimated path cost: <b>${fmtMoney(m.cost.floor)}–${fmtMoney(m.cost.ceiling)}</b> a year · ${m.cost.priced} of ${m.cost.total} path players priced${m.cost.unpriced ? ` · <b>${m.cost.unpriced} path player${m.cost.unpriced > 1 ? 's carry' : ' carries'} no estimate and ${m.cost.unpriced > 1 ? 'are' : 'is'} not counted in the total — never as $0</b>` : ''}`}</p>
     </div></div>
-    ${cmpNote('How to read this page: the <b>conference-best standard</b> is the highest <b>volume-qualified</b> incumbent grade at the room among the teams in ' + esc(t.conf) + ' — the championship bar for that room. The <b>path</b> names, per room, the single best <b>getable</b> player: an evaluated player from the Player Books who has eligibility remaining, whose benchmark beats the lowest-graded man in this room’s played rotation — the <b>depth test</b> — and who is not already on ' + esc(t.name) + '. A getable player marked <b>“Beats your starter”</b> also clears the room’s top man. The room’s <b>projected</b> grade after the path is the better of the incumbent and his benchmark. <b>Closes the gap</b> — his benchmark reaches the standard. <b>Partial</b> — he beats the room’s top man but not the standard. <b>Depth</b> — he beats the rotation’s bottom man only; the room gets deeper and its top grade does not move. “Improved but still short” above counts the Partial and Depth rooms.')}
+    ${cmpNote('How to read this page: the <b>conference-best standard</b> is the highest <b>volume-qualified</b> incumbent grade at the room among the teams in ' + esc(t.conf) + ' — the championship bar for that room. The <b>path</b> names, per room, the single best <b>getable</b> player: an evaluated player from the Player Books who has eligibility remaining, whose benchmark beats the lowest-graded man in this room — the <b>depth test</b> — and who is not already on ' + esc(t.name) + '. The path works from the bottom of the room up toward its median: the bottom player is replaceable whatever his snap count, and a man with no grade on record is the first to fall off — a player who slots into the room only above an ungraded bottom man is getable too. A getable player marked <b>“Beats your starter”</b> also clears the room’s top man. The room’s <b>projected</b> grade after the path is the better of the incumbent and his benchmark. <b>Closes the gap</b> — his benchmark reaches the standard. <b>Partial</b> — he beats the room’s top man but not the standard. <b>Depth</b> — he beats the room’s bottom man only; the room gets deeper and its top grade does not move. “Improved but still short” above counts the Partial and Depth rooms.')}
   </div>`;
   h += renderClassBoard(t, m);
   h += champChart(t, m);
@@ -1852,7 +1925,7 @@ function renderChamp() {
     <div class="tbl-scroll"><table class="ctable champ-table">
       <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Conference-best standard</th><th class="num">Gap</th><th>The path — best getable player</th></tr></thead>
       <tbody>${m.rooms.map(x => champRoomRow(x, t.conf)).join('')}</tbody></table></div>
-    <p class="foot-note">Method, in plain terms. <b>The standard:</b> the highest volume-qualified incumbent grade at the group among all teams in the conference; a room carried below the volume bar never sets it, and if no team in the conference has a qualified incumbent at the group, the standard is the best qualified incumbent grade at the team’s level (G6 or P4) and the table says so. <b>Getable:</b> eligibility remaining under the qualified determination — Unsettled players are shown and flagged “eligibility unsettled” — a benchmark that beats the lowest-graded man in the room’s played rotation (every man with recorded volume; the rostered names with no recorded volume never count), and not already on this team. That is the depth test; the books’ own fits still use the stricter test against the room’s top man, and a getable player who passes that too is marked “Beats your starter”. <b>Projected</b> is the better of the incumbent’s grade and his benchmark from the Player Book method — headline grade plus the position’s translation delta. <b>NIL:</b> getable is a field test — it means he beats your rotation and has eligibility; it does not price him. Separately, each path and getable player carries his estimated NIL projection where priced, and the header’s estimated path cost sums the path players’ floors and ceilings; a path player with no estimate is named as unpriced in that count and is never counted as $0. ${esc(NIL_LABEL)} An asterisked incumbent is a room with no volume-qualified player, carried by its top player by volume under the team-comparison ruling; the depth test still applies to its rotation, so getable players are named for it. Pool: Nov 17, 2026 in-season snapshot of PFF Ultimate exports; grades are PFF headline grades.</p>
+    <p class="foot-note">Method, in plain terms. <b>The standard:</b> the highest volume-qualified incumbent grade at the group among all teams in the conference; a room carried below the volume bar never sets it, and if no team in the conference has a qualified incumbent at the group, the standard is the best qualified incumbent grade at the team’s level (G6 or P4) and the table says so. <b>Getable:</b> eligibility remaining under the qualified determination — Unsettled players are shown and flagged “eligibility unsettled” — a benchmark that beats the lowest-graded man in the room, and not already on this team. That is the depth test under the path replacement doctrine: the path works from the bottom of the room up toward its median; the bottom player is replaceable whatever his snap count, so every rostered man counts, zero-volume men included; and a man with no grade on record is the first to fall off — a player who slots into the room only above an ungraded bottom man is getable, flagged, and no point-worth is claimed for that pairing. The books’ own fits still use the stricter test against the room’s top man, and a getable player who passes that too is marked “Beats your starter”. <b>Projected</b> is the better of the incumbent’s grade and his benchmark from the Player Book method — headline grade plus the position’s translation delta. <b>NIL:</b> getable is a field test — it means he improves your room and has eligibility; it does not price him. Separately, each path and getable player carries his estimated NIL projection where priced, and the header’s estimated path cost sums the path players’ floors and ceilings; a path player with no estimate is named as unpriced in that count and is never counted as $0. ${esc(NIL_LABEL)} An asterisked incumbent is a room with no volume-qualified player, carried by its top player by volume under the team-comparison ruling; the depth test still applies to the room, so getable players are named for it. Pool: Nov 17, 2026 in-season snapshot of PFF Ultimate exports; grades are PFF headline grades.</p>
   </div>`;
   h += renderBudgetReport(t, m);
   h += renderFullRooms(t, m);
@@ -1916,14 +1989,17 @@ function budgetModel(t, m) {
   });
   /* replacement pairing inside each built class, same rule as the
      saved-class board: the picks in build order push the rooms'
-     lowest-graded rotation men off the bottom */
+     bottom men off — the room's true bottom, snaps aside, ungraded
+     men first (path replacement doctrine) */
   for (const k of classes) {
     const prs = pairAdds(t, k.picks.map(p => ({ id: p.c.id, g: p.g, benchmark: p.c.benchmark })));
     let tot = 0;
+    k.ungradedPairs = [];
     for (const p of k.picks) {
       const pr = prs.get(p.c.id);
       p.off = pr ? pr.off : null;
       p.worth = pr ? pr.worth : null;
+      if (p.off && p.off.grade == null) k.ungradedPairs.push(`${p.c.name} replaces ${p.off.name}`);
       if (p.worth != null) tot += p.worth;
     }
     k.worthTotal = Math.round(tot * 10) / 10;
@@ -1939,10 +2015,10 @@ function renderBudgetReport(t, m) {
   const fixCell = r => {
     if (!r.cheapest) {
       const why = (r.x.r.getable || []).length
-        ? 'Getable players beat this room’s rotation, but none carries an NIL estimate, so none can be priced.'
-        : r.x.r.depth_grade == null
-          ? 'No player with recorded volume in this room in the pool snapshot — the depth test has no man for an add to beat.'
-          : 'No evaluated player with eligibility remaining beats the lowest man in this room’s rotation.';
+        ? 'Getable players improve this room’s depth, but none carries an NIL estimate, so none can be priced.'
+        : r.x.r.depth_grade == null && !r.x.r.depth_ungraded_name
+          ? 'No rostered player in this room in the pool snapshot — the depth test has no man for an add to beat.'
+          : 'No evaluated player with eligibility remaining beats the lowest graded man in this room, and the room’s bottom carries no ungraded man for an add to replace.';
       return `<b>No getable fix at any price.</b><br><span class="p-sub">${why}</span>`;
     }
     const c = r.cheapest.c;
@@ -1964,7 +2040,7 @@ function renderBudgetReport(t, m) {
       <h3 class="sub-h">${fmtMoney(k.budget)} class</h3>
       <p class="p-sub">No getable fix fits a ${fmtMoney(k.budget)} budget at the ${esc(mark)} mark.</p></div>`;
     const prows = k.picks.map(p => {
-      const s = slotIn(playedRoom(t.rooms[p.g]), p.c.benchmark);
+      const s = slotIn((t.rooms[p.g] || {}).roster || [], p.c.benchmark);
       return `<tr data-pid="${esc(p.c.id)}"><td><span class="pname">${esc(p.g)}</span></td>
       <td><a href="#/player/${esc(encodeURIComponent(p.c.id))}"><span class="pname">${esc(p.c.name)}</span></a>${p.c.hv ? '<span class="hv">Hidden Value</span>' : ''}
       <br><span class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in the room · ${pairText({ off: p.off, worth: p.worth })}</span></td>
@@ -1978,6 +2054,7 @@ function renderBudgetReport(t, m) {
       <p class="class-totals">Total at your marks: <b>${fmtMoney(k.spend)}</b> a year
         <span class="p-sub">${fmtMoney(k.floor)} at everyone's floor · ${fmtMoney(k.ceiling)} at everyone's ceiling</span>
         <span class="p-sub">· <b>${fmtWorth(k.worthTotal)} pts</b> gained over the players replaced</span></p>
+      ${k.ungradedPairs && k.ungradedPairs.length ? `<p class="p-sub">${k.ungradedPairs.length} pick${k.ungradedPairs.length > 1 ? 's replace' : ' replaces'} a man with no grade on record (${k.ungradedPairs.map(esc).join('; ')}) — no point-worth is claimed for ${k.ungradedPairs.length > 1 ? 'those pairings' : 'that pairing'}, and the points total sums the graded pairings only.</p>` : ''}
       ${k.skipped.length ? `<p class="p-sub">Passed over — even the cheapest fix did not fit what was left of the budget: ${k.skipped.map(esc).join(', ')}.</p>` : ''}
       <button type="button" class="btn-ghost budget-open" data-budgetopen="${k.budget}">Open in class builder</button>
     </div>`;
@@ -1989,9 +2066,9 @@ function renderBudgetReport(t, m) {
       <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Standard</th><th class="num">Gap</th><th>Cheapest getable fix at ${esc(mark)}</th></tr></thead>
       <tbody>${rows}</tbody></table></div>
     <h3 class="sub-h" style="margin-top:16px">Three classes, built to a budget</h3>
-    <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Each pick also pushes the lowest-graded man in that room’s rotation off the bottom — the pick’s worth, printed on his row, is his benchmark minus that man’s grade. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
+    <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Each pick also pushes the bottom man in that room off — the path works from the bottom of the room up toward its median, the bottom player is replaceable whatever his snap count, and a man with no grade on record is the first to fall off; the pick’s worth, printed on his row, is his benchmark minus the replaced man’s grade, and no point-worth is claimed against an ungraded man. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
     ${bm.classes.map(classBlock).join('')}
-    <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume — the depth test still applies to its rotation, so a fix can be named for it. <b>Getable</b> is the depth test: an evaluated player with eligibility remaining whose benchmark beats the lowest-graded man in the room’s played rotation; a fix marked “Beats your starter” also clears the room’s top man. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
+    <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume — the depth test still applies to the room, so a fix can be named for it. <b>Getable</b> is the depth test under the path replacement doctrine: the path works from the bottom of the room up toward its median, so an evaluated player with eligibility remaining is getable when his benchmark beats the room’s lowest-graded man — the bottom player is replaceable whatever his snap count — or when he slots into the room above a man with no grade on record, who is the first to fall off; a fix marked “Beats your starter” also clears the room’s top man. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
   </div>`;
 }
 
@@ -2065,11 +2142,24 @@ function isRegional(t, e) {
   return e.home_state === t.state || (STATE_ADJ[t.state] || []).includes(e.home_state);
 }
 function playedRoom(r) { return ((r && r.roster) || []).filter(p => p.vol > 0); }
+/* The room's fall-off order under the path replacement doctrine
+   (Tommy, Nov 19, 2026): the whole roster from the bottom up, snaps
+   aside — men with no grade on record first (the bottom by
+   definition), then graded men ascending by grade, zero-volume men
+   included. This is the order adds pair against. */
+function roomBottom(r) {
+  return ((r && r.roster) || []).slice().sort((a, b) => {
+    const an = a.grade == null, bn = b.grade == null;
+    if (an !== bn) return an ? -1 : 1;
+    if (an && bn) return String(a.name).localeCompare(String(b.name));
+    return a.grade - b.grade || String(a.name).localeCompare(String(b.name));
+  });
+}
 function slotIn(roster, bench) {
   let rank = 1, above = null, below = null;
   for (const p of roster || []) {
-    if (p.grade > bench) { rank++; if (!above || p.grade < above.grade) above = p; }
-    else if (!below || p.grade > below.grade) below = p;
+    if (p.grade != null && p.grade > bench) { rank++; if (!above || p.grade < above.grade) above = p; }
+    else if (p.grade != null && (!below || p.grade > below.grade)) below = p;
   }
   return { rank, of: (roster || []).length + 1, above, below };
 }
@@ -2164,25 +2254,32 @@ function classEffect(t, m) {
 
 /* ---- replacement pairing: who falls off when a player is added ----
    Tommy, Nov 18, 2026: what is each added player worth against the
-   player he would be replacing — and the worst player falls off. A
-   group's ROTATION is its played room: the roster entries with
-   recorded volume, the same set slot-in counts (the zero-volume tail
-   never counts, and its grades never pair). In the order the adds
-   were made, each add pushes the lowest-graded rotation man not
-   already pushed off the bottom; the add's WORTH is his benchmark
-   minus that man's grade, printed plainly even when negative. Adds
-   beyond the rotation's size pair with nobody. Pairings recompute
-   from scratch on every render, so removing an add re-pairs the
-   adds behind it against the room as it stands. */
+   player he would be replacing — and the worst player falls off.
+   The PATH REPLACEMENT DOCTRINE (Tommy, Nov 19, 2026) sets the set
+   the adds pair against: "we want to work to replace the median of
+   the room — we want to replace the bottom player irrespective of
+   amount of snaps, and quite frankly they should have a limited
+   amount of snaps." So the pairing reads the room's TRUE bottom
+   across all rostered men, snaps aside (roomBottom): men with no
+   grade on record fall off FIRST — they are the bottom by
+   definition — then graded men ascending by grade, zero-volume men
+   included. In the order the adds were made, each add pushes the
+   next man off the bottom; the add's WORTH is his benchmark minus
+   that man's grade, printed plainly even when negative — except
+   against an ungraded man, where no point-worth is claimed (worth
+   null, the pairing still named). Adds beyond the room's size pair
+   with nobody. Pairings recompute from scratch on every render, so
+   removing an add re-pairs the adds behind it against the room as
+   it stands. */
 function pairAdds(t, adds) {
   const out = new Map();
   const taken = {};
   for (const a of adds) {
-    const rot = playedRoom((t.rooms || {})[a.g]).slice().sort((x, y) => x.grade - y.grade);
+    const rot = roomBottom((t.rooms || {})[a.g]);
     const k = taken[a.g] || 0;
     if (k < rot.length) {
       const off = rot[k];
-      out.set(a.id, { off, worth: Math.round((a.benchmark - off.grade) * 10) / 10 });
+      out.set(a.id, { off, worth: off.grade == null ? null : Math.round((a.benchmark - off.grade) * 10) / 10 });
     } else {
       out.set(a.id, { off: null, worth: null });
     }
@@ -2201,14 +2298,16 @@ function classPairings(t) {
 }
 const fmtWorth = w => (w >= 0 ? '+' : '') + f1(w);
 function pairText(pr) {
-  return pr && pr.off
-    ? `Replaces <b>${esc(pr.off.name)}</b> (${f1(pr.off.grade)}) · worth <b>${fmtWorth(pr.worth)} pts</b>`
-    : 'No rotation player left to fall off in this room';
+  if (!pr || !pr.off) return 'No player left to fall off in this room';
+  return pr.off.grade == null
+    ? `Replaces <b>${esc(pr.off.name)}</b> (no grade on record) · no point-worth claimed`
+    : `Replaces <b>${esc(pr.off.name)}</b> (${f1(pr.off.grade)}) · worth <b>${fmtWorth(pr.worth)} pts</b>`;
 }
 function pairTextPlain(pr) {
-  return pr && pr.off
-    ? `replaces ${pr.off.name} (${f1(pr.off.grade)}), worth ${fmtWorth(pr.worth)} pts`
-    : 'no rotation player left to fall off in this room';
+  if (!pr || !pr.off) return 'no player left to fall off in this room';
+  return pr.off.grade == null
+    ? `replaces ${pr.off.name} (no grade on record), no point-worth claimed`
+    : `replaces ${pr.off.name} (${f1(pr.off.grade)}), worth ${fmtWorth(pr.worth)} pts`;
 }
 
 const HIT_STOPS = [[0, 'Floor'], [0.25, 'Low'], [0.5, 'Mid'], [0.75, 'High'], [1, 'Ceiling']];
@@ -2451,8 +2550,13 @@ function renderClassBoard(t, m) {
   const ct = classTotals();
   const pairings = classPairings(t);
   let worthTotal = 0, unpairedN = 0;
-  for (const pr of pairings.values()) {
-    if (pr.worth != null) worthTotal += pr.worth; else unpairedN++;
+  const ungradedPairs = [];
+  for (const [id, pr] of pairings) {
+    if (pr.off && pr.off.grade == null) {
+      const e = idx[id];
+      ungradedPairs.push(`${e ? e.name : id} replaces ${pr.off.name}`);
+    } else if (pr.worth != null) worthTotal += pr.worth;
+    else unpairedN++;
   }
   worthTotal = Math.round(worthTotal * 10) / 10;
   const eff = ct.n ? classEffect(t, m) : null;
@@ -2467,7 +2571,7 @@ function renderClassBoard(t, m) {
   const items = [];
   for (const g of CHAMP.meta.groups) {
     for (const { e, hit } of byGroup[g] || []) {
-      const s = slotIn(playedRoom(t.rooms[g]), e.benchmark);
+      const s = slotIn((t.rooms[g] || {}).roster || [], e.benchmark);
       const price = hitPrice(e, hit);
       lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${pairTextPlain(pairings.get(e.id))} — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
       items.push({ name: e.name, g, school: e.school, benchmark: e.benchmark, rank: s.rank, of: s.of, price, hit, band: price != null ? nilRange(e) : null, hv: !!e.hv, down: e.dir === 'down' });
@@ -2525,7 +2629,7 @@ function renderClassBoard(t, m) {
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
       <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
       <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.priced < ct.n ? ` · ${ct.n - ct.priced} with no estimate, not counted` : ''}</span></p>
-    <p class="p-sub">Points gained over the players replaced: <b>${fmtWorth(worthTotal)} pts</b> in total — each saved player’s benchmark against the rotation man he pushes off the bottom of his room, named on his row.${unpairedN ? ` ${unpairedN} saved player${unpairedN > 1 ? 's have' : ' has'} no rotation player left to fall off and count${unpairedN > 1 ? '' : 's'} as no gain.` : ''}</p>
+    <p class="p-sub">Points gained over the players replaced: <b>${fmtWorth(worthTotal)} pts</b> in total — each saved player’s benchmark against the man he pushes off the bottom of his room, named on his row; the pairing works from the bottom of the room up, snaps aside.${ungradedPairs.length ? ` ${ungradedPairs.length} pairing${ungradedPairs.length > 1 ? 's replace' : ' replaces'} a man with no grade on record (${ungradedPairs.map(esc).join('; ')}) — no point-worth is claimed for ${ungradedPairs.length > 1 ? 'those' : 'that'} pairing${ungradedPairs.length > 1 ? 's' : ''}, and the total above sums the graded pairings only.` : ''}${unpairedN ? ` ${unpairedN} saved player${unpairedN > 1 ? 's have' : ' has'} no player left to fall off and count${unpairedN > 1 ? '' : 's'} as no gain.` : ''}</p>
     <p class="p-sub">With this class: <b>${eff.atAfter} of ${m.rooms.length} rooms at the standard</b> (today: ${m.atNow}) · <b>${f1(eff.points)} grade points to the standard</b> (today: ${f1(m.points)}). Read the same way as the path summary above — a room counts when its projected top grade, the better of the incumbent and your best class benchmark in it, reaches the conference-best standard.</p>`
     : '<p class="p-sub class-empty">No players saved yet — drag a player here, use his Save button below, or save him from his player page.</p>'}
     <p class="foot-note">${esc(NIL_LABEL)}</p>
@@ -2549,22 +2653,23 @@ function renderFullRooms(t, m) {
     const reg = all.filter(e => isRegional(t, e));
     let shown = champRegional ? reg : all;
     if (champArchSel.size) shown = shown.filter(e => archMatchId(e.id));
-    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}${fallSet.has(p.name + '|' + p.grade) ? ' <span class="fall-off">(falls off)</span>' : ''}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
+    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}${p.grade == null ? ' <span class="p-sub">(no grade on record)</span>' : ''}${fallSet.has(p.name + '|' + p.grade) ? ' <span class="fall-off">(falls off)</span>' : ''}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
       + (zeroVol.length ? `<tr class="roster-div"><td colspan="4">Also in the data — no recorded ${esc(r.vol_unit || 'volume')} in the snapshot</td></tr>`
-        + zeroVol.map(p => `<tr class="vol0"><td class="num">—</td><td>${esc(p.name)}</td><td class="num">${f1(p.grade)}</td><td class="num">0 ${esc(r.vol_unit || '')}</td></tr>`).join('') : '');
+        + zeroVol.map(p => `<tr class="vol0"><td class="num">—</td><td>${esc(p.name)}${p.grade == null ? ' <span class="p-sub">(no grade on record)</span>' : ''}${fallSet.has(p.name + '|' + p.grade) ? ' <span class="fall-off">(falls off)</span>' : ''}</td><td class="num">${f1(p.grade)}</td><td class="num">0 ${esc(r.vol_unit || '')}</td></tr>`).join('') : '');
     /* the strict tier, marked in the room's own list: his benchmark
        beats the room's top man — the qualified incumbent's grade, or
        the best grade in the played rotation for a below-bar room */
+    const playedGrades = roster.map(p => p.grade).filter(v => v != null);
     const topBar = r.below_bar
-      ? (roster.length ? Math.max(...roster.map(p => p.grade)) : null)
+      ? (playedGrades.length ? Math.max(...playedGrades) : null)
       : r.inc_grade;
     const availRows = shown.map(e => {
-      const s = slotIn(roster, e.benchmark);
+      const s = slotIn(rosterAll, e.benchmark);
       const inClass = !!champClass[e.id];
       const beatsStarter = topBar != null && e.benchmark > topBar;
-      const slotTxt = roster.length
+      const slotTxt = rosterAll.length
         ? `Slots <b>#${s.rank} of ${s.of}</b>${s.above ? ` — behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? ` · ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}`
-        : 'No player with recorded volume in this room in the pool snapshot';
+        : 'No rostered player in this room in the pool snapshot';
       return `<div class="avail-row${inClass ? ' in-class' : ''}" draggable="true" data-dragpid="${esc(e.id)}">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${beatsStarter ? '<span class="starter-badge">Beats your starter</span>' : ''}${isRegional(t, e) ? `<span class="reg-badge">Regional · ${esc(e.home_state)}</span>` : ''}${tagBadges(e.id)}
@@ -2579,10 +2684,10 @@ function renderFullRooms(t, m) {
       <h2 class="sec" style="margin-top:2px">${esc(g)} — the room in full, and everyone available</h2>
       <div class="room-grid">
         <div>
-          <h3 class="sub-h">The room he enters — ${esc(t.name)} ${esc(g)} (${roster.length})</h3>
+          <h3 class="sub-h">The room he enters — ${esc(t.name)} ${esc(g)} (${rosterAll.length})</h3>
           ${rosterAll.length ? `<div class="tbl-scroll"><table class="fits room-tbl"><thead><tr><th class="num">#</th><th>Player</th><th class="num">Grade</th><th class="num">Volume</th></tr></thead><tbody>${rosterRows}</tbody></table></div>`
             : '<p class="p-sub">No rostered players at this group in the pool snapshot.</p>'}
-          <p class="p-sub">Every player with a report row at this group — the rotation first (with volume), then the rostered names with no recorded ${esc(r.vol_unit || 'volume')} in the snapshot; those carry a grade on a snap or two and do not count in slot-in standing. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
+          <p class="p-sub">Every player with a report row at this group — the rotation first (with volume), then the rostered names with no recorded ${esc(r.vol_unit || 'volume')} in the snapshot. Every man in the room counts in slot-in standing: the path works from the bottom of the room up, the bottom player is replaceable whatever his snap count, and a man with no grade on record is the bottom of the room and the first to fall off. Incumbent: <b>${r.incumbent ? esc(r.incumbent) : '— none qualified —'}${r.inc_grade != null ? ` (${f1(r.inc_grade)})` : ''}</b> · conference-best standard <b>${r.bar_grade != null ? f1(r.bar_grade) : '—'}</b>.</p>
         </div>
         <div>
           <h3 class="sub-h">Available — ${shown.length} of ${all.length} evaluated players${champRegional ? ` (regional only · ${reg.length} regional)` : ''}${champArchSel.size ? ' (archetype filter on — ticked tags only)' : ''}</h3>
@@ -3501,8 +3606,24 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     const cb = e.target.closest('[data-geocheck]');
     if (!cb) return;
     if (cb.checked) dirGeoSel.add(cb.dataset.geocheck); else dirGeoSel.delete(cb.dataset.geocheck);
+    syncGeoUI();
     applyFilters();
   });
+  // the Hometown tab's mini-map: clicking a state (or the Canada /
+  // International / not-on-record blocks) toggles the same selection
+  // the list's tick boxes drive — one selection, two views.
+  $('geoMap').addEventListener('click', e => {
+    const k = e.target.closest('[data-geokey]');
+    if (!k) return;
+    const key = k.dataset.geokey;
+    if (dirGeoSel.has(key)) dirGeoSel.delete(key); else dirGeoSel.add(key);
+    syncGeoUI();
+    applyFilters();
+  });
+  // "Done" — the selection is already applied (filtering is live);
+  // Done is the close affordance: the ribbon collapses to the strip,
+  // which shows the Hometown group active with the places count.
+  $('geoDone').addEventListener('click', () => setRibbonTab(null));
   // prototype search controls
   ['p-dir', 'p-build', 'p-nil-basis'].forEach(id => $(id).addEventListener('change', runPrototype));
   $('p-pos').addEventListener('change', () => { buildProtoTraits(); runPrototype(); });
