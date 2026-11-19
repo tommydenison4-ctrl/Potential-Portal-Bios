@@ -302,12 +302,98 @@ function buildTest(p, bf) {
   return 'pass';
 }
 
+/* -------- plain-language evidence lines for the tags section --------
+   Presentation only (Tommy, Nov 19, 2026 — the tags section gets the
+   same treatment as the skills strip): plainTagStat rewrites the
+   evidence line joined from tags.json into coach language at render
+   time. The data is untouched — same tags, same numbers, same
+   thresholds; only the naming changes. Stat names follow TRAIT_DISPLAY
+   where the tag reads off the same stat, and a percentile headlines
+   as "Top X%" with the exact percentile small beside it (topHtml),
+   exactly as the skills strip prints it. Every evidence template
+   build_tags.py can print has a rule below; an unmatched line returns
+   null and the section falls back to the raw string — the domtest
+   corpus check fails if that ever happens on real data. */
+const _tp = (n, one, many) => `${n} ${Number(n) === 1 ? one : many}`;
+const _wtSeg = (w, m) => `at ${w} lb — the middle weight in his group is ${m} lb`;
+const TAG_STAT_RULES = [
+  // Pure Rusher
+  [/^Win rate ([\d.]+)% \((\d+)\w+ pct\), pressure rate ([\d.]+)%$/,
+    m => `Pass-rush win rate ${m[1]}% · ${topHtml(+m[2])} · Pressure rate ${m[3]}%`],
+  // Speed Rusher (stand-in stat: the win rate read against his weight)
+  [/^Win rate ([\d.]+)% \((\d+)\w+ pct\) at ([\d.]+) lb \(group median ([\d.]+)\)$/,
+    m => `Pass-rush win rate ${m[1]}% · ${topHtml(+m[2])} · ${_wtSeg(m[3], m[4])}`],
+  // Power Rusher (stand-in stat)
+  [/^Sacks are ([\d.]+)% of his pressures \((\d+)\w+ pct\) at ([\d.]+) lb \(group median ([\d.]+)\)$/,
+    m => `Sack finish ${m[1]}% — that share of his pressures end in a sack · ${topHtml(+m[2])} · ${_wtSeg(m[3], m[4])}`],
+  // YAC Threat
+  [/^YAC\/rec ([\d.]+) \((\d+)\w+ pct\)$/,
+    m => `Yards after the catch ${m[1]} per catch · ${topHtml(+m[2])}`],
+  // Speed Back (stand-in stat)
+  [/^([\d.]+) yds\/carry \((\d+)\w+ pct\), ([\d.]+) yds before contact\/att$/,
+    m => `Yards per carry ${m[1]} · ${topHtml(+m[2])} · Yards before contact ${m[3]} per carry`],
+  // Power Back (his weight prints only when the record carries it)
+  [/^Yds after contact\/att ([\d.]+) \((\d+)\w+ pct\)(?:, ([\d.]+) lb)?$/,
+    m => `Yards after contact ${m[1]} per carry · ${topHtml(+m[2])}${m[3] ? ` · at ${m[3]} lb` : ''}`],
+  // Zone Blocker
+  [/^Zone share ([\d.]+)% of run blocks \((\d+)\w+ pct\), RBLK grade ([\d.]+)$/,
+    m => `Zone-blocking share ${m[1]}% of his run blocks · ${topHtml(+m[2])} · Run-block grade ${m[3]}`],
+  // Gap / Power Blocker
+  [/^Gap share ([\d.]+)% of run blocks \((\d+)\w+ pct\), impact blocks ([\d.]+)%$/,
+    m => `Gap-blocking share ${m[1]}% of his run blocks · ${topHtml(+m[2])} · Impact blocks ${m[3]}% of his run blocks`],
+  // Pulling Lineman (stand-in stat; the pool is guards and tackles)
+  [/^Gap share ([\d.]+)% \((\d+)\w+ pct\) \+ impact blocks ([\d.]+)% \((\d+)\w+ pct\) among non-center OL$/,
+    m => `Gap-blocking share ${m[1]}% · ${topHtml(+m[2])} · Impact blocks ${m[3]}% · ${topHtml(+m[4])} · guards and tackles only`],
+  // Ballhawk
+  [/^\(INT\+PBU\) per target ([\d.]+) \((\d+)\w+ pct\), (\d+) INT \+ (\d+) PBU on (\d+) targets$/,
+    m => `Plays on the ball ${m[1]} per throw at him · ${topHtml(+m[2])} · ${_tp(m[3], 'interception', 'interceptions')} and ${_tp(m[4], 'pass break-up', 'pass break-ups')} on ${_tp(m[5], 'throw', 'throws')} at him`],
+  // Coverage
+  [/^Rating allowed ([\d.]+) \((\d+)\w+ pct\), comp% allowed ([\d.]+)%$/,
+    m => `Passer rating allowed ${m[1]} · ${topHtml(+m[2])} · Completions allowed ${m[3]}% of throws at him`],
+  // Press / Jam
+  [/^Press share ([\d.]+)% \((\d+)\w+ pct\), (\d+) press snaps on (\d+) coverage snaps, rating allowed ([\d.]+)$/,
+    m => `Press coverage ${m[1]}% of his coverage snaps · ${topHtml(+m[2])} · ${m[3]} press snaps out of ${m[4]} coverage snaps · Passer rating allowed ${m[5]}`],
+  // Contested Catch
+  [/^Contested catch rate ([\d.]+)% \((\d+)\w+ pct\), (\d+) contested catches$/,
+    m => `Contested-catch rate ${m[1]}% · ${topHtml(+m[2])} · ${_tp(m[3], 'contested catch', 'contested catches')}`],
+  // Sure-Handed
+  [/^Drop rate ([\d.]+)% \((\d+)\w+ pct\), (\d+) catches on (\d+) catchable$/,
+    m => `Drop rate ${m[1]}% · ${topHtml(+m[2])} · ${m[3]} catches from ${m[4]} catchable balls`],
+  // Vertical Stretch (stand-in stat)
+  [/^([\d.]+) yds\/catch \((\d+)\w+ pct\), first-down rate ([\d.]+)%$/,
+    m => `Yards per catch ${m[1]} · ${topHtml(+m[2])} · First-down rate ${m[3]}% of his catches`],
+  // Deep Ball
+  [/^Big-time throw rate ([\d.]+)% \((\d+)\w+ pct\), RTG ([\d.]+)$/,
+    m => `Big-time throws ${m[1]}% of his throws · ${topHtml(+m[2])} · Passer rating ${m[3]}`],
+  // Dual Threat
+  [/^(\d+) rushing yards \((\d+)\w+ pct\) on (\d+) carries$/,
+    m => `Rushing yards ${m[1]} on ${m[3]} carries · ${topHtml(+m[2])}`],
+  // Third-Down Back
+  [/^Receiving: (\d+) catches \((\d+)\w+ pct among RBs\) on (\d+) targets; PBLK grade ([\d.]+) on (\d+) pass-block snaps$/,
+    m => `${m[1]} catches · ${topHtml(+m[2])} of running backs · on ${m[3]} targets · Pass-block grade ${m[4]} on ${m[5]} pass-blocking snaps`],
+  // Verified Speed — an official track time, never a reported forty
+  [/^(\d+)m ([\d.]+)(?: \(wind ([+-][\d.]+) \(over ([+-][\d.]+) limit - wind-aided\)\))?$/,
+    m => `${m[1]} metres in ${m[2]} seconds${m[3] ? ` · wind ${m[3]} — over the ${m[4]} limit, so the time is wind-aided` : ''}`],
+  [/^(\d+)y ([\d.]+)$/,
+    m => `${m[1]}-yard dash in ${m[2]} seconds`],
+];
+const plainTagStat = stat => {
+  for (const [re, fn] of TAG_STAT_RULES) {
+    const m = String(stat).match(re);
+    if (m) return fn(m);
+  }
+  return null;
+};
+
 function bestSection(p) {
   const ts = tagsOf(p);
   if (!ts.length) return '';
   return `<div class="card"><h2 class="sec" style="margin-top:2px">What he does best</h2>
-    <ul class="tight">${ts.map(t => `<li><b>${esc(t.tag)}</b>${t.proxy ? ' <span class="tag-proxy">proxy</span>' : ''} — ${esc(t.stat)}</li>`).join('')}</ul>
-    <p class="p-sub">Archetype tags from his 2026 report lines: each tag is a number against the pool at his level and position group — the primary stat in the top quartile, the secondary at or above the pool median. A tag marked <b>proxy</b> is defined through a stand-in stat, because the direct measure is not in the PFF export.</p></div>`;
+    <ul class="tight">${ts.map(t => {
+      const ev = plainTagStat(t.stat);
+      return `<li><b>${esc(t.tag)}</b>${t.proxy ? ' <span class="tag-proxy">stand-in stat</span>' : ''}${TAG_GLOSS[t.tag] ? ` — ${esc(TAG_GLOSS[t.tag])}` : ''}<span class="best-evidence">${ev != null ? ev : esc(t.stat)}</span></li>`;
+    }).join('')}</ul>
+    <p class="p-sub">These tags come from his 2026 numbers, each one measured against the other players at his position and his level in this library: the headline number for a tag sits in the top quarter of that group, and the supporting number is at least in the top half. A tag marked <b>stand-in stat</b> is read off a related stat, because the direct measure is not in the data.</p></div>`;
 }
 
 /* -------- hometown line --------
