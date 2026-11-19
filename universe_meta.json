@@ -1,0 +1,50 @@
+{
+ "core_evaluated": 1461,
+ "universe": 16923,
+ "total_listed": 18384,
+ "by_level": {
+  "FCS": 7910,
+  "G6": 4908,
+  "P4": 4105
+ },
+ "by_conference": {
+  "ACC": 1078,
+  "American": 972,
+  "Big 12": 996,
+  "Big Sky": 812,
+  "Big Ten": 1058,
+  "CAA": 797,
+  "Conference USA": 719,
+  "Independent": 126,
+  "Ivy": 478,
+  "MAC": 936,
+  "MEAC": 476,
+  "MVFC": 614,
+  "Mountain West": 654,
+  "NEC": 518,
+  "OVC-Big South": 533,
+  "Pac-12": 571,
+  "Patriot": 634,
+  "Pioneer": 806,
+  "SEC": 919,
+  "SWAC": 921,
+  "SoCon": 648,
+  "Southland": 673,
+  "Sun Belt": 984
+ },
+ "fcs_conferences": [
+  "Big Sky",
+  "CAA",
+  "Ivy",
+  "MEAC",
+  "MVFC",
+  "NEC",
+  "OVC-Big South",
+  "Patriot",
+  "Pioneer",
+  "SWAC",
+  "SoCon",
+  "Southland"
+ ],
+ "note": "Standard records carry name, school, level, conference, position, 2026 headline grade and volume only \u2014 no evaluation. Counts are computed by build_universe.py from the source files on disk."
+}
