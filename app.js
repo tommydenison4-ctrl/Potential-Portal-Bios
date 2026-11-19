@@ -1661,6 +1661,25 @@ function downloadClassImage() {
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   });
 }
+function canCopyImage() {
+  try {
+    return !!(window.ClipboardItem && navigator.clipboard && typeof navigator.clipboard.write === 'function');
+  } catch (err) { return false; }
+}
+function copyClassImage() {
+  const note = document.querySelector('[data-copynote]');
+  const say = msg => { if (note) { note.hidden = false; note.textContent = msg; } };
+  classImageBlob(b => {
+    if (!b) { say('The picture could not be made on this device — use Download instead, then attach the file.'); return; }
+    try {
+      const p = navigator.clipboard.write([new ClipboardItem({ 'image/png': b })]);
+      if (p && typeof p.then === 'function') p.then(
+        () => say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).'),
+        () => say('The browser blocked the copy — use Download instead, then attach the file to the draft.'));
+      else say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).');
+    } catch (err) { say('The browser blocked the copy — use Download instead, then attach the file to the draft.'); }
+  });
+}
 function shareClassImage() {
   const snap = champBoardSnapshot;
   if (!snap || !snap.mail) return;
@@ -1728,14 +1747,19 @@ function renderClassBoard(t, m) {
     </div>
     ${ct.n ? '<div class="share-fieldwrap" data-sharefieldwrap hidden><input type="text" readonly data-sharefield class="share-field" aria-label="Share link for this class"></div>' : ''}
     ${ct.n ? `<div class="email-panel" data-emailpanel hidden>
-      <p class="p-sub" style="margin-top:0">The email carries a <b>picture of this board</b> — the class as it looks on screen — with the <b>full text underneath it</b>, so it still reads on a phone even where the picture doesn't load.</p>
+      <p class="p-sub" style="margin-top:0">The class goes out as a <b>picture of this board</b> — the class as it looks on screen — with the <b>full text underneath it</b>, so it still reads on a phone even where the picture doesn't load. Get the picture first, then open a draft for the text.</p>
       <div class="email-btns">
         ${canShareFiles() ? '<button type="button" class="btn-save" data-shareclass>Share — picture + text</button>' : ''}
-        <button type="button" class="btn-ghost" data-dlimg>Download the board picture</button>
-        <a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Open an email draft — text version</a>
-        <a class="btn-ghost mail-btn" href="${gmailCompose(t, m, ct, eff, lines)}" target="_blank" rel="noopener">Open in Gmail — text version</a>
+        <button type="button" class="btn-ghost" data-dlimg>Download board picture</button>
+        ${canCopyImage() ? '<button type="button" class="btn-ghost" data-copyimg>Copy board picture</button>' : ''}
       </div>
-      <p class="p-sub">On a phone, <b>Share</b> drops the picture straight into your mail app — Apple Mail, the Gmail app, whichever you pick — with the text under it. On a computer, download the picture and attach it to the draft (in Gmail, just drag the picture into the compose window) — a web page can't attach a file to an email by itself.</p>
+      ${canShareFiles() ? '<p class="p-sub"><b>Share</b> drops the picture straight into your mail app — Apple Mail, the Gmail app, whichever you pick — with the text under it. That is the one route that attaches the picture by itself.</p>' : ''}
+      <p class="p-sub" data-copynote hidden></p>
+      <p class="p-sub">Email drafts open with the text only — a web page can't attach the picture. Download or copy the picture first, then attach or paste it into the draft.</p>
+      <div class="email-btns">
+        <a class="btn-ghost mail-btn" href="${classMailto(t, m, ct, eff, lines)}">Open an email draft — text only</a>
+        <a class="btn-ghost mail-btn" href="${gmailCompose(t, m, ct, eff, lines)}" target="_blank" rel="noopener">Open in Gmail — text only</a>
+      </div>
     </div>` : ''}
     ${ct.n ? `<div class="class-list">${rows}</div>
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
@@ -2138,6 +2162,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
       return;
     }
     if (e.target.closest('[data-dlimg]')) { downloadClassImage(); return; }
+    if (e.target.closest('[data-copyimg]')) { copyClassImage(); return; }
     if (e.target.closest('[data-shareclass]')) { shareClassImage(); return; }
     if (e.target.closest('[data-sharelink]')) { copyShareLink(e.target.closest('[data-sharelink]')); return; }
     const chip = e.target.closest('[data-hitpid]');
