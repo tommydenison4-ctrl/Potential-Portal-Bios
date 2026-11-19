@@ -1,1 +1,21 @@
-{"weeks":[{"entries":["The library opened with 766 evaluated players — 553 moving up from FCS, 213 moving down from P4 — across 10 Player Books.","Championship path added: every FBS team's rooms measured against its conference-best standard, with the getable players named and a full class builder.","Estimated NIL projections added to every player page and to the championship path, modelled from reported market bands — not reported deals.","Saved classes: save any player to a school's class from his page, print or email the class (board picture plus full text, Gmail included), and share a class with a link that opens it live.","My Team mode added: pick your school once and player pages, fits and the championship path frame themselves around your rooms.","Every book now carries a verified headshot for every player — 766 of 766.","Targeting layer added: 228 players now carry 'What he does best' tags — 19 archetypes, from vertical-stretch receivers to press corners, computed from their trait stats — with a filter in both directories and on the championship path. Every bio now opens with the player's hometown.","Value Board added: all 683 priced players ranked inside their position by grade against price — a steady lens for what he is now and a ceiling lens for what he could become — with each player's NIL band printed beside his score.","Budget Report added to the championship path: each team's rooms ranked by their gap to the conference standard, the cheapest getable fix in every room, and ready-built classes at $500K, $1M and $2M that open straight into the class builder.","P4 Down book expanded to ten home states: the Florida, Georgia, Tennessee, Oklahoma and South Carolina screen added 246 fully evaluated players, taking the book to 459 — every one graded against the 2026 pool, priced, and carrying a Call, with headshots verified. The site now carries 1,012 evaluated players."],"week":"November 18, 2026"}]}
+{
+  "weeks": [
+    {
+      "entries": [
+        "The library opened with 766 evaluated players — 553 moving up from FCS, 213 moving down from P4 — across 10 Player Books.",
+        "Championship path added: every FBS team's rooms measured against its conference-best standard, with the getable players named and a full class builder.",
+        "Estimated NIL projections added to every player page and to the championship path, modelled from reported market bands — not reported deals.",
+        "Saved classes: save any player to a school's class from his page, print or email the class (board picture plus full text, Gmail included), and share a class with a link that opens it live.",
+        "My Team mode added: pick your school once and player pages, fits and the championship path frame themselves around your rooms.",
+        "Every book now carries a verified headshot for every player — 766 of 766.",
+        "Targeting layer added: 228 players now carry 'What he does best' tags — 19 archetypes, from vertical-stretch receivers to press corners, computed from their trait stats — with a filter in both directories and on the championship path. Every bio now opens with the player's hometown.",
+        "Value Board added: all 683 priced players ranked inside their position by grade against price — a steady lens for what he is now and a ceiling lens for what he could become — with each player's NIL band printed beside his score.",
+        "Budget Report added to the championship path: each team's rooms ranked by their gap to the conference standard, the cheapest getable fix in every room, and ready-built classes at $500K, $1M and $2M that open straight into the class builder.",
+        "P4 Down book expanded to ten home states: the Florida, Georgia, Tennessee, Oklahoma and South Carolina screen added 246 fully evaluated players, taking the book to 459 — every one graded against the 2026 pool, priced, and carrying a Call, with headshots verified. The site now carries 1,012 evaluated players.",
+        "Player lists now show what each man does best: his skill tags sit beside his name in both directories, so a press corner, a YAC threat or a pulling lineman reads at a glance without opening his page. 247 of the 1,012 players carry tags.",
+        "Overpay notes added: when a player's projected price outruns his grade by 30 points or more inside his position pool, his page now says 'Priced as an overpay' beside the band, with both percentiles printed, and the Value Board flags him. 174 of the 929 priced players carry the note."
+      ],
+      "week": "November 18, 2026"
+    }
+  ]
+}
