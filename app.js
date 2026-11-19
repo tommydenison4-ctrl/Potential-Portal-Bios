@@ -1568,6 +1568,12 @@ function proBandCell(p) {
 }
 
 function renderCompare(players) {
+  /* Apples to apples (Tommy, Nov 19, 2026): a Blended Score is only ever
+     compared against another Blended Score. If any player shown lacks
+     one, the row shows no numbers at all — a blend is never set beside
+     a base grade or a dash and read as a comparison. */
+  const allBlended = players.every(p => p.blended_score != null);
+  const anyBlended = players.some(p => p.blended_score != null);
   const rows = [
     ['', p => photo(p, 'ph cmp-ph')],
     ['Player', p => `<span class="cmp-name">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}`],
@@ -1579,7 +1585,7 @@ function renderCompare(players) {
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
     ['Headline grade', p => p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`],
-    ['Blended Score', p => p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`],
+    ['Blended Score', p => !allBlended ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`],
     ['Stat line', p => esc(p.stat_line || '—')],
     ['Eligibility', p => `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
     ['Hidden Value', p => p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : '—'],
@@ -1593,7 +1599,10 @@ function renderCompare(players) {
   return `<div class="cmp-grid" style="--cols:${players.length}">` +
     rows.map(([label, fn]) =>
       `<div class="cmp-label">${esc(label)}</div>` + players.map(p => `<div class="cmp-v">${fn(p)}</div>`).join('')
-    ).join('') + '</div>';
+    ).join('') + '</div>' +
+    ((anyBlended && !allBlended)
+      ? cmpNote('Blended Scores are compared only where every player shown has one — a blend is never set against a base grade.')
+      : '');
 }
 
 /* ---------------- conference comparison ---------------- */
