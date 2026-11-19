@@ -1,16 +1,21 @@
 {
  "meta": {
   "source": "portal_scouting/conference_comparison CSVs (build_comparison.py), exported by build_comparison_json.py",
-  "total_players": 553,
-  "books": 9,
-  "p4_likely_total": 175,
-  "p4_starter_likely_total": 33,
-  "hidden_value_total": 128
+  "total_players": 1099,
+  "books": 14,
+  "p4_likely_total": 343,
+  "p4_starter_likely_total": 58,
+  "hidden_value_total": 243
  },
  "books": [
+  "Pioneer",
+  "Ivy",
   "Big Sky",
+  "Patriot",
   "Southland",
+  "SWAC",
   "SoCon",
+  "MEAC",
   "CAA",
   "MVFC",
   "UTEP",
@@ -32,6 +37,50 @@
  ],
  "conference_table": [
   {
+   "book": "Pioneer",
+   "is_roster": false,
+   "n": 179,
+   "schools": 11,
+   "offense_n": 91,
+   "defense_n": 88,
+   "median_grade": 70.7,
+   "elig_remaining": 152,
+   "pct_elig_remaining": 85,
+   "final_year": 27,
+   "unsettled": 0,
+   "hidden_value": 38,
+   "pct_sr_plus": 39,
+   "pct_fr_so": 30,
+   "p4_likely": 43,
+   "p4_starter_likely": 2,
+   "g6_likely": 109,
+   "pro_eval_only": 27,
+   "ceiling_p4_starter_or_better": 11,
+   "final_year_grade_mass_pct": 15.1
+  },
+  {
+   "book": "Ivy",
+   "is_roster": false,
+   "n": 132,
+   "schools": 8,
+   "offense_n": 65,
+   "defense_n": 67,
+   "median_grade": 71.6,
+   "elig_remaining": 132,
+   "pct_elig_remaining": 100,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 29,
+   "pct_sr_plus": 46,
+   "pct_fr_so": 22,
+   "p4_likely": 60,
+   "p4_starter_likely": 14,
+   "g6_likely": 72,
+   "pro_eval_only": 0,
+   "ceiling_p4_starter_or_better": 27,
+   "final_year_grade_mass_pct": 0.0
+  },
+  {
    "book": "Big Sky",
    "is_roster": false,
    "n": 101,
@@ -52,6 +101,28 @@
    "pro_eval_only": 10,
    "ceiling_p4_starter_or_better": 21,
    "final_year_grade_mass_pct": 10.2
+  },
+  {
+   "book": "Patriot",
+   "is_roster": false,
+   "n": 90,
+   "schools": 10,
+   "offense_n": 45,
+   "defense_n": 45,
+   "median_grade": 70.8,
+   "elig_remaining": 84,
+   "pct_elig_remaining": 93,
+   "final_year": 6,
+   "unsettled": 0,
+   "hidden_value": 22,
+   "pct_sr_plus": 31,
+   "pct_fr_so": 36,
+   "p4_likely": 24,
+   "p4_starter_likely": 3,
+   "g6_likely": 60,
+   "pro_eval_only": 6,
+   "ceiling_p4_starter_or_better": 11,
+   "final_year_grade_mass_pct": 6.7
   },
   {
    "book": "Southland",
@@ -76,6 +147,28 @@
    "final_year_grade_mass_pct": 12.2
   },
   {
+   "book": "SWAC",
+   "is_roster": false,
+   "n": 86,
+   "schools": 12,
+   "offense_n": 34,
+   "defense_n": 52,
+   "median_grade": 69.8,
+   "elig_remaining": 62,
+   "pct_elig_remaining": 72,
+   "final_year": 21,
+   "unsettled": 3,
+   "hidden_value": 15,
+   "pct_sr_plus": 44,
+   "pct_fr_so": 24,
+   "p4_likely": 25,
+   "p4_starter_likely": 4,
+   "g6_likely": 40,
+   "pro_eval_only": 21,
+   "ceiling_p4_starter_or_better": 11,
+   "final_year_grade_mass_pct": 24.4
+  },
+  {
    "book": "SoCon",
    "is_roster": false,
    "n": 76,
@@ -96,6 +189,28 @@
    "pro_eval_only": 10,
    "ceiling_p4_starter_or_better": 6,
    "final_year_grade_mass_pct": 13.0
+  },
+  {
+   "book": "MEAC",
+   "is_roster": false,
+   "n": 59,
+   "schools": 6,
+   "offense_n": 26,
+   "defense_n": 33,
+   "median_grade": 69.2,
+   "elig_remaining": 39,
+   "pct_elig_remaining": 66,
+   "final_year": 19,
+   "unsettled": 1,
+   "hidden_value": 11,
+   "pct_sr_plus": 46,
+   "pct_fr_so": 34,
+   "p4_likely": 16,
+   "p4_starter_likely": 2,
+   "g6_likely": 24,
+   "pro_eval_only": 19,
+   "ceiling_p4_starter_or_better": 6,
+   "final_year_grade_mass_pct": 31.7
   },
   {
    "book": "CAA",
@@ -231,6 +346,190 @@
   }
  ],
  "position_grid": {
+  "Pioneer": {
+   "QB": {
+    "n": 7,
+    "median_grade": 76.3,
+    "p4_likely": 3,
+    "p4_starter": 2,
+    "elig_remaining": 5,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "RB": {
+    "n": 9,
+    "median_grade": 75.8,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 6,
+    "final_year": 3,
+    "hidden_value": 0
+   },
+   "WR": {
+    "n": 28,
+    "median_grade": 68.9,
+    "p4_likely": 22,
+    "p4_starter": 0,
+    "elig_remaining": 23,
+    "final_year": 5,
+    "hidden_value": 1
+   },
+   "TE": {
+    "n": 2,
+    "median_grade": 79,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 2,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "OL": {
+    "n": 45,
+    "median_grade": 67.5,
+    "p4_likely": 5,
+    "p4_starter": 0,
+    "elig_remaining": 39,
+    "final_year": 6,
+    "hidden_value": 20
+   },
+   "ED": {
+    "n": 8,
+    "median_grade": 70.3,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 8,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "DI": {
+    "n": 19,
+    "median_grade": 66.6,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 16,
+    "final_year": 3,
+    "hidden_value": 8
+   },
+   "LB": {
+    "n": 26,
+    "median_grade": 66.8,
+    "p4_likely": 5,
+    "p4_starter": 0,
+    "elig_remaining": 23,
+    "final_year": 3,
+    "hidden_value": 0
+   },
+   "CB": {
+    "n": 19,
+    "median_grade": 73.7,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 17,
+    "final_year": 2,
+    "hidden_value": 5
+   },
+   "S": {
+    "n": 16,
+    "median_grade": 77.2,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 13,
+    "final_year": 3,
+    "hidden_value": 4
+   }
+  },
+  "Ivy": {
+   "QB": {
+    "n": 7,
+    "median_grade": 72.6,
+    "p4_likely": 6,
+    "p4_starter": 4,
+    "elig_remaining": 7,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "RB": {
+    "n": 5,
+    "median_grade": 76.5,
+    "p4_likely": 4,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "WR": {
+    "n": 18,
+    "median_grade": 72.2,
+    "p4_likely": 18,
+    "p4_starter": 5,
+    "elig_remaining": 18,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "TE": {
+    "n": 1,
+    "median_grade": 68.3,
+    "p4_likely": 1,
+    "p4_starter": 0,
+    "elig_remaining": 1,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "OL": {
+    "n": 34,
+    "median_grade": 68.6,
+    "p4_likely": 9,
+    "p4_starter": 2,
+    "elig_remaining": 34,
+    "final_year": 0,
+    "hidden_value": 16
+   },
+   "ED": {
+    "n": 8,
+    "median_grade": 73.6,
+    "p4_likely": 4,
+    "p4_starter": 0,
+    "elig_remaining": 8,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "DI": {
+    "n": 13,
+    "median_grade": 65.9,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 13,
+    "final_year": 0,
+    "hidden_value": 4
+   },
+   "LB": {
+    "n": 15,
+    "median_grade": 72,
+    "p4_likely": 6,
+    "p4_starter": 0,
+    "elig_remaining": 15,
+    "final_year": 0,
+    "hidden_value": 4
+   },
+   "CB": {
+    "n": 21,
+    "median_grade": 74.4,
+    "p4_likely": 8,
+    "p4_starter": 3,
+    "elig_remaining": 21,
+    "final_year": 0,
+    "hidden_value": 5
+   },
+   "S": {
+    "n": 10,
+    "median_grade": 76.7,
+    "p4_likely": 1,
+    "p4_starter": 0,
+    "elig_remaining": 10,
+    "final_year": 0,
+    "hidden_value": 0
+   }
+  },
   "Big Sky": {
    "QB": {
     "n": 5,
@@ -323,6 +622,98 @@
     "hidden_value": 2
    }
   },
+  "Patriot": {
+   "QB": {
+    "n": 5,
+    "median_grade": 67.4,
+    "p4_likely": 2,
+    "p4_starter": 1,
+    "elig_remaining": 4,
+    "final_year": 1,
+    "hidden_value": 1
+   },
+   "RB": {
+    "n": 5,
+    "median_grade": 81.6,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "WR": {
+    "n": 10,
+    "median_grade": 69.8,
+    "p4_likely": 9,
+    "p4_starter": 0,
+    "elig_remaining": 9,
+    "final_year": 1,
+    "hidden_value": 0
+   },
+   "TE": {
+    "n": 1,
+    "median_grade": 70.4,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 1,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "OL": {
+    "n": 24,
+    "median_grade": 69,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 21,
+    "final_year": 3,
+    "hidden_value": 12
+   },
+   "ED": {
+    "n": 7,
+    "median_grade": 70.6,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 7,
+    "final_year": 0,
+    "hidden_value": 2
+   },
+   "DI": {
+    "n": 12,
+    "median_grade": 73.9,
+    "p4_likely": 1,
+    "p4_starter": 0,
+    "elig_remaining": 12,
+    "final_year": 0,
+    "hidden_value": 2
+   },
+   "LB": {
+    "n": 11,
+    "median_grade": 67.7,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 11,
+    "final_year": 0,
+    "hidden_value": 4
+   },
+   "CB": {
+    "n": 9,
+    "median_grade": 77.9,
+    "p4_likely": 2,
+    "p4_starter": 2,
+    "elig_remaining": 9,
+    "final_year": 0,
+    "hidden_value": 1
+   },
+   "S": {
+    "n": 6,
+    "median_grade": 74.3,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 1,
+    "hidden_value": 0
+   }
+  },
   "Southland": {
    "QB": {
     "n": 2,
@@ -403,6 +794,89 @@
     "p4_starter": 0,
     "elig_remaining": 7,
     "final_year": 0,
+    "hidden_value": 2
+   }
+  },
+  "SWAC": {
+   "QB": {
+    "n": 3,
+    "median_grade": 71.3,
+    "p4_likely": 1,
+    "p4_starter": 0,
+    "elig_remaining": 1,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "RB": {
+    "n": 5,
+    "median_grade": 83.5,
+    "p4_likely": 5,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 0,
+    "hidden_value": 0
+   },
+   "WR": {
+    "n": 11,
+    "median_grade": 69.3,
+    "p4_likely": 8,
+    "p4_starter": 0,
+    "elig_remaining": 8,
+    "final_year": 3,
+    "hidden_value": 0
+   },
+   "OL": {
+    "n": 15,
+    "median_grade": 66.3,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 10,
+    "final_year": 4,
+    "hidden_value": 4
+   },
+   "ED": {
+    "n": 7,
+    "median_grade": 72.8,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "DI": {
+    "n": 10,
+    "median_grade": 67.9,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 6,
+    "final_year": 2,
+    "hidden_value": 4
+   },
+   "LB": {
+    "n": 17,
+    "median_grade": 67,
+    "p4_likely": 1,
+    "p4_starter": 0,
+    "elig_remaining": 13,
+    "final_year": 4,
+    "hidden_value": 5
+   },
+   "CB": {
+    "n": 11,
+    "median_grade": 71.2,
+    "p4_likely": 6,
+    "p4_starter": 4,
+    "elig_remaining": 9,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "S": {
+    "n": 7,
+    "median_grade": 81.7,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 5,
+    "final_year": 2,
     "hidden_value": 2
    }
   },
@@ -487,6 +961,89 @@
     "elig_remaining": 8,
     "final_year": 0,
     "hidden_value": 3
+   }
+  },
+  "MEAC": {
+   "QB": {
+    "n": 4,
+    "median_grade": 71.3,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 1,
+    "final_year": 3,
+    "hidden_value": 0
+   },
+   "RB": {
+    "n": 4,
+    "median_grade": 83,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 3,
+    "final_year": 1,
+    "hidden_value": 0
+   },
+   "WR": {
+    "n": 6,
+    "median_grade": 67.5,
+    "p4_likely": 4,
+    "p4_starter": 0,
+    "elig_remaining": 4,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "OL": {
+    "n": 12,
+    "median_grade": 66.7,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 8,
+    "final_year": 3,
+    "hidden_value": 8
+   },
+   "ED": {
+    "n": 5,
+    "median_grade": 84.5,
+    "p4_likely": 3,
+    "p4_starter": 0,
+    "elig_remaining": 4,
+    "final_year": 1,
+    "hidden_value": 0
+   },
+   "DI": {
+    "n": 7,
+    "median_grade": 65.5,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 6,
+    "final_year": 1,
+    "hidden_value": 1
+   },
+   "LB": {
+    "n": 9,
+    "median_grade": 65.8,
+    "p4_likely": 2,
+    "p4_starter": 0,
+    "elig_remaining": 6,
+    "final_year": 3,
+    "hidden_value": 1
+   },
+   "CB": {
+    "n": 7,
+    "median_grade": 72.9,
+    "p4_likely": 2,
+    "p4_starter": 2,
+    "elig_remaining": 5,
+    "final_year": 2,
+    "hidden_value": 0
+   },
+   "S": {
+    "n": 5,
+    "median_grade": 70.7,
+    "p4_likely": 0,
+    "p4_starter": 0,
+    "elig_remaining": 2,
+    "final_year": 3,
+    "hidden_value": 1
    }
   },
   "CAA": {
@@ -974,126 +1531,150 @@
   "by_position": [
    {
     "position": "QB",
-    "Fr": 1,
-    "So": 7,
-    "Jr": 4,
-    "Sr+": 4,
-    "total": 16,
-    "elig_remaining": 16,
-    "final_year": 0,
+    "Fr": 6,
+    "So": 9,
+    "Jr": 9,
+    "Sr+": 18,
+    "total": 42,
+    "elig_remaining": 34,
+    "final_year": 8,
     "unsettled": 0,
-    "pct_final_year": 0
+    "pct_final_year": 19
    },
    {
     "position": "RB",
-    "Fr": 2,
-    "So": 11,
-    "Jr": 11,
-    "Sr+": 9,
-    "total": 33,
-    "elig_remaining": 25,
-    "final_year": 7,
+    "Fr": 6,
+    "So": 17,
+    "Jr": 19,
+    "Sr+": 19,
+    "total": 61,
+    "elig_remaining": 49,
+    "final_year": 11,
     "unsettled": 1,
-    "pct_final_year": 21
+    "pct_final_year": 18
    },
    {
     "position": "WR",
-    "Fr": 3,
-    "So": 18,
-    "Jr": 19,
-    "Sr+": 19,
-    "total": 59,
-    "elig_remaining": 50,
-    "final_year": 5,
+    "Fr": 14,
+    "So": 35,
+    "Jr": 43,
+    "Sr+": 40,
+    "total": 132,
+    "elig_remaining": 112,
+    "final_year": 16,
     "unsettled": 4,
-    "pct_final_year": 8
+    "pct_final_year": 12
    },
    {
     "position": "TE",
     "Fr": 0,
-    "So": 1,
-    "Jr": 3,
-    "Sr+": 3,
-    "total": 7,
-    "elig_remaining": 4,
+    "So": 2,
+    "Jr": 4,
+    "Sr+": 5,
+    "total": 11,
+    "elig_remaining": 8,
     "final_year": 3,
     "unsettled": 0,
-    "pct_final_year": 43
+    "pct_final_year": 27
    },
    {
     "position": "OL",
-    "Fr": 12,
-    "So": 21,
-    "Jr": 43,
-    "Sr+": 60,
-    "total": 136,
-    "elig_remaining": 100,
-    "final_year": 32,
-    "unsettled": 4,
-    "pct_final_year": 24
-   },
-   {
-    "position": "ED",
-    "Fr": 5,
-    "So": 6,
-    "Jr": 15,
-    "Sr+": 17,
-    "total": 43,
-    "elig_remaining": 33,
-    "final_year": 7,
-    "unsettled": 3,
-    "pct_final_year": 16
-   },
-   {
-    "position": "DI",
-    "Fr": 4,
-    "So": 15,
-    "Jr": 20,
-    "Sr+": 23,
-    "total": 62,
-    "elig_remaining": 51,
-    "final_year": 11,
-    "unsettled": 0,
+    "Fr": 21,
+    "So": 45,
+    "Jr": 79,
+    "Sr+": 121,
+    "total": 266,
+    "elig_remaining": 212,
+    "final_year": 48,
+    "unsettled": 6,
     "pct_final_year": 18
    },
    {
+    "position": "ED",
+    "Fr": 6,
+    "So": 18,
+    "Jr": 27,
+    "Sr+": 27,
+    "total": 78,
+    "elig_remaining": 65,
+    "final_year": 10,
+    "unsettled": 3,
+    "pct_final_year": 13
+   },
+   {
+    "position": "DI",
+    "Fr": 8,
+    "So": 26,
+    "Jr": 42,
+    "Sr+": 47,
+    "total": 123,
+    "elig_remaining": 104,
+    "final_year": 17,
+    "unsettled": 2,
+    "pct_final_year": 14
+   },
+   {
     "position": "LB",
-    "Fr": 5,
-    "So": 17,
-    "Jr": 24,
-    "Sr+": 33,
-    "total": 79,
-    "elig_remaining": 71,
-    "final_year": 8,
+    "Fr": 9,
+    "So": 31,
+    "Jr": 51,
+    "Sr+": 66,
+    "total": 157,
+    "elig_remaining": 139,
+    "final_year": 18,
     "unsettled": 0,
-    "pct_final_year": 10
+    "pct_final_year": 11
    },
    {
     "position": "CB",
-    "Fr": 6,
-    "So": 23,
-    "Jr": 20,
-    "Sr+": 22,
-    "total": 71,
-    "elig_remaining": 66,
-    "final_year": 4,
+    "Fr": 13,
+    "So": 34,
+    "Jr": 39,
+    "Sr+": 52,
+    "total": 138,
+    "elig_remaining": 127,
+    "final_year": 10,
     "unsettled": 1,
-    "pct_final_year": 6
+    "pct_final_year": 7
    },
    {
     "position": "S",
-    "Fr": 5,
-    "So": 6,
-    "Jr": 18,
-    "Sr+": 18,
-    "total": 47,
-    "elig_remaining": 41,
-    "final_year": 6,
+    "Fr": 8,
+    "So": 16,
+    "Jr": 31,
+    "Sr+": 36,
+    "total": 91,
+    "elig_remaining": 76,
+    "final_year": 15,
     "unsettled": 0,
-    "pct_final_year": 13
+    "pct_final_year": 16
    }
   ],
   "by_book": [
+   {
+    "book": "Pioneer",
+    "is_roster": false,
+    "Fr": 17,
+    "So": 37,
+    "Jr": 56,
+    "Sr+": 69,
+    "total": 179,
+    "elig_remaining": 152,
+    "final_year": 27,
+    "unsettled": 0
+   },
+   {
+    "book": "Ivy",
+    "is_roster": false,
+    "Fr": 8,
+    "So": 21,
+    "Jr": 42,
+    "Sr+": 61,
+    "total": 132,
+    "elig_remaining": 132,
+    "final_year": 0,
+    "unsettled": 0
+   },
    {
     "book": "Big Sky",
     "is_roster": false,
@@ -1105,6 +1686,18 @@
     "elig_remaining": 87,
     "final_year": 10,
     "unsettled": 4
+   },
+   {
+    "book": "Patriot",
+    "is_roster": false,
+    "Fr": 12,
+    "So": 20,
+    "Jr": 30,
+    "Sr+": 28,
+    "total": 90,
+    "elig_remaining": 84,
+    "final_year": 6,
+    "unsettled": 0
    },
    {
     "book": "Southland",
@@ -1119,6 +1712,18 @@
     "unsettled": 3
    },
    {
+    "book": "SWAC",
+    "is_roster": false,
+    "Fr": 6,
+    "So": 15,
+    "Jr": 27,
+    "Sr+": 38,
+    "total": 86,
+    "elig_remaining": 62,
+    "final_year": 21,
+    "unsettled": 3
+   },
+   {
     "book": "SoCon",
     "is_roster": false,
     "Fr": 6,
@@ -1128,6 +1733,18 @@
     "total": 76,
     "elig_remaining": 65,
     "final_year": 10,
+    "unsettled": 1
+   },
+   {
+    "book": "MEAC",
+    "is_roster": false,
+    "Fr": 5,
+    "So": 15,
+    "Jr": 12,
+    "Sr+": 27,
+    "total": 59,
+    "elig_remaining": 39,
+    "final_year": 19,
     "unsettled": 1
    },
    {
@@ -1717,6 +2334,36 @@
  ],
  "schools": [
   {
+   "school": "Alabama A&M",
+   "book": "SWAC",
+   "n": 22,
+   "positions": "QB 1; RB 3; WR 4; OL 3; ED 1; DI 3; LB 2; CB 4; S 1",
+   "elig_remaining": 18,
+   "final_year": 2,
+   "unsettled": 2,
+   "hidden_value": 6,
+   "median_grade": 73.4,
+   "top_player": "Troy Bruce",
+   "top_pos": "RB",
+   "top_grade": 87,
+   "top_final_year": false
+  },
+  {
+   "school": "Alabama State",
+   "book": "SWAC",
+   "n": 3,
+   "positions": "QB 1; OL 1; CB 1",
+   "elig_remaining": 2,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 66.3,
+   "top_player": "Andrew Body",
+   "top_pos": "QB",
+   "top_grade": 71.3,
+   "top_final_year": true
+  },
+  {
    "school": "Albany",
    "book": "CAA",
    "n": 5,
@@ -1732,6 +2379,66 @@
    "top_final_year": false
   },
   {
+   "school": "Alcorn State",
+   "book": "SWAC",
+   "n": 4,
+   "positions": "WR 1; OL 1; LB 1; CB 1",
+   "elig_remaining": 4,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 68.3,
+   "top_player": "Mahamadou Diarra",
+   "top_pos": "LB",
+   "top_grade": 70.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Arkansas-Pine Bluff",
+   "book": "SWAC",
+   "n": 5,
+   "positions": "RB 1; DI 1; LB 1; CB 1; S 1",
+   "elig_remaining": 4,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 81.7,
+   "top_player": "Za'Marion Webber",
+   "top_pos": "RB",
+   "top_grade": 86.6,
+   "top_final_year": false
+  },
+  {
+   "school": "Bethune-Cookman",
+   "book": "SWAC",
+   "n": 1,
+   "positions": "LB 1",
+   "elig_remaining": 0,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 64.5,
+   "top_player": "Stephen Sparrow",
+   "top_pos": "LB",
+   "top_grade": 64.5,
+   "top_final_year": true
+  },
+  {
+   "school": "Brown",
+   "book": "Ivy",
+   "n": 20,
+   "positions": "QB 1; WR 4; OL 4; ED 3; DI 1; LB 2; CB 4; S 1",
+   "elig_remaining": 20,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 6,
+   "median_grade": 67.9,
+   "top_player": "Camryn Williams-Dalton",
+   "top_pos": "CB",
+   "top_grade": 84.5,
+   "top_final_year": false
+  },
+  {
    "school": "Bryant",
    "book": "CAA",
    "n": 4,
@@ -1744,6 +2451,36 @@
    "top_player": "Wyatt Whalen",
    "top_pos": "OL",
    "top_grade": 81.8,
+   "top_final_year": false
+  },
+  {
+   "school": "Bucknell",
+   "book": "Patriot",
+   "n": 2,
+   "positions": "WR 1; CB 1",
+   "elig_remaining": 2,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 71.2,
+   "top_player": "Langston Blair",
+   "top_pos": "CB",
+   "top_grade": 71.5,
+   "top_final_year": false
+  },
+  {
+   "school": "Butler",
+   "book": "Pioneer",
+   "n": 27,
+   "positions": "QB 1; RB 3; WR 1; OL 8; ED 3; DI 2; LB 3; CB 3; S 3",
+   "elig_remaining": 21,
+   "final_year": 6,
+   "unsettled": 0,
+   "hidden_value": 5,
+   "median_grade": 72.8,
+   "top_player": "Ashton Nawrocki",
+   "top_pos": "DI",
+   "top_grade": 87.4,
    "top_final_year": false
   },
   {
@@ -1819,6 +2556,126 @@
    "top_player": "D.J. Adams",
    "top_pos": "CB",
    "top_grade": 85.5,
+   "top_final_year": false
+  },
+  {
+   "school": "Colgate",
+   "book": "Patriot",
+   "n": 11,
+   "positions": "WR 1; OL 3; ED 1; DI 1; LB 2; CB 2; S 1",
+   "elig_remaining": 11,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 70.5,
+   "top_player": "Trooper Price",
+   "top_pos": "LB",
+   "top_grade": 82.1,
+   "top_final_year": false
+  },
+  {
+   "school": "Columbia",
+   "book": "Ivy",
+   "n": 12,
+   "positions": "QB 1; RB 1; WR 2; OL 3; ED 1; DI 1; LB 1; CB 2",
+   "elig_remaining": 12,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 72.3,
+   "top_player": "Griffin Johnson",
+   "top_pos": "RB",
+   "top_grade": 80,
+   "top_final_year": false
+  },
+  {
+   "school": "Cornell",
+   "book": "Ivy",
+   "n": 16,
+   "positions": "QB 1; WR 1; OL 5; DI 2; LB 2; CB 2; S 3",
+   "elig_remaining": 16,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 6,
+   "median_grade": 68.2,
+   "top_player": "Mason Grabowski",
+   "top_pos": "LB",
+   "top_grade": 88.8,
+   "top_final_year": false
+  },
+  {
+   "school": "Dartmouth",
+   "book": "Ivy",
+   "n": 17,
+   "positions": "QB 1; WR 3; OL 4; ED 1; DI 2; LB 1; CB 3; S 2",
+   "elig_remaining": 17,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 67.8,
+   "top_player": "Harrison Keith",
+   "top_pos": "S",
+   "top_grade": 86.9,
+   "top_final_year": false
+  },
+  {
+   "school": "Davidson",
+   "book": "Pioneer",
+   "n": 11,
+   "positions": "RB 1; WR 2; OL 2; DI 1; LB 4; CB 1",
+   "elig_remaining": 11,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 69.3,
+   "top_player": "Jacary Lightsey",
+   "top_pos": "WR",
+   "top_grade": 82.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Dayton",
+   "book": "Pioneer",
+   "n": 20,
+   "positions": "QB 1; RB 1; WR 2; TE 1; OL 4; ED 2; DI 3; LB 2; CB 3; S 1",
+   "elig_remaining": 20,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 71.2,
+   "top_player": "Donovan Weatherly",
+   "top_pos": "TE",
+   "top_grade": 81.9,
+   "top_final_year": false
+  },
+  {
+   "school": "Delaware State",
+   "book": "MEAC",
+   "n": 4,
+   "positions": "QB 2; OL 1; ED 1",
+   "elig_remaining": 0,
+   "final_year": 3,
+   "unsettled": 1,
+   "hidden_value": 1,
+   "median_grade": 71.3,
+   "top_player": "Carl Nesmith",
+   "top_pos": "ED",
+   "top_grade": 76.3,
+   "top_final_year": true
+  },
+  {
+   "school": "Drake",
+   "book": "Pioneer",
+   "n": 13,
+   "positions": "QB 1; WR 4; OL 2; DI 3; LB 1; CB 2",
+   "elig_remaining": 10,
+   "final_year": 3,
+   "unsettled": 0,
+   "hidden_value": 5,
+   "median_grade": 68,
+   "top_player": "Taye Proctor",
+   "top_pos": "CB",
+   "top_grade": 81.2,
    "top_final_year": false
   },
   {
@@ -1912,6 +2769,36 @@
    "top_final_year": false
   },
   {
+   "school": "Florida A&M",
+   "book": "SWAC",
+   "n": 5,
+   "positions": "OL 1; ED 1; DI 1; LB 2",
+   "elig_remaining": 4,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 66.7,
+   "top_player": "Denzel Johnson",
+   "top_pos": "LB",
+   "top_grade": 71.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Fordham",
+   "book": "Patriot",
+   "n": 5,
+   "positions": "OL 3; ED 1; CB 1",
+   "elig_remaining": 5,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 65.6,
+   "top_player": "Kemaury Tye",
+   "top_pos": "CB",
+   "top_grade": 84.5,
+   "top_final_year": false
+  },
+  {
    "school": "Furman",
    "book": "SoCon",
    "n": 5,
@@ -1942,6 +2829,36 @@
    "top_final_year": false
   },
   {
+   "school": "Georgetown",
+   "book": "Patriot",
+   "n": 14,
+   "positions": "QB 1; RB 1; WR 3; TE 1; OL 2; ED 2; DI 3; CB 1",
+   "elig_remaining": 13,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 69.6,
+   "top_player": "Dean Mangiocavallo",
+   "top_pos": "DI",
+   "top_grade": 81.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Grambling State",
+   "book": "SWAC",
+   "n": 7,
+   "positions": "WR 2; OL 2; ED 1; LB 2",
+   "elig_remaining": 5,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 69.1,
+   "top_player": "Demone Green",
+   "top_pos": "ED",
+   "top_grade": 81.1,
+   "top_final_year": true
+  },
+  {
    "school": "Hampton",
    "book": "CAA",
    "n": 1,
@@ -1957,6 +2874,36 @@
    "top_final_year": false
   },
   {
+   "school": "Harvard",
+   "book": "Ivy",
+   "n": 17,
+   "positions": "QB 1; RB 2; WR 2; TE 1; OL 5; DI 1; LB 1; CB 2; S 2",
+   "elig_remaining": 17,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 76.1,
+   "top_player": "Xaden Benson",
+   "top_pos": "S",
+   "top_grade": 89.1,
+   "top_final_year": false
+  },
+  {
+   "school": "Holy Cross",
+   "book": "Patriot",
+   "n": 5,
+   "positions": "OL 3; LB 2",
+   "elig_remaining": 4,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 67.7,
+   "top_player": "Cam Nolan",
+   "top_pos": "OL",
+   "top_grade": 69.7,
+   "top_final_year": true
+  },
+  {
    "school": "Houston Christian",
    "book": "Southland",
    "n": 3,
@@ -1969,6 +2916,21 @@
    "top_player": "Javon Bejarano",
    "top_pos": "S",
    "top_grade": 81.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Howard",
+   "book": "MEAC",
+   "n": 5,
+   "positions": "OL 1; LB 2; CB 1; S 1",
+   "elig_remaining": 3,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 69.3,
+   "top_player": "Ben Chandler IV",
+   "top_pos": "CB",
+   "top_grade": 79.2,
    "top_final_year": false
   },
   {
@@ -2047,6 +3009,21 @@
    "top_final_year": false
   },
   {
+   "school": "Jackson State",
+   "book": "SWAC",
+   "n": 20,
+   "positions": "QB 1; RB 1; WR 3; OL 6; DI 2; LB 2; CB 2; S 3",
+   "elig_remaining": 10,
+   "final_year": 10,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 70.7,
+   "top_player": "B.J. Washington",
+   "top_pos": "S",
+   "top_grade": 87,
+   "top_final_year": true
+  },
+  {
    "school": "LIU",
    "book": "NEC",
    "n": 2,
@@ -2062,6 +3039,21 @@
    "top_final_year": false
   },
   {
+   "school": "Lafayette",
+   "book": "Patriot",
+   "n": 11,
+   "positions": "QB 1; OL 5; ED 1; DI 2; LB 1; S 1",
+   "elig_remaining": 10,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 73.2,
+   "top_player": "Callahan Blair",
+   "top_pos": "ED",
+   "top_grade": 83.8,
+   "top_final_year": false
+  },
+  {
    "school": "Lamar",
    "book": "Southland",
    "n": 16,
@@ -2074,6 +3066,21 @@
    "top_player": "Bryce McDonald",
    "top_pos": "S",
    "top_grade": 91.1,
+   "top_final_year": false
+  },
+  {
+   "school": "Lehigh",
+   "book": "Patriot",
+   "n": 23,
+   "positions": "QB 1; RB 1; WR 3; OL 5; ED 1; DI 3; LB 3; CB 3; S 3",
+   "elig_remaining": 21,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 74,
+   "top_player": "Luke Yoder",
+   "top_pos": "RB",
+   "top_grade": 88.4,
    "top_final_year": false
   },
   {
@@ -2104,6 +3111,21 @@
    "top_player": "Anthony Iliano",
    "top_pos": "OL",
    "top_grade": 70.9,
+   "top_final_year": false
+  },
+  {
+   "school": "Marist",
+   "book": "Pioneer",
+   "n": 21,
+   "positions": "RB 1; WR 2; OL 6; ED 1; DI 3; LB 5; S 3",
+   "elig_remaining": 17,
+   "final_year": 4,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 68.7,
+   "top_player": "Wayne Adair",
+   "top_pos": "LB",
+   "top_grade": 84.4,
    "top_final_year": false
   },
   {
@@ -2152,6 +3174,21 @@
    "top_final_year": false
   },
   {
+   "school": "Mississippi Valley State",
+   "book": "SWAC",
+   "n": 6,
+   "positions": "OL 1; ED 1; LB 2; CB 1; S 1",
+   "elig_remaining": 6,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 70.5,
+   "top_player": "Javieane Stevens",
+   "top_pos": "ED",
+   "top_grade": 91.3,
+   "top_final_year": false
+  },
+  {
    "school": "Monmouth",
    "book": "CAA",
    "n": 2,
@@ -2197,6 +3234,36 @@
    "top_final_year": false
   },
   {
+   "school": "Morehead State",
+   "book": "Pioneer",
+   "n": 9,
+   "positions": "RB 1; WR 2; OL 1; DI 1; LB 2; CB 1; S 1",
+   "elig_remaining": 7,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 68.5,
+   "top_player": "Sidney Webb",
+   "top_pos": "S",
+   "top_grade": 80.4,
+   "top_final_year": false
+  },
+  {
+   "school": "Morgan State",
+   "book": "MEAC",
+   "n": 6,
+   "positions": "OL 2; ED 2; DI 1; LB 1",
+   "elig_remaining": 4,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 64.8,
+   "top_player": "Donovan Moyer",
+   "top_pos": "ED",
+   "top_grade": 84.5,
+   "top_final_year": false
+  },
+  {
    "school": "Murray State",
    "book": "MVFC",
    "n": 6,
@@ -2209,6 +3276,21 @@
    "top_player": "Jaxon Potter",
    "top_pos": "WR",
    "top_grade": 84.6,
+   "top_final_year": false
+  },
+  {
+   "school": "NC Central",
+   "book": "MEAC",
+   "n": 11,
+   "positions": "RB 1; OL 2; ED 1; DI 1; LB 2; CB 2; S 2",
+   "elig_remaining": 10,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 73.1,
+   "top_player": "Gino Addison",
+   "top_pos": "RB",
+   "top_grade": 85.6,
    "top_final_year": false
   },
   {
@@ -2254,6 +3336,21 @@
    "top_player": "Trace Wegmann",
    "top_pos": "OL",
    "top_grade": 68.7,
+   "top_final_year": false
+  },
+  {
+   "school": "Norfolk State",
+   "book": "MEAC",
+   "n": 4,
+   "positions": "WR 1; ED 1; DI 2",
+   "elig_remaining": 3,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 67.3,
+   "top_player": "Quintin Goins",
+   "top_pos": "ED",
+   "top_grade": 89.9,
    "top_final_year": false
   },
   {
@@ -2347,6 +3444,21 @@
    "top_final_year": false
   },
   {
+   "school": "Penn",
+   "book": "Ivy",
+   "n": 16,
+   "positions": "QB 1; WR 2; OL 3; ED 1; DI 3; LB 3; CB 2; S 1",
+   "elig_remaining": 16,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 71.6,
+   "top_player": "Cole Olsztyn",
+   "top_pos": "LB",
+   "top_grade": 85.1,
+   "top_final_year": false
+  },
+  {
    "school": "Portland State",
    "book": "Big Sky",
    "n": 5,
@@ -2362,6 +3474,51 @@
    "top_final_year": true
   },
   {
+   "school": "Prairie View A&M",
+   "book": "SWAC",
+   "n": 7,
+   "positions": "DI 2; LB 4; CB 1",
+   "elig_remaining": 5,
+   "final_year": 1,
+   "unsettled": 1,
+   "hidden_value": 2,
+   "median_grade": 68.6,
+   "top_player": "Eric Zachery",
+   "top_pos": "CB",
+   "top_grade": 85.2,
+   "top_final_year": false
+  },
+  {
+   "school": "Presbyterian",
+   "book": "Pioneer",
+   "n": 11,
+   "positions": "RB 2; WR 2; OL 2; LB 2; CB 2; S 1",
+   "elig_remaining": 10,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 71.9,
+   "top_player": "Noah Taylor",
+   "top_pos": "CB",
+   "top_grade": 83.5,
+   "top_final_year": false
+  },
+  {
+   "school": "Princeton",
+   "book": "Ivy",
+   "n": 19,
+   "positions": "QB 1; RB 1; WR 2; OL 6; ED 2; DI 1; LB 3; CB 3",
+   "elig_remaining": 19,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 74.4,
+   "top_player": "Torian Roberts",
+   "top_pos": "CB",
+   "top_grade": 84.9,
+   "top_final_year": false
+  },
+  {
    "school": "Rhode Island",
    "book": "CAA",
    "n": 2,
@@ -2374,6 +3531,21 @@
    "top_player": "Rohan Davy",
    "top_pos": "LB",
    "top_grade": 72.3,
+   "top_final_year": false
+  },
+  {
+   "school": "Richmond",
+   "book": "Patriot",
+   "n": 11,
+   "positions": "RB 1; OL 3; ED 1; DI 3; LB 2; S 1",
+   "elig_remaining": 11,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 5,
+   "median_grade": 73,
+   "top_player": "Braxton Lassiter",
+   "top_pos": "DI",
+   "top_grade": 82.5,
    "top_final_year": false
   },
   {
@@ -2420,6 +3592,36 @@
    "top_pos": "WR",
    "top_grade": 70.7,
    "top_final_year": false
+  },
+  {
+   "school": "San Diego",
+   "book": "Pioneer",
+   "n": 15,
+   "positions": "QB 1; WR 3; OL 4; DI 2; LB 2; CB 1; S 2",
+   "elig_remaining": 9,
+   "final_year": 6,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 71.9,
+   "top_player": "Dom Nankil",
+   "top_pos": "QB",
+   "top_grade": 90.9,
+   "top_final_year": false
+  },
+  {
+   "school": "South Carolina State",
+   "book": "MEAC",
+   "n": 29,
+   "positions": "QB 2; RB 3; WR 5; OL 6; DI 3; LB 4; CB 4; S 2",
+   "elig_remaining": 19,
+   "final_year": 10,
+   "unsettled": 0,
+   "hidden_value": 4,
+   "median_grade": 68.9,
+   "top_player": "Caleb Williams",
+   "top_pos": "S",
+   "top_grade": 87.6,
+   "top_final_year": true
   },
   {
    "school": "South Dakota",
@@ -2482,6 +3684,21 @@
    "top_final_year": false
   },
   {
+   "school": "Southern",
+   "book": "SWAC",
+   "n": 4,
+   "positions": "ED 2; DI 1; S 1",
+   "elig_remaining": 2,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 69.5,
+   "top_player": "Donald Johnson Jr.",
+   "top_pos": "S",
+   "top_grade": 83.1,
+   "top_final_year": true
+  },
+  {
    "school": "Southern Illinois",
    "book": "MVFC",
    "n": 2,
@@ -2512,6 +3729,21 @@
    "top_final_year": true
   },
   {
+   "school": "St. Thomas",
+   "book": "Pioneer",
+   "n": 19,
+   "positions": "QB 1; WR 4; OL 7; ED 1; LB 1; CB 3; S 2",
+   "elig_remaining": 17,
+   "final_year": 2,
+   "unsettled": 0,
+   "hidden_value": 6,
+   "median_grade": 72.8,
+   "top_player": "Pierce McCrary",
+   "top_pos": "WR",
+   "top_grade": 79.9,
+   "top_final_year": false
+  },
+  {
    "school": "Stephen F. Austin",
    "book": "Southland",
    "n": 24,
@@ -2524,6 +3756,21 @@
    "top_player": "Lowote Jurkin",
    "top_pos": "ED",
    "top_grade": 85.4,
+   "top_final_year": false
+  },
+  {
+   "school": "Stetson",
+   "book": "Pioneer",
+   "n": 13,
+   "positions": "QB 1; WR 3; OL 4; DI 1; LB 2; CB 1; S 1",
+   "elig_remaining": 13,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 2,
+   "median_grade": 70.1,
+   "top_player": "Thomas Von Grote",
+   "top_pos": "QB",
+   "top_grade": 81.7,
    "top_final_year": false
   },
   {
@@ -2599,6 +3846,21 @@
    "top_player": "Andrew Smithberger",
    "top_pos": "OL",
    "top_grade": 80.6,
+   "top_final_year": false
+  },
+  {
+   "school": "Texas Southern",
+   "book": "SWAC",
+   "n": 2,
+   "positions": "WR 1; ED 1",
+   "elig_remaining": 2,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 68.6,
+   "top_player": "Jordan Thompson",
+   "top_pos": "ED",
+   "top_grade": 71.9,
    "top_final_year": false
   },
   {
@@ -2722,6 +3984,36 @@
    "top_final_year": false
   },
   {
+   "school": "Valparaiso",
+   "book": "Pioneer",
+   "n": 20,
+   "positions": "QB 1; WR 3; TE 1; OL 5; ED 1; DI 3; LB 2; CB 2; S 2",
+   "elig_remaining": 17,
+   "final_year": 3,
+   "unsettled": 0,
+   "hidden_value": 5,
+   "median_grade": 68.5,
+   "top_player": "Nic Lendino",
+   "top_pos": "CB",
+   "top_grade": 89.9,
+   "top_final_year": false
+  },
+  {
+   "school": "Villanova",
+   "book": "Patriot",
+   "n": 3,
+   "positions": "QB 1; WR 1; CB 1",
+   "elig_remaining": 2,
+   "final_year": 1,
+   "unsettled": 0,
+   "hidden_value": 0,
+   "median_grade": 87.5,
+   "top_player": "Pat McQuaide",
+   "top_pos": "QB",
+   "top_grade": 87.6,
+   "top_final_year": true
+  },
+  {
    "school": "Wagner",
    "book": "NEC",
    "n": 3,
@@ -2782,6 +4074,21 @@
    "top_final_year": false
   },
   {
+   "school": "William & Mary",
+   "book": "Patriot",
+   "n": 5,
+   "positions": "QB 1; RB 2; WR 1; LB 1",
+   "elig_remaining": 5,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 1,
+   "median_grade": 70.9,
+   "top_player": "Andrew King",
+   "top_pos": "RB",
+   "top_grade": 86.6,
+   "top_final_year": false
+  },
+  {
    "school": "Wofford",
    "book": "SoCon",
    "n": 13,
@@ -2794,6 +4101,21 @@
    "top_player": "Nicholas Mathious",
    "top_pos": "DI",
    "top_grade": 83.4,
+   "top_final_year": false
+  },
+  {
+   "school": "Yale",
+   "book": "Ivy",
+   "n": 15,
+   "positions": "RB 1; WR 2; OL 4; DI 2; LB 2; CB 3; S 1",
+   "elig_remaining": 15,
+   "final_year": 0,
+   "unsettled": 0,
+   "hidden_value": 3,
+   "median_grade": 69.7,
+   "top_player": "Brandon Webster",
+   "top_pos": "CB",
+   "top_grade": 88.4,
    "top_final_year": false
   },
   {
