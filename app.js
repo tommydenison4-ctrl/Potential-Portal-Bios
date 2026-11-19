@@ -544,7 +544,7 @@ function renderProspects() {
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
-      <td class="num">${p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`}</td>
+      <td class="num">${p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
       <td class="num">${nilRange(p) || '—'}</td>
@@ -1013,7 +1013,7 @@ function applyFilters() {
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
-      <td class="num">${p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`}</td>
+      <td class="num">${p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
     </tr>`).join('');
@@ -1441,7 +1441,7 @@ function renderPlayer(p) {
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
-        ${p.blended_score != null ? `<p><span class="blend-num">${Math.round(p.blended_score)}</span> <span class="p-sub"><b>Blended Score</b> — our score — grades, production, honours and market combined.</span></p>` : ''}
+        ${p.blended_score != null ? `<p><span class="blend-num">${p.blended_score.toFixed(1)}</span> <span class="p-sub"><b>Blended Score</b> — our score — grades, production, honours and market combined.</span></p>` : ''}
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
@@ -1579,7 +1579,7 @@ function renderCompare(players) {
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
     ['Headline grade', p => p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`],
-    ['Blended Score', p => p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`],
+    ['Blended Score', p => p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`],
     ['Stat line', p => esc(p.stat_line || '—')],
     ['Eligibility', p => `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
     ['Hidden Value', p => p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : '—'],
