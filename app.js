@@ -4,6 +4,8 @@ let CMP = null;             // conference comparison dataset (comparison.json)
 let TEAMS = null;           // team comparison dataset (teams.json)
 let CHAMP = null;           // championship path dataset (championship.json)
 let CHANGES = null;         // what-changed log (changes.json), newest week first
+let TRAITS_BY_ID = {};      // trait layer (traits.json): player id -> [trait percentile entries]
+let TRAIT_REG = {};         // trait layer registry: trait key -> {label, groups, report, proxy, floor}
 let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
 let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
 let PROSPECTS = [];         // Prospect List: highlighted player ids (localStorage portalProspects)
@@ -43,6 +45,158 @@ const tagBadges = id => {
   return ' ' + ts.map(t => `<span class="tag-badge${t.proxy ? ' proxy' : ''}">${esc(t.tag)}${t.proxy ? ' · proxy' : ''}</span>`).join('');
 };
 const holdsAnyTag = (p, set) => tagsOf(p).some(t => set.has(t.tag));
+const holdsAllTags = (p, set) => [...set].every(t => tagsOf(p).some(x => x.tag === t));
+
+/* -------- skill traits (percentile bars + value lean) --------
+   The trait layer (build_traits.py -> traits.json) carries, per player,
+   one entry per trait he clears the volume floor for: {key, label, pct,
+   proxy, ...} — pct is his midpoint percentile inside his level x
+   position-group pool, the same pools the archetype tags use. A player
+   with NO entry for a trait is below that trait's floor; a percentile
+   bar on the trait therefore drops him (the honest floor). traitBars
+   holds the bars the user has set; bars AND-combine. The value lean
+   (Tommy, Nov 19, 2026) narrows a set trait to value-for-money carriers:
+   the trait percentile must be >= 60 AND run at least 30 points ahead of
+   his price percentile in his position pool — p.value.price_pct, the
+   Value Board's own percentile, so the product speaks one value
+   language. A player with no NIL price carries no p.value and cannot
+   carry the lean: he drops out while the lean is on. */
+const TRAIT_GROUP_ORDER = ['QB', 'RB', 'WR', 'TE', 'OL', 'ED', 'DI', 'LB', 'CB', 'S'];
+let traitBars = {};         // trait key -> percentile bar (number)
+let valueLean = false;
+
+const traitsOf = p => (p && TRAITS_BY_ID[p.id]) || [];
+const traitEntry = (p, key) => traitsOf(p).find(e => e.key === key) || null;
+
+function passesTraits(p) {
+  for (const key of Object.keys(traitBars)) {
+    const e = traitEntry(p, key);
+    if (!e || e.pct < traitBars[key]) return false;
+    if (valueLean) {
+      if (e.pct < 60) return false;
+      const v = p.value;
+      if (!v || v.price_pct == null) return false;
+      if (e.pct - v.price_pct < 30) return false;
+    }
+  }
+  return true;
+}
+
+function buildTraitPanel() {
+  const el = $('traitPanel');
+  if (!el) return;
+  if (!Object.keys(TRAIT_REG).length) { el.innerHTML = ''; return; }
+  const counts = {};
+  for (const p of PLAYERS) for (const e of traitsOf(p)) counts[e.key + '|' + e.group] = (counts[e.key + '|' + e.group] || 0) + 1;
+  const secs = TRAIT_GROUP_ORDER.map(g => {
+    const keys = Object.keys(TRAIT_REG).filter(k => (TRAIT_REG[k].groups || []).includes(g));
+    if (!keys.length) return '';
+    const rowsHtml = keys.map(k => {
+      const r = TRAIT_REG[k], n = counts[k + '|' + g] || 0;
+      return `<label class="trait-row"><span class="trait-name">${esc(r.label)}${r.proxy ? ' <span class="tag-proxy">proxy</span>' : ''}</span><span class="trait-count">${n} in this directory</span><input type="number" class="trait-bar" data-trait="${esc(k)}" min="0" max="100" step="1" placeholder="75" value="${traitBars[k] != null ? traitBars[k] : ''}"${n ? '' : ' disabled'} aria-label="Minimum percentile for ${esc(r.label)}"></label>`;
+    }).join('');
+    return `<div class="trait-group"><h3 class="trait-gh">${g}</h3>${rowsHtml}</div>`;
+  }).join('');
+  el.innerHTML = `<div class="card trait-card">
+    <h2 class="sec" style="margin-top:2px">Skill traits — percentile bars</h2>
+    <p class="p-sub">Set a percentile bar on any trait and the directory keeps only the players whose trait sits at or above it in his level-and-position pool. A player with no entry for a set trait is below its volume floor and drops out. Bars combine: every set bar applies at once. A trait marked <b>proxy</b> is measured through a stand-in stat, as on the archetype tags.</p>
+    <label class="check trait-lean"><input type="checkbox" id="t-lean"${valueLean ? ' checked' : ''}> <span><b>Value lean</b> — with the lean on, a set trait only counts when it sits at the 60th percentile or better <b>and</b> runs at least 30 points ahead of his price percentile in his position pool: a real skill, bought cheap. Players with no NIL price can’t carry the lean and drop out while it’s on.</span></label>
+    ${secs}</div>`;
+  el.querySelectorAll('.trait-bar').forEach(inp => inp.addEventListener('input', () => {
+    const v = parseFloat(inp.value);
+    if (inp.value.trim() === '' || !Number.isFinite(v)) delete traitBars[inp.dataset.trait];
+    else traitBars[inp.dataset.trait] = v;
+    // a trait spanning several groups (win rate under ED, DI and LB)
+    // renders one input per group over the same bar — keep them in sync
+    el.querySelectorAll(`.trait-bar[data-trait="${inp.dataset.trait}"]`).forEach(o => { if (o !== inp) o.value = inp.value; });
+    applyFilters();
+  }));
+  const lean = $('t-lean');
+  if (lean) lean.addEventListener('change', () => { valueLean = lean.checked; applyFilters(); });
+}
+
+/* -------- build filters (height / weight / build for his position) --------
+   Heights on record are strings ("6-1"; the down file also carries
+   "6-4--" artefacts) — heightInches parses "6-1" and plain inches alike,
+   for the records and for the filter inputs. The build composite is the
+   average of a player's height percentile and weight percentile inside
+   his position group in the CURRENT directory (midpoint percentiles,
+   screen_position groups); it is null whenever either measurement is
+   missing, and a null can never pass an active build filter — the
+   result count says how many were not shown for missing data. */
+function heightInches(v) {
+  if (v == null) return null;
+  if (typeof v === 'number') return v > 0 ? v : null;
+  const s = String(v).trim();
+  if (!s) return null;
+  const m = s.match(/^(\d+)\s*[-–']\s*(\d+)/);
+  if (m) return parseInt(m[1], 10) * 12 + parseInt(m[2], 10);
+  const n = parseInt(s, 10);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+const numOrNull = v => { const n = parseFloat(v); return Number.isFinite(n) && n > 0 ? n : null; };
+
+function midPct(sortedVals, v) {
+  let below = 0, equal = 0;
+  for (const x of sortedVals) { if (x < v) below++; else if (x === v) equal++; }
+  return sortedVals.length ? ((below + 0.5 * equal) / sortedVals.length) * 100 : null;
+}
+
+let buildCompCache = null;  // {dir, map: player id -> composite | null}
+function buildComposite(p) {
+  if (!buildCompCache || buildCompCache.dir !== curDir) {
+    const byGroup = {};
+    for (const q of PLAYERS) (byGroup[q.screen_position || q.position] = byGroup[q.screen_position || q.position] || []).push(q);
+    const map = {};
+    for (const g of Object.keys(byGroup)) {
+      const hs = [], ws = [];
+      for (const q of byGroup[g]) {
+        const h = heightInches(q.height); if (h != null) hs.push(h);
+        if (q.weight != null) ws.push(q.weight);
+      }
+      hs.sort((a, b) => a - b); ws.sort((a, b) => a - b);
+      for (const q of byGroup[g]) {
+        const h = heightInches(q.height);
+        map[q.id] = (h != null && q.weight != null && hs.length && ws.length)
+          ? (midPct(hs, h) + midPct(ws, q.weight)) / 2 : null;
+      }
+    }
+    buildCompCache = { dir: curDir, map };
+  }
+  const c = buildCompCache.map[p.id];
+  return c === undefined ? null : c;
+}
+
+function buildFilterState() {
+  return {
+    htMin: heightInches($('b-ht-min').value), htMax: heightInches($('b-ht-max').value),
+    wtMin: numOrNull($('b-wt-min').value), wtMax: numOrNull($('b-wt-max').value),
+    build: $('b-build').value
+  };
+}
+const buildFilterActive = bf => bf.htMin != null || bf.htMax != null || bf.wtMin != null || bf.wtMax != null || bf.build !== 'any';
+
+/* 'pass' | 'fail' | 'miss-wt' | 'miss-ht' — a miss means the player was
+   excluded only because a measurement the active filters need is not on
+   record for him. */
+function buildTest(p, bf) {
+  const h = heightInches(p.height), w = p.weight == null ? null : p.weight;
+  const needH = bf.htMin != null || bf.htMax != null || bf.build !== 'any';
+  const needW = bf.wtMin != null || bf.wtMax != null || bf.build !== 'any';
+  if (needW && w == null) return 'miss-wt';
+  if (needH && h == null) return 'miss-ht';
+  if (bf.htMin != null && h < bf.htMin) return 'fail';
+  if (bf.htMax != null && h > bf.htMax) return 'fail';
+  if (bf.wtMin != null && w < bf.wtMin) return 'fail';
+  if (bf.wtMax != null && w > bf.wtMax) return 'fail';
+  if (bf.build !== 'any') {
+    const c = buildComposite(p);
+    if (c == null) return 'fail';
+    if (bf.build === 'half' && c < 50) return 'fail';
+    if (bf.build === 'quartile' && c < 75) return 'fail';
+  }
+  return 'pass';
+}
 
 function bestSection(p) {
   const ts = tagsOf(p);
@@ -251,8 +405,9 @@ const FILTER_DEFS = [
   { id: 'f-arch', name: 'What he does best',
     values: () => [...new Set(PLAYERS.flatMap(p => tagsOf(p).map(t => t.tag)))].sort(),
     label: v => `${v} (${PLAYERS.reduce((n, p) => n + (tagsOf(p).some(t => t.tag === v) ? 1 : 0), 0)})`,
-    test: (p, set) => !set.size || holdsAnyTag(p, set) }
+    test: (p, set) => !set.size || (archModeAll ? holdsAllTags(p, set) : holdsAnyTag(p, set)) }
 ];
+let archModeAll = false;    // directory archetype mode: ANY ticked tag (default) vs EVERY ticked tag
 const filterSel = {};
 FILTER_DEFS.forEach(d => { filterSel[d.id] = new Set(); });
 const filterDef = id => FILTER_DEFS.find(d => d.id === id);
@@ -279,7 +434,15 @@ function clearFilter(id) {
   updateMsButton(filterDef(id));
 }
 
-function clearAllFilters() { FILTER_DEFS.forEach(d => clearFilter(d.id)); }
+function clearAllFilters() {
+  FILTER_DEFS.forEach(d => clearFilter(d.id));
+  archModeAll = false;
+  const aa = $('f-arch-all'); if (aa) aa.checked = false;
+  traitBars = {}; valueLean = false;
+  ['b-ht-min', 'b-ht-max', 'b-wt-min', 'b-wt-max'].forEach(id => { const el = $(id); if (el) el.value = ''; });
+  const bs = $('b-build'); if (bs) bs.value = 'any';
+  buildTraitPanel();
+}
 
 let openMsId = null;
 function closeMs() {
@@ -308,6 +471,7 @@ function setDataset(dir) {
   sortKey = 'name'; sortDir = 1;
   closeMs();
   buildFilterPanels();
+  buildTraitPanel();
   $('dirTitle').textContent = DIRS[dir].label;
   const sw = $('dirSwitch');
   if (dir === 'up') { sw.textContent = 'P4 — Moving Down →'; sw.href = '#/down'; }
@@ -364,11 +528,29 @@ function applyFilters() {
   let rows = PLAYERS.filter(p => {
     if (f.q && !(p.name.toLowerCase().includes(f.q) || (p.school || '').toLowerCase().includes(f.q))) return false;
     for (const def of FILTER_DEFS) if (!def.test(p, filterSel[def.id])) return false;
+    if (!passesTraits(p)) return false;
     if (f.hv && !p.hidden_value) return false;
     if (f.ulm && !(p.fits && p.fits.ulm_qualifier)) return false;
     if (f.mt && myTeam && !fitsMyTeam(p, myTeam)) return false;
     return true;
   });
+  // Build filters apply LAST, over the players every other filter kept,
+  // so the not-shown count below is honest: it names only the players
+  // excluded here, and only because a measurement is not on record.
+  let missingNote = '';
+  const bf = buildFilterState();
+  if (buildFilterActive(bf)) {
+    let missWt = 0, missHt = 0;
+    rows = rows.filter(p => {
+      const r = buildTest(p, bf);
+      if (r === 'pass') return true;
+      if (r === 'miss-wt') missWt++;
+      else if (r === 'miss-ht') missHt++;
+      return false;
+    });
+    if (missWt) missingNote += ` · ${missWt} not shown — no verified weight on record`;
+    if (missHt) missingNote += ` · ${missHt} not shown — no verified height on record`;
+  }
   const keyFns = {
     name: p => p.name.toLowerCase(),
     position: p => p.position,
@@ -381,7 +563,7 @@ function applyFilters() {
   document.querySelectorAll('th[data-sort] .arrow').forEach(a => a.textContent = '');
   const th = document.querySelector(`th[data-sort="${sortKey}"] .arrow`);
   if (th) th.textContent = sortDir === 1 ? '▲' : '▼';
-  $('resultCount').textContent = `${rows.length} of ${PLAYERS.length} players`;
+  $('resultCount').textContent = `${rows.length} of ${PLAYERS.length} players${missingNote}`;
   $('dirEmpty').hidden = rows.length > 0;
   $('dirBody').innerHTML = rows.map(p => `
     <tr data-id="${esc(p.id)}">
@@ -1725,9 +1907,10 @@ const STATE_NAMES = { AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas'
 
 let champRegional = false;
 let champArchSel = new Set();   // archetypes ticked on the championship path — a getable/available player matches if he holds ANY of them
+let champArchModeAll = false;   // championship archetype mode: ANY ticked tag (default) vs EVERY ticked tag
 function archMatchId(id) {
   if (!champArchSel.size) return true;
-  return holdsAnyTag(byIdAll[id], champArchSel);
+  return champArchModeAll ? holdsAllTags(byIdAll[id], champArchSel) : holdsAnyTag(byIdAll[id], champArchSel);
 }
 let champHitDefault = 0.5;
 let champClass = {};          // playerId -> {g, hit} — hit is 0..1 across his NIL band
@@ -2703,6 +2886,17 @@ function loadChamp() {
     .catch(() => null);
 }
 
+function loadTraits() {
+  // same failure-tolerant pattern: a missing or malformed traits.json
+  // degrades to no trait layer, never an error. The file is the
+  // build_traits.py output: a "_registry" object plus one entry list
+  // per player id.
+  return fetch('traits.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && j._registry) ? j : null)
+    .catch(() => null);
+}
+
 function loadChanges() {
   // same failure-tolerant pattern: a missing or malformed changes.json
   // degrades to no changes posted, never an error. The file is a plain
@@ -2714,11 +2908,16 @@ function loadChanges() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges()]).then(([up, down, cmp, teams, champ, changes]) => {
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits()]).then(([up, down, cmp, teams, champ, changes, traits]) => {
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
   CHANGES = changes;
+  TRAIT_REG = (traits && traits._registry) || {};
+  TRAITS_BY_ID = {};
+  if (traits) for (const id of Object.keys(traits)) {
+    if (id !== '_registry' && Array.isArray(traits[id])) TRAITS_BY_ID[id] = traits[id];
+  }
   // My Team: a returning user's saved school seeds the championship
   // path's selected team here at boot. After boot the page keeps
   // following the setting (renderChamp) until the user makes an
@@ -2748,6 +2947,12 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     : 'First class in build — the screen is running.';
   ['q', 'f-hv', 'f-ulm', 'f-myteam'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
+  // archetype AND-mode + build filters: plain controls over applyFilters
+  $('f-arch-all').addEventListener('change', e => { archModeAll = e.target.checked; applyFilters(); });
+  ['b-ht-min', 'b-ht-max', 'b-wt-min', 'b-wt-max', 'b-build'].forEach(id => {
+    $(id).addEventListener('input', applyFilters);
+    $(id).addEventListener('change', applyFilters);
+  });
   FILTER_DEFS.forEach(def => {
     const w = msWrap(def.id);
     $(def.id).addEventListener('click', () => toggleMs(def.id));
@@ -2806,8 +3011,15 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     champRestoreScroll = window.scrollY;
     renderChamp();
   });
+  $('c-arch-all').addEventListener('change', e => {
+    champArchModeAll = e.target.checked;
+    champRestoreScroll = window.scrollY;
+    renderChamp();
+  });
   $('champArchClear').addEventListener('click', () => {
     champArchSel.clear();
+    champArchModeAll = false;
+    $('c-arch-all').checked = false;
     buildChampArchPanel();
     champRestoreScroll = window.scrollY;
     renderChamp();
