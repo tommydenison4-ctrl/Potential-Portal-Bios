@@ -344,7 +344,7 @@ function loadProspects() {
 }
 function saveProspects() { try { localStorage.setItem('portalProspects', JSON.stringify(PROSPECTS)); } catch (err) {} }
 const isProspect = id => PROSPECTS.includes(id);
-function updateProspectLink() { const a = $('prospectLink'); if (a) a.textContent = PROSPECTS.length ? `Prospects (${PROSPECTS.length})` : 'Prospects'; }
+function updateProspectLink() { const a = $('prospectLink'); if (a) a.textContent = PROSPECTS.length ? `Prospect list (${PROSPECTS.length})` : 'Prospect list'; }
 function syncProspectStars() {
   document.querySelectorAll('[data-prospect]').forEach(b => {
     const on = isProspect(b.dataset.prospect);
@@ -509,9 +509,6 @@ function setDataset(dir) {
   buildTraitPanel();
   buildGeoPanel();
   $('dirTitle').textContent = DIRS[dir].label;
-  const sw = $('dirSwitch');
-  if (dir === 'up') { sw.textContent = 'P4 — Moving Down →'; sw.href = '#/down'; }
-  else { sw.textContent = '← FCS — Moving Up'; sw.href = '#/up'; }
   applyFilters();
 }
 
@@ -536,6 +533,44 @@ function showView(name) {
 
 function setBackLinks(dir) {
   document.querySelectorAll('.back-dir').forEach(a => { a.href = '#/' + dir; });
+}
+
+/* -------- top-level menu bar --------
+   The dark bar is the site's menu (Tommy, Nov 19, 2026): "Find
+   players" and "Teams" are click-open menus holding every route,
+   "What changed" is a plain link, and the bar is static HTML —
+   identical on every view. route() closes the menus and marks the
+   current page's item active; a player or compare page marks its
+   own direction's directory. */
+function closeTopMenus() {
+  document.querySelectorAll('.tmenu-panel').forEach(p => { p.hidden = true; });
+  document.querySelectorAll('.tmenu-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+}
+function toggleTopMenu(btn) {
+  const panel = btn.parentElement.querySelector('.tmenu-panel');
+  const open = panel.hidden;
+  closeTopMenus();
+  if (open) { panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+}
+function navRouteFor(hash) {
+  if (hash === '#/up' || hash === '#/down') return hash;
+  if (hash.startsWith('#/player/') || hash.startsWith('#/compare/')) {
+    const seg = hash.split('/')[2] || '';
+    const p = byIdAll[decodeURIComponent(seg.split(',')[0])];
+    return p ? '#/' + (p.direction || 'up') : null;
+  }
+  if (hash.startsWith('#/championship-path')) return '#/championship-path';
+  for (const r of ['#/team-comparison', '#/compare-conferences', '#/prototype', '#/map', '#/value', '#/prospects', '#/changes'])
+    if (hash === r) return r;
+  return null;
+}
+function markActiveNav() {
+  const cur = navRouteFor(location.hash || '');
+  document.querySelectorAll('[data-nav]').forEach(a => {
+    const on = a.dataset.nav === cur;
+    a.classList.toggle('active', on);
+    if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
 }
 
 /* "Fits my team": the player's PRINTED fits include the school — the
@@ -3108,6 +3143,8 @@ function runPrototype() {
 }
 
 function route() {
+  closeTopMenus();
+  markActiveNav();
   const hash = location.hash || '';
   const cm = hash.match(/^#\/compare\/(.+)$/);
   if (cm) {
@@ -3754,5 +3791,19 @@ $('csvBtnTeam').addEventListener('click', () => {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+});
+/* top-level menus: click a button to open, click it again, click
+   outside, press Escape or choose an item to close */
+document.querySelectorAll('.tmenu-btn').forEach(b =>
+  b.addEventListener('click', () => toggleTopMenu(b)));
+document.querySelectorAll('.tmenu-item').forEach(a =>
+  a.addEventListener('click', closeTopMenus));
+document.addEventListener('click', e => { if (!e.target.closest('.tmenu')) closeTopMenus(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const open = document.querySelector('.tmenu-panel:not([hidden])');
+  if (!open) return;
+  closeTopMenus();
+  open.parentElement.querySelector('.tmenu-btn').focus();
 });
 window.addEventListener('hashchange', route);
