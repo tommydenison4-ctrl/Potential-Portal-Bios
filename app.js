@@ -1424,11 +1424,147 @@ function renderChamp() {
       <tbody>${m.rooms.map(x => champRoomRow(x, t.conf)).join('')}</tbody></table></div>
     <p class="foot-note">Method, in plain terms. <b>The standard:</b> the highest volume-qualified incumbent grade at the group among all teams in the conference; a room carried below the volume bar never sets it, and if no team in the conference has a qualified incumbent at the group, the standard is the best qualified incumbent grade at the team’s level (G6 or P4) and the table says so. <b>Getable:</b> eligibility remaining under the qualified determination — Unsettled players are shown and flagged “eligibility unsettled” — a benchmark that clears the room’s incumbent under the books’ strict test, and not already on this team. <b>Projected</b> is his benchmark from the Player Book method — headline grade plus the position’s translation delta. <b>NIL:</b> getable is a field test — it means he clears your room and has eligibility; it does not price him. Separately, each path and getable player carries his estimated NIL projection where priced, and the header’s estimated path cost sums the path players’ floors and ceilings; a path player with no estimate is named as unpriced in that count and is never counted as $0. ${esc(NIL_LABEL)} An asterisked incumbent is a room with no volume-qualified player, carried by its top player by volume under the team-comparison ruling; no getable players are named for those rooms. Pool: Nov 17, 2026 in-season snapshot of PFF Ultimate exports; grades are PFF headline grades.</p>
   </div>`;
+  h += renderBudgetReport(t, m);
   h += renderFullRooms(t, m);
   body.innerHTML = h;
   if (champRestoreScroll === 'board') { const b = $('classBoard'); if (b) b.scrollIntoView({ block: 'start' }); }
   else if (typeof champRestoreScroll === 'number') window.scrollTo(0, champRestoreScroll);
   champRestoreScroll = null;
+}
+
+/* ---------------- championship path: Budget Report ----------------
+   Tommy's approved design (Nov 18, 2026): a per-team report on this
+   page — the rooms ranked by gap to the conference-best standard, the
+   cheapest getable fix per room, and three classes auto-built at set
+   budgets ($500K / $1M / $2M). Everything is priced at the class
+   builder's current mark (champHitDefault — the saved-class board's
+   "Price new saves at" setting) via the same hitPrice the builder
+   uses, and a built class opens in the builder with share-link
+   semantics: in memory only, the team's saved class untouched until
+   the user changes something in it. Built entirely from the data this
+   page already loads — a room's getable list IS the strict-test set,
+   in benchmark order, and every getable entry in this snapshot
+   carries an NIL band (the unpriced branch below is defensive). */
+const BUDGET_LEVELS = [500000, 1000000, 2000000];
+
+function budgetModel(t, m) {
+  const hit = champHitDefault;
+  const rooms = m.rooms.map(x => {
+    const getable = (x.r.getable || []).filter(c => c.nil_status === 'priced');
+    const gapPts = (x.inc != null && x.bar != null)
+      ? Math.round(Math.max(0, x.bar - x.inc) * 10) / 10 : null;
+    let cheapest = null;
+    for (const c of getable) {
+      const price = hitPrice(c, hit);
+      if (price != null && (!cheapest || price < cheapest.price)) cheapest = { c, price };
+    }
+    return { g: x.g, x, gapPts, getable, cheapest,
+             fixable: gapPts != null && gapPts > 0 && getable.length > 0 };
+  });
+  /* biggest gap first — the sort is stable, so tied rooms keep the
+     book's room order */
+  const ranked = [...rooms].sort((a, b) => (b.gapPts ?? -1) - (a.gapPts ?? -1));
+  const classes = BUDGET_LEVELS.map(budget => {
+    let remaining = budget;
+    const usedIds = new Set(), doneRooms = new Set();
+    const picks = [], skipped = [];
+    for (const r of ranked) {
+      if (!r.fixable || doneRooms.has(r.g)) continue;
+      const pick = r.getable.find(c => !usedIds.has(c.id) && hitPrice(c, hit) <= remaining);
+      if (pick) {
+        const price = hitPrice(pick, hit);
+        picks.push({ g: r.g, c: pick, price, floor: pick.nil_floor, ceiling: pick.nil_ceiling });
+        usedIds.add(pick.id);
+        doneRooms.add(r.g);
+        remaining -= price;
+      } else skipped.push(r.g);
+    }
+    return { budget, picks, skipped,
+             spend: picks.reduce((s, p) => s + p.price, 0),
+             floor: picks.reduce((s, p) => s + p.floor, 0),
+             ceiling: picks.reduce((s, p) => s + p.ceiling, 0) };
+  });
+  return { rooms, ranked, classes,
+           need: rooms.filter(r => r.gapPts != null && r.gapPts > 0).length,
+           fixable: rooms.filter(r => r.fixable).length };
+}
+
+function renderBudgetReport(t, m) {
+  const bm = budgetModel(t, m);
+  const mark = hitLabel(champHitDefault);
+  const fixCell = r => {
+    if (!r.cheapest) {
+      const why = r.x.bb
+        ? 'No candidates are named for a below-bar room — the strict test needs a qualified bar to clear.'
+        : (r.x.r.getable || []).length
+          ? 'Getable players clear this room, but none carries an NIL estimate, so none can be priced.'
+          : r.x.r.incumbent == null
+            ? 'No qualified incumbent in the pool snapshot — the strict test has no bar to clear.'
+            : 'No evaluated player with eligibility remaining clears this room.';
+      return `<b>No getable fix at any price.</b><br><span class="p-sub">${why}</span>`;
+    }
+    const c = r.cheapest.c;
+    return `<a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}
+      <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b> · <b>${fmtMoney(r.cheapest.price)}</b> at ${esc(mark)}</span>
+      <br><span class="p-sub">Band ${nilRange(c)} a year</span>${r.x.atBar ? '<br><span class="p-sub">This room is already at the standard — no fix needed; this is its cheapest clearer.</span>' : ''}`;
+  };
+  const rows = bm.ranked.map(r => {
+    const x = r.x;
+    return `<tr><td><span class="pname">${esc(r.g)}</span></td>
+      <td>${x.r.incumbent ? esc(x.r.incumbent) : '<span class="p-sub">— none qualified —</span>'}</td>
+      <td class="num">${x.inc != null ? `<b>${f1(x.inc)}</b>${x.bb ? '*' : ''}` : '—'}</td>
+      <td class="num">${x.bar != null ? `<b>${f1(x.bar)}</b><br><span class="p-sub">${esc(x.r.bar_team)}</span>` : '—'}</td>
+      <td class="num"><b>${r.gapPts != null ? f1(r.gapPts) : '—'}</b></td>
+      <td>${fixCell(r)}</td></tr>`;
+  }).join('');
+  const classBlock = k => {
+    if (!k.picks.length) return `<div class="budget-block" data-budget="${k.budget}">
+      <h3 class="sub-h">${fmtMoney(k.budget)} class</h3>
+      <p class="p-sub">No getable fix fits a ${fmtMoney(k.budget)} budget at the ${esc(mark)} mark.</p></div>`;
+    const prows = k.picks.map(p => `<tr data-pid="${esc(p.c.id)}"><td><span class="pname">${esc(p.g)}</span></td>
+      <td><a href="#/player/${esc(encodeURIComponent(p.c.id))}"><span class="pname">${esc(p.c.name)}</span></a>${p.c.hv ? '<span class="hv">Hidden Value</span>' : ''}</td>
+      <td>${esc(p.c.school)}</td><td class="num"><b>${f1(p.c.benchmark)}</b></td>
+      <td class="num"><b>${fmtMoney(p.price)}</b></td><td>${nilRange(p.c)}</td></tr>`).join('');
+    return `<div class="budget-block" data-budget="${k.budget}">
+      <h3 class="sub-h">${fmtMoney(k.budget)} class — ${k.picks.length} fix${k.picks.length > 1 ? 'es' : ''}</h3>
+      <div class="tbl-scroll"><table class="fits"><thead><tr><th>Room</th><th>Player</th><th>School</th><th class="num">Benchmark</th><th class="num">Price at ${esc(mark)}</th><th>Band</th></tr></thead>
+      <tbody>${prows}</tbody></table></div>
+      <p class="class-totals">Total at your marks: <b>${fmtMoney(k.spend)}</b> a year
+        <span class="p-sub">${fmtMoney(k.floor)} at everyone's floor · ${fmtMoney(k.ceiling)} at everyone's ceiling</span></p>
+      ${k.skipped.length ? `<p class="p-sub">Passed over — even the cheapest fix did not fit what was left of the budget: ${k.skipped.map(esc).join(', ')}.</p>` : ''}
+      <button type="button" class="btn-ghost budget-open" data-budgetopen="${k.budget}">Open in class builder</button>
+    </div>`;
+  };
+  return `<div class="card" id="budgetReport">
+    <h2 class="sec" style="margin-top:2px">Budget Report — ${esc(t.name)}</h2>
+    <p class="p-sub">The rooms ranked by gap — grade points from the room’s incumbent to the conference-best standard, biggest first — the cheapest getable fix in each room, and three ready-built classes at set budgets. Every price is at the class builder’s current mark, <b>${esc(mark)}</b> (the “Price new saves at” setting on the saved class board above). ${bm.need} of ${bm.rooms.length} rooms sit below the standard; ${bm.fixable} of those have a getable fix.</p>
+    <div class="tbl-scroll"><table class="ctable champ-table">
+      <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Standard</th><th class="num">Gap</th><th>Cheapest getable fix at ${esc(mark)}</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+    <h3 class="sub-h" style="margin-top:16px">Three classes, built to a budget</h3>
+    <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
+    ${bm.classes.map(classBlock).join('')}
+    <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume, and no getable players are named for those rooms. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
+  </div>`;
+}
+
+/* Load a budget-built class into the board with share-link semantics:
+   the class replaces the board's class in memory only — the stored
+   class for the team is not read again and not overwritten; the first
+   change the user makes saves it as their own (every mutation path
+   runs through saveClass, exactly as with a shared class). */
+function openBudgetClass(budget) {
+  const t = CHAMP && CHAMP.teams.find(x => x.name === champSel);
+  if (!t) return;
+  const bm = budgetModel(t, champModel(t, CHAMP.meta.groups));
+  const k = bm.classes.find(c => c.budget === budget);
+  if (!k || !k.picks.length) return;
+  const cls = {};
+  for (const p of k.picks) cls[p.c.id] = { g: p.g, hit: champHitDefault };
+  champPicked = true;   // the report names its team explicitly — like a share link, My Team must not move the page off it
+  champSharedPending = { team: t.name, cls };
+  champRestoreScroll = 'board';
+  renderChamp();
 }
 
 /* ---------------- championship path: full rooms, regional view, class builder
@@ -2369,6 +2505,8 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   });
   $('playerBody').addEventListener('change', e => { if (e.target.closest('#saveTeamSel')) updateSaveBtn(); });
   $('champBody').addEventListener('click', e => {
+    const bo = e.target.closest('[data-budgetopen]');
+    if (bo) { openBudgetClass(parseInt(bo.dataset.budgetopen, 10)); return; }
     const add = e.target.closest('[data-add]');
     if (add) { classAdd(add.dataset.add); return; }
     const rem = e.target.closest('[data-remove]');

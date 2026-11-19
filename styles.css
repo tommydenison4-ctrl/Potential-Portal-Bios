@@ -443,6 +443,10 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .hit-price{font-size:14px}
 .class-totals{font-size:15px;margin:10px 0 4px}
 .class-empty{padding:6px 0}
+/* championship path: Budget Report */
+.budget-block{margin-top:16px}
+.budget-block .class-totals{margin-top:8px}
+.budget-open{margin-top:6px}
 @page champ{size:landscape;margin:11mm}
 #view-champ{page:champ}
 @media print{
@@ -457,6 +461,7 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
   #view-champ .shared-strip,#view-champ .share-fieldwrap{display:none!important}
   #view-champ .hit-chips,#view-champ .hit-range{display:none!important}
   #view-champ .btn-add,#view-champ .btn-remove{display:none!important}
+  #view-champ .budget-open{display:none!important}
   #view-champ .avail-scroll{max-height:none;overflow:visible;border:0;padding:0}
   #view-champ .avail-row{cursor:default}
 }
