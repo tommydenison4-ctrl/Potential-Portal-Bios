@@ -3,6 +3,7 @@ let UP = [], DOWN = [];
 let CMP = null;             // conference comparison dataset (comparison.json)
 let TEAMS = null;           // team comparison dataset (teams.json)
 let CHAMP = null;           // championship path dataset (championship.json)
+let CHANGES = null;         // what-changed log (changes.json), newest week first
 let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
 let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
 const teamSet = [];         // selected team names on the team comparison page, in pick order
@@ -161,7 +162,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -743,6 +744,21 @@ function bindComparison() {
     refreshSchools();
   }));
   refreshSchools();
+}
+
+/* ---------------- what changed ---------------- */
+function renderChanges() {
+  // a missing or malformed changes.json (CHANGES null) degrades to one
+  // honest line — no changes posted yet — never an error
+  if (!CHANGES || !CHANGES.weeks.length) {
+    return `<div class="card empty-state"><h2 class="empty-title">What changed</h2>
+      <p>No changes are posted yet. When the pool or the library changes, the week's entries are posted here.</p>
+      <p><a href="#/up">Browse the FCS — Moving Up directory instead →</a></p></div>`;
+  }
+  return CHANGES.weeks.map(w => `<div class="card">
+    <h2 class="sec" style="margin-top:2px">${esc(w.week)}</h2>
+    <ul class="changes-list">${(Array.isArray(w.entries) ? w.entries : []).map(e => `<li>${esc(e)}</li>`).join('')}</ul>
+  </div>`).join('');
 }
 
 function renderComparison() {
@@ -1934,6 +1950,14 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  if (hash === '#/changes') {
+    setChrome(null);
+    showView('changes');
+    $('changesBody').innerHTML = renderChanges();
+    document.title = 'What changed — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/up' || hash === '#/down') {
     const dir = hash === '#/down' ? 'down' : 'up';
     if (curDir !== dir) setDataset(dir);
@@ -1989,10 +2013,22 @@ function loadChamp() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp()]).then(([up, down, cmp, teams, champ]) => {
+function loadChanges() {
+  // same failure-tolerant pattern: a missing or malformed changes.json
+  // degrades to no changes posted, never an error. The file is a plain
+  // {"weeks": [{"week": "...", "entries": ["...", ...]}, ...]} log,
+  // newest week first — the Tuesday screen run prepends a week object.
+  return fetch('changes.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && Array.isArray(j.weeks)) ? j : null)
+    .catch(() => null);
+}
+
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges()]).then(([up, down, cmp, teams, champ, changes]) => {
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
+  CHANGES = changes;
   // My Team: a returning user's saved school seeds the championship
   // path's selected team here at boot. After boot the page keeps
   // following the setting (renderChamp) until the user makes an
