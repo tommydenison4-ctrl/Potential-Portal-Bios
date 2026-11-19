@@ -44,6 +44,22 @@ a:hover{text-decoration:underline}
 .ms-clear{font:inherit;font-size:13px;font-weight:600;width:100%;margin-top:5px;padding:6px 8px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;color:var(--accent);cursor:pointer}
 .ms-clear:hover{background:#f1f5f9}
 .result-count{margin-left:auto;font-weight:600;color:var(--accent)}
+/* build filters + skill-trait panel */
+.controls .build-row{margin-top:12px}
+.build-label{font-size:12.5px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding-bottom:9px}
+.controls .build-in{font:inherit;font-size:14.5px;color:var(--ink);padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff;width:110px}
+.build-help{margin:8px 0 0}
+.ms-mode{border-top:1px solid var(--line);margin-top:4px}
+.trait-card .trait-lean{display:flex;flex-direction:row;gap:8px;align-items:flex-start;font-size:14px;margin:10px 0 4px;cursor:pointer}
+.trait-lean input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);flex:none;margin:2px 0 0;cursor:pointer}
+.trait-group{margin-top:10px}
+.trait-gh{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:10px 0 4px}
+.trait-row{display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.trait-row:last-child{border-bottom:0}
+.trait-name{flex:1 1 auto;font-weight:500}
+.trait-count{color:var(--mut);font-size:12.5px;white-space:nowrap}
+.trait-bar{font:inherit;font-size:14px;color:var(--ink);padding:5px 7px;border:1px solid var(--line);border-radius:7px;background:#fff;width:76px}
+.trait-bar:disabled{background:var(--bg);color:var(--mut)}
 .table-card{padding:6px 0;overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:760px}
 th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
