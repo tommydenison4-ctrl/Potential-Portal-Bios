@@ -4,7 +4,7 @@
   --ok:#15803d; --okbg:#dcfce7; --no:#b91c1c; --nobg:#fee2e2; --un:#a16207; --unbg:#fef9c3;
 }
 *{box-sizing:border-box}
-body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);overflow-x:clip}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
 a{color:var(--accent2);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -69,7 +69,9 @@ a:hover{text-decoration:underline}
 .trait-gh{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:10px 0 4px}
 .trait-row{display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid var(--line);cursor:pointer}
 .trait-row:last-child{border-bottom:0}
-.trait-name{flex:1 1 auto;font-weight:500}
+.trait-name{font-weight:500}
+.trait-main{flex:1 1 auto;display:flex;flex-direction:column;min-width:0}
+.trait-gloss{font-size:12px;color:var(--mut);font-weight:400;line-height:1.35}
 .trait-count{color:var(--mut);font-size:12.5px;white-space:nowrap}
 .trait-bar{font:inherit;font-size:14px;color:var(--ink);padding:5px 7px;border:1px solid var(--line);border-radius:7px;background:#fff;width:76px}
 .trait-bar:disabled{background:var(--bg);color:var(--mut)}
@@ -184,17 +186,7 @@ table.fits th{text-transform:none;letter-spacing:0;font-size:13px;color:var(--in
 }
 /* ---------------- title page + directions ---------------- */
 .dir-chip{background:var(--accent2);color:#fff;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600}
-.splash-head{text-align:center;padding:38px 10px 6px}
-.splash-title{font-size:36px;margin:0 0 8px;color:var(--accent)}
-.splash-sub{color:var(--mut);max-width:560px;margin:0 auto;font-size:15.5px}
-.splash-choices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0 30px}
-.choice-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;color:var(--ink)}
-.choice-card-wide{grid-column:1/-1}
-.choice-card:hover{border-color:var(--accent2);text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
-.choice-dir{font-size:21px;font-weight:700;color:var(--accent)}
-.choice-desc{color:var(--mut)}
-.choice-meta{font-weight:700;color:var(--accent2)}
-.choice-go{font-weight:600;color:var(--accent2);margin-top:auto}
+
 .dir-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin:16px 0 0}
 .dir-title{font-size:20px;margin:0;color:var(--accent)}
 .empty-state{padding:22px}
@@ -203,23 +195,65 @@ table.fits th{text-transform:none;letter-spacing:0;font-size:13px;color:var(--in
 .fits-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 img{max-width:100%}
 
-/* ---------------- splash hero ---------------- */
-.splash-hero{background:linear-gradient(150deg,#0f172a 0%,#1e293b 55%,#334155 100%);border-radius:14px;padding:46px 24px 36px;text-align:center;margin:22px 0 0;color:#fff}
-.splash-kicker{margin:0;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:#2dd4bf}
-.splash-hero .splash-title{font-size:clamp(46px,9vw,74px);font-weight:800;letter-spacing:-.02em;line-height:1.02;color:#fff;margin:10px 0 12px}
-.splash-hero .splash-sub{color:#cbd5e1;max-width:600px;margin:0 auto;font-size:16.5px}
-.splash-stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:30px}
-.sstat{min-width:128px;padding:12px 10px 2px;border-top:2px solid #475569}
-.sstat-n{display:block;font-size:36px;font-weight:800;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums}
-.sstat-l{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:#94a3b8;margin-top:3px}
-.choice-card{padding:26px}
-.choice-dir{font-size:22px}
-.choice-count{display:block;font-size:48px;font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
-.choice-meta{font-size:14px}
-.compare-banner{display:flex;flex-direction:column;gap:7px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:12px;padding:20px 24px;margin:0 0 30px;color:var(--ink)}
-.compare-banner:hover{border-color:var(--accent2);border-left-color:var(--accent2);text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
-.cb-title{font-size:19px;font-weight:700;color:var(--accent)}
-.cb-desc{color:var(--mut)}
+/* ---------------- landing page ----------------
+   One dark stage, full bleed under the top bar. Slate deepened to
+   near-black, white type, the site's one teal as the only accent.
+   Restraint is the design: type and space do the work. */
+#view-splash{width:100vw;margin-left:calc(50% - 50vw);background:#0a0f1c;color:#f1f5f9;padding:78px 0 88px}
+.splash-in{max-width:1120px;margin:0 auto;padding:0 24px}
+@keyframes splashRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#view-splash .splash-hero2{animation:splashRise .7s cubic-bezier(.22,.61,.36,1) both}
+#view-splash .splash-choices{animation:splashRise .7s cubic-bezier(.22,.61,.36,1) .08s both}
+#view-splash .splash-team{animation:splashRise .7s cubic-bezier(.22,.61,.36,1) .14s both}
+#view-splash .splash-more{animation:splashRise .7s cubic-bezier(.22,.61,.36,1) .18s both}
+#view-splash .splash-foot{animation:splashRise .7s cubic-bezier(.22,.61,.36,1) .24s both}
+@media (prefers-reduced-motion:reduce){#view-splash .splash-hero2,#view-splash .splash-choices,#view-splash .splash-team,#view-splash .splash-more,#view-splash .splash-foot{animation:none}}
+.splash-hero2{text-align:center}
+.splash-kicker{margin:0;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.24em;color:#2dd4bf}
+.splash-title{font-size:clamp(54px,8.5vw,96px);font-weight:800;letter-spacing:-.03em;line-height:1;color:#fff;margin:20px 0 22px}
+.splash-sub{color:#a8b3c5;max-width:620px;margin:0 auto;font-size:clamp(16px,2vw,19px);line-height:1.55}
+.splash-stats{display:flex;justify-content:center;flex-wrap:wrap;margin-top:54px}
+.sstat{padding:2px 36px;border-left:1px solid #263449}
+.sstat:first-child{border-left:0}
+.sstat-n{display:block;font-size:clamp(38px,5vw,54px);font-weight:800;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.sstat-l{display:block;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#7d8aa0;margin-top:5px}
+.splash-choices{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:66px}
+.choice-card{display:flex;flex-direction:column;gap:6px;background:#111a2e;border:1px solid #263449;border-radius:18px;padding:34px 36px;color:#f1f5f9;transition:border-color .18s ease,transform .18s ease,background .18s ease}
+.choice-card:hover{border-color:rgba(45,212,191,.55);background:#131f36;transform:translateY(-2px);text-decoration:none}
+.choice-dir{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2dd4bf}
+.choice-count{display:block;font-size:clamp(62px,7vw,84px);font-weight:800;line-height:1;color:#fff;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.choice-meta{font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:#7d8aa0}
+.choice-desc{color:#a8b3c5;font-size:15.5px;line-height:1.55;margin-top:10px}
+.choice-go{font-weight:600;color:#2dd4bf;margin-top:auto;padding-top:20px;font-size:15px}
+.splash-team{text-align:center;margin:32px 0 0;color:#a8b3c5;font-size:15px}
+.splash-team a{color:#2dd4bf;font-weight:600;white-space:nowrap}
+.splash-more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}
+.stile{display:flex;flex-direction:column;gap:5px;background:transparent;border:1px solid #1e2a3f;border-radius:14px;padding:20px 22px;color:#f1f5f9;transition:border-color .18s ease,background .18s ease}
+.stile:hover{border-color:rgba(45,212,191,.5);background:#0e1626;text-decoration:none}
+.stile-t{font-size:16.5px;font-weight:700;color:#fff;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.stile-go{color:#2dd4bf;font-weight:400}
+.stile-d{color:#8b98ad;font-size:13.5px;line-height:1.5}
+.stile-count{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#7d8aa0;margin-top:2px}
+.splash-foot{text-align:center;color:#5b6a82;font-size:12.5px;margin:58px 0 0}
+@media(max-width:900px){
+  .splash-more{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  #view-splash{padding:50px 0 62px}
+  .splash-in{padding:0 18px}
+  .splash-stats{margin-top:40px}
+  .sstat{padding:2px 18px}
+  .sstat-n{font-size:34px}
+  .splash-choices{grid-template-columns:1fr;margin-top:46px}
+  .choice-card{padding:26px 24px}
+  .choice-count{font-size:58px}
+  .splash-more{margin-top:42px}
+}
+@media(max-width:560px){
+  .splash-more{grid-template-columns:1fr}
+  .sstat{padding:2px 12px}
+  .sstat-l{font-size:10.5px}
+}
 .changes-list{margin:4px 0 2px;padding-left:20px}
 .changes-list li{margin:0 0 7px;line-height:1.45}
 .changes-list li:last-child{margin-bottom:0}
@@ -300,27 +334,14 @@ th[data-ssort]:hover{color:var(--ink)}
   .grade-big{font-size:21px}
   .band .rung{flex:1 1 128px}
   .btn-print{min-height:44px}
-  .splash-choices{grid-template-columns:1fr}
-  .splash-title{font-size:29px}
-  .splash-head{padding-top:26px}
-  .choice-card{padding:18px}
 }
 @media(max-width:560px){
   .pro-ladder{grid-template-columns:repeat(2,1fr)}
   .pl-rung{min-height:0}
 }
 
-/* ---------------- splash + comparison on mobile ---------------- */
+/* ---------------- comparison on mobile ---------------- */
 @media(max-width:720px){
-  .splash-hero{padding:32px 16px 26px;margin-top:14px}
-  .splash-stats{gap:10px;margin-top:22px}
-  .sstat{flex:1 1 0;min-width:0;padding:10px 4px 2px}
-  .sstat-n{font-size:27px}
-  .sstat-l{font-size:13px}
-  .choice-card{padding:20px}
-  .choice-count{font-size:40px}
-  .compare-banner{padding:17px 18px}
-  .cb-title{font-size:18px}
   /* comparison tables scroll inside their wrappers — the page never scrolls sideways */
   .tbl-scroll{margin:0 -2px}
   table.ctable{font-size:14px}
@@ -388,9 +409,10 @@ th[data-ssort]:hover{color:var(--ink)}
   table{min-width:0}
   .table-card{overflow:visible}
   .tbl-scroll{overflow:visible}
-  .splash-hero{background:#fff;color:#000;border:1px solid #94a3b8}
-  .splash-hero .splash-title,.sstat-n{color:#000}
-  .splash-hero .splash-sub{color:#334155}
+  #view-splash{width:auto;margin-left:0;background:#fff;color:#000;padding:10px 0}
+  #view-splash .splash-title,.sstat-n,.choice-count,.stile-t{color:#000}
+  #view-splash .splash-sub,.choice-desc,.stile-d,.splash-team{color:#334155}
+  .choice-card,.stile{background:#fff;border-color:#94a3b8;animation:none}
   .school-tools{display:none!important}
   .cmp-grid{font-size:11px;border-color:#94a3b8}
   .cmp-label,.cmp-v{border-color:#cbd5e1}
@@ -546,9 +568,16 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 /* flash layer + skills strip (Nov 19, 2026) */
 .flash-badge{display:inline-block;background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
 .trait-badge{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:5px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:7px;vertical-align:1px}
-.skills-strip{display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;margin:6px 0 2px}
+.skills-strip{margin:6px 0 2px}
+.skills-strip .skills-label{display:block}
+.skills-pills{display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;margin-top:2px}
 .skills-strip .tag-badge,.skills-strip .trait-badge,.skills-strip .flash-badge{margin-left:0;margin-right:7px}
 .skills-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-right:8px}
+.skills-explainer{font-size:12.5px;color:var(--mut);line-height:1.45;margin:3px 0 2px;max-width:78ch}
+.badge-sub{font-size:9px;font-weight:600;opacity:.7}
+.skills-glosses{margin-top:4px}
+.skills-gloss{display:block;font-size:12px;color:var(--mut);line-height:1.45}
+.skills-gloss b{font-weight:600}
 
 /* filter ribbon (Nov 19, 2026) */
 .ribbon{padding:10px 14px}
