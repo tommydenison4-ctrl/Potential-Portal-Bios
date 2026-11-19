@@ -12,10 +12,28 @@
   <div class="wrap topbar-in">
     <a class="brand" href="#/">Player Books</a>
     <span class="tagline">Player evaluation library</span>
-    <a class="topbar-link" href="#/value">Value Board</a>
-    <a class="topbar-link" href="#/prospects" id="prospectLink">Prospects</a>
-    <a class="topbar-link" href="#/map">Map</a>
-    <a class="topbar-link" href="#/prototype">Prototype</a>
+    <nav class="topnav" aria-label="Site menu">
+      <div class="tmenu">
+        <button type="button" class="tmenu-btn" id="menuFindBtn" aria-haspopup="true" aria-expanded="false">Find players <span class="tmenu-caret">▾</span></button>
+        <div class="tmenu-panel" id="menuFindPanel" role="menu" hidden>
+          <a class="tmenu-item" role="menuitem" href="#/up" data-nav="#/up">FCS — Moving Up</a>
+          <a class="tmenu-item" role="menuitem" href="#/down" data-nav="#/down">P4 — Moving Down</a>
+          <a class="tmenu-item" role="menuitem" href="#/prototype" data-nav="#/prototype">Prototype search</a>
+          <a class="tmenu-item" role="menuitem" href="#/map" data-nav="#/map">Map</a>
+          <a class="tmenu-item" role="menuitem" href="#/value" data-nav="#/value">Value Board</a>
+          <a class="tmenu-item" role="menuitem" href="#/prospects" data-nav="#/prospects" id="prospectLink">Prospect list</a>
+        </div>
+      </div>
+      <div class="tmenu">
+        <button type="button" class="tmenu-btn" id="menuTeamsBtn" aria-haspopup="true" aria-expanded="false">Teams <span class="tmenu-caret">▾</span></button>
+        <div class="tmenu-panel" id="menuTeamsPanel" role="menu" hidden>
+          <a class="tmenu-item" role="menuitem" href="#/championship-path" data-nav="#/championship-path">Championship path</a>
+          <a class="tmenu-item" role="menuitem" href="#/team-comparison" data-nav="#/team-comparison">Team comparison</a>
+          <a class="tmenu-item" role="menuitem" href="#/compare-conferences" data-nav="#/compare-conferences">Conference comparison</a>
+        </div>
+      </div>
+      <a class="topbar-link" href="#/changes" data-nav="#/changes">What changed</a>
+    </nav>
     <span class="dir-chip" id="dirChip" hidden></span>
     <label class="myteam-lbl">My team
       <select id="myTeamSel" aria-label="My team — the school the site frames itself around"><option value="">No team set</option></select>
@@ -100,7 +118,6 @@
 
   <!-- DOWN EMPTY STATE -->
   <section id="view-downempty" hidden>
-    <p class="dir-head"><a href="#/" class="back">← Title page</a></p>
     <div class="card empty-state">
       <h2 class="empty-title">P4 — Moving Down</h2>
       <p class="empty-lede">First class in build — the screen is running.</p>
@@ -113,7 +130,6 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/map">Map</a> · <a href="#/prototype">Prototype search</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div class="controls card ribbon" id="filterRibbon">
       <div class="ribbon-strip">
@@ -274,7 +290,6 @@
   <section id="view-comparison" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Conference comparison</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <div id="comparisonBody"></div>
   </section>
@@ -283,7 +298,6 @@
   <section id="view-teamcmp" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Team comparison</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -311,7 +325,6 @@
   <section id="view-champ" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Path to a conference championship</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -348,7 +361,6 @@
   <section id="view-changes" hidden>
     <div class="dir-head">
       <h1 class="dir-title">What changed</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a></span>
     </div>
     <p class="p-sub" style="margin:10px 0 0">The newest players, books and features, week by week — newest first. The pool is re-screened every Tuesday; each week's changes are posted here.</p>
     <div id="changesBody"></div>
@@ -358,7 +370,6 @@
   <section id="view-value" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Value Board</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -404,7 +415,6 @@
   <section id="view-prospects" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Prospect List</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/down">P4 — Moving Down directory →</a> · <a href="#/championship-path">Championship path</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div id="prospectBody"></div>
   </section>
@@ -412,7 +422,6 @@
   <section id="view-map" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Map — players by home state</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/down">P4 — Moving Down directory →</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div id="mapBody"></div>
   </section>
@@ -421,7 +430,6 @@
   <section id="view-prototype" hidden>
     <div class="dir-head">
       <h1 class="dir-title">Prototype search</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/down">P4 — Moving Down directory →</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/map">Map</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div class="controls card">
       <p class="p-sub" style="margin-top:0">Build the player you want. Only the position is required — every other input narrows the match. Results sort by benchmark, best first, and every row links to the player’s page and carries his Prospect star and a Save-to-class action.</p>
