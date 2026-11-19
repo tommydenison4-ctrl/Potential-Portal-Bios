@@ -155,12 +155,36 @@
             <button type="button" class="ms-btn" id="f-arch" aria-haspopup="true" aria-expanded="false">What he does best <span class="ms-caret">▾</span></button>
             <div class="ms-panel" hidden>
               <div class="ms-opts"></div>
-              <p class="p-sub ms-note">Archetype tags — a player matches if he holds <b>any</b> ticked tag. Filters combine: every active filter applies at once.</p>
+              <label class="ms-opt ms-mode"><input type="checkbox" id="f-arch-all"> Require all ticked tags</label>
+              <p class="p-sub ms-note">Archetype tags — a player matches if he holds <b>any</b> ticked tag, or <b>every</b> ticked tag while “Require all” is on. Filters combine: every active filter applies at once.</p>
               <button type="button" class="ms-clear">Clear</button>
             </div>
           </div>
         </div>
       </div>
+      <div class="row build-row">
+        <span class="build-label">Build</span>
+        <label>Height min
+          <input id="b-ht-min" class="build-in" type="text" inputmode="numeric" placeholder="6-1 or 73" autocomplete="off">
+        </label>
+        <label>Height max
+          <input id="b-ht-max" class="build-in" type="text" inputmode="numeric" placeholder="6-5 or 77" autocomplete="off">
+        </label>
+        <label>Weight min
+          <input id="b-wt-min" class="build-in" type="number" min="0" placeholder="lb">
+        </label>
+        <label>Weight max
+          <input id="b-wt-max" class="build-in" type="number" min="0" placeholder="lb">
+        </label>
+        <label>Build for his position
+          <select id="b-build">
+            <option value="any">Any</option>
+            <option value="half">Top half</option>
+            <option value="quartile">Top quartile</option>
+          </select>
+        </label>
+      </div>
+      <p class="p-sub build-help">Build for his position: the average of his height percentile and his weight percentile within his position group, in this directory.</p>
       <div class="row checks">
         <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
         <label class="check"><input type="checkbox" id="f-ulm"> Louisiana-Monroe qualifiers only</label>
@@ -170,6 +194,8 @@
         <span class="result-count" id="resultCount"></span>
       </div>
     </div>
+
+    <div id="traitPanel"></div>
 
     <div id="compareTray" class="card compare-tray" hidden></div>
 
@@ -266,7 +292,8 @@
             <button type="button" class="ms-btn" id="c-arch" aria-haspopup="true" aria-expanded="false">What he does best <span class="ms-caret">▾</span></button>
             <div class="ms-panel" hidden>
               <div class="ms-opts" id="champArchOpts"></div>
-              <p class="p-sub ms-note">Cut every room’s getable and available lists to the players holding <b>any</b> ticked archetype — what he does best.</p>
+              <label class="ms-opt ms-mode"><input type="checkbox" id="c-arch-all"> Require all ticked tags</label>
+              <p class="p-sub ms-note">Cut every room’s getable and available lists to the players holding <b>any</b> ticked archetype — or <b>every</b> ticked archetype while “Require all” is on.</p>
               <button type="button" class="ms-clear" id="champArchClear">Clear</button>
             </div>
           </div>
