@@ -197,6 +197,15 @@
         <p class="p-sub" id="offerModeNote"></p>
         <div class="row checks">
           <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
+          <label>Blended Score
+            <select id="f-blend">
+              <option value="">Any</option>
+              <option value="60">60+</option>
+              <option value="70">70+</option>
+              <option value="80">80+</option>
+              <option value="90">90+</option>
+            </select>
+          </label>
           <label class="check"><input type="checkbox" id="f-ulm"> Louisiana-Monroe qualifiers only</label>
           <label class="check" id="f-myteam-wrap" hidden><input type="checkbox" id="f-myteam"> Fits my team <span id="f-myteam-name"></span></label>
           <span class="p-sub" id="f-myteam-hint">Set “My team” in the topbar to filter to your school’s fits.</span>
@@ -271,6 +280,7 @@
             <th data-sort="school">School <span class="arrow"></span></th>
             <th>Book</th>
             <th data-sort="grade" class="num">Grade <span class="arrow"></span></th>
+            <th data-sort="blended" class="num">Blended Score <span class="arrow"></span></th>
             <th data-sort="rung">Band — likely <span class="arrow"></span></th>
             <th>Eligibility</th>
           </tr>
@@ -279,7 +289,7 @@
       </table>
       <p class="empty" id="dirEmpty" hidden>No players match those filters.</p>
     </div>
-    <p class="foot-note">Grades are each book's headline PFF grade for the 2026 season. Bands and verdicts are as printed in the books; eligibility shows the qualified determination (see each player's page for its basis).</p>
+    <p class="foot-note">Grades are each book's headline PFF grade for the 2026 season. Blended Score is our score — grades, production, honours and market combined — and shows only where the record supports one. Bands and verdicts are as printed in the books; eligibility shows the qualified determination (see each player's page for its basis).</p>
   </section>
 
   <!-- PLAYER VIEW -->

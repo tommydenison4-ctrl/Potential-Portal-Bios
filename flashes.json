@@ -4703,6 +4703,34 @@
    "flash": true
   }
  ],
+ "nathan-nyandoro": [
+  {
+   "key": "win_rate",
+   "label": "Pass-rush win rate",
+   "value": 17.1,
+   "display": "17.1%",
+   "pct": 91.0,
+   "pool": "FBS",
+   "group": "ED",
+   "volume": 41.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pressure_rate",
+   "label": "Pressure rate",
+   "value": 17.1,
+   "display": "17.1%",
+   "pct": 93.7,
+   "pool": "FBS",
+   "group": "ED",
+   "volume": 41.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "nicholas-humphries": [
   {
    "key": "rtg_allowed",
@@ -5599,6 +5627,34 @@
    "group": "S",
    "volume": 250.0,
    "volume_label": "coverage snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "stive-bentley-keumajou-yondui": [
+  {
+   "key": "win_rate",
+   "label": "Pass-rush win rate",
+   "value": 11.5,
+   "display": "11.5%",
+   "pct": 94.8,
+   "pool": "FBS",
+   "group": "DI",
+   "volume": 26.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pressure_rate",
+   "label": "Pressure rate",
+   "value": 15.4,
+   "display": "15.4%",
+   "pct": 99.2,
+   "pool": "FBS",
+   "group": "DI",
+   "volume": 26.0,
+   "volume_label": "pass-rush snaps",
    "proxy": false,
    "flash": true
   }

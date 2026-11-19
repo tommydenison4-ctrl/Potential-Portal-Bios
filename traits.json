@@ -38658,6 +38658,56 @@
    "proxy": false
   }
  ],
+ "shekai-mills-knight": [
+  {
+   "key": "yco_per_att",
+   "label": "Yards after contact per attempt",
+   "value": 3.7,
+   "display": "3.70",
+   "pct": 72.2,
+   "pool": "FBS",
+   "group": "RB",
+   "volume": 41.0,
+   "volume_label": "carries",
+   "proxy": false
+  },
+  {
+   "key": "mtf_rate",
+   "label": "Missed tackles forced per attempt",
+   "value": 0.0732,
+   "display": "7.3%",
+   "pct": 2.8,
+   "pool": "FBS",
+   "group": "RB",
+   "volume": 41.0,
+   "volume_label": "carries",
+   "proxy": false
+  },
+  {
+   "key": "ypc",
+   "label": "Yards per carry",
+   "value": 5.0,
+   "display": "5.0",
+   "pct": 54.9,
+   "pool": "FBS",
+   "group": "RB",
+   "volume": 41.0,
+   "volume_label": "carries",
+   "proxy": true
+  },
+  {
+   "key": "ybc_per_att",
+   "label": "Yards before contact per attempt",
+   "value": 1.3,
+   "display": "1.30",
+   "pct": 34.1,
+   "pool": "FBS",
+   "group": "RB",
+   "volume": 41.0,
+   "volume_label": "carries",
+   "proxy": true
+  }
+ ],
  "shoes-brinkley": [
   {
    "key": "rtg_allowed",

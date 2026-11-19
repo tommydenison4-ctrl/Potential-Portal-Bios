@@ -139,6 +139,7 @@ tbody tr:hover{background:#0e1626}
 .p-home{font-size:16px;margin:4px 0 1px;color:var(--ink)}
 .p-sub{color:var(--mut);margin:3px 0}
 .grade-big{font-size:24px;font-weight:700}
+.blend-num{font-size:20px;font-weight:700;color:var(--accent)}
 h2.sec{font-size:16px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);border-bottom:2px solid var(--line);padding-bottom:5px;margin:22px 0 10px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
 @media(max-width:720px){.cols{grid-template-columns:1fr}}

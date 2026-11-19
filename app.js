@@ -544,6 +544,7 @@ function renderProspects() {
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
+      <td class="num">${p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
       <td class="num">${nilRange(p) || '—'}</td>
@@ -554,7 +555,7 @@ function renderProspects() {
     <p class="p-sub">The highlight layer: one shortlist across both directories, saved in this browser. Pricing and classes live on the <a href="#/championship-path">championship path</a> — open a player’s page to save him to a school’s class.</p>
     <p class="prospect-ctl"><button type="button" class="btn-ghost" data-printprospects>Print / Save PDF</button> <button type="button" class="btn-ghost" data-clearprospects>Clear the list</button></p>
     <div class="tbl-scroll"><table class="ctable">
-      <thead><tr><th></th><th>Player</th><th>Pos</th><th>School</th><th class="num">Grade</th><th>Likely</th><th>Eligibility</th><th class="num">NIL band</th><th></th></tr></thead>
+      <thead><tr><th></th><th>Player</th><th>Pos</th><th>School</th><th class="num">Grade</th><th class="num">Blended</th><th>Likely</th><th>Eligibility</th><th class="num">NIL band</th><th></th></tr></thead>
       <tbody>${rows}</tbody></table></div>
     <p class="p-sub">${esc(NIL_LABEL)}</p></div>`;
 }
@@ -667,7 +668,7 @@ function setDataset(dir) {
   PLAYERS.forEach(p => byId[p.id] = p);
   cmpSel.length = 0;
   renderCmpTray();
-  $('q').value = ''; clearAllFilters(); $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false;
+  $('q').value = ''; clearAllFilters(); $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; $('f-blend').value = '';
   syncMyTeamToggle();
   sortKey = 'name'; sortDir = 1;
   closeMs();
@@ -832,7 +833,8 @@ function tierPrice(e, hit, teamName) {
 function currentFilters() {
   return {
     q: $('q').value.trim().toLowerCase(),
-    hv: $('f-hv').checked, ulm: $('f-ulm').checked, mt: $('f-myteam').checked
+    hv: $('f-hv').checked, ulm: $('f-ulm').checked, mt: $('f-myteam').checked,
+    blend: $('f-blend') ? $('f-blend').value : ''
   };
 }
 
@@ -927,7 +929,7 @@ function syncGeoUI() {
 function activeFilterGroups() {
   const f = currentFilters();
   const groups = [];
-  if (f.q || f.hv || f.ulm || f.mt || FILTER_DEFS.some(d => d.id !== 'f-arch' && filterSel[d.id].size)) groups.push('search');
+  if (f.q || f.hv || f.blend || f.ulm || f.mt || FILTER_DEFS.some(d => d.id !== 'f-arch' && filterSel[d.id].size)) groups.push('search');
   if (buildFilterActive(buildFilterState())) groups.push('size');
   if (dirGeoSel.size) groups.push('hometown');
   if (filterSel['f-arch'].size || archModeAll) groups.push('archetypes');
@@ -964,6 +966,7 @@ function applyFilters() {
     if (dirGeoSel.size && !dirGeoSel.has(mapKeyOf(p))) return false;
     if (!passesTraits(p)) return false;
     if (f.hv && !p.hidden_value) return false;
+    if (f.blend && !(p.blended_score != null && p.blended_score >= Number(f.blend))) return false;
     if (f.ulm && !(p.fits && p.fits.ulm_qualifier)) return false;
     if (f.mt && myTeam && !fitsMyTeam(p, myTeam)) return false;
     return true;
@@ -990,6 +993,7 @@ function applyFilters() {
     position: p => p.position,
     school: p => (p.school || '').toLowerCase(),
     grade: p => (p.headline_grade == null ? -1 : p.headline_grade),
+    blended: p => (p.blended_score == null ? -1 : p.blended_score),
     rung: p => (p.band && p.band.likely_rung != null ? p.band.likely_rung : -1)
   };
   const fn = keyFns[sortKey] || keyFns.name;
@@ -1009,6 +1013,7 @@ function applyFilters() {
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
+      <td class="num">${p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
     </tr>`).join('');
@@ -1436,6 +1441,7 @@ function renderPlayer(p) {
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
+        ${p.blended_score != null ? `<p><span class="blend-num">${Math.round(p.blended_score)}</span> <span class="p-sub"><b>Blended Score</b> — our score — grades, production, honours and market combined.</span></p>` : ''}
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
@@ -1573,6 +1579,7 @@ function renderCompare(players) {
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
     ['Headline grade', p => p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`],
+    ['Blended Score', p => p.blended_score == null ? '—' : `<b>${Math.round(p.blended_score)}</b>`],
     ['Stat line', p => esc(p.stat_line || '—')],
     ['Eligibility', p => `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
     ['Hidden Value', p => p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : '—'],
@@ -3955,6 +3962,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     : 'First class in build — the screen is running.';
   ['q', 'f-hv', 'f-ulm', 'f-myteam'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
+  $('f-blend').addEventListener('change', applyFilters);
   // universe directory: filters re-render the window; headers sort
   ['uq', 'ulevel', 'uconf', 'upos', 'ugrade'].forEach(id => {
     const n = $(id);
@@ -4185,7 +4193,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMs(); });
   $('reset').addEventListener('click', () => {
     $('q').value = ''; clearAllFilters();
-    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; applyFilters();
+    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; $('f-blend').value = ''; applyFilters();
   });
   // the filter ribbon: tabs open one panel at a time; the active tab
   // or the chevron collapses back to the strip; Clear all in the
@@ -4197,7 +4205,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('ribbonChev').addEventListener('click', () => setRibbonTab(null));
   $('ribbonClear').addEventListener('click', () => {
     $('q').value = ''; clearAllFilters();
-    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; applyFilters();
+    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; $('f-blend').value = ''; applyFilters();
   });
   $('geoPanel').addEventListener('change', e => {
     const cb = e.target.closest('[data-geocheck]');
