@@ -6,6 +6,7 @@ let CHAMP = null;           // championship path dataset (championship.json)
 let CHANGES = null;         // what-changed log (changes.json), newest week first
 let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
 let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
+let PROSPECTS = [];         // Prospect List: highlighted player ids (localStorage portalProspects)
 const teamSet = [];         // selected team names on the team comparison page, in pick order
 const TEAM_CAP = 4;         // side-by-side team comparison cap
 let teamOrder = 'position'; // team page room order: 'position' | 'priority'
@@ -132,6 +133,71 @@ const overpayLine = p => {
   return `<p class="overpay-note"><b>Priced as an overpay.</b> This band prices him at the ${f1(v.price_pct)} percentile of ${esc(v.position)} prices while his grade sits at the ${f1(v.grade_pct)} percentile — a ${f1(-v.steady_value)}-point gap. The valuation prices his projected destination, not his play.</p>`;
 };
 
+/* -------- Prospect List (highlight layer) --------
+   The star beside a player's name in either directory — and the
+   highlight button on his page — collects him here: one shortlist
+   across both directions, before any school's class or price enters
+   it. Saved per browser (localStorage portalProspects), like the
+   saved classes. Pricing stays on the championship path. */
+function loadProspects() {
+  try { const v = JSON.parse(localStorage.getItem('portalProspects') || '[]'); PROSPECTS = Array.isArray(v) ? v.filter(x => typeof x === 'string') : []; }
+  catch (err) { PROSPECTS = []; }
+}
+function saveProspects() { try { localStorage.setItem('portalProspects', JSON.stringify(PROSPECTS)); } catch (err) {} }
+const isProspect = id => PROSPECTS.includes(id);
+function updateProspectLink() { const a = $('prospectLink'); if (a) a.textContent = PROSPECTS.length ? `Prospects (${PROSPECTS.length})` : 'Prospects'; }
+function syncProspectStars() {
+  document.querySelectorAll('[data-prospect]').forEach(b => {
+    const on = isProspect(b.dataset.prospect);
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (b.classList.contains('btn-prospect')) b.textContent = on ? '★ On your prospect list — tap to remove' : '☆ Highlight as a prospect';
+  });
+}
+function toggleProspect(id) {
+  PROSPECTS = isProspect(id) ? PROSPECTS.filter(x => x !== id) : [...PROSPECTS, id];
+  saveProspects(); syncProspectStars(); updateProspectLink();
+}
+const prospectStar = p => `<button type="button" class="pstar${isProspect(p.id) ? ' on' : ''}" data-prospect="${esc(p.id)}" aria-pressed="${isProspect(p.id)}" aria-label="Highlight ${esc(p.name)} on your prospect list" title="Highlight as a prospect">★</button>`;
+
+function prospectStrip(p) {
+  const on = isProspect(p.id);
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Prospect list</h2>
+    <p><button type="button" class="btn-prospect${on ? ' on' : ''}" data-prospect="${esc(p.id)}" aria-pressed="${on}">${on ? '★ On your prospect list — tap to remove' : '☆ Highlight as a prospect'}</button>
+    <span class="p-sub">Your highlighted shortlist lives on the <a href="#/prospects">Prospect List</a> page — highlight first, price him later in a school’s saved class.</span></p></div>`;
+}
+
+function renderProspects() {
+  const el = $('prospectBody');
+  if (!el) return;
+  const ps = PROSPECTS.map(id => byIdAll[id]).filter(Boolean);
+  if (!ps.length) {
+    el.innerHTML = `<div class="card"><h2 class="sec" style="margin-top:2px">No prospects highlighted yet</h2>
+      <p>Tap the star beside any player’s name in either directory — or the highlight button on his page — and he collects here: one shortlist across both directions, before any school’s class or price enters it.</p>
+      <p><a href="#/up">Browse the FCS — Moving Up directory →</a> · <a href="#/down">Browse the P4 — Moving Down directory →</a></p></div>`;
+    return;
+  }
+  const rows = ps.map(p => `<tr data-id="${esc(p.id)}">
+      <td>${photo(p)}</td>
+      <td><a class="pname" href="#/player/${encodeURIComponent(p.id)}">${esc(p.name)}</a>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.direction === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}${tagBadges(p.id)}</td>
+      <td>${esc(p.position)}</td>
+      <td>${esc(p.school)}</td>
+      <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
+      <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
+      <td>${eligChip(p.elig_qualified)}</td>
+      <td class="num">${nilRange(p) || '—'}</td>
+      <td><button type="button" class="btn-remove" data-unprospect="${esc(p.id)}" aria-label="Remove ${esc(p.name)} from your prospect list">×</button></td>
+    </tr>`).join('');
+  el.innerHTML = `<div class="card prospect-board">
+    <h2 class="sec" style="margin-top:2px">Your highlighted prospects — ${ps.length}</h2>
+    <p class="p-sub">The highlight layer: one shortlist across both directories, saved in this browser. Pricing and classes live on the <a href="#/championship-path">championship path</a> — open a player’s page to save him to a school’s class.</p>
+    <p class="prospect-ctl"><button type="button" class="btn-ghost" data-printprospects>Print / Save PDF</button> <button type="button" class="btn-ghost" data-clearprospects>Clear the list</button></p>
+    <div class="tbl-scroll"><table class="ctable">
+      <thead><tr><th></th><th>Player</th><th>Pos</th><th>School</th><th class="num">Grade</th><th>Likely</th><th>Eligibility</th><th class="num">NIL band</th><th></th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+    <p class="p-sub">${esc(NIL_LABEL)}</p></div>`;
+}
+
 function nilSection(p) {
   if (!p.nil_status) return '';
   let h = `<div class="card"><h2 class="sec" style="margin-top:2px">Estimated NIL projection</h2>`;
@@ -251,7 +317,7 @@ function setChrome(dir) {
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value', 'prospects']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -309,7 +375,7 @@ function applyFilters() {
     <tr data-id="${esc(p.id)}">
       <td class="cmp-cell"><input type="checkbox" class="cmp-check" data-cmp="${esc(p.id)}" ${cmpSel.includes(p.id) ? 'checked' : ''} aria-label="Select ${esc(p.name)} to compare"></td>
       <td>${photo(p)}</td>
-      <td><span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}${tagBadges(p.id)}</td>
+      <td>${prospectStar(p)}<span class="pname">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LM QUALIFIER</span>' : ''}${tagBadges(p.id)}</td>
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
@@ -522,6 +588,8 @@ function renderPlayer(p) {
     </div></div>`;
 
   h += saveStrip(p);
+
+  h += prospectStrip(p);
 
   h += myTeamCard(p);
 
@@ -2324,6 +2392,14 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  if (hash === '#/prospects') {
+    setChrome(null);
+    showView('prospects');
+    renderProspects();
+    document.title = 'Prospect List — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   if (hash === '#/up' || hash === '#/down') {
     const dir = hash === '#/down' ? 'down' : 'up';
     if (curDir !== dir) setDataset(dir);
@@ -2405,6 +2481,8 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   } catch (err) {}
   buildMyTeamSelect();
   syncMyTeamToggle();
+  loadProspects();
+  updateProspectLink();
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
@@ -2505,6 +2583,8 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('valueSteadyBtn').addEventListener('click', () => { valueLens = 'steady'; renderValue(); });
   $('valueCeilingBtn').addEventListener('click', () => { valueLens = 'ceiling'; renderValue(); });
   $('playerBody').addEventListener('click', e => {
+    const pr = e.target.closest('[data-prospect]');
+    if (pr) { toggleProspect(pr.dataset.prospect); return; }
     const go = e.target.closest('[data-goclass]');
     if (go) { champSel = go.dataset.goclass; champPicked = true; champBtnLabel(); buildChampPanel(); }
     const sv = e.target.closest('[data-saveplayer]');
@@ -2519,6 +2599,20 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     }
   });
   $('playerBody').addEventListener('change', e => { if (e.target.closest('#saveTeamSel')) updateSaveBtn(); });
+  $('prospectBody').addEventListener('click', e => {
+    const un = e.target.closest('[data-unprospect]');
+    if (un) { toggleProspect(un.dataset.unprospect); renderProspects(); return; }
+    if (e.target.closest('[data-clearprospects]')) {
+      PROSPECTS = []; saveProspects(); syncProspectStars(); updateProspectLink(); renderProspects(); return;
+    }
+    if (e.target.closest('[data-printprospects]')) {
+      document.body.classList.add('print-prospects');
+      const donePp = () => { document.body.classList.remove('print-prospects'); window.removeEventListener('afterprint', donePp); };
+      window.addEventListener('afterprint', donePp);
+      setTimeout(donePp, 2000);
+      try { window.print(); } catch (err) {}
+    }
+  });
   $('champBody').addEventListener('click', e => {
     const bo = e.target.closest('[data-budgetopen]');
     if (bo) { openBudgetClass(parseInt(bo.dataset.budgetopen, 10)); return; }
@@ -2600,6 +2694,8 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     applyFilters();
   }));
   $('dirBody').addEventListener('click', e => {
+    const star = e.target.closest('[data-prospect]');
+    if (star) { toggleProspect(star.dataset.prospect); return; }
     if (e.target.closest('.cmp-cell')) return;
     const tr = e.target.closest('tr[data-id]');
     if (tr) location.hash = '#/player/' + encodeURIComponent(tr.dataset.id);
