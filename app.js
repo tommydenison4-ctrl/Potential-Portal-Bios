@@ -293,7 +293,8 @@ function savePlayerToTeam(pid, teamName) {
 /* -------- My Team mode --------
    One saved school (localStorage portalMyTeam, picked in the topbar)
    frames the site around the user's own program: the championship
-   path opens on it at boot, the player page reads each player against
+   path opens on it (and follows it until the user picks a team on
+   that page themselves), the player page reads each player against
    its rooms, the save picker defaults to it, and the directories can
    filter to the players whose printed fits include it. */
 function myTeamObj() {
@@ -1251,6 +1252,14 @@ function renderChamp() {
       <p><a href="#/team-comparison">Open the team comparison instead →</a></p></div>`;
     return;
   }
+  // Until the user makes an explicit team choice of their own for this
+  // page (champPicked), the page follows My Team — including a My Team
+  // set mid-session, after boot. Once they pick, the setting never
+  // moves the page again.
+  if (!champPicked && myTeam && champSel !== myTeam && CHAMP.teams.some(x => x.name === myTeam)) {
+    champSel = myTeam;
+    buildChampPanel();
+  }
   const t = CHAMP.teams.find(x => x.name === champSel) || CHAMP.teams[0];
   champSel = t.name;
   champBtnLabel();
@@ -1313,6 +1322,7 @@ let champClass = {};          // playerId -> {g, hit} — hit is 0..1 across his
 let champClassTeam = null;
 let champSharedPending = null;  // {team, cls} decoded from a share link, applied by the next renderChamp
 let champSharedView = false;    // the board is showing an unmodified shared class, not this device's stored one
+let champPicked = false;        // an explicit team choice for this page — its own picker, a share link, or a go-to-class link; until one happens, the page follows My Team (see renderChamp)
 let champRestoreScroll = null;
 let AVAIL_IDX = null;
 
@@ -1890,6 +1900,7 @@ function route() {
     const shared = parseSharedClass(sm[1]);
     if (shared) {
       champSel = shared.team;
+      champPicked = true;   // a share link names its team — an explicit choice, so My Team must not move the page off it
       champSharedPending = shared;
       champBtnLabel();
       buildChampPanel();
@@ -1983,8 +1994,9 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   TEAMS = teams;
   CHAMP = champ;
   // My Team: a returning user's saved school seeds the championship
-  // path's selected team here at boot — and only at boot; afterwards
-  // the path picker and share links still win, never the setting.
+  // path's selected team here at boot. After boot the page keeps
+  // following the setting (renderChamp) until the user makes an
+  // explicit team choice of their own there — champPicked.
   try {
     const mt = localStorage.getItem('portalMyTeam');
     if (mt && CHAMP && CHAMP.teams.some(t => t.name === mt)) { myTeam = mt; champSel = mt; }
@@ -2047,6 +2059,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     const rb = e.target.closest('input[type=radio][name=champTeam]');
     if (!rb) return;
     champSel = rb.value;
+    champPicked = true;   // the page's own picker is an explicit choice — My Team no longer moves this page
     champBtnLabel();
     closeMs();
     renderChamp();
@@ -2054,7 +2067,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('champQ').addEventListener('input', buildChampPanel);
   $('playerBody').addEventListener('click', e => {
     const go = e.target.closest('[data-goclass]');
-    if (go) { champSel = go.dataset.goclass; champBtnLabel(); buildChampPanel(); }
+    if (go) { champSel = go.dataset.goclass; champPicked = true; champBtnLabel(); buildChampPanel(); }
     const sv = e.target.closest('[data-saveplayer]');
     if (sv) {
       const sel = $('saveTeamSel');
