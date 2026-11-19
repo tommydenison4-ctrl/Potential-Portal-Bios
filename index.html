@@ -18,6 +18,7 @@
         <div class="tmenu-panel" id="menuFindPanel" role="menu" hidden>
           <a class="tmenu-item" role="menuitem" href="#/up" data-nav="#/up">FCS — Moving Up</a>
           <a class="tmenu-item" role="menuitem" href="#/down" data-nav="#/down">P4 — Moving Down</a>
+          <a class="tmenu-item" role="menuitem" href="#/universe" data-nav="#/universe">Every player — the full list</a>
           <a class="tmenu-item" role="menuitem" href="#/prototype" data-nav="#/prototype">Prototype search</a>
           <a class="tmenu-item" role="menuitem" href="#/map" data-nav="#/map">Map</a>
           <a class="tmenu-item" role="menuitem" href="#/value" data-nav="#/value">Value Board</a>
@@ -35,9 +36,12 @@
       <a class="topbar-link" href="#/changes" data-nav="#/changes">What changed</a>
     </nav>
     <span class="dir-chip" id="dirChip" hidden></span>
-    <label class="myteam-lbl">My team
+    <span class="myteam-lbl" id="myTeamWrap">
+      <img class="myteam-logo" id="myTeamLogo" alt="" hidden>
+      <label for="myTeamSel">My team</label>
       <select id="myTeamSel" aria-label="My team — the school the site frames itself around"><option value="">No team set</option></select>
-    </label>
+      <button type="button" class="myteam-clear" id="myTeamClear" hidden>Clear team</button>
+    </span>
     <span class="count-chip" id="totalChip"></span>
   </div>
 </header>
@@ -49,7 +53,7 @@
       <div class="splash-hero2">
         <p class="splash-kicker">Player Evaluation Library</p>
         <h1 class="splash-title">The portal,<br>evaluated.</h1>
-        <p class="splash-sub">Every player in the library is graded and given a verdict — The Call — in the format of the printed books. Two directions. One standard.</p>
+        <p class="splash-sub">Every evaluated player is graded and given a verdict — The Call — in the format of the printed books. Two directions. One standard.</p>
         <div class="splash-stats">
           <div class="sstat"><span class="sstat-n" id="statPlayers">—</span><span class="sstat-l">Players evaluated</span></div>
           <div class="sstat"><span class="sstat-n" id="statBooks">—</span><span class="sstat-l">Player Books</span></div>
@@ -73,6 +77,12 @@
         </a>
       </div>
       <p class="splash-team"><span id="splashTeamName"></span> <a id="splashTeamLink" href="#/championship-path" hidden>See its championship path →</a></p>
+      <div class="splash-reveal" id="splashReveal">
+        <p class="reveal-kicker">Every player. Listed.</p>
+        <span class="reveal-n" id="revealTotal">—</span>
+        <p class="reveal-sub" id="revealSub"></p>
+        <a class="reveal-link" href="#/universe">Browse the full list →</a>
+      </div>
       <div class="splash-more">
         <a class="stile" href="#/prototype">
           <span class="stile-t">Prototype search <span class="stile-go">→</span></span>
@@ -424,6 +434,59 @@
     <div id="mapBody"></div>
   </section>
 
+  <!-- UNIVERSE VIEW: every graded player, as a standard record -->
+  <section id="view-universe" hidden>
+    <div class="dir-head">
+      <div>
+        <h1 class="dir-title">Every player</h1>
+        <p class="p-sub" id="uniSub" style="margin:4px 0 0"></p>
+      </div>
+      <span class="dir-chip">Standard records</span>
+    </div>
+    <div class="card controls" id="uniControls">
+      <div class="row">
+        <label class="grow">Search name or school
+          <input type="search" id="uq" placeholder="Start typing a name or a school…" autocomplete="off">
+        </label>
+        <label>Level
+          <select id="ulevel">
+            <option value="">All levels</option>
+            <option value="P4">P4</option>
+            <option value="G6">G6</option>
+            <option value="FCS">FCS</option>
+          </select>
+        </label>
+        <label>Conference
+          <select id="uconf"><option value="">All conferences</option></select>
+        </label>
+        <label>Position
+          <select id="upos"><option value="">All positions</option></select>
+        </label>
+        <label>Lowest grade
+          <input type="number" id="ugrade" class="build-in" min="0" max="99" step="1" placeholder="Any">
+        </label>
+      </div>
+      <div class="row checks">
+        <span class="result-count" id="uniCount" aria-live="polite"></span>
+      </div>
+    </div>
+    <div class="card table-card">
+      <table id="unitable">
+        <thead><tr>
+          <th data-usort="name">Player</th>
+          <th data-usort="school">School</th>
+          <th data-usort="conference">Conference</th>
+          <th data-usort="position">Pos</th>
+          <th class="num" data-usort="grade">2026 grade</th>
+          <th class="num" data-usort="volume">Volume</th>
+        </tr></thead>
+        <tbody id="uniBody"></tbody>
+      </table>
+      <div id="uniMore"></div>
+    </div>
+    <p class="foot-note" id="uniFoot"></p>
+  </section>
+
   <!-- PROTOTYPE SEARCH VIEW -->
   <section id="view-prototype" hidden>
     <div class="dir-head">
@@ -451,6 +514,7 @@
             <option value="both">Both</option>
             <option value="up">FCS — Moving Up</option>
             <option value="down">P4 — Moving Down</option>
+            <option value="all">Everywhere — incl. standard records</option>
           </select>
         </label>
         <label>Benchmark min
