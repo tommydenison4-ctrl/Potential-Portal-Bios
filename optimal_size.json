@@ -1,0 +1,102 @@
+{
+ "QB": {
+  "ht_min": 73,
+  "ht_max": 76,
+  "ht_min_label": "6-1",
+  "ht_max_label": "6-4",
+  "wt_min": 200,
+  "wt_max": 218,
+  "n": 44,
+  "basis": "full group (top quartile under 20 players)"
+ },
+ "RB": {
+  "ht_min": 70,
+  "ht_max": 72,
+  "ht_min_label": "5-10",
+  "ht_max_label": "6-0",
+  "wt_min": 196,
+  "wt_max": 213,
+  "n": 24,
+  "basis": "top-quartile"
+ },
+ "WR": {
+  "ht_min": 70,
+  "ht_max": 73,
+  "ht_min_label": "5-10",
+  "ht_max_label": "6-1",
+  "wt_min": 175,
+  "wt_max": 194,
+  "n": 30,
+  "basis": "top-quartile"
+ },
+ "TE": {
+  "ht_min": 76,
+  "ht_max": 78,
+  "ht_min_label": "6-4",
+  "ht_max_label": "6-6",
+  "wt_min": 235,
+  "wt_max": 254,
+  "n": 60,
+  "basis": "full group (top quartile under 20 players)"
+ },
+ "OL": {
+  "ht_min": 76,
+  "ht_max": 78,
+  "ht_min_label": "6-4",
+  "ht_max_label": "6-6",
+  "wt_min": 301,
+  "wt_max": 320,
+  "n": 63,
+  "basis": "top-quartile"
+ },
+ "ED": {
+  "ht_min": 75,
+  "ht_max": 78,
+  "ht_min_label": "6-3",
+  "ht_max_label": "6-6",
+  "wt_min": 240,
+  "wt_max": 260,
+  "n": 28,
+  "basis": "top-quartile"
+ },
+ "DI": {
+  "ht_min": 73,
+  "ht_max": 76,
+  "ht_min_label": "6-1",
+  "ht_max_label": "6-4",
+  "wt_min": 270,
+  "wt_max": 298,
+  "n": 39,
+  "basis": "top-quartile"
+ },
+ "LB": {
+  "ht_min": 72,
+  "ht_max": 75,
+  "ht_min_label": "6-0",
+  "ht_max_label": "6-3",
+  "wt_min": 216,
+  "wt_max": 227,
+  "n": 23,
+  "basis": "top-quartile"
+ },
+ "CB": {
+  "ht_min": 71,
+  "ht_max": 73,
+  "ht_min_label": "5-11",
+  "ht_max_label": "6-1",
+  "wt_min": 180,
+  "wt_max": 194,
+  "n": 40,
+  "basis": "top-quartile"
+ },
+ "S": {
+  "ht_min": 71,
+  "ht_max": 73,
+  "ht_min_label": "5-11",
+  "ht_max_label": "6-1",
+  "wt_min": 186,
+  "wt_max": 199,
+  "n": 25,
+  "basis": "top-quartile"
+ }
+}
