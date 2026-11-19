@@ -569,6 +569,19 @@ function updateSaveBtn() {
   if (!has) { const m = $('saveMsg'); if (m) m.textContent = ''; }
 }
 
+/* Published portal rankings (Tommy, Nov 18, 2026): the handful of
+   players who carry a national ranking from a published transfer-
+   portal list wear it at the top of the page, with the cycle year —
+   market evidence, printed as the lists printed it. */
+function portalRankLine(p) {
+  const pr = p.portal_rank;
+  if (!pr || !Array.isArray(pr.source_ranks) || !pr.source_ranks.length) return '';
+  const parts = pr.source_ranks.map((r, i) => i === 0
+    ? `#${r.rank} NATIONALLY — ${esc(String(r.source).toUpperCase())}`
+    : `#${r.rank} — ${esc(String(r.source).toUpperCase())}`);
+  return `<p class="portal-rank">${esc(pr.cycle)} TRANSFER PORTAL: ${parts.join(' · ')}</p>`;
+}
+
 function renderPlayer(p) {
   const vitals = [
     ['Position', p.position], ['School', p.school], ['Book', p.conference_book],
@@ -579,6 +592,7 @@ function renderPlayer(p) {
     <div class="p-head">${photo(p)}
       <div>
         <p class="p-name">${esc(p.name)}${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.fits && p.fits.ulm_qualifier ? '<span class="ulm-badge">LOUISIANA-MONROE QUALIFIER</span>' : ''}</p>
+        ${portalRankLine(p)}
         ${home ? `<p class="p-home">Hometown: <b>${esc(home)}</b></p>` : ''}
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
@@ -1567,6 +1581,20 @@ function budgetModel(t, m) {
              floor: picks.reduce((s, p) => s + p.floor, 0),
              ceiling: picks.reduce((s, p) => s + p.ceiling, 0) };
   });
+  /* replacement pairing inside each built class, same rule as the
+     saved-class board: the picks in build order push the rooms'
+     lowest-graded rotation men off the bottom */
+  for (const k of classes) {
+    const prs = pairAdds(t, k.picks.map(p => ({ id: p.c.id, g: p.g, benchmark: p.c.benchmark })));
+    let tot = 0;
+    for (const p of k.picks) {
+      const pr = prs.get(p.c.id);
+      p.off = pr ? pr.off : null;
+      p.worth = pr ? pr.worth : null;
+      if (p.worth != null) tot += p.worth;
+    }
+    k.worthTotal = Math.round(tot * 10) / 10;
+  }
   return { rooms, ranked, classes,
            need: rooms.filter(r => r.gapPts != null && r.gapPts > 0).length,
            fixable: rooms.filter(r => r.fixable).length };
@@ -1604,16 +1632,21 @@ function renderBudgetReport(t, m) {
     if (!k.picks.length) return `<div class="budget-block" data-budget="${k.budget}">
       <h3 class="sub-h">${fmtMoney(k.budget)} class</h3>
       <p class="p-sub">No getable fix fits a ${fmtMoney(k.budget)} budget at the ${esc(mark)} mark.</p></div>`;
-    const prows = k.picks.map(p => `<tr data-pid="${esc(p.c.id)}"><td><span class="pname">${esc(p.g)}</span></td>
-      <td><a href="#/player/${esc(encodeURIComponent(p.c.id))}"><span class="pname">${esc(p.c.name)}</span></a>${p.c.hv ? '<span class="hv">Hidden Value</span>' : ''}</td>
+    const prows = k.picks.map(p => {
+      const s = slotIn(playedRoom(t.rooms[p.g]), p.c.benchmark);
+      return `<tr data-pid="${esc(p.c.id)}"><td><span class="pname">${esc(p.g)}</span></td>
+      <td><a href="#/player/${esc(encodeURIComponent(p.c.id))}"><span class="pname">${esc(p.c.name)}</span></a>${p.c.hv ? '<span class="hv">Hidden Value</span>' : ''}
+      <br><span class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in the room · ${pairText({ off: p.off, worth: p.worth })}</span></td>
       <td>${esc(p.c.school)}</td><td class="num"><b>${f1(p.c.benchmark)}</b></td>
-      <td class="num"><b>${fmtMoney(p.price)}</b></td><td>${nilRange(p.c)}</td></tr>`).join('');
+      <td class="num"><b>${fmtMoney(p.price)}</b></td><td>${nilRange(p.c)}</td></tr>`;
+    }).join('');
     return `<div class="budget-block" data-budget="${k.budget}">
       <h3 class="sub-h">${fmtMoney(k.budget)} class — ${k.picks.length} fix${k.picks.length > 1 ? 'es' : ''}</h3>
       <div class="tbl-scroll"><table class="fits"><thead><tr><th>Room</th><th>Player</th><th>School</th><th class="num">Benchmark</th><th class="num">Price at ${esc(mark)}</th><th>Band</th></tr></thead>
       <tbody>${prows}</tbody></table></div>
       <p class="class-totals">Total at your marks: <b>${fmtMoney(k.spend)}</b> a year
-        <span class="p-sub">${fmtMoney(k.floor)} at everyone's floor · ${fmtMoney(k.ceiling)} at everyone's ceiling</span></p>
+        <span class="p-sub">${fmtMoney(k.floor)} at everyone's floor · ${fmtMoney(k.ceiling)} at everyone's ceiling</span>
+        <span class="p-sub">· <b>${fmtWorth(k.worthTotal)} pts</b> gained over the players replaced</span></p>
       ${k.skipped.length ? `<p class="p-sub">Passed over — even the cheapest fix did not fit what was left of the budget: ${k.skipped.map(esc).join(', ')}.</p>` : ''}
       <button type="button" class="btn-ghost budget-open" data-budgetopen="${k.budget}">Open in class builder</button>
     </div>`;
@@ -1625,7 +1658,7 @@ function renderBudgetReport(t, m) {
       <thead><tr><th>Room</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Standard</th><th class="num">Gap</th><th>Cheapest getable fix at ${esc(mark)}</th></tr></thead>
       <tbody>${rows}</tbody></table></div>
     <h3 class="sub-h" style="margin-top:16px">Three classes, built to a budget</h3>
-    <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
+    <p class="p-sub">How these classes are built — rooms are filled biggest gap first, one fix per room. In each room the class takes the best getable player — highest benchmark first — whose price at your current mark fits what is left of the budget. A room is passed over when even its cheapest getable fix does not fit what is left, and a room with no getable fix at any price is never filled. Each pick also pushes the lowest-graded man in that room’s rotation off the bottom — the pick’s worth, printed on his row, is his benchmark minus that man’s grade. Opening a class in the builder loads it in memory only — your saved class for ${esc(t.name)} is untouched until you change something in it.</p>
     ${bm.classes.map(classBlock).join('')}
     <p class="foot-note">Method, in plain terms. <b>Gap</b> is grade points from the room’s incumbent to the conference-best standard; an asterisked incumbent is a below-bar room carried by its top player by volume, and no getable players are named for those rooms. <b>Cheapest fix</b> is the lowest-priced getable player in the room at your current mark, with his estimated band beside him. <b>Floor totals are soft:</b> the NIL model’s floor is $0 in some band cells — 79 priced players sit in $0-floor cells — so a class’s floor bound understates what those players would really cost. ${esc(NIL_LABEL)}</p>
   </div>`;
@@ -1793,6 +1826,55 @@ function classEffect(t, m) {
     if (proj != null && x.bar != null) points += Math.max(0, x.bar - proj);
   }
   return { atAfter, points: Math.round(points * 10) / 10 };
+}
+
+/* ---- replacement pairing: who falls off when a player is added ----
+   Tommy, Nov 18, 2026: what is each added player worth against the
+   player he would be replacing — and the worst player falls off. A
+   group's ROTATION is its played room: the roster entries with
+   recorded volume, the same set slot-in counts (the zero-volume tail
+   never counts, and its grades never pair). In the order the adds
+   were made, each add pushes the lowest-graded rotation man not
+   already pushed off the bottom; the add's WORTH is his benchmark
+   minus that man's grade, printed plainly even when negative. Adds
+   beyond the rotation's size pair with nobody. Pairings recompute
+   from scratch on every render, so removing an add re-pairs the
+   adds behind it against the room as it stands. */
+function pairAdds(t, adds) {
+  const out = new Map();
+  const taken = {};
+  for (const a of adds) {
+    const rot = playedRoom((t.rooms || {})[a.g]).slice().sort((x, y) => x.grade - y.grade);
+    const k = taken[a.g] || 0;
+    if (k < rot.length) {
+      const off = rot[k];
+      out.set(a.id, { off, worth: Math.round((a.benchmark - off.grade) * 10) / 10 });
+    } else {
+      out.set(a.id, { off: null, worth: null });
+    }
+    taken[a.g] = k + 1;
+  }
+  return out;
+}
+function classPairings(t) {
+  const idx = availIdx();
+  const adds = [];
+  for (const [id, c] of Object.entries(champClass)) {
+    const e = idx[id]; if (!e) continue;
+    adds.push({ id, g: c.g, benchmark: e.benchmark });
+  }
+  return pairAdds(t, adds);
+}
+const fmtWorth = w => (w >= 0 ? '+' : '') + f1(w);
+function pairText(pr) {
+  return pr && pr.off
+    ? `Replaces <b>${esc(pr.off.name)}</b> (${f1(pr.off.grade)}) · worth <b>${fmtWorth(pr.worth)} pts</b>`
+    : 'No rotation player left to fall off in this room';
+}
+function pairTextPlain(pr) {
+  return pr && pr.off
+    ? `replaces ${pr.off.name} (${f1(pr.off.grade)}), worth ${fmtWorth(pr.worth)} pts`
+    : 'no rotation player left to fall off in this room';
 }
 
 const HIT_STOPS = [[0, 'Floor'], [0.25, 'Low'], [0.5, 'Mid'], [0.75, 'High'], [1, 'Ceiling']];
@@ -2033,6 +2115,12 @@ function shareClassImage() {
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
+  const pairings = classPairings(t);
+  let worthTotal = 0, unpairedN = 0;
+  for (const pr of pairings.values()) {
+    if (pr.worth != null) worthTotal += pr.worth; else unpairedN++;
+  }
+  worthTotal = Math.round(worthTotal * 10) / 10;
   const eff = ct.n ? classEffect(t, m) : null;
   const byGroup = {};
   for (const [id, c] of Object.entries(champClass)) {
@@ -2047,13 +2135,14 @@ function renderClassBoard(t, m) {
     for (const { e, hit } of byGroup[g] || []) {
       const s = slotIn(playedRoom(t.rooms[g]), e.benchmark);
       const price = hitPrice(e, hit);
-      lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
+      lines.push(`${e.name} (${g}) — ${e.school} — benchmark ${f1(e.benchmark)} — slots #${s.rank} of ${s.of} in the ${t.name} room — ${pairTextPlain(pairings.get(e.id))} — ${price != null ? `priced at ${hitLabel(hit)}: ${fmtMoney(price)} a year (band ${nilRange(e)})` : 'Est. NIL: no estimate'}`);
       items.push({ name: e.name, g, school: e.school, benchmark: e.benchmark, rank: s.rank, of: s.of, price, hit, band: price != null ? nilRange(e) : null, hv: !!e.hv, down: e.dir === 'down' });
       rows += `<div class="class-row">${photo(e)}
         <div class="avail-main">
           <a href="#/player/${esc(encodeURIComponent(e.id))}"><span class="pname">${esc(e.name)}</span></a>
           <span class="room-tag">${esc(g)}</span>${e.hv ? '<span class="hv">Hidden Value</span>' : ''}${e.dir === 'down' ? '<span class="down-badge">P4 Down</span>' : ''}
           <br><span class="p-sub">${esc(e.school)} · benchmark <b>${f1(e.benchmark)}</b> · slots <b>#${s.rank} of ${s.of}</b> in this room</span>
+          <br><span class="p-sub">${pairText(pairings.get(e.id))}</span>
           <br><span class="p-sub">${price != null ? `Est. NIL ${nilRange(e)} a year` : 'Est. NIL — no estimate (not counted in the spend)'}</span>
           ${price != null ? `<span class="hit-ctl"><span class="hit-chips">${HIT_STOPS.map(([v, lab]) =>
             `<button type="button" class="hit-chip${Math.abs(hit - v) < 0.001 ? ' on' : ''}" data-hitpid="${esc(e.id)}" data-hitval="${v}">${lab}</button>`).join('')}</span>
@@ -2102,6 +2191,7 @@ function renderClassBoard(t, m) {
     <p class="class-totals">Class spend at your marks: <b id="classSpend">${ct.priced ? fmtMoney(ct.spend) : '—'}</b> a year
       <span class="p-sub" id="classBounds">${ct.priced ? `${fmtMoney(ct.floor)} at everyone's floor · ${fmtMoney(ct.ceiling)} at everyone's ceiling` : ''}</span>
       <span class="p-sub">· ${ct.n} player${ct.n > 1 ? 's' : ''}${ct.priced < ct.n ? ` · ${ct.n - ct.priced} with no estimate, not counted` : ''}</span></p>
+    <p class="p-sub">Points gained over the players replaced: <b>${fmtWorth(worthTotal)} pts</b> in total — each saved player’s benchmark against the rotation man he pushes off the bottom of his room, named on his row.${unpairedN ? ` ${unpairedN} saved player${unpairedN > 1 ? 's have' : ' has'} no rotation player left to fall off and count${unpairedN > 1 ? '' : 's'} as no gain.` : ''}</p>
     <p class="p-sub">With this class: <b>${eff.atAfter} of ${m.rooms.length} rooms at the standard</b> (today: ${m.atNow}) · <b>${f1(eff.points)} grade points to the standard</b> (today: ${f1(m.points)}). Read the same way as the path summary above — a room counts when its projected top grade, the better of the incumbent and your best class benchmark in it, reaches the conference-best standard.</p>`
     : '<p class="p-sub class-empty">No players saved yet — drag a player here, use his Save button below, or save him from his player page.</p>'}
     <p class="foot-note">${esc(NIL_LABEL)}</p>
@@ -2109,17 +2199,23 @@ function renderClassBoard(t, m) {
 }
 
 function renderFullRooms(t, m) {
+  const pairings = classPairings(t);
   let h = '';
   for (const x of m.rooms) {
     const g = x.g, r = x.r;
     const rosterAll = r.roster || [];
     const roster = rosterAll.filter(p => p.vol > 0);
     const zeroVol = rosterAll.filter(p => !(p.vol > 0));
+    const fallSet = new Set();
+    for (const [id, pr] of pairings) {
+      const c = champClass[id];
+      if (c && c.g === g && pr.off) fallSet.add(pr.off.name + '|' + pr.off.grade);
+    }
     const all = champAvailFor(t, g);
     const reg = all.filter(e => isRegional(t, e));
     let shown = champRegional ? reg : all;
     if (champArchSel.size) shown = shown.filter(e => archMatchId(e.id));
-    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
+    const rosterRows = roster.map((p, i) => `<tr><td class="num">${i + 1}</td><td>${esc(p.name)}${fallSet.has(p.name + '|' + p.grade) ? ' <span class="fall-off">(falls off)</span>' : ''}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${esc(p.vol)} ${esc(r.vol_unit || '')}</td></tr>`).join('')
       + (zeroVol.length ? `<tr class="roster-div"><td colspan="4">Also in the data — no recorded ${esc(r.vol_unit || 'volume')} in the snapshot</td></tr>`
         + zeroVol.map(p => `<tr class="vol0"><td class="num">—</td><td>${esc(p.name)}</td><td class="num">${f1(p.grade)}</td><td class="num">0 ${esc(r.vol_unit || '')}</td></tr>`).join('') : '');
     const availRows = shown.map(e => {

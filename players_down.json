@@ -571,6 +571,19 @@
  },
  {
   "id": "deuce-knight",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 100
+    },
+    {
+     "source": "ESPN",
+     "rank": 92
+    }
+   ]
+  },
   "pid": "198161",
   "name": "Deuce Knight",
   "group": "QB",
@@ -37877,6 +37890,15 @@
  },
  {
   "id": "malcolm-simmons",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 151
+    }
+   ]
+  },
   "pid": "191278",
   "name": "Malcolm Simmons",
   "group": "WR",
@@ -39553,6 +39575,19 @@
  },
  {
   "id": "isiah-canion",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 33
+    },
+    {
+     "source": "ESPN",
+     "rank": 51
+    }
+   ]
+  },
   "pid": "183213",
   "name": "Isiah Canion",
   "group": "WR",
@@ -56375,6 +56410,15 @@
  },
  {
   "id": "jack-van-dorselaer",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 219
+    }
+   ]
+  },
   "pid": "199978",
   "name": "Jack Van Dorselaer",
   "group": "TE",
@@ -70730,6 +70774,19 @@
  },
  {
   "id": "carius-curne",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 45
+    },
+    {
+     "source": "ESPN",
+     "rank": 53
+    }
+   ]
+  },
   "pid": "199754",
   "name": "Carius Curne",
   "group": "OL",
@@ -97982,6 +98039,15 @@
  },
  {
   "id": "kamauryn-morgan",
+  "portal_rank": {
+   "cycle": 2026,
+   "source_ranks": [
+    {
+     "source": "247Sports",
+     "rank": 176
+    }
+   ]
+  },
   "pid": "200104",
   "name": "Kamauryn Morgan",
   "group": "ED",
