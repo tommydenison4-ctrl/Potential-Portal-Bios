@@ -544,7 +544,7 @@ function renderProspects() {
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
-      <td class="num">${p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`}</td>
+      <td class="num">${p.blended_score == null ? '—' : blendVal(p)}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
       <td class="num">${nilRange(p) || '—'}</td>
@@ -1013,7 +1013,7 @@ function applyFilters() {
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
-      <td class="num">${p.blended_score == null ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`}</td>
+      <td class="num">${p.blended_score == null ? '—' : blendVal(p)}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
     </tr>`).join('');
@@ -1441,7 +1441,7 @@ function renderPlayer(p) {
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
-        ${p.blended_score != null ? `<p><span class="blend-num">${p.blended_score.toFixed(1)}</span> <span class="p-sub"><b>Blended Score</b> — our score — grades, production, honours and market combined.</span></p>` : ''}
+        ${p.blended_score != null ? `<p><span class="blend-num">${p.blended_score.toFixed(1)}</span> <span class="p-sub"><b>Blended Score</b> · ${blendLevel(p)} — our score — grades, production, honours and market combined.</span></p>` : ''}
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
@@ -1567,6 +1567,16 @@ function proBandCell(p) {
   return '—';
 }
 
+/* A Blended Score is a percentile composite inside the player's own
+   level (Tommy, Nov 19, 2026) — stamp the level wherever it prints,
+   the same way fits are stamped, so an FCS number is never read as
+   the same claim as a P4 number. Level derives from the book: the
+   P4 Down book is P4, the ULM and UTEP roster books are G6, and
+   every other book is an FCS conference. */
+const blendLevel = p => p.conference_book === 'P4 Down' ? 'P4'
+  : (p.conference_book === 'ULM' || p.conference_book === 'UTEP') ? 'G6' : 'FCS';
+const blendVal = p => `<b>${p.blended_score.toFixed(1)}</b> <span class="p-sub">${blendLevel(p)}</span>`;
+
 function renderCompare(players) {
   /* Apples to apples (Tommy, Nov 19, 2026): a Blended Score is only ever
      compared against another Blended Score. If any player shown lacks
@@ -1585,7 +1595,7 @@ function renderCompare(players) {
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
     ['Headline grade', p => p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`],
-    ['Blended Score', p => !allBlended ? '—' : `<b>${p.blended_score.toFixed(1)}</b>`],
+    ['Blended Score', p => !allBlended ? '—' : blendVal(p)],
     ['Stat line', p => esc(p.stat_line || '—')],
     ['Eligibility', p => `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
     ['Hidden Value', p => p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : '—'],
