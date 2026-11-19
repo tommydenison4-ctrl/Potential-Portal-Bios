@@ -13,6 +13,9 @@
     <a class="brand" href="#/">Player Books</a>
     <span class="tagline">Player evaluation library</span>
     <span class="dir-chip" id="dirChip" hidden></span>
+    <label class="myteam-lbl">My team
+      <select id="myTeamSel" aria-label="My team — the school the site frames itself around"><option value="">No team set</option></select>
+    </label>
     <span class="count-chip" id="totalChip"></span>
   </div>
 </header>
@@ -133,6 +136,8 @@
       <div class="row checks">
         <label class="check"><input type="checkbox" id="f-hv"> Hidden Value only</label>
         <label class="check"><input type="checkbox" id="f-ulm"> Louisiana-Monroe qualifiers only</label>
+        <label class="check" id="f-myteam-wrap" hidden><input type="checkbox" id="f-myteam"> Fits my team <span id="f-myteam-name"></span></label>
+        <span class="p-sub" id="f-myteam-hint">Set “My team” in the topbar to filter to your school’s fits.</span>
         <button id="reset" class="btn-ghost" type="button">Reset filters</button>
         <span class="result-count" id="resultCount"></span>
       </div>

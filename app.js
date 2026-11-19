@@ -4,6 +4,7 @@ let CMP = null;             // conference comparison dataset (comparison.json)
 let TEAMS = null;           // team comparison dataset (teams.json)
 let CHAMP = null;           // championship path dataset (championship.json)
 let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
+let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
 const teamSet = [];         // selected team names on the team comparison page, in pick order
 const TEAM_CAP = 4;         // side-by-side team comparison cap
 let teamOrder = 'position'; // team page room order: 'position' | 'priority'
@@ -134,7 +135,8 @@ function setDataset(dir) {
   PLAYERS.forEach(p => byId[p.id] = p);
   cmpSel.length = 0;
   renderCmpTray();
-  $('q').value = ''; clearAllFilters(); $('f-hv').checked = false; $('f-ulm').checked = false;
+  $('q').value = ''; clearAllFilters(); $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false;
+  syncMyTeamToggle();
   sortKey = 'name'; sortDir = 1;
   closeMs();
   buildFilterPanels();
@@ -168,10 +170,24 @@ function setBackLinks(dir) {
   document.querySelectorAll('.back-dir').forEach(a => { a.href = '#/' + dir; });
 }
 
+/* "Fits my team": the player's PRINTED fits include the school — the
+   g6 / p4 fit rows on his record, plus the separately printed
+   Louisiana-Monroe fit (ulm_fit / ulm_qualifier). The fit rows carry
+   full school names identical to the championship pool's team names
+   (verified across all 766 records: every fits school is a CHAMP team
+   name), so the match is plain string equality. */
+function fitsMyTeam(p, teamName) {
+  const f = p.fits;
+  if (!f || !teamName) return false;
+  if (f.ulm_fit && f.ulm_fit.school === teamName) return true;
+  if (teamName === 'Louisiana-Monroe' && f.ulm_qualifier) return true;
+  return [...(f.g6 || []), ...(f.p4 || [])].some(r => r.school === teamName);
+}
+
 function currentFilters() {
   return {
     q: $('q').value.trim().toLowerCase(),
-    hv: $('f-hv').checked, ulm: $('f-ulm').checked
+    hv: $('f-hv').checked, ulm: $('f-ulm').checked, mt: $('f-myteam').checked
   };
 }
 
@@ -182,6 +198,7 @@ function applyFilters() {
     for (const def of FILTER_DEFS) if (!def.test(p, filterSel[def.id])) return false;
     if (f.hv && !p.hidden_value) return false;
     if (f.ulm && !(p.fits && p.fits.ulm_qualifier)) return false;
+    if (f.mt && myTeam && !fitsMyTeam(p, myTeam)) return false;
     return true;
   });
   const keyFns = {
@@ -273,6 +290,96 @@ function savePlayerToTeam(pid, teamName) {
   if (teamName === champClassTeam) champClass = cls;
   return true;
 }
+/* -------- My Team mode --------
+   One saved school (localStorage portalMyTeam, picked in the topbar)
+   frames the site around the user's own program: the championship
+   path opens on it at boot, the player page reads each player against
+   its rooms, the save picker defaults to it, and the directories can
+   filter to the players whose printed fits include it. */
+function myTeamObj() {
+  return (myTeam && CHAMP) ? CHAMP.teams.find(t => t.name === myTeam) || null : null;
+}
+function buildMyTeamSelect() {
+  const sel = $('myTeamSel');
+  if (!sel) return;
+  const names = CHAMP ? CHAMP.teams.map(t => t.name) : [];
+  sel.innerHTML = '<option value="">No team set</option>' + names.map(n =>
+    `<option value="${esc(n)}"${n === myTeam ? ' selected' : ''}>${esc(n)}</option>`).join('');
+  sel.value = myTeam || '';
+}
+function syncMyTeamToggle() {
+  const wrap = $('f-myteam-wrap'), hint = $('f-myteam-hint'), cb = $('f-myteam'), nm = $('f-myteam-name');
+  if (!wrap || !cb) return;
+  const on = !!myTeam;
+  wrap.hidden = !on;
+  if (hint) hint.hidden = on;
+  if (nm) nm.textContent = on ? `— ${myTeam}` : '';
+  if (!on && cb.checked) { cb.checked = false; if (curDir) applyFilters(); }
+}
+function setMyTeam(name) {
+  myTeam = name && CHAMP && CHAMP.teams.some(t => t.name === name) ? name : null;
+  try { if (myTeam) localStorage.setItem('portalMyTeam', myTeam); else localStorage.removeItem('portalMyTeam'); } catch (err) {}
+  const sel = $('myTeamSel');
+  if (sel) sel.value = myTeam || '';
+  syncMyTeamToggle();
+  const hash = location.hash || '';
+  if (hash.startsWith('#/player/')) route();   // re-render so the For card and the save default apply
+  else if ((hash === '#/up' || hash === '#/down') && $('f-myteam') && $('f-myteam').checked) applyFilters();
+}
+/* Is he already theirs? His record's school, or his book's own team
+   (the ULM book's players carry school "ULM"; champOwnBookTeam maps
+   the book to its championship-pool team name), or his pool entry's
+   school — the same own-team semantics champAvailFor excludes by. */
+function onRosterOf(p, t) {
+  if (!t) return false;
+  if (p.school === t.name) return true;
+  if (champOwnBookTeam(p.conference_book) === t.name) return true;
+  const e = availIdx()[p.id];
+  return !!(e && e.school === t.name);
+}
+function myTeamCard(p) {
+  const t = myTeamObj();
+  if (!t) return '';
+  const head = `<h2 class="sec" style="margin-top:2px">For ${esc(t.name)}</h2>`;
+  const e = availIdx()[p.id];
+  if (onRosterOf(p, t)) {
+    let h = `<div class="card">${head}<p>He is already on ${esc(t.name)}’s roster — this page is his evaluation in the ${esc(p.conference_book)} book.</p>`;
+    const g = (e && e._g) || p.group || p.position;
+    const room = t.rooms && t.rooms[g];
+    if (room) {
+      const entry = (room.roster || []).find(x => x.name === p.name);
+      const grade = entry ? entry.grade : (e ? e.grade : p.headline_grade);
+      if (grade != null) {
+        const s = slotIn(playedRoom(room).filter(x => x.name !== p.name), grade);
+        h += `<p class="p-sub">His grade (${f1(grade)}) ranks <b>#${s.rank} of ${s.of}</b> against the ${esc(g)} room’s played roster.</p>`;
+      }
+    }
+    return h + '</div>';
+  }
+  if (!e) {
+    const why = p.elig_qualified === 'Not eligible' ? 'his eligibility is used up under the qualified determination' : 'he carries no projection benchmark in the pool';
+    return `<div class="card">${head}<p class="p-sub">He carries no college projection to measure against your room — ${why}.</p></div>`;
+  }
+  if (t.level === 'P4' && e.dir === 'down') {
+    return `<div class="card">${head}<p>He is in the P4 Down pool, which projects players to G6 schools — there is no projection for a P4 room, so there is no standing to read against ${esc(t.name)}’s ${esc(e._g)} room.</p></div>`;
+  }
+  const g = e._g;
+  const room = t.rooms && t.rooms[g];
+  let h = `<div class="card">${head}`;
+  if (room) {
+    const getable = (room.getable || []).some(x => x.id === p.id);
+    h += getable
+      ? `<p><b>Getable for ${esc(t.name)}</b> — he clears your incumbent under the strict test.</p>`
+      : `<p>Does not clear your room’s incumbent under the strict test.</p>`;
+    const s = slotIn(playedRoom(room), e.benchmark);
+    h += `<p class="p-sub">Slots <b>#${s.rank} of ${s.of}</b> in your ${esc(g)} room — his benchmark against the room’s played roster${s.above ? `, behind ${esc(s.above.name)} ${f1(s.above.grade)}` : ' — the room’s top grade'}${s.below ? `, ahead of ${esc(s.below.name)} ${f1(s.below.grade)}` : ''}.</p>`;
+  } else {
+    h += `<p class="p-sub">No ${esc(g)} room for ${esc(t.name)} in the championship pool.</p>`;
+  }
+  h += `<p class="p-sub">Benchmark <b>${f1(e.benchmark)}</b> — his grade after the level-translation adjustment, the number the fits and the strict test use.</p>`;
+  return h + '</div>';
+}
+
 function saveStrip(p) {
   if (!CHAMP) return '';
   const e = availIdx()[p.id];
@@ -284,7 +391,8 @@ function saveStrip(p) {
   const teams = CHAMP.teams.filter(t => champAvailFor(t, e._g).some(x => x.id === p.id));
   if (!teams.length) return `<div class="card"><h2 class="sec" style="margin-top:2px">Save to a school’s class</h2>
     <p class="p-sub">No school can add him — the only rooms he clears are at his own school.</p></div>`;
-  const def = teams.some(t => t.name === champSel) ? champSel : teams[0].name;
+  const def = teams.some(t => t.name === myTeam) ? myTeam
+    : teams.some(t => t.name === champSel) ? champSel : teams[0].name;
   const has = !!classOf(def)[p.id];
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Save to a school’s class</h2>
     <div class="save-row">
@@ -322,6 +430,8 @@ function renderPlayer(p) {
     </div></div>`;
 
   h += saveStrip(p);
+
+  h += myTeamCard(p);
 
   h += `<div class="card"><h2 class="sec" style="margin-top:2px">Eligibility</h2>
     <p><b>Qualified:</b> ${esc(p.elig_qualified)}${p.elig_track ? ` <span class="p-sub">(${esc(p.elig_track)})</span>` : ''}</p>
@@ -1872,6 +1982,15 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
+  // My Team: a returning user's saved school seeds the championship
+  // path's selected team here at boot — and only at boot; afterwards
+  // the path picker and share links still win, never the setting.
+  try {
+    const mt = localStorage.getItem('portalMyTeam');
+    if (mt && CHAMP && CHAMP.teams.some(t => t.name === mt)) { myTeam = mt; champSel = mt; }
+  } catch (err) {}
+  buildMyTeamSelect();
+  syncMyTeamToggle();
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
@@ -1887,7 +2006,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('splashDownMeta').textContent = DOWN.length
     ? 'players evaluated'
     : 'First class in build — the screen is running.';
-  ['q', 'f-hv', 'f-ulm'].forEach(id =>
+  ['q', 'f-hv', 'f-ulm', 'f-myteam'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
   FILTER_DEFS.forEach(def => {
     const w = msWrap(def.id);
@@ -2018,7 +2137,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMs(); });
   $('reset').addEventListener('click', () => {
     $('q').value = ''; clearAllFilters();
-    $('f-hv').checked = false; $('f-ulm').checked = false; applyFilters();
+    $('f-hv').checked = false; $('f-ulm').checked = false; $('f-myteam').checked = false; applyFilters();
   });
   document.querySelectorAll('th[data-sort]').forEach(th => th.addEventListener('click', () => {
     const k = th.dataset.sort;
@@ -2060,6 +2179,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
 }).catch(err => {
   $('resultCount').textContent = 'Could not load players.json — ' + err.message;
 });
+$('myTeamSel').addEventListener('change', e => setMyTeam(e.target.value));
 $('printBtn').addEventListener('click', () => window.print());
 $('printBtnCmp').addEventListener('click', () => window.print());
 $('printBtnTeam').addEventListener('click', () => window.print());
