@@ -1606,12 +1606,12 @@ function renderConfTable() {
       <td class="num">${f1(b.final_year_grade_mass_pct)}%</td>
       <td class="num">${b.hidden_value}</td>
     </tr>`).join('');
-  return `<div class="card"><h2 class="sec" style="margin-top:2px">The nine books side by side</h2>
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">The fourteen books side by side</h2>
     ${cmpNote('The FCS rows are <b>evaluated cores</b> — the screened, deep-dived players from each Player Book — <b>not full rosters</b>; a conference’s full roster is roughly ten times its core. <b>ULM</b> and <b>UTEP</b> are full evaluated rosters. <b>Grade mass</b> is the sum of headline grades in a group — a concentration proxy that shows where a group’s graded weight sits; it is not a production total.')}
     <div class="tbl-scroll"><table class="ctable">
       <thead><tr><th>Book</th><th class="num">Players</th><th class="num">Median grade</th><th class="num">P4 at likely</th><th class="num">P4 starters</th><th class="num">Eligibility remaining</th><th class="num">Final-year grade mass</th><th class="num">Hidden Value</th></tr></thead>
       <tbody>${rows}</tbody></table></div>
-    <p class="p-sub">P4 at likely: the band’s likely rung is P4 depth or P4 starter — ${CMP.meta.p4_likely_total} of the 366 banded players, ${CMP.meta.p4_starter_likely_total} of them as P4 starters. The two full rosters sit 9–15 median-grade points below every FCS core; the cores are each conference’s screened top and the rosters are everybody who was evaluated, so the gap measures the screen, not a talent ordering. Eligibility is the qualified determination as printed in the re-issued books.</p></div>`;
+    <p class="p-sub">P4 at likely: the band’s likely rung is P4 depth or P4 starter — ${CMP.meta.p4_likely_total} of the 943 banded players, ${CMP.meta.p4_starter_likely_total} of them as P4 starters. The two full rosters sit 8–14 median-grade points below every FCS core; the cores are each conference’s screened top and the rosters are everybody who was evaluated, so the gap measures the screen, not a talent ordering. Eligibility is the qualified determination as printed in the re-issued books.</p></div>`;
 }
 
 function renderGrid() {
@@ -1742,7 +1742,7 @@ function refreshSchools() {
 function renderSchools() {
   const th = (key, label, cls) => `<th data-ssort="${key}"${cls ? ` class="${cls}"` : ''}>${label} <span class="arrow">${schoolSortKey === key ? (schoolSortDir === 1 ? '▲' : '▼') : ''}</span></th>`;
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Schools — where the evaluated players sit</h2>
-    <p class="p-sub">Every school with an evaluated player, across all nine books. The cores are not spread evenly: Stephen F. Austin holds 16 of Southland’s 66; Chattanooga (14) and Tennessee Tech (14) together hold 28 of SoCon’s 60. “Remaining / Final” counts eligibility remaining against final-year players.</p>
+    <p class="p-sub">Every school with an evaluated player, across all fourteen books. The cores are not spread evenly: South Carolina State holds 29 of the MEAC’s 59; Butler (27) and Marist (21) together hold 48 of Pioneer’s 179. “Remaining / Final” counts eligibility remaining against final-year players.</p>
     <div class="school-tools">
       <label class="grow">Search schools
         <input id="schoolQ" type="search" placeholder="School name…" autocomplete="off" value="${esc(schoolQ)}">
@@ -3217,7 +3217,7 @@ function teamCard(t) {
       <p class="p-sub">${esc(t.conf)} · ${esc(t.level)}</p>
       <p class="p-sub">${roomsWith} of ${TEAMS.meta.groups.length} rooms have a volume-qualified incumbent in the pool snapshot${roomsBelow ? ` · ${roomsBelow} carried below the bar by the top player by volume` : ''} · ${totalCand} evaluated players clear one of its bars</p>
     </div></div>
-    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps). A room with no qualified player is <b>carried by its top player by volume</b>, flagged with an asterisk and his volume against the bar — his gaps print, but no candidates are named for that room. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players — the nine conference books and the P4 Down book — who clear the room under the depth test: his benchmark beats the room’s lowest-graded man, and a candidate flagged as beating the incumbent also clears the room’s top man. A P4 Down player’s benchmark is his headline grade at a P4 room (same level, no translation adjustment) and his projected grade at a G6 room.')}
+    ${cmpNote('How to read this page: the pool is a <b>Nov 17, 2026 in-season snapshot</b> of PFF Ultimate exports, and grades are PFF headline grades. The <b>incumbent</b> is each room’s top-graded <b>volume-qualified</b> player under the books’ fits bars (for example TE ≥ 20 targets, OL ≥ 200 snaps). A room with no qualified player is <b>carried by its top player by volume</b>, flagged with an asterisk and his volume against the bar — his gaps print, but no candidates are named for that room. Conference and level medians are medians of team incumbents — the level median is the G6 median for a G6 team, the P4 median for a P4 team. <b>Upgrade candidates</b> are the evaluated players — the twelve conference books, the ULM and UTEP books and the P4 Down book — who clear the room under the depth test: his benchmark beats the room’s lowest-graded man, and a candidate flagged as beating the incumbent also clears the room’s top man. A P4 Down player’s benchmark is his headline grade at a P4 room (same level, no translation adjustment) and his projected grade at a G6 room.')}
     <div class="team-sort"><span class="kv">Room order</span>
       <button type="button" class="btn-ghost${teamOrder === 'position' ? ' on' : ''}" data-torder="position">Position</button>
       <button type="button" class="btn-ghost${teamOrder === 'priority' ? ' on' : ''}" data-torder="priority">Upgrade priority</button>
