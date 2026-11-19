@@ -1370,7 +1370,7 @@ function universeFiltered() {
 }
 
 function uniRowHtml(p) {
-  return `<tr><td><a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a><span class="uni-badge">Standard record</span></td><td>${esc(p.school)}</td><td>${esc(p.conference)}</td><td>${esc(p.position)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${fmtN(p.volume)} ${esc(p.volume_label)}</td></tr>`;
+  return `<tr><td class="cmp-cell"><input type="checkbox" class="cmp-check" data-cmp="${esc(p.id)}" ${cmpSel.includes(p.id) ? 'checked' : ''} aria-label="Select ${esc(p.name)} to compare"></td><td><a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a><span class="uni-badge">Standard record</span></td><td>${esc(p.school)}</td><td>${esc(p.conference)}</td><td>${esc(p.position)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${fmtN(p.volume)} ${esc(p.volume_label)}</td></tr>`;
 }
 
 function renderUniverseRows(reset) {
@@ -1380,7 +1380,7 @@ function renderUniverseRows(reset) {
   $('uniCount').textContent = `${fmtN(rows.length)} of ${fmtN(UNIVERSE.length)} standard records`;
   $('uniBody').innerHTML = rows.length
     ? rows.slice(0, uniShown).map(uniRowHtml).join('')
-    : '<tr><td colspan="6"><p class="empty">No standard records match — loosen a filter.</p></td></tr>';
+    : '<tr><td colspan="7"><p class="empty">No standard records match — loosen a filter.</p></td></tr>';
   $('uniMore').innerHTML = rows.length > uniShown
     ? `<div class="showmore-row"><button type="button" class="btn-more" id="uniMoreBtn">Show more — ${fmtN(rows.length - uniShown)} more</button></div>` : '';
   const b = $('uniMoreBtn');
@@ -1395,7 +1395,7 @@ function renderUniverseView() {
   }
   buildUniverseFilters();
   $('uniSub').textContent = `${fmtN(UNIVERSE.length)} standard records — every graded P4, G6 and FCS player who is not in the evaluated core. The ${fmtN(UP.length + DOWN.length)} fully evaluated players live in the two directories; nobody on this page has been through the full evaluation. Sorted by grade — his playing time is printed beside it, and a big grade on a small sample should be read that way.`;
-  $('uniFoot').textContent = 'A standard record carries only what the source files carry: name, school, level, conference, position, his 2026 headline grade and his playing time. No band, no fits, no Call — the full evaluation has not been run on these players.'
+  $('uniFoot').textContent = 'A standard record carries only what the source files carry: name, school, level, conference, position, his 2026 headline grade and his playing time. No band, no fits, no Call — the full evaluation has not been run on these players. Tick the box beside any player to compare him — against an evaluated player or another standard record — on the numbers both sides honestly have.'
     + (UNIVERSE_META && Array.isArray(UNIVERSE_META.fcs_conferences) && !UNIVERSE_META.fcs_conferences.includes('MEAC') ? ' The MEAC joins this list when its 2026 pulls finish landing.' : '');
   renderUniverseRows(true);
 }
@@ -1544,7 +1544,7 @@ function renderCmpTray(msg) {
   const tray = $('compareTray');
   if (!cmpSel.length) { tray.hidden = true; tray.innerHTML = ''; return; }
   const chips = cmpSel.map(id => {
-    const p = byId[id];
+    const p = byIdAll[id];
     return `<span class="cmp-chip">${esc(p ? p.name : id)} <button type="button" class="cmp-x" data-rm="${esc(id)}" aria-label="Remove ${esc(p ? p.name : id)}">×</button></span>`;
   }).join('');
   tray.innerHTML = `<span class="kv">Compare — ${cmpSel.length} of 3</span>${chips}
@@ -1586,18 +1586,20 @@ function renderCompare(players) {
   const anyBlended = players.some(p => p.blended_score != null);
   const rows = [
     ['', p => photo(p, 'ph cmp-ph')],
-    ['Player', p => `<span class="cmp-name">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}`],
+    ['Player', p => `<span class="cmp-name">${esc(p.name)}</span>${p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : ''}${p.universe ? '<span class="uni-badge">Standard record</span>' : ''}`],
     ['Position', p => esc(p.position)],
     ['School', p => esc(p.school)],
-    ['Book', p => esc(p.conference_book)],
+    ['Book', p => p.universe ? `Standard record — ${esc(p.level)}` : esc(p.conference_book)],
     ['Class', p => esc(p.listed_class || '—')],
     ['Height', p => esc(p.height || '—')],
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
-    ['Headline grade', p => p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`],
+    ['Headline grade', p => p.universe
+      ? (p.grade == null ? '—' : `<b>${f1(p.grade)}</b> <span class="p-sub">${esc(p.grade_col)}</span>`)
+      : (p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`)],
     ['Blended Score', p => !allBlended ? '—' : blendVal(p)],
     ['Stat line', p => esc(p.stat_line || '—')],
-    ['Eligibility', p => `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
+    ['Eligibility', p => p.universe ? '—' : `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
     ['Hidden Value', p => p.hidden_value ? '<span class="hv">HIDDEN VALUE</span>' : '—'],
     ['College band', p => bandCell(p.band)],
     ['Pro band', proBandCell],
@@ -1606,13 +1608,15 @@ function renderCompare(players) {
     ['Weaknesses', p => (p.weaknesses && p.weaknesses.length) ? `<ul>${p.weaknesses.map(s => `<li>${esc(s)}</li>`).join('')}</ul>` : '—'],
     ['Bio', p => esc(p.bio || '—')]
   ];
+  const notes = [];
+  if (anyBlended && !allBlended)
+    notes.push('Blended Scores are compared only where every player shown has one — a blend is never set against a base grade.');
+  if (players.some(p => p.universe))
+    notes.push('A standard record is compared on his headline grade only — the full evaluation has not been run on him.');
   return `<div class="cmp-grid" style="--cols:${players.length}">` +
     rows.map(([label, fn]) =>
       `<div class="cmp-label">${esc(label)}</div>` + players.map(p => `<div class="cmp-v">${fn(p)}</div>`).join('')
-    ).join('') + '</div>' +
-    ((anyBlended && !allBlended)
-      ? cmpNote('Blended Scores are compared only where every player shown has one — a blend is never set against a base grade.')
-      : '');
+    ).join('') + '</div>' + notes.map(cmpNote).join('');
 }
 
 /* ---------------- conference comparison ---------------- */
@@ -3657,6 +3661,14 @@ function route() {
       window.scrollTo(0, 0);
       return;
     }
+    if (!UNIVERSE && ps.length < ids.length) {
+      // a standard record's compare link, followed before the
+      // universe has loaded: load it, then route again
+      showView('compare');
+      $('compareBody').innerHTML = '<div class="card empty">Loading the full list…</div>';
+      ensureUniverse().then(() => route());
+      return;
+    }
   }
   const m = hash.match(/^#\/player\/(.+)$/);
   if (m) {
@@ -4333,7 +4345,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     const tr = e.target.closest('tr[data-id]');
     if (tr) location.hash = '#/player/' + encodeURIComponent(tr.dataset.id);
   });
-  $('dirBody').addEventListener('change', e => {
+  const onCmpChange = e => {
     const cb = e.target.closest('.cmp-check');
     if (!cb) return;
     const id = cb.dataset.cmp;
@@ -4349,7 +4361,9 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
       if (i >= 0) cmpSel.splice(i, 1);
     }
     renderCmpTray();
-  });
+  };
+  $('dirBody').addEventListener('change', onCmpChange);
+  $('uniBody').addEventListener('change', onCmpChange);
   $('compareTray').addEventListener('click', e => {
     const x = e.target.closest('[data-rm]');
     if (!x) return;
