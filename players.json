@@ -267,7 +267,10 @@
    "ceiling_value": 32.4,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "frankie-weaver",
@@ -530,7 +533,10 @@
    "ceiling_value": -1.9,
    "nil_low": 750000,
    "nil_high": 2500000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "poochie-snyder",
@@ -800,7 +806,10 @@
    "ceiling_value": 32.4,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "de-von-thomas",
@@ -1063,7 +1072,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jameer-reeder",
@@ -1299,7 +1311,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jj-cowan",
@@ -1573,7 +1588,10 @@
    "ceiling_value": -6.6,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kamerin-mcdowell-moore",
@@ -1848,7 +1866,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aaron-enterline",
@@ -2118,7 +2139,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-zollar",
@@ -2353,7 +2377,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kenaz-mcmillian",
@@ -2567,7 +2594,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tavahri-groves",
@@ -2814,7 +2844,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tra-neal",
@@ -3056,7 +3089,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "khalid-bueno",
@@ -3324,7 +3360,10 @@
    "ceiling_value": -0.8,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cadricus-stanley",
@@ -3587,7 +3626,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dawson-james",
@@ -3842,7 +3884,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chris-williams",
@@ -4099,7 +4144,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dillon-dunathan",
@@ -4362,7 +4410,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "drake-lusk",
@@ -4619,7 +4670,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "geno-calgaro",
@@ -4875,7 +4929,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "javian-jones",
@@ -5096,7 +5153,10 @@
    "ceiling_value": -9.9,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jeremiah-pruitt",
@@ -5352,7 +5412,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noah-carpenter",
@@ -5608,7 +5671,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "ME",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rohan-davy",
@@ -5864,7 +5930,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "seth-chestnut",
@@ -6120,7 +6189,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trevor-barry",
@@ -6377,7 +6449,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryson-hughley",
@@ -6631,7 +6706,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eric-jones",
@@ -6900,7 +6978,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nyair-domnie",
@@ -7134,7 +7215,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "omaris-mcmiller-jr",
@@ -7403,7 +7487,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "phillip-harris",
@@ -7672,7 +7759,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "remington-moss",
@@ -7934,7 +8024,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tj-sands",
@@ -8183,7 +8276,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dana-johnson-jr",
@@ -8438,7 +8534,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "deandre-nance",
@@ -8686,7 +8785,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "qwae-willis",
@@ -8942,7 +9044,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "victor-holt",
@@ -9210,7 +9315,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andre-oben",
@@ -9310,7 +9418,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-kocan",
@@ -9554,7 +9665,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anthony-iliano",
@@ -9799,7 +9913,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "beau-riley",
@@ -9898,7 +10015,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "christian-blackwell",
@@ -10092,7 +10212,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "deshawn-leonard",
@@ -10192,7 +10315,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gabe-navarro",
@@ -10428,7 +10554,10 @@
    "ceiling_value": -1.9,
    "nil_low": 200000,
    "nil_high": 1000000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gregory-celestin-jr",
@@ -10622,7 +10751,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jc-campos",
@@ -10728,7 +10860,10 @@
     "stat": "Zone share 63% of run blocks (88th pct), RBLK grade 58.8",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jadon-lafontant",
@@ -10909,7 +11044,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-golden",
@@ -11008,7 +11146,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kenny-walz",
@@ -11188,7 +11329,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kevin-garcia",
@@ -11403,7 +11547,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mehki-cousar",
@@ -11591,7 +11738,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "michael-muldrow-jr",
@@ -11847,7 +11997,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noah-okoye",
@@ -12032,7 +12185,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sean-tanner",
@@ -12268,7 +12424,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "will-tellers",
@@ -12518,7 +12677,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wyatt-whalen",
@@ -12775,7 +12937,10 @@
    "ceiling_value": -1.9,
    "nil_low": 200000,
    "nil_high": 1000000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "devin-lippold",
@@ -12997,7 +13162,10 @@
    "ceiling_value": -1.9,
    "nil_low": 750000,
    "nil_high": 2500000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gavin-rutherford",
@@ -13268,7 +13436,10 @@
    "ceiling_value": 6.5,
    "nil_low": 296000,
    "nil_high": 750000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brennan-carroll",
@@ -13530,7 +13701,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "broderick-taylor",
@@ -13799,7 +13973,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "speedy-jones",
@@ -14067,7 +14244,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kyree-paul",
@@ -14323,7 +14503,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "major-mcbride",
@@ -14542,7 +14725,10 @@
    "ceiling_value": -6.6,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "clayton-wayland",
@@ -14776,7 +14962,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dkhai-joseph",
@@ -15017,7 +15206,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jamaal-levi",
@@ -15277,7 +15469,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "curtis-deville",
@@ -15481,7 +15676,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-champagne",
@@ -15686,7 +15884,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "micah-simpson",
@@ -15941,7 +16142,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "emmanuel-harris",
@@ -16145,7 +16349,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lowote-jurkin",
@@ -16411,7 +16618,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tim-muhammad",
@@ -16604,7 +16814,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "a-amear-walton",
@@ -16870,7 +17083,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "calvin-kalu-alexander",
@@ -17136,7 +17352,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-hare",
@@ -17391,7 +17610,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "KY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "iyiolaoluwa-solomi",
@@ -17657,7 +17879,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaydon-eason",
@@ -17923,7 +18148,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "k-mard-kimble",
@@ -18180,7 +18408,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "alex-sumler",
@@ -18448,7 +18679,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "alijah-alexander",
@@ -18704,7 +18938,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jack-harwell",
@@ -18959,7 +19196,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "christian-barney",
@@ -19213,7 +19453,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wesley-york-jr",
@@ -19468,7 +19711,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "caleb-nuhi-yandall",
@@ -19724,7 +19970,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dawson-washington",
@@ -19979,7 +20228,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jackson-waid",
@@ -20235,7 +20487,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kevin-martin-jr",
@@ -20490,7 +20745,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "roman-kupu",
@@ -20746,7 +21004,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "caleb-holmes",
@@ -21018,7 +21279,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaiydyn-johnson",
@@ -21280,7 +21544,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "makai-frisby",
@@ -21559,7 +21826,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "safir-stills-bey",
@@ -21799,7 +22069,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zaylon-stoker",
@@ -22040,7 +22313,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chance-sautter",
@@ -22296,7 +22572,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kenneth-ford",
@@ -22563,7 +22842,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryce-mcdonald",
@@ -22818,7 +23100,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carter-hanberry",
@@ -23073,7 +23358,10 @@
    "ceiling_value": -38.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "diego-sanchez",
@@ -23329,7 +23617,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mar-mar-evans",
@@ -23597,7 +23888,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaylen-jenkins",
@@ -23871,7 +24165,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "amaaz-eugene",
@@ -24119,7 +24416,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bugs-mortimer",
@@ -24247,7 +24547,10 @@
     "stat": "YAC/rec 7.8 (93rd pct)",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-huff",
@@ -24499,7 +24802,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "withchiel-filamar",
@@ -24681,7 +24987,10 @@
    "ceiling_value": -0.8,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "alexandre-dedieu",
@@ -24875,7 +25184,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": null,
+  "home_country": "International",
+  "home_country_name": "France"
  },
  {
   "id": "kemarion-ivory",
@@ -25144,7 +25456,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chris-campbell",
@@ -25262,7 +25577,10 @@
     "stat": "Win rate 9.9% (94th pct), pressure rate 7.4%",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kamari-federick",
@@ -25528,7 +25846,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eli-ennis",
@@ -25638,7 +25959,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jachai-pulley",
@@ -25891,7 +26215,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "malachi-williams",
@@ -26002,7 +26329,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "emauri-sibley",
@@ -26256,7 +26586,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayven-anderson",
@@ -26510,7 +26843,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jordan-okoye",
@@ -26765,7 +27101,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "landon-barrett",
@@ -27026,7 +27365,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "luke-williams",
@@ -27281,7 +27623,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cj-fraser",
@@ -27542,7 +27887,10 @@
    "ceiling_value": 3.5,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mason-edwards",
@@ -27809,7 +28157,10 @@
    "ceiling_value": -3.5,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lanar-kelley",
@@ -28064,7 +28415,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "richard-mckneely",
@@ -28312,7 +28666,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "javon-bejarano",
@@ -28567,7 +28924,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "patrick-batiste",
@@ -28830,7 +29190,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "alex-haralson",
@@ -29061,7 +29424,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andres-barraza",
@@ -29318,7 +29684,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anfernee-crease",
@@ -29417,7 +29786,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brandon-stuckey",
@@ -29666,7 +30038,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cameron-vargas",
@@ -29911,7 +30286,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cole-molina",
@@ -30130,7 +30508,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "erik-gray",
@@ -30229,7 +30610,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "giovanny-alegria",
@@ -30438,7 +30822,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-hayes",
@@ -30681,7 +31068,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-hood",
@@ -30779,7 +31169,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-johnson",
@@ -30967,7 +31360,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jamiah-harvey",
@@ -31067,7 +31463,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jason-crowder",
@@ -31312,7 +31711,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-hester",
@@ -31412,7 +31814,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "johnny-holly",
@@ -31663,7 +32068,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kamron-barnes",
@@ -31762,7 +32170,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kanyon-ives",
@@ -32012,7 +32423,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "korede-folorunso",
@@ -32111,7 +32525,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kunian-kuany",
@@ -32353,7 +32770,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "malik-ellis",
@@ -32555,7 +32975,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trace-wegmann",
@@ -32795,7 +33218,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trevanti-davis",
@@ -33039,7 +33465,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyrone-mcduffie-iii",
@@ -33249,7 +33678,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "james-basinger",
@@ -33519,7 +33951,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zechariah-prince",
@@ -33775,7 +34210,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "reid-watkins",
@@ -34003,7 +34441,10 @@
    "ceiling_value": -6.6,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dimitri-howard",
@@ -34252,7 +34693,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dylan-lord",
@@ -34521,7 +34965,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaxon-potter",
@@ -34779,7 +35226,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-reed",
@@ -35037,7 +35487,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "camron-miller",
@@ -35280,7 +35733,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dexter-niekamp",
@@ -35530,7 +35986,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nathan-laperi",
@@ -35723,7 +36182,10 @@
    "ceiling_value": 49.2,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cameron-daniels",
@@ -35987,7 +36449,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ryan-mccall",
@@ -36243,7 +36708,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "josh-grant",
@@ -36512,7 +36980,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "key-crowell",
@@ -36783,7 +37254,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rett-hemphill",
@@ -37046,7 +37520,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brandon-chambers-jr",
@@ -37294,7 +37771,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "grant-noland",
@@ -37569,7 +38049,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaylen-boehm-peterson",
@@ -37840,7 +38323,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "MN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rj-stewart",
@@ -38095,7 +38581,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "arison-walker",
@@ -38351,7 +38840,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "xavier-terrell",
@@ -38608,7 +39100,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tennel-bryant",
@@ -38852,7 +39347,10 @@
    "ceiling_value": 41.9,
    "nil_low": 17000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ebony-curry-jr",
@@ -39057,7 +39555,10 @@
    "ceiling_value": 2.0,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lance-rucker",
@@ -39253,7 +39754,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NE",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-childers",
@@ -39373,7 +39877,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "IN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "peter-eyabi",
@@ -39500,7 +40007,10 @@
     "stat": "Win rate 11.7% (82nd pct), pressure rate 11.3%",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-starman",
@@ -39620,7 +40130,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "logan-green",
@@ -39746,7 +40259,10 @@
     "stat": "Win rate 11.8% (98th pct), pressure rate 11.3%",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wade-abrams",
@@ -39864,7 +40380,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sebastian-vargas",
@@ -40134,7 +40653,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "xavian-andrews",
@@ -40251,7 +40773,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dev-holman",
@@ -40507,7 +41032,10 @@
    "ceiling_value": -3.5,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "IN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ben-wallace",
@@ -40722,7 +41250,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brayden-jellison",
@@ -40959,7 +41490,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brendon-crispe",
@@ -41197,7 +41731,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "daz-galloway",
@@ -41314,7 +41851,10 @@
     "stat": "Gap share 65% (95th pct) + impact blocks 10.0% (89th pct) among non-center OL",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "desmeal-leigh",
@@ -41420,7 +41960,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaac-cariveau",
@@ -41656,7 +42199,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "MN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jackson-kerstin",
@@ -41906,7 +42452,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jake-utley",
@@ -42137,7 +42686,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-pica",
@@ -42249,7 +42801,10 @@
     "stat": "Zone share 67% of run blocks (92nd pct), RBLK grade 79.5",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "SD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kenyon-bigbow",
@@ -42457,7 +43012,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "OK",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lance-berends",
@@ -42637,7 +43195,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "landon-woodard",
@@ -42751,7 +43312,10 @@
     "stat": "Zone share 80% of run blocks (99th pct), RBLK grade 65.2",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "WI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lucas-feldkamp",
@@ -43002,7 +43566,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "SD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "matthew-keeley",
@@ -43247,7 +43814,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nick-nielsen",
@@ -43478,7 +44048,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "MI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "quinten-christensen",
@@ -43590,7 +44163,10 @@
     "stat": "Zone share 65% of run blocks (90th pct), RBLK grade 71.1",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "SD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shane-keenan",
@@ -43696,7 +44272,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shane-willenbring",
@@ -43949,7 +44528,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "WI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyrese-smith",
@@ -44212,7 +44794,10 @@
    "ceiling_value": -1.9,
    "nil_low": 750000,
    "nil_high": 2500000
-  }
+  },
+  "home_state": "NV",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gabe-downing",
@@ -44404,7 +44989,10 @@
    "ceiling_value": 32.4,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-keawe-sagapolutele",
@@ -44610,7 +45198,10 @@
    "ceiling_value": 32.4,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaxon-bell",
@@ -44872,7 +45463,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kenveon-stone",
@@ -45139,7 +45733,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "spencer-ferguson",
@@ -45406,7 +46003,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tytan-mason",
@@ -45673,7 +46273,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaden-green",
@@ -45934,7 +46537,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "misa-paiau",
@@ -46138,7 +46744,10 @@
    "ceiling_value": -6.6,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": null,
+  "home_country": "International",
+  "home_country_name": "American Samoa"
  },
  {
   "id": "brooks-davis",
@@ -46412,7 +47021,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carter-dahlke",
@@ -46685,7 +47297,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "darnell-o-quinn",
@@ -46925,7 +47540,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noah-kjar",
@@ -47188,7 +47806,10 @@
    "ceiling_value": -5.9,
    "nil_low": 300000,
    "nil_high": 800000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nolan-mcwilliams",
@@ -47451,7 +48072,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dane-steel",
@@ -47722,7 +48346,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "WY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "david-spjut",
@@ -47925,7 +48552,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "drew-carlson",
@@ -48131,7 +48761,10 @@
    "ceiling_value": -5.9,
    "nil_low": 300000,
    "nil_high": 800000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "robert-young",
@@ -48329,7 +48962,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trey-olsen",
@@ -48529,7 +49165,10 @@
    "ceiling_value": -5.9,
    "nil_low": 300000,
    "nil_high": 800000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noah-west-baranco",
@@ -48795,7 +49434,10 @@
    "ceiling_value": 34.5,
    "nil_low": 16000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rocky-lencioni",
@@ -49061,7 +49703,10 @@
    "ceiling_value": 34.5,
    "nil_low": 16000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jalonn-booth",
@@ -49319,7 +49964,10 @@
    "ceiling_value": -0.8,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kaleb-pleis",
@@ -49502,7 +50150,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nate-abbott",
@@ -49732,7 +50383,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trehsyn-fesili",
@@ -49950,7 +50604,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jake-east",
@@ -50204,7 +50861,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "julian-fernandez",
@@ -50471,7 +51131,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zion-finau",
@@ -50724,7 +51387,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "manaalii-danielson",
@@ -50990,7 +51656,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "daylen-love",
@@ -51245,7 +51914,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jackson-sievers",
@@ -51498,7 +52170,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "moe-passi",
@@ -51751,7 +52426,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "da-veon-ross",
@@ -52006,7 +52684,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "hudson-voggesser",
@@ -52260,7 +52941,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noble-young-blackgoat",
@@ -52514,7 +53198,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "teni-worthen",
@@ -52769,7 +53456,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "xavier-ahrens",
@@ -53023,7 +53713,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brian-harris",
@@ -53283,7 +53976,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cadence-turner",
@@ -53542,7 +54238,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chris-johnson-ii",
@@ -53809,7 +54508,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jakobi-spence",
@@ -54061,7 +54763,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lono-solomon",
@@ -54321,7 +55026,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tamal-johnson",
@@ -54581,7 +55289,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "treshawn-shorty",
@@ -54849,7 +55560,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ambrose-marsh",
@@ -55108,7 +55822,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jackson-daniels",
@@ -55367,7 +56084,10 @@
    "ceiling_value": -3.5,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kameron-totton",
@@ -55593,7 +56313,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shaun-niu-jr",
@@ -55840,7 +56563,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryce-smith",
@@ -56094,7 +56820,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shahid-wilson",
@@ -56354,7 +57083,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-mayberry",
@@ -56620,7 +57352,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "keali-i-ah-yat",
@@ -56881,7 +57616,10 @@
    "ceiling_value": 74.1,
    "nil_low": 0,
    "nil_high": 33000
-  }
+  },
+  "home_state": "HI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "patrick-duchien",
@@ -57088,7 +57826,10 @@
    "ceiling_value": -1.9,
    "nil_low": 750000,
    "nil_high": 2500000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "floyd-chalk",
@@ -57206,7 +57947,10 @@
     "stat": "5.9 yds/carry (83rd pct), 2.40 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "joey-stout",
@@ -57454,7 +58198,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "terence-loville",
@@ -57566,7 +58313,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "fidel-pitts",
@@ -57763,7 +58513,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "joshua-acord",
@@ -57890,7 +58643,10 @@
     "stat": "YAC/rec 6.0 (80th pct)",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dominic-butts",
@@ -58130,7 +58886,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "levi-little",
@@ -58391,7 +59150,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "collin-lewis",
@@ -58645,7 +59407,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "UT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "grant-hessler",
@@ -58907,7 +59672,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "hunter-sharbono",
@@ -59161,7 +59929,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trent-carrade",
@@ -59415,7 +60186,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryce-grebe",
@@ -59669,7 +60443,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chase-martin",
@@ -59924,7 +60701,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-perez",
@@ -60178,7 +60958,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaiden-letua",
@@ -60289,7 +61072,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lincoln-tuioti-mariner",
@@ -60546,7 +61332,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "NV",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ammon-allen",
@@ -60657,7 +61446,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nathan-reynolds",
@@ -60911,7 +61703,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "troy-bean",
@@ -61139,7 +61934,10 @@
    "ceiling_value": 0.0,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ty-richardson",
@@ -61412,7 +62210,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "colter-petre",
@@ -61666,7 +62467,10 @@
    "ceiling_value": 1.7,
    "nil_low": 140000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rl-miller",
@@ -61920,7 +62724,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shoes-brinkley",
@@ -62030,7 +62837,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "troy-wilkey",
@@ -62278,7 +63088,10 @@
    "ceiling_value": -0.8,
    "nil_low": 200000,
    "nil_high": 500000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anthony-patt",
@@ -62385,7 +63198,10 @@
     "stat": "Zone share 62% of run blocks (82nd pct), RBLK grade 59.3",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "braden-zimmer",
@@ -62641,7 +63457,10 @@
    "ceiling_value": -1.9,
    "nil_low": 200000,
    "nil_high": 1000000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carter-lavrusky",
@@ -62826,7 +63645,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "corey-johnson",
@@ -63056,7 +63878,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dyllan-drummond",
@@ -63285,7 +64110,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gabriel-rzany",
@@ -63471,7 +64299,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaac-adams",
@@ -63680,7 +64511,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jack-d-ambra",
@@ -63780,7 +64614,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jack-ziebell",
@@ -63995,7 +64832,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-edmonds",
@@ -64239,7 +65079,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kt-carter",
@@ -64490,7 +65333,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kamani-fifita",
@@ -64727,7 +65573,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "krush-sowers",
@@ -64920,7 +65769,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "layton-vining",
@@ -65149,7 +66001,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "leon-evans",
@@ -65328,7 +66183,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "levi-johnson",
@@ -65537,7 +66395,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "matthew-mena",
@@ -65723,7 +66584,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ryan-karby",
@@ -65902,7 +66766,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sirri-kandiyeli",
@@ -66097,7 +66964,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "titan-fleischmann",
@@ -66202,7 +67072,10 @@
     "stat": "Zone share 69% of run blocks (95th pct), RBLK grade 69.0",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "torin-jeske",
@@ -66445,7 +67318,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "MT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "travis-gutierrez",
@@ -66659,7 +67535,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyler-skinner",
@@ -66844,7 +67723,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wyatt-sandford",
@@ -66944,7 +67826,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "ID",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "keyshawn-jackson",
@@ -67222,7 +68107,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nigel-gay",
@@ -67483,7 +68371,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eric-taylor",
@@ -67753,7 +68644,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cole-walker",
@@ -68020,7 +68914,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-harvey",
@@ -68288,7 +69185,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ean-johnson-kelley",
@@ -68556,7 +69456,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "joseph-polite",
@@ -68810,7 +69713,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nicholas-mathious",
@@ -69076,7 +69982,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "c-j-smith",
@@ -69199,7 +70108,10 @@
     "stat": "Win rate 13.2% (89th pct) at 243 lb (group median 250)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ryan-bell",
@@ -69381,7 +70293,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-jackson",
@@ -69575,7 +70490,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ayden-guess",
@@ -69806,7 +70724,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "OK",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trevor-short",
@@ -70073,7 +70994,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyrese-whitaker",
@@ -70267,7 +71191,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jake-thorner",
@@ -70449,7 +71376,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nick-simmons",
@@ -70705,7 +71635,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cj-favors",
@@ -70961,7 +71894,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jyarius-carter",
@@ -71215,7 +72151,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "greg-turner-iii",
@@ -71471,7 +72410,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "erick-roman",
@@ -71727,7 +72669,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "quinn-kennedy",
@@ -71982,7 +72927,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "logan-mccloud",
@@ -72235,7 +73183,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wyatt-ward",
@@ -72490,7 +73441,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mason-mims",
@@ -72696,7 +73650,10 @@
    "ceiling_value": -1.9,
    "nil_low": 750000,
    "nil_high": 2500000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "journey-wyche",
@@ -72929,7 +73886,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "KY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sebastien-boyle",
@@ -73176,7 +74136,10 @@
    "ceiling_value": -6.6,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NE",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaden-nelson",
@@ -73433,7 +74396,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "braylon-peebles",
@@ -73688,7 +74654,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lashon-young",
@@ -73936,7 +74905,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anthony-busa",
@@ -74185,7 +75157,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ej-wilborne",
@@ -74441,7 +75416,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kevonte-corbin",
@@ -74649,7 +75627,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "marquise-henderson",
@@ -74861,7 +75842,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "d-j-adams",
@@ -75133,7 +76117,10 @@
    "ceiling_value": -3.5,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "martez-cooksey-jr",
@@ -75367,7 +76354,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cj-gilmore",
@@ -75638,7 +76628,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jameson-wharton",
@@ -75918,7 +76911,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kehinde-akintunde",
@@ -76183,7 +77179,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": null,
+  "home_country": "International",
+  "home_country_name": "Nigeria"
  },
  {
   "id": "jamarr-jones",
@@ -76451,7 +77450,10 @@
    "ceiling_value": 23.9,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mckenzie-hazzard",
@@ -76570,7 +77572,10 @@
     "stat": "Sacks are 33% of his pressures (89th pct) at 299 lb (group median 290)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-moore",
@@ -76764,7 +77769,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "orlando-daniels",
@@ -76994,7 +78002,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "hudson-tucker",
@@ -77116,7 +78127,10 @@
     "stat": "Win rate 16.8% (96th pct) at 242 lb (group median 250)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kristian-ozane",
@@ -77370,7 +78384,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zion-rutledge",
@@ -77626,7 +78643,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "raleigh-herbert",
@@ -77882,7 +78902,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kaleb-brown",
@@ -77992,7 +79015,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aiden-morris",
@@ -78246,7 +79272,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jax-leatherwood",
@@ -78510,7 +79539,10 @@
    "ceiling_value": 6.5,
    "nil_low": 296000,
    "nil_high": 750000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kevin-lalin",
@@ -78764,7 +79796,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mj-flowers",
@@ -78882,7 +79917,10 @@
     "stat": "Receiving: 20 catches (81st pct among RBs) on 25 targets; PBLK grade 44.3 on 35 pass-block snaps",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "qua-ashley",
@@ -79012,7 +80050,10 @@
     "stat": "6.9 yds/carry (94th pct), 2.20 yds before contact/att",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kam-baah-slay",
@@ -79268,7 +80309,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eli-campbell",
@@ -79534,7 +80578,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacobi-hatter",
@@ -79788,7 +80835,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ashton-schumann",
@@ -79988,7 +81038,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "suderian-harrison",
@@ -80208,7 +81261,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brayden-smith",
@@ -80480,7 +81536,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eric-weatherly",
@@ -80685,7 +81744,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gabe-nunez",
@@ -80802,7 +81864,10 @@
     "stat": "YAC/rec 6.8 (85th pct)",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "clayton-hixon",
@@ -80908,7 +81973,10 @@
     "stat": "Zone share 63% of run blocks (87th pct), RBLK grade 60.1",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "devin-lively",
@@ -81138,7 +82206,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "frank-west",
@@ -81376,7 +82447,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "KY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "j-von-lindsey",
@@ -81585,7 +82659,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-ziegler",
@@ -81794,7 +82871,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacorey-wright",
@@ -81982,7 +83062,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaden-brinkley",
@@ -82199,7 +83282,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nason-simmons",
@@ -82297,7 +83383,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "parker-peterson",
@@ -82553,7 +83642,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "reggie-houston",
@@ -82775,7 +83867,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "renard-smith",
@@ -82875,7 +83970,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "steve-lizama",
@@ -83105,7 +84203,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "t-j-holmberg",
@@ -83356,7 +84457,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyler-murray",
@@ -83585,7 +84689,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "watts-alexander",
@@ -83816,7 +84923,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zach-watson",
@@ -84038,7 +85148,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "daylan-pringle",
@@ -84287,7 +85400,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lucas-theriaque",
@@ -84542,7 +85658,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "myles-hansford",
@@ -84796,7 +85915,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carter-lance",
@@ -85057,7 +86179,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dashawn-fields",
@@ -85323,7 +86448,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "marquacious-wright",
@@ -85591,7 +86719,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rodney-mills",
@@ -85786,7 +86917,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "asher-wilson",
@@ -86054,7 +87188,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aaziah-scott",
@@ -86322,7 +87459,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jordan-gaston",
@@ -86584,7 +87724,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "teddy-mcduffie-jr",
@@ -86780,7 +87923,10 @@
    "ceiling_value": -0.8,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-staton",
@@ -87036,7 +88182,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "frederick-borkey",
@@ -87291,7 +88440,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "amanuel-dickson",
@@ -87546,7 +88698,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jake-lopinto",
@@ -87801,7 +88956,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "adjatay-abegesah",
@@ -88057,7 +89215,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brendan-leal",
@@ -88312,7 +89473,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "deonte-douglas",
@@ -88576,7 +89740,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dallas-harper",
@@ -88830,7 +89997,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "braylon-beckwith",
@@ -89086,7 +90256,10 @@
    "ceiling_value": -0.8,
    "nil_low": 200000,
    "nil_high": 500000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sha-lik-hampton",
@@ -89354,7 +90527,10 @@
    "ceiling_value": 0.0,
    "nil_low": 113000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "WV",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ryan-petras",
@@ -89601,7 +90777,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "d-arious-reed",
@@ -89821,7 +91000,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "issac-glaudin",
@@ -90013,7 +91195,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "galen-combs",
@@ -90277,7 +91462,10 @@
    "ceiling_value": -5.9,
    "nil_low": 300000,
    "nil_high": 800000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shawn-corchado",
@@ -90488,7 +91676,10 @@
    "ceiling_value": -5.9,
    "nil_low": 300000,
    "nil_high": 800000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chris-jean",
@@ -90754,7 +91945,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "mekhi-kilburn",
@@ -91006,7 +92200,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ronnie-woods",
@@ -91279,7 +92476,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tahseen-howard",
@@ -91395,7 +92595,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyler-hammel",
@@ -91644,7 +92847,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "logan-barnes",
@@ -91912,7 +93118,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ravon-johnson",
@@ -92103,7 +93312,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "irv-briggs",
@@ -92298,7 +93510,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "malachi-mapp",
@@ -92552,7 +93767,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "luke-miller",
@@ -92809,7 +94027,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ricky-encarnacion",
@@ -93065,7 +94286,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eric-miles",
@@ -93321,7 +94545,10 @@
    "ceiling_value": 43.7,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "michael-trovarelli",
@@ -93595,7 +94822,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nate-burleson-ii",
@@ -93800,7 +95030,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anthony-massa",
@@ -93986,7 +95219,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "douglas-traynor",
@@ -94216,7 +95452,10 @@
    "ceiling_value": 78.2,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "george-wiley-v",
@@ -94445,7 +95684,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "karl-khuns",
@@ -94674,7 +95916,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "NY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "pete-jarvis",
@@ -94898,7 +96143,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "riley-piper",
@@ -95143,7 +96391,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "WA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "toluwanimi-tunde",
@@ -95373,7 +96624,10 @@
    "ceiling_value": 29.8,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": null,
+  "home_country": "International",
+  "home_country_name": "Nigeria"
  },
  {
   "id": "jayden-hancock",
@@ -95644,7 +96898,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "byron-davis",
@@ -95888,7 +97145,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jalen-labranche",
@@ -96152,7 +97412,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "collin-bray",
@@ -96379,7 +97642,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jamie-williamson",
@@ -96637,7 +97903,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jason-hertz",
@@ -96888,7 +98157,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "king-smith",
@@ -97146,7 +98418,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "timothy-maxson",
@@ -97411,7 +98686,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "duston-chavis",
@@ -97669,7 +98947,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aidan-archibald",
@@ -97855,7 +99136,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aj-mebane",
@@ -98125,7 +99409,10 @@
    "ceiling_value": -0.8,
    "nil_low": 177000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brandon-mcdonald",
@@ -98376,7 +99663,10 @@
    "ceiling_value": 76.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kj-mcrae",
@@ -98634,7 +99924,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jamarion-ravenell",
@@ -98899,7 +100192,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nigel-lucas",
@@ -99150,7 +100446,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "maxwell-warren",
@@ -99387,7 +100686,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CT",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kory-jones",
@@ -99657,7 +100959,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "anthony-taylor",
@@ -99866,7 +101171,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jacob-kania",
@@ -100067,7 +101375,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "david-williams",
@@ -100324,7 +101635,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "taylor-smallwood",
@@ -100437,7 +101751,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "devonta-owens",
@@ -100556,7 +101873,10 @@
     "stat": "Rating allowed 49.2 (92nd pct), comp% allowed 53.7%",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "OK",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "preston-hamilton",
@@ -100680,7 +102000,10 @@
     "stat": "Sacks are 29% of his pressures (85th pct) at 300 lb (group median 290)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-zook",
@@ -100945,7 +102268,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ashtin-rustemeyer",
@@ -101070,7 +102396,10 @@
     "stat": "Win rate 9.0% (91st pct) at 281 lb (group median 290)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "trey-weems",
@@ -101340,7 +102669,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "steve-zayachkowsky",
@@ -101598,7 +102930,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "caelum-jones",
@@ -101856,7 +103191,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cole-dutkovich",
@@ -102114,7 +103452,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "antonio-dobbins",
@@ -102372,7 +103713,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lebron-morgan",
@@ -102636,7 +103980,10 @@
    "ceiling_value": 0.0,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nick-reinicke",
@@ -102894,7 +104241,10 @@
    "ceiling_value": 39.6,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "avery-dixon",
@@ -103007,7 +104357,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-smithberger",
@@ -103257,7 +104610,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "andrew-swingle",
@@ -103467,7 +104823,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "hayes-formby",
@@ -103698,7 +105057,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aidan-armenta",
@@ -103884,7 +105246,10 @@
    "ceiling_value": -3.7,
    "nil_low": 296000,
    "nil_high": 750000
-  }
+  },
+  "home_state": "NM",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "austin-carlisle",
@@ -104080,7 +105445,10 @@
    "ceiling_value": 40.7,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "don-chaney",
@@ -104227,7 +105595,10 @@
     "stat": "100m 10.77",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zach-palmer-smith",
@@ -104347,7 +105718,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "NJ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "marcellus-jackson",
@@ -104571,7 +105945,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "derrick-jameson",
@@ -104689,7 +106066,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jp-coulter",
@@ -104873,7 +106253,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lt-robinson",
@@ -105062,7 +106445,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "KS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cj-phillip",
@@ -105234,7 +106620,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryson-roland",
@@ -105447,7 +106836,10 @@
    "ceiling_value": 2.2,
    "nil_low": 135000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nic-trujillo",
@@ -105652,7 +107044,10 @@
    "ceiling_value": -6.2,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "NM",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "parker-fulghum",
@@ -105845,7 +107240,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bryce-anderson",
@@ -106053,7 +107451,10 @@
    "ceiling_value": 0.0,
    "nil_low": 113000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cj-wilson",
@@ -106185,7 +107586,10 @@
     "stat": "Win rate 8.3% (83rd pct) at 250 lb (group median 290)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "MI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carl-fauntroy",
@@ -106370,7 +107774,10 @@
    "ceiling_value": 13.0,
    "nil_low": 0,
    "nil_high": 17000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "james-smith",
@@ -106491,7 +107898,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "colton-vatne",
@@ -106611,7 +108021,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dj-jester",
@@ -106781,7 +108194,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jay-harper",
@@ -106974,7 +108390,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "billy-pullen",
@@ -107101,7 +108520,10 @@
     "stat": "Win rate 16.3% (89th pct), pressure rate 11.4%",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kevontay-wells",
@@ -107243,7 +108665,10 @@
     "stat": "Win rate 15.5% (99th pct) at 255 lb (group median 290)",
     "proxy": true
    }
-  ]
+  ],
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "marcus-ross",
@@ -107376,7 +108801,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaeden-calender",
@@ -107561,7 +108989,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "marvin-hall",
@@ -107761,7 +109192,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "MO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "armoni-rue",
@@ -107959,7 +109393,10 @@
    "ceiling_value": 39.4,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zy-jackson",
@@ -108164,7 +109601,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jabari-tiller",
@@ -108285,7 +109725,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "SC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "noah-flemmings",
@@ -108513,7 +109956,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "taijh-overton",
@@ -108693,7 +110139,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rickey-banks",
@@ -108893,7 +110342,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-lewis",
@@ -109063,7 +110515,10 @@
    "ceiling_value": 1.1,
    "nil_low": 150000,
    "nil_high": 700000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tj-williams",
@@ -109263,7 +110718,10 @@
    "ceiling_value": -3.0,
    "nil_low": 135000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rj-hall",
@@ -109435,7 +110893,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "chris-payne",
@@ -109636,7 +111097,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "moses-madubuike",
@@ -109835,7 +111299,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "gavin-howard",
@@ -110025,7 +111492,10 @@
    "ceiling_value": 9.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "zyan-tremont",
@@ -110196,7 +111666,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tyrell-brown",
@@ -110381,7 +111854,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sean-dugery",
@@ -110555,7 +112031,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "aj-vinson",
@@ -110751,7 +112230,10 @@
    "ceiling_value": -31.0,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "david-applewhite",
@@ -110925,7 +112407,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kaliem-croswell",
@@ -111099,7 +112584,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "PA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "quentis-griffin-jr",
@@ -111208,7 +112696,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MS",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "nate-green",
@@ -111397,7 +112888,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "adameon-botley",
@@ -111506,7 +113000,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "bright-fagbamiye",
@@ -111666,7 +113163,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "IN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "drew-hutchinson",
@@ -111775,7 +113275,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "john-curtis-goodman-jr",
@@ -111884,7 +113387,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "LA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "reese-steele",
@@ -111993,7 +113499,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "IA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "adarius-hutchinson",
@@ -112233,7 +113742,10 @@
    "ceiling_value": -35.3,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ashton-coker",
@@ -112408,7 +113920,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "carver-cheeks",
@@ -112611,7 +114126,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "cash-cheeks",
@@ -112732,7 +114250,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "CO",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "darnell-williams",
@@ -112917,7 +114438,10 @@
    "ceiling_value": 13.0,
    "nil_low": 0,
    "nil_high": 17000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "decorian-thompson",
@@ -113176,7 +114700,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "derek-burns",
@@ -113284,7 +114811,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "donavan-howard",
@@ -113391,7 +114921,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "VA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "dycin-davis",
@@ -113566,7 +115099,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "ej-colson-jr",
@@ -113741,7 +115277,10 @@
    "ceiling_value": -3.7,
    "nil_low": 296000,
    "nil_high": 750000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "elijah-fields",
@@ -113960,7 +115499,10 @@
    "ceiling_value": 70.4,
    "nil_low": 0,
    "nil_high": 20000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "esteban-guillory",
@@ -114149,7 +115691,10 @@
    "ceiling_value": 13.0,
    "nil_low": 0,
    "nil_high": 17000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "garrett-hawkins",
@@ -114388,7 +115933,10 @@
    "ceiling_value": 8.4,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TN",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-bogerty",
@@ -114510,7 +116058,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaden-smith",
@@ -114639,7 +116190,10 @@
     "stat": "Drop rate 2.4% (86th pct), 39 catches on 41 catchable",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-wilson",
@@ -114900,7 +116454,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaylan-brown",
@@ -115083,7 +116640,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jeremiah-nash",
@@ -115258,7 +116818,10 @@
    "ceiling_value": 13.6,
    "nil_low": 141000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "judah-ezinwa",
@@ -115374,7 +116937,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "CA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "justin-content",
@@ -115585,7 +117151,10 @@
    "ceiling_value": -6.2,
    "nil_low": 140000,
    "nil_high": 150000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "justin-lee",
@@ -115811,7 +117380,10 @@
    "ceiling_value": -34.2,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kaleb-miles",
@@ -116064,7 +117636,10 @@
    "ceiling_value": -15.8,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kam-thomas",
@@ -116191,7 +117766,10 @@
     "stat": "YAC/rec 7.8 (92nd pct)",
     "proxy": false
    }
-  ]
+  ],
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "kode-lowe",
@@ -116313,7 +117891,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "latristan-thompson",
@@ -116574,7 +118155,10 @@
    "ceiling_value": 21.2,
    "nil_low": 17000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "lamar-sperling",
@@ -116784,7 +118368,10 @@
    "ceiling_value": 25.7,
    "nil_low": 18000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "OH",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "leander-parrish",
@@ -117010,7 +118597,10 @@
    "ceiling_value": 0.0,
    "nil_low": 177000,
    "nil_high": 250000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "oryend-fisher",
@@ -117236,7 +118826,10 @@
    "ceiling_value": 23.9,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "KY",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "raymond-moore-iii",
@@ -117417,7 +119010,10 @@
    "ceiling_value": 40.7,
    "nil_low": 33000,
    "nil_high": 600000
-  }
+  },
+  "home_state": "MD",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "royce-wilson",
@@ -117591,7 +119187,10 @@
    "ceiling_value": 8.7,
    "nil_low": 20000,
    "nil_high": 300000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shakaun-bowser",
@@ -117699,7 +119298,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "AZ",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "shay-smith",
@@ -117911,7 +119513,10 @@
    "ceiling_value": 4.5,
    "nil_low": 19000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "sterling-miles",
@@ -118019,7 +119624,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "MI",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "tavorus-jones",
@@ -118141,7 +119749,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "xavier-smith",
@@ -118261,7 +119872,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "juan-camacho-jr",
@@ -118371,7 +119985,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jaymon-lamb",
@@ -118548,7 +120165,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "craig-wydra",
@@ -118717,7 +120337,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "brian-williams-jr",
@@ -118902,7 +120525,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "GA",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "isaiah-maumalanga",
@@ -119012,7 +120638,10 @@
   "elig_differs": false,
   "nil_status": "no_estimate",
   "nil_reason": "no college band - pro-only projection, no destination level to price",
-  "nil_projection_basis": "no college band (pro-only / not eligible)"
+  "nil_projection_basis": "no college band (pro-only / not eligible)",
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "diego-de-la-cruz",
@@ -119189,7 +120818,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": null,
+  "home_country": "International",
+  "home_country_name": "Mexico"
  },
  {
   "id": "tyler-roberts",
@@ -119366,7 +120998,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "preston-perkins",
@@ -119528,7 +121163,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "wesley-dallao-kubik",
@@ -119763,7 +121401,10 @@
    "ceiling_value": 71.6,
    "nil_low": 155000,
    "nil_high": 200000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "jayden-trapp",
@@ -119940,7 +121581,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "omoruyi-aliu-otokiti",
@@ -120103,7 +121747,10 @@
    "ceiling_value": 11.1,
    "nil_low": 19000,
    "nil_high": 400000
-  }
+  },
+  "home_state": "FL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eric-sandoval-araujo",
@@ -120273,7 +121920,10 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "rashad-smith",
@@ -120436,7 +122086,10 @@
    "ceiling_value": 22.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "AL",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "eddie-lartigue-jr",
@@ -120599,7 +122252,10 @@
    "ceiling_value": -6.2,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "TX",
+  "home_country": "US",
+  "home_country_name": null
  },
  {
   "id": "grayson-johnson",
@@ -120762,6 +122418,9 @@
    "ceiling_value": 64.7,
    "nil_low": 0,
    "nil_high": 19000
-  }
+  },
+  "home_state": "NC",
+  "home_country": "US",
+  "home_country_name": null
  }
 ]
