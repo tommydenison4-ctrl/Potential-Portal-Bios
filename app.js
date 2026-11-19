@@ -9,7 +9,11 @@ let TRAIT_REG = {};         // trait layer registry: trait key -> {label, groups
 let FLASHES_BY_ID = {};     // flash layer (flashes.json): player id -> [limited-action flash entries]
 let FLASH_REG = {};         // flash registry: trait key -> {label, groups, floor, flash_floor}
 let OPTIMAL_SIZE = {};      // optimal size bands (optimal_size.json): group -> {ht_min, ht_max, wt_min, wt_max, ...}
-let champSel = 'Louisiana-Monroe';  // selected team on the championship path page
+let TEAM_BRANDS = {};       // team_brands.json: FBS team name -> {logo, color, accent} — the My Team skin data
+let UNIVERSE_META = null;   // universe_meta.json: the honest counts (evaluated core vs standard records)
+let UNIVERSE = null;        // the standard records themselves — lazy-loaded on first reach, never up front
+let universePromise = null;
+let champSel = null;  // selected team on the championship path page — null until My Team or an explicit pick names one; the page opens on nobody by default
 let myTeam = null;          // "My Team" mode: the user's saved school (localStorage portalMyTeam), or null
 let PROSPECTS = [];         // Prospect List: highlighted player ids (localStorage portalProspects)
 const teamSet = [];         // selected team names on the team comparison page, in pick order
@@ -29,6 +33,7 @@ const DIRS = {
 };
 
 const $ = id => document.getElementById(id);
+const fmtN = n => Number(n).toLocaleString('en-US');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const initials = n => n.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
 const photo = (p, cls) => p.headshot
@@ -682,12 +687,14 @@ function setChrome(dir) {
     $('totalChip').textContent = `${(dir === 'down' ? DOWN : UP).length} players`;
   } else {
     chip.hidden = true;
-    $('totalChip').textContent = `${UP.length + DOWN.length} players`;
+    $('totalChip').textContent = UNIVERSE_META
+      ? `${fmtN(UP.length + DOWN.length)} evaluated · ${fmtN(UNIVERSE_META.total_listed)} listed`
+      : `${UP.length + DOWN.length} players`;
   }
 }
 
 function showView(name) {
-  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value', 'prospects', 'map', 'prototype']) {
+  for (const v of ['splash', 'directory', 'downempty', 'player', 'compare', 'comparison', 'teamcmp', 'champ', 'changes', 'value', 'prospects', 'map', 'prototype', 'universe']) {
     $('view-' + v).hidden = v !== name;
   }
 }
@@ -721,7 +728,7 @@ function navRouteFor(hash) {
     return p ? '#/' + (p.direction || 'up') : null;
   }
   if (hash.startsWith('#/championship-path')) return '#/championship-path';
-  for (const r of ['#/team-comparison', '#/compare-conferences', '#/prototype', '#/map', '#/value', '#/prospects', '#/changes'])
+  for (const r of ['#/team-comparison', '#/compare-conferences', '#/prototype', '#/map', '#/value', '#/prospects', '#/changes', '#/universe'])
     if (hash === r) return r;
   return null;
 }
@@ -1156,12 +1163,46 @@ function syncSplashTeam() {
     link.hidden = true;
   }
 }
+/* the team skin: while My Team is active, the team's colour drives
+   the --accent variable and its mark sits in the top bar on a light
+   chip (so black marks read on black). Unselecting removes the inline
+   accent entirely — the site is full black neutral again, and every
+   team-framed default switches off with it. Saved classes are
+   per-team data in localStorage; they are not touched here. */
+function applyTeamSkin() {
+  const logoEl = $('myTeamLogo'), clearBtn = $('myTeamClear');
+  if (!logoEl || !clearBtn) return;
+  if (myTeam) {
+    const brand = TEAM_BRANDS[myTeam] || null;
+    if (brand && brand.accent) document.documentElement.style.setProperty('--accent', brand.accent);
+    else document.documentElement.style.removeProperty('--accent');
+    const t = myTeamObj();
+    const logo = (t && t.logo) || (brand && brand.logo);
+    if (logo) { logoEl.src = 'logos/' + logo; logoEl.alt = `${myTeam} logo`; logoEl.hidden = false; }
+    else logoEl.hidden = true;
+    clearBtn.hidden = false;
+    document.body.classList.add('team-on');
+  } else {
+    document.documentElement.style.removeProperty('--accent');
+    logoEl.hidden = true;
+    logoEl.removeAttribute('src');
+    logoEl.alt = '';
+    clearBtn.hidden = true;
+    document.body.classList.remove('team-on');
+  }
+}
+
 function setMyTeam(name) {
   myTeam = name && CHAMP && CHAMP.teams.some(t => t.name === name) ? name : null;
+  // Unselecting switches the personalisation off entirely: unless the
+  // user picked a team on the championship page itself (champPicked),
+  // the path goes back to opening on nobody.
+  if (!myTeam && !champPicked) champSel = null;
   try { if (myTeam) localStorage.setItem('portalMyTeam', myTeam); else localStorage.removeItem('portalMyTeam'); } catch (err) {}
   const sel = $('myTeamSel');
   if (sel) sel.value = myTeam || '';
   syncMyTeamToggle();
+  applyTeamSkin();
   syncOfferNote();
   const hash = location.hash || '';
   if (hash.startsWith('#/player/')) route();   // re-render so the For card and the save default apply
@@ -1268,6 +1309,116 @@ function portalRankLine(p) {
     ? `#${r.rank} NATIONALLY — ${esc(String(r.source).toUpperCase())}`
     : `#${r.rank} — ${esc(String(r.source).toUpperCase())}`);
   return `<p class="portal-rank">${esc(pr.cycle)} TRANSFER PORTAL: ${parts.join(' · ')}</p>`;
+}
+
+/* -------- the universe: standard records --------
+   Every graded P4, G6 and FCS player who is not in the evaluated
+   core, listed with only what the source files carry: name, school,
+   level, conference, position, 2026 headline grade and volume. No
+   Call, no band, no fits, no NIL — the page and the row say plainly
+   that the full evaluation has not been run on him. The data loads
+   lazily, the first time anything reaches for it; the landing and
+   the core directories never pay for it. */
+const UNI_PAGE = 150;
+let uniShown = UNI_PAGE, uniSortKey = 'grade', uniSortDir = -1;
+
+function ensureUniverse() {
+  if (UNIVERSE) return Promise.resolve(UNIVERSE);
+  if (!universePromise) {
+    universePromise = Promise.all([loadJson('universe_fbs.json'), loadJson('universe_fcs.json')]).then(([fbs, fcs]) => {
+      UNIVERSE = [...(Array.isArray(fbs) ? fbs : []), ...(Array.isArray(fcs) ? fcs : [])]
+        .map(p => ({ ...p, universe: true }));
+      UNIVERSE.forEach(p => { if (!byIdAll[p.id]) byIdAll[p.id] = p; });
+      buildUniverseFilters();
+      return UNIVERSE;
+    });
+  }
+  return universePromise;
+}
+
+function buildUniverseFilters() {
+  const confSel = $('uconf'), posSel = $('upos');
+  if (confSel && confSel.options.length <= 1 && UNIVERSE) {
+    const confs = [...new Set(UNIVERSE.map(p => p.conference))].sort();
+    confSel.innerHTML = '<option value="">All conferences</option>' + confs.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  }
+  if (posSel && posSel.options.length <= 1) {
+    posSel.innerHTML = '<option value="">All positions</option>' + TRAIT_GROUP_ORDER.map(g => `<option value="${g}">${g}</option>`).join('');
+  }
+}
+
+function universeFiltered() {
+  const q = ($('uq').value || '').trim().toLowerCase();
+  const lvl = $('ulevel').value, conf = $('uconf').value, pos = $('upos').value;
+  const gmin = numOrNull($('ugrade').value);
+  const rows = UNIVERSE.filter(p =>
+    (!q || p.name.toLowerCase().includes(q) || p.school.toLowerCase().includes(q)) &&
+    (!lvl || p.level === lvl) && (!conf || p.conference === conf) &&
+    (!pos || p.position === pos) && (gmin == null || p.grade >= gmin));
+  const k = uniSortKey, d = uniSortDir;
+  rows.sort((a, b) => {
+    const x = a[k], y = b[k];
+    if (typeof x === 'number' && typeof y === 'number') return (x - y) * d;
+    return String(x).localeCompare(String(y)) * d || (b.grade - a.grade);
+  });
+  return rows;
+}
+
+function uniRowHtml(p) {
+  return `<tr><td><a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a><span class="uni-badge">Standard record</span></td><td>${esc(p.school)}</td><td>${esc(p.conference)}</td><td>${esc(p.position)}</td><td class="num"><b>${f1(p.grade)}</b></td><td class="num">${fmtN(p.volume)} ${esc(p.volume_label)}</td></tr>`;
+}
+
+function renderUniverseRows(reset) {
+  if (!UNIVERSE) return;
+  if (reset) uniShown = UNI_PAGE;
+  const rows = universeFiltered();
+  $('uniCount').textContent = `${fmtN(rows.length)} of ${fmtN(UNIVERSE.length)} standard records`;
+  $('uniBody').innerHTML = rows.length
+    ? rows.slice(0, uniShown).map(uniRowHtml).join('')
+    : '<tr><td colspan="6"><p class="empty">No standard records match — loosen a filter.</p></td></tr>';
+  $('uniMore').innerHTML = rows.length > uniShown
+    ? `<div class="showmore-row"><button type="button" class="btn-more" id="uniMoreBtn">Show more — ${fmtN(rows.length - uniShown)} more</button></div>` : '';
+  const b = $('uniMoreBtn');
+  if (b) b.addEventListener('click', () => { uniShown += UNI_PAGE; renderUniverseRows(false); });
+}
+
+function renderUniverseView() {
+  if (!UNIVERSE) {
+    $('uniSub').textContent = 'Loading the full list…';
+    ensureUniverse().then(() => { if ((location.hash || '') === '#/universe') renderUniverseView(); });
+    return;
+  }
+  buildUniverseFilters();
+  $('uniSub').textContent = `${fmtN(UNIVERSE.length)} standard records — every graded P4, G6 and FCS player who is not in the evaluated core. The ${fmtN(UP.length + DOWN.length)} fully evaluated players live in the two directories; nobody on this page has been through the full evaluation. Sorted by grade — his playing time is printed beside it, and a big grade on a small sample should be read that way.`;
+  $('uniFoot').textContent = 'A standard record carries only what the source files carry: name, school, level, conference, position, his 2026 headline grade and his playing time. No band, no fits, no Call — the full evaluation has not been run on these players.'
+    + (UNIVERSE_META && Array.isArray(UNIVERSE_META.fcs_conferences) && !UNIVERSE_META.fcs_conferences.includes('MEAC') ? ' The MEAC joins this list when its 2026 pulls finish landing.' : '');
+  renderUniverseRows(true);
+}
+
+/* a standard record's page: a smaller, perfect object — the grade
+   and the volume set like they matter, the honest statement, and
+   nothing else. No empty sections, no placeholder furniture. */
+function renderUniversePlayer(p) {
+  const peers = UNIVERSE ? UNIVERSE.filter(x => x.conference === p.conference && x.position === p.position) : [];
+  let rank = '';
+  if (peers.length >= 5) {
+    const r = peers.filter(x => x.grade > p.grade).length + 1;
+    rank = `<p class="u-note" style="margin-top:22px">His grade ranks <b style="color:var(--ink)">#${r} of ${peers.length}</b> ${esc(p.position)}s in the ${esc(p.conference)} on this list.</p>`;
+  }
+  return `<p style="margin:14px 0 0"><a class="back" href="#/universe">← Every player</a></p>
+  <div class="u-page">
+    <p class="u-kicker">Standard record — not yet evaluated</p>
+    <h1 class="u-name">${esc(p.name)}</h1>
+    <p class="u-school">${esc(p.school)} · ${esc(p.conference)} · ${esc(p.level)}</p>
+    <div class="u-stats">
+      <div class="u-stat"><span class="u-stat-n">${f1(p.grade)}</span><span class="u-stat-l">${esc(p.grade_col)} — 2026</span></div>
+      <div class="u-stat"><span class="u-stat-n">${fmtN(p.volume)}</span><span class="u-stat-l">${esc(p.volume_label)} — 2026</span></div>
+    </div>
+    <div class="u-facts"><span>Position <b>${esc(p.position)}</b></span><span>Level <b>${esc(p.level)}</b></span><span>Conference <b>${esc(p.conference)}</b></span></div>
+    ${rank}
+    <p class="u-note">This is a standard record: he is listed with the grade and the playing time on his 2026 record, and nothing more is claimed for him. The full evaluation — band, fits, The Call — has not been run on him. The ${fmtN(UP.length + DOWN.length)} players in the two directories carry it.</p>
+    <a class="u-back" href="#/universe">Browse the full list →</a>
+  </div>`;
 }
 
 function renderPlayer(p) {
@@ -1472,7 +1623,7 @@ function renderGrid() {
       const c = (CMP.position_grid[bk] || {})[pos];
       if (!c) return '<td class="ctr heat-empty">—</td>';
       const a = (0.05 + 0.23 * (c.n / maxN)).toFixed(3);
-      return `<td class="ctr" style="background:rgba(15,118,110,${a})"><span class="grid-n">${c.n}</span><span class="grid-sub">P4 ${c.p4_likely} · med ${f1(c.median_grade)}</span></td>`;
+      return `<td class="ctr" style="background:rgba(45,212,191,${a})"><span class="grid-n">${c.n}</span><span class="grid-sub">P4 ${c.p4_likely} · med ${f1(c.median_grade)}</span></td>`;
     }).join('');
     return `<tr><td><span class="pname">${bookLabel(b)}</span></td>${cells}</tr>`;
   }).join('');
@@ -1871,7 +2022,7 @@ function candBlock(t, g) {
 }
 
 /* ---------------- team comparison charts ---------------- */
-const TEAM_COLORS = ['#1d4ed8', '#d97706', '#059669', '#dc2626'];
+const TEAM_COLORS = ['#3b82f6', '#f59e0b', '#34d399', '#f87171'];
 
 /* Horizontal bars: each room's gap to the team's own level median,
    biggest deficit first. Below-bar rooms are drawn faded and asterisked. */
@@ -1892,7 +2043,7 @@ function gapChart(t) {
     const y = top + i * rowH;
     const x = X(r.v);
     const bx = Math.min(zero, x), bw = Math.max(2, Math.abs(x - zero));
-    const fill = r.v >= 0 ? '#1a7f37' : '#c0392b';
+    const fill = r.v >= 0 ? '#4ade80' : '#f87171';
     const lab = r.v >= 0 ? `${x + 6}` : `${x - 6}`;
     const anch = r.v >= 0 ? 'start' : 'end';
     s += `<text x="0" y="${y + 15}" class="ch-room">${esc(r.g)}${r.bb ? '*' : ''}</text>`;
@@ -1930,10 +2081,10 @@ function distChart(sel) {
     const X = v => L + ((v - lo) / (hi - lo)) * (R - L);
     const y = top + gi * stripH + stripH / 2;
     s += `<text x="0" y="${y + 4}" class="ch-room">${esc(g)}</text>`;
-    s += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}" stroke="#e5e9ef" stroke-width="1"/>`;
+    s += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}" stroke="#1e2a3f" stroke-width="1"/>`;
     vals.forEach((v, i) => {
       const jy = y + (((i * 7) % 9) - 4);
-      s += `<circle cx="${X(v).toFixed(1)}" cy="${jy}" r="2.4" fill="#c3cad4"/>`;
+      s += `<circle cx="${X(v).toFixed(1)}" cy="${jy}" r="2.4" fill="#5b6a82"/>`;
     });
     if (med[g].g6 != null) s += `<line x1="${X(med[g].g6)}" y1="${y - 10}" x2="${X(med[g].g6)}" y2="${y + 10}" stroke="#94a3b8" stroke-width="2"/>`;
     if (med[g].p4 != null) s += `<line x1="${X(med[g].p4)}" y1="${y - 10}" x2="${X(med[g].p4)}" y2="${y + 10}" stroke="#475569" stroke-width="2"/>`;
@@ -2152,15 +2303,15 @@ function champChart(t, m) {
   const X = v => L + ((v - lo) / (hi - lo)) * (R - L);
   let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t.name)} — incumbent, conference-best standard and projected grade after the path, room by room">`;
   s += `<rect x="${L}" y="6" width="10" height="10" fill="#94a3b8"/><text x="${L + 15}" y="15" class="ch-leg">Incumbent</text>`;
-  s += `<rect x="${L + 96}" y="6" width="10" height="10" fill="#0f172a"/><text x="${L + 111}" y="15" class="ch-leg">Conference-best standard</text>`;
-  s += `<rect x="${L + 268}" y="6" width="10" height="10" fill="#1a7f37"/><text x="${L + 283}" y="15" class="ch-leg">Projected after the path</text>`;
+  s += `<rect x="${L + 96}" y="6" width="10" height="10" fill="#e2e8f0"/><text x="${L + 111}" y="15" class="ch-leg">Conference-best standard</text>`;
+  s += `<rect x="${L + 268}" y="6" width="10" height="10" fill="#4ade80"/><text x="${L + 283}" y="15" class="ch-leg">Projected after the path</text>`;
   m.rooms.forEach((x, i) => {
     const y0 = top + i * blockH;
     s += `<text x="0" y="${y0 + 16}" class="ch-room">${esc(x.g)}${x.bb ? '*' : ''}</text>`;
     const bars = [
       { v: x.inc, fill: '#94a3b8', faded: x.bb, label: x.inc != null ? f1(x.inc) + (x.bb ? '*' : '') : null },
-      { v: x.bar, fill: '#0f172a', faded: false, label: x.bar != null ? f1(x.bar) : null },
-      { v: x.path ? x.projected : null, fill: '#1a7f37', faded: false, label: x.path ? f1(x.projected) : null }
+      { v: x.bar, fill: '#e2e8f0', faded: false, label: x.bar != null ? f1(x.bar) : null },
+      { v: x.path ? x.projected : null, fill: '#4ade80', faded: false, label: x.path ? f1(x.projected) : null }
     ];
     bars.forEach((b, bi) => {
       if (b.v == null) return;
@@ -2196,7 +2347,19 @@ function renderChamp() {
     champSel = myTeam;
     buildChampPanel();
   }
-  const t = CHAMP.teams.find(x => x.name === champSel) || CHAMP.teams[0];
+  const t = CHAMP.teams.find(x => x.name === champSel);
+  if (!t) {
+    // No team chosen — My Team unset and no pick made on this page.
+    // The path opens on nobody: choosing a school is the user's act,
+    // never a silent default.
+    champBtnLabel();
+    const ph0 = $('champPrintHead');
+    if (ph0) ph0.innerHTML = '';
+    body.innerHTML = `<div class="card empty-state"><h2 class="empty-title">Path to a conference championship</h2>
+      <p class="empty-lede">Pick your team to see its path.</p>
+      <p>Choose a school in the Team picker above — or set “My team” in the top bar and this page opens on your school. Until a team is chosen, no school is assumed.</p></div>`;
+    return;
+  }
   champSel = t.name;
   champBtnLabel();
   if (champClassTeam !== t.name) loadClass(t.name);
@@ -2765,35 +2928,35 @@ function classBoardCanvas() {
   const ctx = cv.getContext('2d');
   if (!ctx) return null;
   ctx.scale(S, S);
-  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = '#334155'; ctx.fillRect(0, 0, W, 88);
+  ctx.fillStyle = '#0d1526'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#070b14'; ctx.fillRect(0, 0, W, 88);
   ctx.fillStyle = '#ffffff'; ctx.font = `700 20px ${FONT}`;
   ctx.fillText(fitLine(ctx, `Saved class — ${snap.team}`, MAXW), PAD, 38);
   ctx.fillStyle = '#cbd5e1'; ctx.font = `12.5px ${FONT}`;
   ctx.fillText(`${snap.date} · Player Books — championship path`, PAD, 62);
   let y = 112;
   for (const it of snap.items) {
-    ctx.fillStyle = '#1e293b'; ctx.font = `700 15px ${FONT}`;
+    ctx.fillStyle = '#f1f5f9'; ctx.font = `700 15px ${FONT}`;
     ctx.fillText(fitLine(ctx, it.name + `${it.hv ? ' · Hidden Value' : ''}${it.down ? ' · P4 Down' : ''}`, MAXW), PAD, y);
-    ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
+    ctx.fillStyle = '#a8b3c5'; ctx.font = `12.5px ${FONT}`;
     ctx.fillText(fitLine(ctx, `${it.g} · ${it.school} · benchmark ${f1(it.benchmark)} · slots #${it.rank} of ${it.of} in this room`, MAXW), PAD, y + 19);
-    ctx.fillStyle = '#1e293b';
+    ctx.fillStyle = '#f1f5f9';
     ctx.fillText(fitLine(ctx, it.tier ? `${it.tier} — no NIL spend at this school` : it.price != null ? `Priced at ${hitLabel(it.hit)} — ${fmtMoney(it.price)} a year · band ${it.band}` : 'Est. NIL — no estimate (not counted in the spend)', MAXW), PAD, y + 38);
     y += ROWH;
-    ctx.strokeStyle = '#e2e8f0'; ctx.beginPath(); ctx.moveTo(PAD, y - 12); ctx.lineTo(W - PAD, y - 12); ctx.stroke();
+    ctx.strokeStyle = '#263449'; ctx.beginPath(); ctx.moveTo(PAD, y - 12); ctx.lineTo(W - PAD, y - 12); ctx.stroke();
   }
-  ctx.fillStyle = '#f8fafc'; ctx.fillRect(PAD - 8, tY, MAXW + 16, totalsH);
-  ctx.fillStyle = '#1e293b'; ctx.font = `700 14.5px ${FONT}`;
+  ctx.fillStyle = '#111a2e'; ctx.fillRect(PAD - 8, tY, MAXW + 16, totalsH);
+  ctx.fillStyle = '#f1f5f9'; ctx.font = `700 14.5px ${FONT}`;
   ctx.fillText((snap.ct.priced || snap.ct.sch) ? `Class spend at your marks: ${fmtMoney(snap.ct.spend)} a year` : 'Class spend: no priced players.', PAD, tY + 24);
   let ly = tY + 24;
   if (snap.ct.priced || snap.ct.sch) {
-    ctx.fillStyle = '#64748b'; ctx.font = `12.5px ${FONT}`;
+    ctx.fillStyle = '#a8b3c5'; ctx.font = `12.5px ${FONT}`;
     ly += 18;
     ctx.fillText(fitLine(ctx, `${snap.ct.priced ? `${fmtMoney(snap.ct.floor)} at everyone's floor · ${fmtMoney(snap.ct.ceiling)} at everyone's ceiling · ` : ''}${snap.ct.n} player${snap.ct.n > 1 ? 's' : ''}${snap.ct.sch ? ` · ${snap.ct.sch} at Scholarship only — $0 NIL` : ''}${snap.ct.n - snap.ct.priced - snap.ct.sch > 0 ? ` · ${snap.ct.n - snap.ct.priced - snap.ct.sch} with no estimate, not counted` : ''}`, MAXW), PAD, ly);
   }
-  ctx.fillStyle = '#1e293b'; ctx.font = `12.5px ${FONT}`;
+  ctx.fillStyle = '#f1f5f9'; ctx.font = `12.5px ${FONT}`;
   for (const L of effLines) { ly += 18; ctx.fillText(L, PAD, ly); }
-  ctx.fillStyle = '#64748b'; ctx.font = `10.5px ${FONT}`;
+  ctx.fillStyle = '#7d8aa0'; ctx.font = `10.5px ${FONT}`;
   let fy = tY + totalsH + 22;
   for (const L of footLines) { ctx.fillText(L, PAD, fy); fy += 14; }
   return cv;
@@ -3280,12 +3443,14 @@ let protoArchAll = false;
 let protoCompCache = {};    // pool key -> {player id -> build composite | null}
 
 const protoBench = p => {
+  if (p.universe) return p.grade != null ? p.grade : null;   // a standard record sorts on his headline grade, labelled as such
   const b = (p.fits || {}).benchmark;
   return b != null ? b : (p.proj != null ? p.proj : null);
 };
 
 function protoPool() {
   const d = $('p-dir').value;
+  if (d === 'all') return UNIVERSE ? [...UP, ...DOWN, ...UNIVERSE] : [...UP, ...DOWN];
   return d === 'up' ? UP : d === 'down' ? DOWN : [...UP, ...DOWN];
 }
 
@@ -3382,6 +3547,11 @@ function runPrototype() {
   syncOfferNote();
   const pos = $('p-pos').value;
   const dirKey = $('p-dir').value;
+  if (dirKey === 'all' && !UNIVERSE) {
+    body.innerHTML = '<div class="card"><p class="empty">Loading the full list…</p></div>';
+    ensureUniverse().then(() => runPrototype());
+    return;
+  }
   const pool = protoPool().filter(p => (p.screen_position || p.position) === pos);
   const bf = {
     htMin: heightInches($('p-ht-min').value), htMax: heightInches($('p-ht-max').value),
@@ -3419,9 +3589,17 @@ function runPrototype() {
     if (y == null) return -1;
     return y - x || a.name.localeCompare(b.name);
   });
-  $('protoCount').textContent = `${rows.length} of ${pool.length} ${pos} players match`;
+  const uniN = dirKey === 'all' ? rows.filter(p => p.universe).length : 0;
+  $('protoCount').textContent = `${rows.length} of ${pool.length} ${pos} players match${dirKey === 'all' ? ` — ${uniN} of the matches are standard records, ranked on their headline grade only` : ''}`;
   body.innerHTML = rows.length ? `<div class="card table-card"><div class="tbl-scroll"><table class="ctable"><thead><tr><th>Player</th><th>Pos</th><th>School</th><th>Book</th><th class="num">Benchmark</th><th>Size</th><th>Hometown</th><th>Est. NIL band</th><th>Save to a class</th></tr></thead><tbody>
-    ${rows.map(p => `<tr>
+    ${rows.map(p => p.universe ? `<tr>
+      <td><a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a><span class="uni-badge">Standard record</span></td>
+      <td>${esc(p.position)}</td><td>${esc(p.school)}</td><td>Standard record — ${esc(p.level)}</td>
+      <td class="num"><b>${f1(p.grade)}</b> <span class="p-sub">headline grade</span></td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td><span class="p-sub">Not evaluated</span></td></tr>` : `<tr>
       <td>${prospectStar(p)}<a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a>${tagBadges(p.id)}${flashBadges(p.id)}</td>
       <td>${esc(p.position)}</td><td>${esc(p.school)}</td><td>${esc(p.conference_book)}${p.direction === 'down' ? ' · P4 Down' : ''}</td>
       <td class="num"><b>${protoBench(p) == null ? '—' : f1(protoBench(p))}</b></td>
@@ -3456,6 +3634,26 @@ function route() {
   const m = hash.match(/^#\/player\/(.+)$/);
   if (m) {
     const p = byIdAll[decodeURIComponent(m[1])];
+    if (p && p.universe) {
+      setChrome(null);
+      const chip = $('dirChip');
+      chip.hidden = false;
+      chip.textContent = 'Standard record';
+      if (UNIVERSE_META) $('totalChip').textContent = `${fmtN(UNIVERSE_META.total_listed)} listed`;
+      showView('player');
+      $('playerBody').innerHTML = renderUniversePlayer(p);
+      document.title = `${p.name} — Player Books`;
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (!p && !UNIVERSE && decodeURIComponent(m[1]).charAt(0) === 'u') {
+      // a standard record's deep link, followed before the universe
+      // has loaded: load it, then route again
+      showView('player');
+      $('playerBody').innerHTML = '<div class="card empty">Loading the full list…</div>';
+      ensureUniverse().then(() => route());
+      return;
+    }
     if (p) {
       const dir = p.direction || 'up';
       if (curDir !== dir) setDataset(dir);
@@ -3572,6 +3770,18 @@ function route() {
     window.scrollTo(0, 0);
     return;
   }
+  if (hash === '#/universe') {
+    setChrome(null);
+    const chip = $('dirChip');
+    chip.hidden = false;
+    chip.textContent = 'Every player — standard records';
+    if (UNIVERSE_META) $('totalChip').textContent = `${fmtN(UNIVERSE_META.total_listed)} listed`;
+    showView('universe');
+    renderUniverseView();
+    document.title = 'Every player — Player Books';
+    window.scrollTo(0, 0);
+    return;
+  }
   // the site root is the title page: choose a direction
   setChrome(null);
   showView('splash');
@@ -3644,6 +3854,26 @@ function loadOptimal() {
     .catch(() => null);
 }
 
+function loadTeamBrands() {
+  // same failure-tolerant pattern: a missing team_brands.json degrades
+  // to no team skin colours (the neutral site is unaffected), never an
+  // error. Shape: {team name: {logo, color, accent}}.
+  return fetch('team_brands.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j)) ? j : null)
+    .catch(() => null);
+}
+
+function loadUniverseMeta() {
+  // same failure-tolerant pattern: a missing universe_meta.json
+  // degrades to core-only counts, never an error. The universe data
+  // files themselves load lazily via ensureUniverse().
+  return fetch('universe_meta.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(j => (j && !Array.isArray(j) && typeof j.total_listed === 'number') ? j : null)
+    .catch(() => null);
+}
+
 function loadChanges() {
   // same failure-tolerant pattern: a missing or malformed changes.json
   // degrades to no changes posted, never an error. The file is a plain
@@ -3655,7 +3885,7 @@ function loadChanges() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits(), loadFlashes(), loadOptimal()]).then(([up, down, cmp, teams, champ, changes, traits, flashes, optimal]) => {
+Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits(), loadFlashes(), loadOptimal(), loadTeamBrands(), loadUniverseMeta()]).then(([up, down, cmp, teams, champ, changes, traits, flashes, optimal, brands, umeta]) => {
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
@@ -3671,6 +3901,8 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     if (id !== '_registry' && Array.isArray(flashes[id])) FLASHES_BY_ID[id] = flashes[id];
   }
   OPTIMAL_SIZE = optimal || {};
+  TEAM_BRANDS = brands || {};
+  UNIVERSE_META = umeta;
   // My Team: a returning user's saved school seeds the championship
   // path's selected team here at boot. After boot the page keeps
   // following the setting (renderChamp) until the user makes an
@@ -3681,13 +3913,20 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   } catch (err) {}
   buildMyTeamSelect();
   syncMyTeamToggle();
+  applyTeamSkin();
   loadProspects();
   updateProspectLink();
   UP = (Array.isArray(up) ? up : []).map(p => ({ ...p, direction: p.direction || 'up' }));
   DOWN = (Array.isArray(down) ? down : []).map(p => ({ ...p, direction: p.direction || 'down' }));
   UP.forEach(p => { byIdAll[p.id] = p; });
   DOWN.forEach(p => { if (!byIdAll[p.id]) byIdAll[p.id] = p; });
-  $('statPlayers').textContent = UP.length + DOWN.length;
+  $('statPlayers').textContent = fmtN(UP.length + DOWN.length);
+  if (UNIVERSE_META) {
+    // the reveal: the full universe, stated once — the evaluated core
+    // and the standard records as separate honest numbers
+    $('revealTotal').textContent = fmtN(UNIVERSE_META.total_listed);
+    $('revealSub').textContent = `players listed. ${fmtN(UNIVERSE_META.core_evaluated)} carry the full evaluation — band, fits, The Call. The other ${fmtN(UNIVERSE_META.universe)} are standard records: name, school, 2026 grade and snaps. Nothing more is claimed for them.`;
+  }
   $('statBooks').textContent = new Set([...UP, ...DOWN].map(p => p.conference_book)).size;
   $('statTeams').textContent = TEAMS ? TEAMS.teams.length : '—';
   $('teamCardCount').textContent = TEAMS ? TEAMS.teams.length : '—';
@@ -3700,6 +3939,20 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
     : 'First class in build — the screen is running.';
   ['q', 'f-hv', 'f-ulm', 'f-myteam'].forEach(id =>
     $(id).addEventListener('input', applyFilters));
+  // universe directory: filters re-render the window; headers sort
+  ['uq', 'ulevel', 'uconf', 'upos', 'ugrade'].forEach(id => {
+    const n = $(id);
+    if (!n) return;
+    n.addEventListener('input', () => renderUniverseRows(true));
+    n.addEventListener('change', () => renderUniverseRows(true));
+  });
+  document.querySelectorAll('#unitable th[data-usort]').forEach(th =>
+    th.addEventListener('click', () => {
+      const k = th.dataset.usort;
+      if (uniSortKey === k) uniSortDir = -uniSortDir;
+      else { uniSortKey = k; uniSortDir = (k === 'grade' || k === 'volume') ? -1 : 1; }
+      renderUniverseRows(true);
+    }));
   // archetype AND-mode + build filters: plain controls over applyFilters
   $('f-arch-all').addEventListener('change', e => { archModeAll = e.target.checked; applyFilters(); });
   ['b-ht-min', 'b-ht-max', 'b-wt-min', 'b-wt-max', 'b-build'].forEach(id => {
@@ -4068,6 +4321,7 @@ Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadCompar
   $('resultCount').textContent = 'Could not load players.json — ' + err.message;
 });
 $('myTeamSel').addEventListener('change', e => setMyTeam(e.target.value));
+$('myTeamClear').addEventListener('click', () => setMyTeam(''));
 $('printBtn').addEventListener('click', () => window.print());
 $('printBtnCmp').addEventListener('click', () => window.print());
 $('printBtnTeam').addEventListener('click', () => window.print());
