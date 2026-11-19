@@ -461,6 +461,40 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .budget-block{margin-top:16px}
 .budget-block .class-totals{margin-top:8px}
 .budget-open{margin-top:6px}
+/* map view: players by home state (Nov 19, 2026) */
+.map-layout{display:flex;gap:18px;align-items:flex-start;margin-top:10px}
+.map-mapwrap{flex:1 1 auto;min-width:0}
+.map-svg{width:100%;height:auto;display:block}
+.map-region{fill:#e6ebf1;stroke:#fff;stroke-width:1;cursor:pointer}
+.map-region:hover{fill:#c7d2de}
+.map-region.sel{fill:var(--accent2)}
+.map-region.sel:hover{fill:var(--accent2)}
+.map-lab{font-size:11px;font-weight:700;fill:var(--accent);text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.map-lab-can{font-size:15px;letter-spacing:2px}
+.map-cnt{font-size:9.5px;font-weight:600;fill:#5b6b7d;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.map-leader{stroke:#94a3b8;stroke-width:.8}
+.map-callout{font-size:10.5px;font-weight:600;fill:var(--accent);cursor:pointer}
+.map-callout.sel{fill:var(--accent2);font-weight:800}
+.map-note{margin-top:6px}
+.map-side{flex:0 0 302px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.map-block{display:flex;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff}
+.map-block h3{margin:0 0 3px;font-size:15px}
+.map-block .p-sub{margin:0}
+.map-block.sel{border-color:var(--accent2);box-shadow:inset 0 0 0 1px var(--accent2)}
+.map-block:hover{border-color:var(--accent2)}
+.map-globe{width:36px;height:36px;flex:none;color:var(--accent2);margin-top:2px}
+.map-list{border:1px solid var(--line);border-radius:12px;padding:8px 12px;max-height:452px;overflow:auto;background:#fff}
+.map-opt{display:flex;align-items:center;gap:8px;padding:3px 2px;cursor:pointer;font-size:14px}
+.map-opt input{accent-color:var(--accent2);width:15px;height:15px;flex:none}
+.map-opt-n{margin-left:auto;color:#64748b;font-weight:700}
+.map-opt-sep{border-top:1px solid var(--line);margin:6px 0}
+.map-selhead{display:flex;align-items:flex-start;gap:14px}
+.map-selhead .btn-ghost{margin-left:auto;flex:none}
+@media (max-width:920px){
+  .map-layout{flex-direction:column}
+  .map-side{flex:1 1 auto;width:100%}
+  .map-list{max-height:320px}
+}
 @page champ{size:landscape;margin:11mm}
 #view-champ{page:champ}
 @media print{

@@ -14,6 +14,7 @@
     <span class="tagline">Player evaluation library</span>
     <a class="topbar-link" href="#/value">Value Board</a>
     <a class="topbar-link" href="#/prospects" id="prospectLink">Prospects</a>
+    <a class="topbar-link" href="#/map">Map</a>
     <span class="dir-chip" id="dirChip" hidden></span>
     <label class="myteam-lbl">My team
       <select id="myTeamSel" aria-label="My team — the school the site frames itself around"><option value="">No team set</option></select>
@@ -84,6 +85,11 @@
       <span class="cb-desc">The newest players, books and features, week by week.</span>
       <span class="choice-go">See what changed →</span>
     </a>
+    <a class="compare-banner" href="#/map">
+      <span class="cb-title">Map — players by home state</span>
+      <span class="cb-desc">Every evaluated player placed by the hometown on his record: click states on the map — Canada drawn as one region, the rest of the world under the globe — or tick them off the alphabetical list.</span>
+      <span class="choice-go">Open the map →</span>
+    </a>
   </section>
 
   <!-- DOWN EMPTY STATE -->
@@ -101,7 +107,7 @@
   <section id="view-directory">
     <div class="dir-head">
       <h1 class="dir-title" id="dirTitle">FCS — Moving Up</h1>
-      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/changes">What changed</a></span>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/down" id="dirSwitch">P4 — Moving Down →</a> · <a href="#/compare-conferences">Conference comparison</a> · <a href="#/team-comparison">Team comparison</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/map">Map</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div class="controls card">
       <div class="row">
@@ -337,6 +343,14 @@
       <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/down">P4 — Moving Down directory →</a> · <a href="#/championship-path">Championship path</a> · <a href="#/changes">What changed</a></span>
     </div>
     <div id="prospectBody"></div>
+  </section>
+
+  <section id="view-map" hidden>
+    <div class="dir-head">
+      <h1 class="dir-title">Map — players by home state</h1>
+      <span class="dir-links"><a href="#/">← Title page</a> · <a href="#/up">FCS — Moving Up directory →</a> · <a href="#/down">P4 — Moving Down directory →</a> · <a href="#/championship-path">Championship path</a> · <a href="#/value">Value Board</a> · <a href="#/changes">What changed</a></span>
+    </div>
+    <div id="mapBody"></div>
   </section>
 </main>
 
