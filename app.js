@@ -602,11 +602,22 @@ const FILTER_DEFS = [
     values: () => ['NIL', 'Scholarship only', 'Walk-on'],
     test: (p, set) => !set.size || offerMatches(p, set) },
   { id: 'f-arch', name: 'What he does best',
-    values: () => [...new Set(PLAYERS.flatMap(p => tagsOf(p).map(t => t.tag)))].sort(),
-    label: v => `${v} (${PLAYERS.reduce((n, p) => n + (tagsOf(p).some(t => t.tag === v) ? 1 : 0), 0)})`,
+    /* the archetype list follows the position selection (Charlie,
+       Nov 20, 2026): with positions ticked it offers only the
+       archetypes players at those positions actually hold, counted
+       against those positions; no position ticked = the full list */
+    values: () => [...new Set(archPool().flatMap(p => tagsOf(p).map(t => t.tag)))].sort(),
+    label: v => `${v} (${archPool().reduce((n, p) => n + (tagsOf(p).some(t => t.tag === v) ? 1 : 0), 0)})`,
     test: (p, set) => !set.size || (archModeAll ? holdsAllTags(p, set) : holdsAnyTag(p, set)) }
 ];
 let archModeAll = false;    // directory archetype mode: ANY ticked tag (default) vs EVERY ticked tag
+/* the pool the archetype list is built from: the players at the
+   currently ticked positions, or the whole library when no
+   position is ticked (Charlie's feedback round, Nov 20, 2026) */
+function archPool() {
+  const pos = filterSel['f-pos'];
+  return pos && pos.size ? PLAYERS.filter(p => pos.has(p.position)) : PLAYERS;
+}
 const filterSel = {};
 FILTER_DEFS.forEach(d => { filterSel[d.id] = new Set(); });
 const filterDef = id => FILTER_DEFS.find(d => d.id === id);
@@ -634,6 +645,22 @@ function clearFilter(id) {
   updateMsButton(filterDef(id));
 }
 
+/* When the position selection changes, the archetype panel is
+   rebuilt from the players at the selected positions (Charlie,
+   Nov 20, 2026): a ticked archetype nobody at those positions
+   holds is dropped from the active filter, so the result count
+   reflects the drop. */
+function refreshArchFilter() {
+  const def = filterDef('f-arch');
+  const valid = new Set(def.values());
+  for (const v of [...filterSel['f-arch']]) {
+    if (!valid.has(v)) filterSel['f-arch'].delete(v);
+  }
+  msWrap('f-arch').querySelector('.ms-opts').innerHTML = def.values().map(v =>
+    `<label class="ms-opt"><input type="checkbox" value="${esc(v)}"${filterSel['f-arch'].has(v) ? ' checked' : ''}> ${esc(def.label ? def.label(v) : v)}</label>`).join('');
+  updateMsButton(def);
+}
+
 function clearAllFilters() {
   FILTER_DEFS.forEach(d => clearFilter(d.id));
   archModeAll = false;
@@ -644,6 +671,7 @@ function clearAllFilters() {
   ['b-ht-min', 'b-ht-max', 'b-wt-min', 'b-wt-max'].forEach(id => { const el = $(id); if (el) el.value = ''; });
   const bs = $('b-build'); if (bs) bs.value = 'any';
   buildTraitPanel();
+  buildFilterPanels();
 }
 
 let openMsId = null;
@@ -1064,10 +1092,50 @@ function helpSection(p) {
   const more = total - p.help.length;
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Will contribute</h2>
     <p class="p-sub">Schools where he wouldn’t start but would land in the rotation and contribute — his spot in the room shown.</p>
-    <div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Level</th><th class="num">His spot</th></tr>
-    ${p.help.map(r => `<tr><td>${esc(r.school)}${r.ulm ? ' <span class="ulm-badge">ULM</span>' : ''}</td><td>${esc(r.level || '')}</td><td class="num">${esc(r.spot_label || '')}</td></tr>`).join('')}</table></div>
+    <div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Level</th><th class="num">His spot</th></tr>
+    ${p.help.map(r => `<tr><td>${esc(r.school)}${r.ulm ? ' <span class="ulm-badge">ULM</span>' : ''}</td><td>${esc(r.conf || '')}</td><td>${esc(r.level || '')}</td><td class="num">${esc(r.spot_label || '')}</td></tr>`).join('')}</table></div>
     ${more > 0 ? `<p class="p-sub">…and ${more} more school${more === 1 ? '' : 's'} where he would land in the rotation and contribute.</p>` : ''}
   </div>`;
+}
+
+/* SCHEME FIT (Charlie's feedback round, Nov 20, 2026) — directly
+   under the fits section: his own scheme headline set beside the
+   conferences his printed fits play in. The scheme claim comes
+   only from his own data — his scheme-split headline (scheme_line,
+   stamped by apply_scheme_join.py from the deep-dive splits) or,
+   where he has no splits, his top "What he does best" tag — and
+   the conferences come only from the fit and Will Contribute rows
+   actually printed on this page. No team scheme tendencies are
+   claimed: the library holds no team scheme data. No block when he
+   has neither a scheme claim nor a printed school list. */
+function schemeFitSection(p) {
+  const claim = p.scheme_line
+    || (tagsOf(p).length ? `What he does best: ${tagsOf(p)[0].tag}` : null);
+  if (!claim) return '';
+  const confsOf = rows => {
+    const out = [];
+    for (const r of rows || []) {
+      if (r.conf && !out.includes(r.conf)) out.push(r.conf);
+    }
+    return out;
+  };
+  let confs = [], whose = 'His top fits play in';
+  if (p.fits) {
+    confs = confsOf([...(p.fits.g6 || []), ...(p.fits.p4 || []),
+                     ...(p.fits.ulm_fit ? [p.fits.ulm_fit] : [])]);
+  }
+  if (!confs.length && p.help && p.help.length) {
+    confs = confsOf(p.help);
+    whose = 'The schools where he would contribute play in';
+  }
+  if (!confs.length) return '';
+  const named = confs.map(c => `the ${c}`);
+  const confLine = named.length <= 5
+    ? `${whose} ${named.length === 1 ? named[0]
+        : `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}`}.`
+    : `${whose.replace(' play in', '')} span ${confs.length} conferences, including ${named.slice(0, 3).join(', ')}.`;
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Scheme fit</h2>
+    <p>${esc(claim)}. ${esc(confLine)}</p></div>`;
 }
 
 /* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
@@ -1459,6 +1527,7 @@ function renderPlayer(p) {
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
+        ${p.pff_id ? `<p><a href="https://premium.pff.com/ncaa/players/2026/REGPO/player/${esc(p.pff_id)}" target="_blank" rel="noopener"><b>Key plays to watch — on PFF ↗</b></a> <span class="p-sub">His key plays and film live on his PFF page — the link opens PFF in a new tab, on your own PFF login.</span></p>` : ''}
       </div>
     </div></div>`;
 
@@ -1522,6 +1591,8 @@ function renderPlayer(p) {
       ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td><td>${moveCell(p.fits.ulm_fit)}</td><td>${offerCell(p.fits.ulm_fit)}</td></tr></table></div>` : ''}
     </div>`;
   }
+
+  h += schemeFitSection(p);
 
   h += helpSection(p);
 
@@ -4047,9 +4118,14 @@ Promise.all([loadPlayers('players.json'), loadPlayers('players_down.json'), load
       if (!cb) return;
       if (cb.checked) filterSel[def.id].add(cb.value); else filterSel[def.id].delete(cb.value);
       updateMsButton(def);
+      if (def.id === 'f-pos') refreshArchFilter();
       applyFilters();
     });
-    w.querySelector('.ms-clear').addEventListener('click', () => { clearFilter(def.id); applyFilters(); });
+    w.querySelector('.ms-clear').addEventListener('click', () => {
+      clearFilter(def.id);
+      if (def.id === 'f-pos') refreshArchFilter();
+      applyFilters();
+    });
   });
   document.addEventListener('click', e => { if (openMsId && !e.target.closest('.ms')) closeMs(); });
   // team picker: the same dropdown panel machinery, multi-select up to TEAM_CAP

@@ -87,12 +87,19 @@ a:hover{text-decoration:underline}
 .trait-name{font-weight:500}
 .trait-main{flex:1 1 auto;display:flex;flex-direction:column;min-width:0}
 .trait-gloss{font-size:12px;color:var(--mut);font-weight:400;line-height:1.35}
-.trait-count{color:var(--mut);font-size:12.5px;white-space:nowrap}
+.trait-count{color:var(--mut);font-size:12.5px}
+/* option rows inside the filter panels are ROWS: the generic
+   .controls label rule stacks field labels in a column, and left
+   alone it hijacks these rows too — the count line then had
+   nowhere to wrap and ran off both edges of the panel on a phone
+   (Charlie's feedback round, Nov 20, 2026) */
+.controls .trait-row,.controls .map-opt{flex-direction:row}
+.trait-row{min-width:0}
 .trait-bar{font:inherit;font-size:14px;color:var(--ink);padding:5px 7px;border:1px solid var(--line);border-radius:7px;background:var(--inset);width:76px}
 .trait-bar:disabled{background:var(--bg);color:var(--mut)}
 .table-card{padding:6px 0;overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:760px}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th,td{padding:7px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
 th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);white-space:nowrap}
 th[data-sort]{cursor:pointer;user-select:none}
 th[data-sort]:hover{color:var(--ink)}
@@ -327,12 +334,17 @@ th[data-ssort]:hover{color:var(--ink)}
   table#dir{min-width:0}
   table#dir thead{display:none}
   table#dir,table#dir tbody{display:block}
-  table#dir tr{display:flex;flex-wrap:wrap;align-items:center;gap:3px 9px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  /* denser cards (Charlie, Nov 20, 2026): less padding, a smaller
+     headshot and tighter type so more players fit on one screen —
+     same information, less air */
+  table#dir tr{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 11px;margin:0 0 7px}
+  table#dir .ph{width:36px;height:36px}
+  table#dir .pname{font-size:15px;line-height:1.15}
   table#dir td{border:0;padding:1px 0;display:block}
   table#dir td:nth-child(1){order:1}
   table#dir td:nth-child(2){order:2}
   table#dir td:nth-child(3){order:3;flex:1 1 52%;min-width:130px}
-  table#dir td:nth-child(7){order:4;font-size:19px;font-weight:700}
+  table#dir td:nth-child(7){order:4;font-size:17px;font-weight:700}
   table#dir td:nth-child(4){order:5;color:var(--mut);font-weight:600}
   table#dir td:nth-child(5){order:6;color:var(--mut)}
   table#dir td:nth-child(6){order:7;color:var(--mut)}
@@ -553,9 +565,10 @@ svg.chart .ch-leg{font-size:11px;fill:var(--mut)}
 .map-block:hover{border-color:var(--accent)}
 .map-globe{width:36px;height:36px;flex:none;color:var(--accent);margin-top:2px}
 .map-list{border:1px solid var(--line);border-radius:12px;padding:8px 12px;max-height:452px;overflow:auto;background:var(--card)}
-.map-opt{display:flex;align-items:center;gap:8px;padding:3px 2px;cursor:pointer;font-size:14px}
+.map-opt{display:flex;align-items:center;gap:8px;padding:3px 2px;cursor:pointer;font-size:14px;min-width:0}
 .map-opt input{accent-color:var(--accent);width:15px;height:15px;flex:none}
-.map-opt-n{margin-left:auto;color:var(--mut);font-weight:700}
+.map-opt>span{min-width:0}
+.map-opt-n{margin-left:auto;color:var(--mut);font-weight:700;flex:none}
 .map-opt-sep{border-top:1px solid var(--line);margin:6px 0}
 .map-selhead{display:flex;align-items:flex-start;gap:14px}
 .map-selhead .btn-ghost{margin-left:auto;flex:none}
