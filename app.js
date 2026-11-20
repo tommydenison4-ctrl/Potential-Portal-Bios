@@ -1108,10 +1108,13 @@ function helpSection(p) {
    actually printed on this page. No team scheme tendencies are
    claimed: the library holds no team scheme data. No block when he
    has neither a scheme claim nor a printed school list. */
-function schemeFitSection(p) {
+/* The scheme-fit sentence, split into its two parts so the player
+   export (Send this player) can carry the identical sentence as
+   plain text — one source for the claim, never a second wording. */
+function schemeFitParts(p) {
   const claim = p.scheme_line
     || (tagsOf(p).length ? `What he does best: ${tagsOf(p)[0].tag}` : null);
-  if (!claim) return '';
+  if (!claim) return null;
   const confsOf = rows => {
     const out = [];
     for (const r of rows || []) {
@@ -1128,14 +1131,23 @@ function schemeFitSection(p) {
     confs = confsOf(p.help);
     whose = 'The schools where he would contribute play in';
   }
-  if (!confs.length) return '';
+  if (!confs.length) return null;
   const named = confs.map(c => `the ${c}`);
   const confLine = named.length <= 5
     ? `${whose} ${named.length === 1 ? named[0]
         : `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}`}.`
     : `${whose.replace(' play in', '')} span ${confs.length} conferences, including ${named.slice(0, 3).join(', ')}.`;
+  return { claim, confLine };
+}
+function schemeFitSection(p) {
+  const parts = schemeFitParts(p);
+  if (!parts) return '';
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Scheme fit</h2>
-    <p>${esc(claim)}. ${esc(confLine)}</p></div>`;
+    <p>${esc(parts.claim)}. ${esc(parts.confLine)}</p></div>`;
+}
+function schemeFitText(p) {
+  const parts = schemeFitParts(p);
+  return parts ? `${parts.claim}. ${parts.confLine}` : null;
 }
 
 /* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
@@ -1532,6 +1544,8 @@ function renderPlayer(p) {
     </div></div>`;
 
   h += saveStrip(p);
+
+  h += sendStrip(p);
 
   h += prospectStrip(p);
 
@@ -3134,6 +3148,414 @@ function shareClassImage() {
     try { navigator.share(data).catch(() => {}); } catch (err) {}
   });
 }
+
+/* ---- Send this player (Nov 20, 2026) ----
+   A coach who does not have the site cannot open a player page —
+   the site stays behind its password, and no link to a player is
+   ever created. What he can open is a file. So every player page
+   carries a "Send this player" strip that builds the same kind of
+   export the saved class board sends: a PICTURE of the bio (a
+   canvas rendering in the page's dark look, headshot included),
+   with the FULL TEXT of the bio underneath it in the share/email,
+   so it still reads on a phone where the picture does not load.
+   The picture is a PNG, not a PDF: the site ships no PDF library
+   (it is fully self-contained) and the class board's picture flow
+   is the proven route on both desktop Chrome and mobile Safari.
+   The export is built from the record alone — no navigation, no
+   menus, no save/prospect/My Team cards, no site chrome — and a
+   section prints only when the record carries it, so a sparse
+   page exports clean: no empty headings, ever. */
+let playerExportSnapshot = null;   // {p, mail:{subject, body}} — set by sendStrip on render, like champBoardSnapshot
+
+function playerSkillLines(p) {
+  const out = [];
+  for (const t of tagsOf(p)) {
+    const ev = plainTagStat(t.stat);
+    out.push(`${t.tag}${t.proxy ? ' (stand-in stat)' : ''} — ${ev != null ? ev : t.stat}`);
+  }
+  const traits = traitsOf(p).slice().sort((a, b) => b.pct - a.pct).slice(0, 4);
+  for (const e of traits) out.push(`${traitName(e)} · Top ${topShare(e.pct)}%`);
+  const flashes = flashesOf(p).slice().sort((a, b) => b.pct - a.pct);
+  for (const e of flashes) out.push(`Limited action — ${traitName(e)} · Top ${topShare(e.pct)}% · on just ${e.volume} ${e.volume_label}`);
+  return out;
+}
+const fitRowText = r => [
+  r.school + (r.conf ? ` (${r.conf})` : ''),
+  r.incumbent ? `incumbent ${r.incumbent}${r.inc_grade != null ? ` (${Number(r.inc_grade).toFixed(1)})` : ''}` : '',
+  r.move || '', r.offer || '',
+].filter(Boolean).join(' · ');
+
+/* The export as structured plain content: a header (what the top
+   of the page shows) plus ordered blocks. Both renderers — the
+   canvas picture and the email text — read this one model, so the
+   picture and the text can never drift apart. Block types:
+   sec (section heading), kv (sub-heading), p (paragraph),
+   li (bullet), row (one table row), note (small print),
+   foot (the footer line). */
+function playerExportModel(p) {
+  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const vitals = [
+    ['Position', p.position], ['School', p.school], ['Book', p.conference_book],
+    ['Class', p.listed_class], ['Height', p.height], ['Weight', p.weight]
+  ].filter(v => v[1] !== null && v[1] !== undefined && v[1] !== '');
+  const home = hometownLine(p);
+  const head = {
+    nameLine: `${p.name}${p.hidden_value ? ' · HIDDEN VALUE' : ''}${p.fits && p.fits.ulm_qualifier ? ' · LOUISIANA-MONROE QUALIFIER' : ''}`,
+    vitalsLine: vitals.map(v => `${v[0]}: ${v[1]}`).join(' · '),
+    homeLine: home ? `Hometown: ${home}` : null,
+    gradeVal: p.headline_grade == null ? '—' : p.headline_grade.toFixed(1),
+    gradeCol: p.headline_grade_col || 'grade',
+    secondLine: p.blended_score != null
+      ? `Second score — Blended ${p.blended_score.toFixed(1)} ${blendLevel(p)}: grades, production, honours and market combined, where that data exists.` : null,
+    statLine: p.stat_line || null,
+    screenLine: p.screen_label || null,
+    eligWord: p.elig_qualified || null,
+    pffUrl: p.pff_id ? `https://premium.pff.com/ncaa/players/2026/REGPO/player/${p.pff_id}` : null,
+  };
+  const blocks = [];
+  const section = (title, fill) => {
+    const b = {
+      list: [],
+      para: s => { if (s) b.list.push({ t: 'p', s }); },
+      note: s => { if (s) b.list.push({ t: 'note', s }); },
+      kv: s => b.list.push({ t: 'kv', s }),
+      li: s => b.list.push({ t: 'li', s }),
+      row: s => b.list.push({ t: 'row', s }),
+    };
+    fill(b);
+    if (b.list.length) blocks.push({ t: 'sec', s: title }, ...b.list);
+  };
+
+  if (p.elig_qualified) section('Eligibility', b => {
+    b.para(`Qualified: ${p.elig_qualified}${p.elig_track ? ` (${p.elig_track})` : ''}`);
+    b.para(p.elig_basis);
+    if (p.elig_differs && p.elig_book) b.para(`The book prints “${p.elig_book}”; the qualified determination under the current NCAA rules is “${p.elig_qualified}.”`);
+    else if (p.elig_book) b.para(`Book: ${p.elig_book} — the qualified determination agrees with the book.`);
+    if (p.eligibility && p.eligibility.note) b.note(p.eligibility.note);
+  });
+
+  if (p.bio) section('Bio', b => b.para(p.bio));
+
+  const skills = playerSkillLines(p);
+  if (skills.length) section('Skills — what he does best', b => skills.forEach(s => b.li(s)));
+
+  if ((p.strengths && p.strengths.length) || (p.weaknesses && p.weaknesses.length)) {
+    section('Strengths & weaknesses', b => {
+      if (p.strengths && p.strengths.length) { b.kv('Strengths'); p.strengths.forEach(s => b.li(s)); }
+      if (p.weaknesses && p.weaknesses.length) { b.kv('Weaknesses'); p.weaknesses.forEach(s => b.li(s)); }
+    });
+  }
+
+  if (p.band) section('Projection band', b => {
+    b.para(`Floor: ${p.band.floor} · Likely: ${p.band.likely} · Ceiling: ${p.band.ceiling}`);
+    b.para(p.projection_plain);
+  });
+
+  if (p.nil_status) section('Estimated NIL projection', b => {
+    if (p.nil_status === 'no_estimate') {
+      b.para(`No estimate — ${p.nil_reason || 'no destination projection to price'}.`);
+    } else {
+      b.para(`${fmtMoney(p.nil_floor)}–${fmtMoney(p.nil_ceiling)} a year — floor to ceiling at his projected destination`);
+      b.para(`Basis: ${p.nil_basis || ''}${p.nil_projection_basis ? ` (${p.nil_projection_basis})` : ''}${p.nil_band_basis ? ` · band evidence: ${String(p.nil_band_basis).toLowerCase()}` : ''}`);
+      if (isOverpay(p)) {
+        const v = p.value;
+        b.para(`Priced as an overpay. This band prices him at the ${f1(v.price_pct)} percentile of ${p.position} prices while his grade sits at the ${f1(v.grade_pct)} percentile — a ${f1(-v.steady_value)}-point gap. The valuation prices his projected destination, not his play.`);
+      }
+      if (p.on3_valuation != null) b.para(`On3 published valuation: ${fmtMoney(p.on3_valuation)} — On3’s model estimate, shown as a market reference.`);
+    }
+    b.note(NIL_LABEL);
+  });
+
+  if (p.call) section('The Call', b => {
+    const c = p.call;
+    if (c.case_for && c.case_for.length) { b.kv('Case for'); c.case_for.forEach(s => b.li(s)); }
+    if (c.case_against && c.case_against.length) { b.kv('Case against'); c.case_against.forEach(s => b.li(s)); }
+    if (c.verdict_college) b.para(`College verdict: ${c.verdict_college}`);
+    if (c.lever_college) b.para(`What changes the college call: ${c.lever_college}`);
+    if (c.verdict_pro) b.para(`Pro verdict: ${c.verdict_pro}`);
+    if (c.lever_pro) b.para(`What changes the pro call: ${c.lever_pro}`);
+  });
+
+  if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit)) {
+    section('Fits — rooms he would upgrade', b => {
+      if (p.fits.benchmark != null) b.para(`Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent.`);
+      if (p.fits.g6 && p.fits.g6.length) { b.kv('Top G6 fits'); p.fits.g6.forEach(r => b.row(fitRowText(r))); }
+      if (p.fits.p4 && p.fits.p4.length) { b.kv(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits'); p.fits.p4.forEach(r => b.row(fitRowText(r))); }
+      if (p.fits.ulm_fit) { b.kv('Louisiana-Monroe'); b.row(fitRowText(p.fits.ulm_fit) + ' · QUALIFIES'); }
+    });
+  }
+
+  const sf = schemeFitText(p);
+  if (sf) section('Scheme fit', b => b.para(sf));
+
+  if (p.help && p.help.length) section('Will contribute', b => {
+    b.para('Schools where he wouldn’t start but would land in the rotation and contribute — his spot in the room shown.');
+    p.help.forEach(r => b.row([r.school + (r.ulm ? ' (ULM)' : ''), r.conf || '', r.level || '', r.spot_label || ''].filter(Boolean).join(' · ')));
+    const total = p.help_counts ? (p.help_counts.g6 || 0) + (p.help_counts.p4 || 0) : p.help.length;
+    if (total - p.help.length > 0) b.note(`…and ${total - p.help.length} more school${total - p.help.length === 1 ? '' : 's'} where he would land in the rotation and contribute.`);
+  });
+
+  blocks.push({ t: 'foot', s: `${p.name} · Prepared ${date}` });
+  return { head, blocks, date };
+}
+
+/* The full text of the bio — what travels under the picture in a
+   share, and the whole body of the email drafts. */
+function playerExportText(p) {
+  const m = playerExportModel(p);
+  const h = m.head;
+  const lines = [h.nameLine, h.vitalsLine];
+  if (h.homeLine) lines.push(h.homeLine);
+  lines.push(`Grade: ${h.gradeVal} (${h.gradeCol})`);
+  if (h.secondLine) lines.push(h.secondLine);
+  if (h.statLine) lines.push(h.statLine);
+  if (h.screenLine) lines.push(h.screenLine);
+  if (h.eligWord) lines.push(`Eligibility: ${h.eligWord} — qualified determination`);
+  if (h.pffUrl) lines.push(`Key plays to watch — on PFF: ${h.pffUrl}`, 'His key plays and film live on his PFF page — the link opens PFF on your own PFF login.');
+  for (const b of m.blocks) {
+    if (b.t === 'sec') lines.push('', b.s.toUpperCase());
+    else if (b.t === 'kv') lines.push(b.s);
+    else if (b.t === 'li') lines.push(`• ${b.s}`);
+    else if (b.t === 'foot') lines.push('', b.s);
+    else lines.push(b.s);
+  }
+  return lines.join('\n');
+}
+function playerEmailText(p) {
+  return { subject: `Player bio — ${p.name} (${p.position}, ${p.school})`, body: playerExportText(p) };
+}
+function playerMailto(p) {
+  const em = playerEmailText(p);
+  return `mailto:?subject=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
+}
+function playerGmail(p) {
+  const em = playerEmailText(p);
+  return `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
+}
+
+/* The picture: the export model drawn on canvas in the page's
+   dark look — same palette and two-pass measure-then-draw walk
+   as the class board picture, with the headshot drawn into the
+   header (initials where he has none, or the photo fails). */
+function playerExportCanvas(p, img) {
+  const model = playerExportModel(p);
+  const head = model.head;
+  const probe = document.createElement('canvas');
+  const pctx = probe.getContext('2d');
+  if (!pctx) return null;
+  const W = 680, PAD = 28, MAXW = W - PAD * 2;
+  const FONT = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  const F = {
+    name: `700 21px ${FONT}`, sub: `12.5px ${FONT}`, grade: `700 20px ${FONT}`,
+    sec: `700 14px ${FONT}`, kv: `700 11.5px ${FONT}`, body: `12.5px ${FONT}`,
+    row: `12px ${FONT}`, note: `10.5px ${FONT}`, foot: `10.5px ${FONT}`,
+  };
+  // header height: the headshot's 104px governs unless the text
+  // column runs taller — the steps mirror the drawing walk below
+  let headBottom = 42 + 20 + (head.homeLine ? 18 : 0) + 24
+    + (head.secondLine ? 18 : 0) + (head.statLine ? 18 : 0)
+    + (head.screenLine ? 18 : 0) + (head.eligWord ? 18 : 0);
+  const HEADH = Math.max(20 + 104 + 14, headBottom + 16);
+  const walk = (ctx, draw) => {
+    let y = HEADH + 6;
+    for (const b of model.blocks) {
+      if (b.t === 'sec') {
+        y += 16;
+        if (draw) {
+          ctx.fillStyle = '#2dd4bf'; ctx.font = F.sec;
+          ctx.fillText(b.s.toUpperCase(), PAD, y);
+          ctx.strokeStyle = '#263449'; ctx.beginPath();
+          ctx.moveTo(PAD, y + 7); ctx.lineTo(W - PAD, y + 7); ctx.stroke();
+        }
+        y += 20;
+      } else if (b.t === 'kv') {
+        y += 6;
+        if (draw) { ctx.fillStyle = '#a8b3c5'; ctx.font = F.kv; ctx.fillText(b.s.toUpperCase(), PAD, y); }
+        y += 15;
+      } else if (b.t === 'p' || b.t === 'note') {
+        ctx.font = b.t === 'note' ? F.note : F.body;
+        const lines = wrapLines(ctx, b.s, MAXW);
+        const lh = b.t === 'note' ? 14 : 18;
+        if (draw) {
+          ctx.fillStyle = b.t === 'note' ? '#7d8aa0' : '#f1f5f9';
+          for (const L of lines) { y += lh; ctx.fillText(L, PAD, y); }
+        } else y += lines.length * lh;
+        y += 4;
+      } else if (b.t === 'li') {
+        ctx.font = F.body;
+        const lines = wrapLines(ctx, b.s, MAXW - 14);
+        if (draw) {
+          ctx.fillStyle = '#f1f5f9';
+          lines.forEach((L, i) => { y += 18; if (i === 0) ctx.fillText('•', PAD, y); ctx.fillText(L, PAD + 14, y); });
+        } else y += lines.length * 18;
+        y += 2;
+      } else if (b.t === 'row') {
+        ctx.font = F.row;
+        y += 17;
+        if (draw) { ctx.fillStyle = '#f1f5f9'; ctx.fillText(fitLine(ctx, b.s, MAXW), PAD, y); }
+      } else if (b.t === 'foot') {
+        y += 16;
+        if (draw) { ctx.fillStyle = '#7d8aa0'; ctx.font = F.foot; ctx.fillText(b.s, PAD, y); }
+        y += 4;
+      }
+    }
+    return y + 18;
+  };
+  const H = walk(pctx, false);
+  let S = 2;
+  if (H * S > 15000) S = 1;   // stay under the canvas height ceilings (Safari)
+  const cv = document.createElement('canvas');
+  cv.width = W * S; cv.height = H * S;
+  const ctx = cv.getContext('2d');
+  if (!ctx) return null;
+  ctx.scale(S, S);
+  ctx.fillStyle = '#0d1526'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#070b14'; ctx.fillRect(0, 0, W, HEADH);
+  const HX = PAD, HY = 20, HS = 104;
+  if (img && img.width && img.height) {
+    const sc = Math.max(HS / img.width, HS / img.height);
+    const dw = img.width * sc, dh = img.height * sc;
+    ctx.save(); ctx.beginPath(); ctx.rect(HX, HY, HS, HS); ctx.clip();
+    ctx.drawImage(img, HX + (HS - dw) / 2, HY + (HS - dh) / 2, dw, dh);
+    ctx.restore();
+  } else {
+    ctx.fillStyle = '#111a2e'; ctx.fillRect(HX, HY, HS, HS);
+    ctx.fillStyle = '#a8b3c5'; ctx.font = `700 30px ${FONT}`;
+    ctx.textAlign = 'center';
+    ctx.fillText(initials(p.name), HX + HS / 2, HY + HS / 2 + 11);
+    ctx.textAlign = 'left';
+  }
+  const TX = HX + HS + 18, TW = W - PAD - TX;
+  let ty = 42;
+  ctx.fillStyle = '#ffffff'; ctx.font = F.name;
+  ctx.fillText(fitLine(ctx, head.nameLine, TW), TX, ty);
+  ctx.font = F.sub; ctx.fillStyle = '#cbd5e1';
+  ty += 20; ctx.fillText(fitLine(ctx, head.vitalsLine, TW), TX, ty);
+  if (head.homeLine) { ty += 18; ctx.fillText(fitLine(ctx, head.homeLine, TW), TX, ty); }
+  ty += 24;
+  ctx.fillStyle = '#ffffff'; ctx.font = F.grade;
+  ctx.fillText(head.gradeVal, TX, ty);
+  const gw = ctx.measureText(head.gradeVal + ' ').width;
+  ctx.font = F.sub; ctx.fillStyle = '#a8b3c5';
+  ctx.fillText(fitLine(ctx, head.gradeCol, TW - gw), TX + gw, ty);
+  if (head.secondLine) { ty += 18; ctx.fillStyle = '#cbd5e1'; ctx.fillText(fitLine(ctx, head.secondLine, TW), TX, ty); }
+  if (head.statLine) { ty += 18; ctx.fillStyle = '#a8b3c5'; ctx.fillText(fitLine(ctx, head.statLine, TW), TX, ty); }
+  if (head.screenLine) { ty += 18; ctx.fillText(fitLine(ctx, head.screenLine, TW), TX, ty); }
+  if (head.eligWord) {
+    ty += 18;
+    ctx.fillStyle = head.eligWord === 'Eligible' ? '#4ade80' : head.eligWord === 'Not eligible' ? '#f87171' : '#facc15';
+    const et = `Eligibility: ${head.eligWord}`;
+    ctx.fillText(et, TX, ty);
+    if (head.pffUrl) {
+      const ew = ctx.measureText(et + '  ·  ').width;
+      ctx.fillStyle = '#2dd4bf'; ctx.font = `700 12.5px ${FONT}`;
+      ctx.fillText(fitLine(ctx, 'Key plays to watch — on PFF', TW - ew), TX + ew, ty);
+    }
+  }
+  walk(ctx, true);
+  return cv;
+}
+function playerExportBlob(p, cb) {
+  const finish = img => {
+    const cv = playerExportCanvas(p, img);
+    if (!cv) { cb(null); return; }
+    if (cv.toBlob) { cv.toBlob(b => cb(b), 'image/png'); return; }
+    try {
+      const bin = atob(cv.toDataURL('image/png').split(',')[1]);
+      const arr = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      cb(new Blob([arr], { type: 'image/png' }));
+    } catch (err) { cb(null); }
+  };
+  if (!p.headshot) { finish(null); return; }
+  let done = false;
+  const img = new Image();
+  const once = ok => { if (done) return; done = true; finish(ok ? img : null); };
+  img.onload = () => once(true);
+  img.onerror = () => once(false);
+  img.src = 'headshots/' + String(p.headshot).replace(/^headshots\//, '');
+  setTimeout(() => once(false), 2500);
+}
+function playerImageName() {
+  const snap = playerExportSnapshot;
+  return `${snap ? snap.p.id : 'player'}-bio.png`;
+}
+function downloadPlayerImage() {
+  const snap = playerExportSnapshot;
+  if (!snap) return;
+  playerExportBlob(snap.p, b => {
+    if (!b) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = playerImageName();
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+}
+function copyPlayerImage() {
+  const snap = playerExportSnapshot;
+  if (!snap) return;
+  const note = document.querySelector('[data-sendnote]');
+  const say = msg => { if (note) { note.hidden = false; note.textContent = msg; } };
+  playerExportBlob(snap.p, b => {
+    if (!b) { say('The picture could not be made on this device — use Download instead, then attach the file.'); return; }
+    try {
+      const pr = navigator.clipboard.write([new ClipboardItem({ 'image/png': b })]);
+      if (pr && typeof pr.then === 'function') pr.then(
+        () => say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).'),
+        () => say('The browser blocked the copy — use Download instead, then attach the file to the draft.'));
+      else say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).');
+    } catch (err) { say('The browser blocked the copy — use Download instead, then attach the file to the draft.'); }
+  });
+}
+function sharePlayerExport() {
+  const snap = playerExportSnapshot;
+  if (!snap || !snap.mail) return;
+  playerExportBlob(snap.p, b => {
+    const data = { title: snap.mail.subject, text: snap.mail.body };
+    if (b) {
+      try {
+        const file = new File([b], playerImageName(), { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) data.files = [file];
+      } catch (err) {}
+    }
+    try { navigator.share(data).catch(() => {}); } catch (err) {}
+  });
+}
+function toggleSendPanel() {
+  const panel = document.querySelector('[data-sendpanel]');
+  if (panel) panel.hidden = !panel.hidden;
+}
+function sendPlayerMain() {
+  // the share sheet is the one route that attaches the picture by
+  // itself; everywhere else the button opens the ways-to-send panel
+  if (canShareFiles()) { sharePlayerExport(); return; }
+  toggleSendPanel();
+}
+function sendStrip(p) {
+  const mail = playerEmailText(p);
+  playerExportSnapshot = { p, mail };
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Send this player</h2>
+    <p class="p-sub">For a coach who doesn’t have the site: his page goes out as a <b>picture of his bio</b> with the <b>full text underneath it</b> — a file that opens anywhere, no site password, and no link back to the site is ever created. The picture carries the look of the page; the text carries everything in it, his PFF key-plays link included.</p>
+    <div class="email-btns">
+      <button type="button" class="btn-save" data-sendplayer="${esc(p.id)}">Send this player</button>
+      <button type="button" class="btn-ghost" data-sendpaneltoggle>Other ways to send</button>
+    </div>
+    <div class="email-panel" data-sendpanel hidden>
+      <p class="p-sub" style="margin-top:0">The picture is the file to send. Get the picture first, then open a draft for the text — a web page can’t attach the picture to a draft by itself. On a phone, <b>Send this player</b> above drops the picture straight into your mail or messages app with the text under it.</p>
+      <div class="email-btns">
+        ${canShareFiles() ? '<button type="button" class="btn-save" data-sendshare>Share — picture + text</button>' : ''}
+        <button type="button" class="btn-ghost" data-senddl>Download his picture</button>
+        ${canCopyImage() ? '<button type="button" class="btn-ghost" data-sendcopy>Copy his picture</button>' : ''}
+      </div>
+      <p class="p-sub" data-sendnote hidden></p>
+      <p class="p-sub">Email drafts open with the text only — download or copy the picture first, then attach or paste it into the draft.</p>
+      <div class="email-btns">
+        <a class="btn-ghost mail-btn" href="${playerMailto(p)}">Email this player — text only</a>
+        <a class="btn-ghost mail-btn" href="${playerGmail(p)}" target="_blank" rel="noopener">Open in Gmail — text only</a>
+      </div>
+    </div></div>`;
+}
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
@@ -4205,6 +4627,11 @@ Promise.all([loadPlayers('players.json'), loadPlayers('players_down.json'), load
   $('valueSteadyBtn').addEventListener('click', () => { valueLens = 'steady'; renderValue(); });
   $('valueCeilingBtn').addEventListener('click', () => { valueLens = 'ceiling'; renderValue(); });
   $('playerBody').addEventListener('click', e => {
+    if (e.target.closest('[data-sendplayer]')) { sendPlayerMain(); return; }
+    if (e.target.closest('[data-sendpaneltoggle]')) { toggleSendPanel(); return; }
+    if (e.target.closest('[data-sendshare]')) { sharePlayerExport(); return; }
+    if (e.target.closest('[data-senddl]')) { downloadPlayerImage(); return; }
+    if (e.target.closest('[data-sendcopy]')) { copyPlayerImage(); return; }
     const pr = e.target.closest('[data-prospect]');
     if (pr) { toggleProspect(pr.dataset.prospect); return; }
     const go = e.target.closest('[data-goclass]');
