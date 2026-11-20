@@ -309,6 +309,49 @@
    "flash_floor": "SNAPS \u2265 40 and RBLK \u2265 20"
   }
  },
+ "aderian-adelabu": [
+  {
+   "key": "gap_share",
+   "label": "Gap share of run blocks",
+   "value": 0.5333,
+   "display": "53%",
+   "pct": 76.9,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 86.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "adeyeye-adebawore": [
+  {
+   "key": "win_rate",
+   "label": "Pass-rush win rate",
+   "value": 7.1,
+   "display": "7.1%",
+   "pct": 81.5,
+   "pool": "FCS",
+   "group": "DI",
+   "volume": 28.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pressure_rate",
+   "label": "Pressure rate",
+   "value": 7.1,
+   "display": "7.1%",
+   "pct": 75.9,
+   "pool": "FCS",
+   "group": "DI",
+   "volume": 28.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "adjatay-abegesah": [
   {
    "key": "win_rate",
@@ -376,6 +419,34 @@
    "group": "DI",
    "volume": 40.0,
    "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "aiden-smith": [
+  {
+   "key": "gap_share",
+   "label": "Gap share of run blocks",
+   "value": 0.7778,
+   "display": "78%",
+   "pct": 99.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 61.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 11.1,
+   "display": "11.1%",
+   "pct": 92.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 61.0,
+   "volume_label": "snaps",
    "proxy": false,
    "flash": true
   }
@@ -509,6 +580,47 @@
    "flash": true
   }
  ],
+ "anthony-liakhnovich": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.6,
+   "display": "60%",
+   "pct": 77.1,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 43.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 12.0,
+   "display": "12.0%",
+   "pct": 94.6,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 43.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 83.7,
+   "display": "83.7",
+   "pct": 94.3,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 43.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "anthony-taylor": [
   {
    "key": "drop_rate",
@@ -623,6 +735,21 @@
    "flash": true
   }
  ],
+ "avery-huggins": [
+  {
+   "key": "gap_share",
+   "label": "Gap share of run blocks",
+   "value": 0.5366,
+   "display": "54%",
+   "pct": 77.5,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 74.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "b-j-washington": [
   {
    "key": "rtg_allowed",
@@ -705,6 +832,75 @@
    "flash": true
   }
  ],
+ "billy-wheless": [
+  {
+   "key": "gap_share",
+   "label": "Gap share of run blocks",
+   "value": 0.6552,
+   "display": "66%",
+   "pct": 93.7,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 97.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "rblk_grade",
+   "label": "Run-block grade",
+   "value": 64.8,
+   "display": "64.8",
+   "pct": 82.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 97.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "blaine-zoller": [
+  {
+   "key": "ypr",
+   "label": "Yards per reception",
+   "value": 15.0,
+   "display": "15.0",
+   "pct": 89.7,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 15.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.75,
+   "display": "75%",
+   "pct": 94.9,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 15.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 6.8,
+   "display": "6.8",
+   "pct": 89.7,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 15.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "blake-houser": [
   {
    "key": "win_rate",
@@ -744,6 +940,21 @@
    "group": "DI",
    "volume": 28.0,
    "volume_label": "pass-rush snaps",
+   "proxy": true,
+   "flash": true
+  }
+ ],
+ "brady-wagner": [
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.6,
+   "display": "60%",
+   "pct": 76.5,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 13.0,
+   "volume_label": "targets",
    "proxy": true,
    "flash": true
   }
@@ -864,6 +1075,21 @@
    "flash": true
   }
  ],
+ "brock-cornell": [
+  {
+   "key": "ballhawk_rate",
+   "label": "(INT + PBU) per target",
+   "value": 0.2,
+   "display": "0.20",
+   "pct": 79.7,
+   "pool": "FCS",
+   "group": "S",
+   "volume": 10.0,
+   "volume_label": "coverage targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "brock-schott": [
   {
    "key": "ypr",
@@ -948,6 +1174,64 @@
    "flash": true
   }
  ],
+ "caden-butler": [
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.75,
+   "display": "75%",
+   "pct": 93.0,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 15.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "contested_rate",
+   "label": "Contested catch rate",
+   "value": 0.5,
+   "display": "50%",
+   "pct": 79.1,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 4.0,
+   "volume_label": "contested targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "caleb-solomon": [
+  {
+   "key": "ballhawk_rate",
+   "label": "(INT + PBU) per target",
+   "value": 0.1667,
+   "display": "0.17",
+   "pct": 81.0,
+   "pool": "FCS",
+   "group": "CB",
+   "volume": 12.0,
+   "volume_label": "coverage targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "caleb-yates": [
+  {
+   "key": "gap_share",
+   "label": "Gap share of run blocks",
+   "value": 0.7111,
+   "display": "71%",
+   "pct": 96.4,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 132.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "cam-brandt": [
   {
    "key": "pressure_rate",
@@ -974,6 +1258,21 @@
    "group": "OL",
    "volume": 95.0,
    "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "cameron-bates": [
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 6.3,
+   "display": "6.3",
+   "pct": 77.3,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 12.0,
+   "volume_label": "targets",
    "proxy": false,
    "flash": true
   }
@@ -1374,6 +1673,101 @@
    "flash": true
   }
  ],
+ "cole-allen-2": [
+  {
+   "key": "yco_per_att",
+   "label": "Yards after contact per attempt",
+   "value": 4.0,
+   "display": "4.00",
+   "pct": 87.6,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 25.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "mtf_rate",
+   "label": "Missed tackles forced per attempt",
+   "value": 0.24,
+   "display": "24.0%",
+   "pct": 77.8,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 25.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "ypc",
+   "label": "Yards per carry",
+   "value": 5.8,
+   "display": "5.8",
+   "pct": 82.4,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 25.0,
+   "volume_label": "carries",
+   "proxy": true,
+   "flash": true
+  }
+ ],
+ "cole-euker": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.5926,
+   "display": "59%",
+   "pct": 76.5,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 52.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 14.8,
+   "display": "14.8%",
+   "pct": 99.2,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 52.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "rblk_grade",
+   "label": "Run-block grade",
+   "value": 65.7,
+   "display": "65.7",
+   "pct": 84.5,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 52.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 77.8,
+   "display": "77.8",
+   "pct": 79.1,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 52.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "cole-olsztyn": [
   {
    "key": "pressure_rate",
@@ -1567,6 +1961,21 @@
    "pool": "FBS",
    "group": "OL",
    "volume": 53.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "david-rolands": [
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 79.6,
+   "display": "79.6",
+   "pct": 82.2,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 113.0,
    "volume_label": "snaps",
    "proxy": false,
    "flash": true
@@ -1938,6 +2347,60 @@
    "flash": true
   }
  ],
+ "ean-pope": [
+  {
+   "key": "yco_per_att",
+   "label": "Yards after contact per attempt",
+   "value": 4.0,
+   "display": "4.00",
+   "pct": 87.6,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 27.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "mtf_rate",
+   "label": "Missed tackles forced per attempt",
+   "value": 0.4815,
+   "display": "48.1%",
+   "pct": 100.0,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 27.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "ypc",
+   "label": "Yards per carry",
+   "value": 8.0,
+   "display": "8.0",
+   "pct": 98.2,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 27.0,
+   "volume_label": "carries",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "ybc_per_att",
+   "label": "Yards before contact per attempt",
+   "value": 4.0,
+   "display": "4.00",
+   "pct": 99.6,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 27.0,
+   "volume_label": "carries",
+   "proxy": true,
+   "flash": true
+  }
+ ],
  "ej-crowell": [
   {
    "key": "yco_per_att",
@@ -2121,6 +2584,49 @@
    "flash": true
   }
  ],
+ "ethan-carson": [
+  {
+   "key": "win_rate",
+   "label": "Pass-rush win rate",
+   "value": 18.4,
+   "display": "18.4%",
+   "pct": 97.0,
+   "pool": "FCS",
+   "group": "LB",
+   "volume": 38.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pressure_rate",
+   "label": "Pressure rate",
+   "value": 21.1,
+   "display": "21.1%",
+   "pct": 88.0,
+   "pool": "FCS",
+   "group": "LB",
+   "volume": 38.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "ethan-clark": [
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 10.5,
+   "display": "10.5",
+   "pct": 83.8,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 6.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "fletcher-turk": [
   {
    "key": "gap_share",
@@ -2233,6 +2739,49 @@
    "flash": true
   }
  ],
+ "galvin-goss": [
+  {
+   "key": "comp_allowed",
+   "label": "Completion % allowed",
+   "value": 53.8,
+   "display": "53.8%",
+   "pct": 75.9,
+   "pool": "FCS",
+   "group": "S",
+   "volume": 13.0,
+   "volume_label": "coverage targets",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "ballhawk_rate",
+   "label": "(INT + PBU) per target",
+   "value": 0.2308,
+   "display": "0.23",
+   "pct": 88.5,
+   "pool": "FCS",
+   "group": "S",
+   "volume": 13.0,
+   "volume_label": "coverage targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "garon-kemp": [
+  {
+   "key": "ypr",
+   "label": "Yards per reception",
+   "value": 15.4,
+   "display": "15.4",
+   "pct": 79.0,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 10.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  }
+ ],
  "gemyel-allen": [
   {
    "key": "zone_share",
@@ -2314,6 +2863,62 @@
    "volume": 202.0,
    "volume_label": "snaps",
    "proxy": false,
+   "flash": true
+  }
+ ],
+ "graham-roberts": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.7568,
+   "display": "76%",
+   "pct": 98.3,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 81.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 82.8,
+   "display": "82.8",
+   "pct": 92.4,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 81.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "graham-smith": [
+  {
+   "key": "drop_rate",
+   "label": "Drop rate",
+   "value": 0.0,
+   "display": "0.0%",
+   "pct": 93.8,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 16.0,
+   "volume_label": "catchable targets",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.6875,
+   "display": "69%",
+   "pct": 88.2,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 19.0,
+   "volume_label": "targets",
+   "proxy": true,
    "flash": true
   }
  ],
@@ -2597,6 +3202,62 @@
    "flash": true
   }
  ],
+ "ian-cooper": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.6277,
+   "display": "63%",
+   "pct": 82.8,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 210.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "ian-scott": [
+  {
+   "key": "ypr",
+   "label": "Yards per reception",
+   "value": 16.7,
+   "display": "16.7",
+   "pct": 88.7,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 10.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.8333,
+   "display": "83%",
+   "pct": 98.5,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 10.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 7.0,
+   "display": "7.0",
+   "pct": 86.3,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 10.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "isaac-adams": [
   {
    "key": "pblk_grade",
@@ -2793,6 +3454,21 @@
    "flash": true
   }
  ],
+ "jackson-bennett": [
+  {
+   "key": "yco_per_att",
+   "label": "Yards after contact per attempt",
+   "value": 3.9,
+   "display": "3.90",
+   "pct": 85.5,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 21.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "jackson-cantwell": [
   {
    "key": "gap_share",
@@ -2804,6 +3480,60 @@
    "group": "OL",
    "volume": 84.0,
    "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "jackson-green": [
+  {
+   "key": "drop_rate",
+   "label": "Drop rate",
+   "value": 0.0,
+   "display": "0.0%",
+   "pct": 96.0,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 11.0,
+   "volume_label": "catchable targets",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "ypr",
+   "label": "Yards per reception",
+   "value": 18.1,
+   "display": "18.1",
+   "pct": 93.6,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 19.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.9091,
+   "display": "91%",
+   "pct": 99.7,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 19.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "contested_rate",
+   "label": "Contested catch rate",
+   "value": 0.6,
+   "display": "60%",
+   "pct": 91.1,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 5.0,
+   "volume_label": "contested targets",
    "proxy": false,
    "flash": true
   }
@@ -3301,6 +4031,21 @@
    "flash": true
   }
  ],
+ "jason-bish": [
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 8.0,
+   "display": "8.0",
+   "pct": 95.6,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 15.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "javari-barnett": [
   {
    "key": "yco_per_att",
@@ -3449,6 +4194,34 @@
    "volume": 18.0,
    "volume_label": "coverage targets",
    "proxy": false,
+   "flash": true
+  }
+ ],
+ "jaxon-long": [
+  {
+   "key": "drop_rate",
+   "label": "Drop rate",
+   "value": 0.0,
+   "display": "0.0%",
+   "pct": 96.0,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 12.0,
+   "volume_label": "catchable targets",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.6667,
+   "display": "67%",
+   "pct": 78.6,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 18.0,
+   "volume_label": "targets",
+   "proxy": true,
    "flash": true
   }
  ],
@@ -3635,6 +4408,21 @@
    "flash": true
   }
  ],
+ "joey-wassler": [
+  {
+   "key": "drop_rate",
+   "label": "Drop rate",
+   "value": 0.0,
+   "display": "0.0%",
+   "pct": 93.8,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 11.0,
+   "volume_label": "catchable targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "jon-adair": [
   {
    "key": "zone_share",
@@ -3706,6 +4494,34 @@
    "flash": true
   }
  ],
+ "jordan-harris": [
+  {
+   "key": "yco_per_att",
+   "label": "Yards after contact per attempt",
+   "value": 3.6,
+   "display": "3.60",
+   "pct": 78.7,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 21.0,
+   "volume_label": "carries",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 12.5,
+   "display": "12.5",
+   "pct": 92.9,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 8.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "jordan-thomas": [
   {
    "key": "win_rate",
@@ -3772,6 +4588,49 @@
    "pool": "FBS",
    "group": "OL",
    "volume": 77.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "josiah-allen": [
+  {
+   "key": "ypc",
+   "label": "Yards per carry",
+   "value": 5.5,
+   "display": "5.5",
+   "pct": 77.4,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 24.0,
+   "volume_label": "carries",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "ybc_per_att",
+   "label": "Yards before contact per attempt",
+   "value": 2.5,
+   "display": "2.50",
+   "pct": 86.7,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 24.0,
+   "volume_label": "carries",
+   "proxy": true,
+   "flash": true
+  }
+ ],
+ "kamal-harris": [
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 83.8,
+   "display": "83.8",
+   "pct": 94.6,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 181.0,
    "volume_label": "snaps",
    "proxy": false,
    "flash": true
@@ -4156,6 +5015,21 @@
    "flash": true
   }
  ],
+ "logan-reaska": [
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 6.6,
+   "display": "6.6",
+   "pct": 88.2,
+   "pool": "FCS",
+   "group": "TE",
+   "volume": 12.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "lucas-allgeyer": [
   {
    "key": "impact_rblk",
@@ -4184,6 +5058,21 @@
    "flash": true
   }
  ],
+ "luke-walker": [
+  {
+   "key": "sack_share",
+   "label": "Sack share of pressures",
+   "value": 0.5,
+   "display": "50%",
+   "pct": 98.0,
+   "pool": "FCS",
+   "group": "ED",
+   "volume": 46.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": true,
+   "flash": true
+  }
+ ],
  "luke-williams": [
   {
    "key": "pressure_rate",
@@ -4195,6 +5084,21 @@
    "group": "LB",
    "volume": 27.0,
    "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "maddux-reid": [
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 10.2,
+   "display": "10.2",
+   "pct": 80.5,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 9.0,
+   "volume_label": "targets",
    "proxy": false,
    "flash": true
   }
@@ -4464,6 +5368,62 @@
    "flash": true
   }
  ],
+ "michael-gidaro": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.6,
+   "display": "60%",
+   "pct": 77.1,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 60.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 25.0,
+   "display": "25.0%",
+   "pct": 100.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 60.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "rblk_grade",
+   "label": "Run-block grade",
+   "value": 75.0,
+   "display": "75.0",
+   "pct": 98.3,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 60.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "michael-nesbit": [
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.6667,
+   "display": "67%",
+   "pct": 78.6,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 18.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  }
+ ],
  "michael-smith": [
   {
    "key": "contested_rate",
@@ -4503,6 +5463,21 @@
    "group": "OL",
    "volume": 68.0,
    "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "michael-walters": [
+  {
+   "key": "mtf_rate",
+   "label": "Missed tackles forced per attempt",
+   "value": 0.2308,
+   "display": "23.1%",
+   "pct": 76.2,
+   "pool": "FCS",
+   "group": "RB",
+   "volume": 26.0,
+   "volume_label": "carries",
    "proxy": false,
    "flash": true
   }
@@ -4572,6 +5547,21 @@
    "group": "OL",
    "volume": 186.0,
    "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "najih-rahman": [
+  {
+   "key": "drop_rate",
+   "label": "Drop rate",
+   "value": 0.0,
+   "display": "0.0%",
+   "pct": 96.0,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 10.0,
+   "volume_label": "catchable targets",
    "proxy": false,
    "flash": true
   }
@@ -4727,6 +5717,60 @@
    "group": "ED",
    "volume": 41.0,
    "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "ned-zilinskas": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.6176,
+   "display": "62%",
+   "pct": 80.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 67.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 11.8,
+   "display": "11.8%",
+   "pct": 94.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 67.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "rblk_grade",
+   "label": "Run-block grade",
+   "value": 63.8,
+   "display": "63.8",
+   "pct": 79.4,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 67.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pblk_grade",
+   "label": "Pass-block grade",
+   "value": 83.1,
+   "display": "83.1",
+   "pct": 92.7,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 67.0,
+   "volume_label": "snaps",
    "proxy": false,
    "flash": true
   }
@@ -5168,6 +6212,47 @@
    "flash": true
   }
  ],
+ "roman-laurio": [
+  {
+   "key": "ypr",
+   "label": "Yards per reception",
+   "value": 16.3,
+   "display": "16.3",
+   "pct": 86.7,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 12.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "first_down_rate",
+   "label": "First-down rate",
+   "value": 0.7143,
+   "display": "71%",
+   "pct": 88.3,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 12.0,
+   "volume_label": "targets",
+   "proxy": true,
+   "flash": true
+  },
+  {
+   "key": "yac_per_rec",
+   "label": "Yards after catch per reception",
+   "value": 6.7,
+   "display": "6.7",
+   "pct": 82.8,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 12.0,
+   "volume_label": "targets",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "roman-voss": [
   {
    "key": "ypr",
@@ -5261,6 +6346,21 @@
    "group": "OL",
    "volume": 53.0,
    "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "ryan-tattersall": [
+  {
+   "key": "contested_rate",
+   "label": "Contested catch rate",
+   "value": 0.5,
+   "display": "50%",
+   "pct": 79.1,
+   "pool": "FCS",
+   "group": "WR",
+   "volume": 6.0,
+   "volume_label": "contested targets",
    "proxy": false,
    "flash": true
   }
@@ -5904,6 +7004,21 @@
    "flash": true
   }
  ],
+ "tru-kendrick": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.6977,
+   "display": "70%",
+   "pct": 92.9,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 74.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
  "vernell-brown-iii": [
   {
    "key": "drop_rate",
@@ -6136,6 +7251,62 @@
    "pool": "FCS",
    "group": "OL",
    "volume": 105.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "xavier-rivers": [
+  {
+   "key": "win_rate",
+   "label": "Pass-rush win rate",
+   "value": 19.4,
+   "display": "19.4%",
+   "pct": 99.1,
+   "pool": "FCS",
+   "group": "ED",
+   "volume": 31.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "pressure_rate",
+   "label": "Pressure rate",
+   "value": 16.1,
+   "display": "16.1%",
+   "pct": 94.8,
+   "pool": "FCS",
+   "group": "ED",
+   "volume": 31.0,
+   "volume_label": "pass-rush snaps",
+   "proxy": false,
+   "flash": true
+  }
+ ],
+ "yuseph-mustafa": [
+  {
+   "key": "zone_share",
+   "label": "Zone share of run blocks",
+   "value": 0.7121,
+   "display": "71%",
+   "pct": 95.0,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 112.0,
+   "volume_label": "snaps",
+   "proxy": false,
+   "flash": true
+  },
+  {
+   "key": "impact_rblk",
+   "label": "Impact block rate",
+   "value": 9.0,
+   "display": "9.0%",
+   "pct": 81.6,
+   "pool": "FCS",
+   "group": "OL",
+   "volume": 112.0,
    "volume_label": "snaps",
    "proxy": false,
    "flash": true
