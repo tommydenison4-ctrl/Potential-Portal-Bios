@@ -744,16 +744,19 @@ function markActiveNav() {
 
 /* "Fits my team": the player's PRINTED fits include the school — the
    g6 / p4 fit rows on his record, plus the separately printed
-   Louisiana-Monroe fit (ulm_fit / ulm_qualifier). The fit rows carry
-   full school names identical to the championship pool's team names
-   (verified across all 766 records: every fits school is a CHAMP team
-   name), so the match is plain string equality. */
+   Louisiana-Monroe fit (ulm_fit / ulm_qualifier). A fit means he
+   CLEARS THE ROOM (Tommy, Nov 20, 2026): the Will Contribute list
+   does NOT count here — this filter reads the strict fits only, as it did
+   before the Nov 19 depth tier briefly widened it. The fit rows
+   carry full school names identical to the championship pool's team
+   names (verified across all 766 records: every fits school is a
+   CHAMP team name), so the match is plain string equality. */
 function fitsMyTeam(p, teamName) {
   const f = p.fits;
   if (!f || !teamName) return false;
   if (f.ulm_fit && f.ulm_fit.school === teamName) return true;
   if (teamName === 'Louisiana-Monroe' && f.ulm_qualifier) return true;
-  return [...(f.g6 || []), ...(f.p4 || []), ...(f.depth_g6 || []), ...(f.depth_p4 || [])].some(r => r.school === teamName);
+  return [...(f.g6 || []), ...(f.p4 || [])].some(r => r.school === teamName);
 }
 
 /* -------- offer tiers on fits (Tommy, Nov 19, 2026) --------
@@ -1042,18 +1045,29 @@ function fitsTable(title, rows) {
     ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
 }
 
-/* Depth-tier fits (Tommy, Nov 19, 2026): the rooms whose lowest
-   graded man his benchmark beats without clearing the room's top
-   man — the second tier under the printed starter-tier fits, stamped
-   onto the records by apply_fits_depth_join.py as fits.depth_g6 /
-   depth_p4. The depth bar reads under the path replacement doctrine:
-   the room's lowest graded man, snaps aside; a row whose man has no
-   grade on record carries depth_ungraded and prints that instead of
-   a grade. */
-function fitsDepthTable(title, rows) {
-  if (!rows || !rows.length) return '';
-  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Lowest graded man in the room</th><th class="num">His grade</th><th>Move</th><th>Offer</th></tr>
-    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.depth_name || '')}</td><td class="num">${r.depth_ungraded ? 'no grade on record' : r.depth_grade == null ? '—' : Number(r.depth_grade).toFixed(1)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
+/* WILL CONTRIBUTE (Tommy, Nov 20, 2026) — the secondary list on the
+   player page, replacing the Nov 19 depth-tier tables ("Also
+   improves the depth at"). A fit clears the room; the Will
+   Contribute list names the schools where he is NOT a fit but would
+   land at a set depth-chart spot or better in the room (QB 3, RB 3,
+   WR 7, TE 3, OL 10, DL 6, LB 4, CB 4, S 4 — the table lives in
+   help_fits.py). His spot = 1 + the room's graded men above his
+   grade; ungraded men count as below him. Stamped onto the records
+   by apply_help_join.py as `help` (the display set: top 5 G6 + top
+   5 P4, Louisiana-Monroe always included when he qualifies there)
+   and `help_counts` (the full list's totals). The depth-tier data
+   fields stay on the records — the team and championship machinery
+   still reads them — but they no longer print on this page. */
+function helpSection(p) {
+  if (!p.help || !p.help.length) return '';
+  const total = p.help_counts ? (p.help_counts.g6 || 0) + (p.help_counts.p4 || 0) : p.help.length;
+  const more = total - p.help.length;
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Will contribute</h2>
+    <p class="p-sub">Schools where he wouldn’t start but would land in the rotation and contribute — his spot in the room shown.</p>
+    <div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Level</th><th class="num">His spot</th></tr>
+    ${p.help.map(r => `<tr><td>${esc(r.school)}${r.ulm ? ' <span class="ulm-badge">ULM</span>' : ''}</td><td>${esc(r.level || '')}</td><td class="num">${esc(r.spot_label || '')}</td></tr>`).join('')}</table></div>
+    ${more > 0 ? `<p class="p-sub">…and ${more} more school${more === 1 ? '' : 's'} where he would land in the rotation and contribute.</p>` : ''}
+  </div>`;
 }
 
 /* Skills at the top of the bio (Tommy, Nov 19, 2026): the player's
@@ -1498,18 +1512,18 @@ function renderPlayer(p) {
     </div>`;
   }
 
-  if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit || (p.fits.depth_g6 && p.fits.depth_g6.length) || (p.fits.depth_p4 && p.fits.depth_p4.length))) {
+  if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit)) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Fits — rooms he would upgrade</h2>
-      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = his benchmark beats the room's top-graded volume-qualified incumbent. The rooms under “Also improves the depth at” are the second tier — the depth test: his benchmark beats the lowest-graded man in the room without clearing its top man — the bottom player is replaceable whatever his snap count, and where the room's bottom man has no grade on record the row says so.</p>
-      <p class="p-sub">Every row also carries the <b>move</b> it is from where he plays now — Up, Lateral or Down — and the <b>offer</b> the school should make on that fit. The offer rule: on a starter-tier fit his NIL band applies. On a depth-tier fit the offer is <b>Scholarship only</b> where no NIL is projected for him there — his band floor is $0, or the school sits below the level his band prices — and his NIL band otherwise. <b>Walk-on</b> is the tier below scholarship only; it applies to FCS rooms and arrives with the FCS books' site integration, so no fit here carries it yet.</p>
+      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent. The schools where he wouldn't clear the room but would still land in the rotation are listed under <b>Will contribute</b>, below.</p>
+      <p class="p-sub">Every row also carries the <b>move</b> it is from where he plays now — Up, Lateral or Down — and the <b>offer</b> the school should make on that fit: on a fit, his NIL band applies.</p>
       ${p.direction === 'down' ? `<p class="p-sub">His P4 fits are read off his headline grade, ${Number(p.headline_grade).toFixed(1)} — same level, no translation adjustment.</p>` : ''}` : ''}
       ${fitsTable('Top G6 fits', p.fits.g6)}
       ${fitsTable(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits', p.fits.p4)}
       ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td><td>${moveCell(p.fits.ulm_fit)}</td><td>${offerCell(p.fits.ulm_fit)}</td></tr></table></div>` : ''}
-      ${fitsDepthTable('Also improves the depth at — G6', p.fits.depth_g6)}
-      ${fitsDepthTable('Also improves the depth at — P4', p.fits.depth_p4)}
     </div>`;
   }
+
+  h += helpSection(p);
 
   const games = [p.best_game, p.worst_game].filter(Boolean);
   const seasons = [p.best_season, p.worst_season].filter(Boolean);
