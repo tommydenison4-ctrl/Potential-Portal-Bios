@@ -3939,7 +3939,18 @@ function loadChanges() {
     .catch(() => null);
 }
 
-Promise.all([loadJson('players.json'), loadJson('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits(), loadFlashes(), loadOptimal(), loadTeamBrands(), loadUniverseMeta()]).then(([up, down, cmp, teams, champ, changes, traits, flashes, optimal, brands, umeta]) => {
+function loadPlayers(file) {
+  // Player payloads ship in two parts (<file> + <name>_b.json, split by
+  // split_players.py to stay under the host's file-size wall); the lists
+  // concatenate in file order to reproduce the dataset exactly. A missing
+  // second part degrades to part one alone (same pattern as loadChamp).
+  const get = url => fetch(url)
+    .then(r => (r.ok ? r.json() : null))
+    .catch(() => null);
+  return Promise.all([get(file), get(file.replace(/\.json$/, '_b.json'))])
+    .then(([a, b]) => (Array.isArray(a) && Array.isArray(b)) ? a.concat(b) : a);
+}
+Promise.all([loadPlayers('players.json'), loadPlayers('players_down.json'), loadComparison(), loadTeams(), loadChamp(), loadChanges(), loadTraits(), loadFlashes(), loadOptimal(), loadTeamBrands(), loadUniverseMeta()]).then(([up, down, cmp, teams, champ, changes, traits, flashes, optimal, brands, umeta]) => {
   CMP = cmp;
   TEAMS = teams;
   CHAMP = champ;
