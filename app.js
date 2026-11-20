@@ -1441,7 +1441,7 @@ function renderPlayer(p) {
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         ${skillsStrip(p)}
         <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
-        ${p.blended_score != null ? `<p><span class="blend-num">${p.blended_score.toFixed(1)}</span> <span class="p-sub"><b>Blended Score</b> · ${blendLevel(p)} — our score — grades, production, honours and market combined.</span></p>` : ''}
+        ${p.blended_score != null ? `<p class="p-sub">Second score — Blended ${blendVal(p)}: grades, production, honours and market combined, where that data exists.</p>` : ''}
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
