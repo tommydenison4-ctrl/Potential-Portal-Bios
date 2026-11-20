@@ -3153,19 +3153,20 @@ function shareClassImage() {
    A coach who does not have the site cannot open a player page —
    the site stays behind its password, and no link to a player is
    ever created. What he can open is a file. So every player page
-   carries a "Send this player" strip that builds the same kind of
-   export the saved class board sends: a PICTURE of the bio (a
-   canvas rendering in the page's dark look, headshot included),
-   with the FULL TEXT of the bio underneath it in the share/email,
-   so it still reads on a phone where the picture does not load.
-   The picture is a PNG, not a PDF: the site ships no PDF library
-   (it is fully self-contained) and the class board's picture flow
-   is the proven route on both desktop Chrome and mobile Safari.
+   carries a "Send this player" strip that builds him a true PDF
+   of the bio: the canvas rendering in the page's dark look
+   (headshot included), sliced into Letter pages at block
+   boundaries and bound with the vendored pdf-lib. The PDF is
+   sent BY ITSELF — no text, title or link rides with it. The
+   first version shared a picture and the text in one payload
+   and Messages sent the text and dropped the picture; the
+   second sent the picture alone; Tommy then called the format:
+   a true PDF, with no additional text (Nov 20, 2026).
    The export is built from the record alone — no navigation, no
    menus, no save/prospect/My Team cards, no site chrome — and a
    section prints only when the record carries it, so a sparse
    page exports clean: no empty headings, ever. */
-let playerExportSnapshot = null;   // {p, mail:{subject, body}} — set by sendStrip on render, like champBoardSnapshot
+let playerExportSnapshot = null;   // {p} — set by sendStrip on render
 
 function playerSkillLines(p) {
   const out = [];
@@ -3187,8 +3188,8 @@ const fitRowText = r => [
 
 /* The export as structured plain content: a header (what the top
    of the page shows) plus ordered blocks. Both renderers — the
-   canvas picture and the email text — read this one model, so the
-   picture and the text can never drift apart. Block types:
+   canvas render and the text model — read this one model, so
+   they can never drift apart. Block types:
    sec (section heading), kv (sub-heading), p (paragraph),
    li (bullet), row (one table row), note (small print),
    foot (the footer line). */
@@ -3299,8 +3300,11 @@ function playerExportModel(p) {
   return { head, blocks, date };
 }
 
-/* The full text of the bio — what travels under the picture in a
-   share, and the whole body of the email drafts. */
+/* The full text of the bio, as structured plain lines. Nothing
+   sends this any more — the PDF goes alone — it survives as the
+   test suite's content gate on the export model (via the
+   PortalExport hook below), so a section can never silently
+   drop out of the model the PDF is drawn from. */
 function playerExportText(p) {
   const m = playerExportModel(p);
   const h = m.head;
@@ -3321,22 +3325,17 @@ function playerExportText(p) {
   }
   return lines.join('\n');
 }
-function playerEmailText(p) {
-  return { subject: `Player bio — ${p.name} (${p.position}, ${p.school})`, body: playerExportText(p) };
-}
-function playerMailto(p) {
-  const em = playerEmailText(p);
-  return `mailto:?subject=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
-}
-function playerGmail(p) {
-  const em = playerEmailText(p);
-  return `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(em.subject)}&body=${encodeURIComponent(em.body)}`;
-}
+/* (The email-draft machinery that used to sit here — a mailto
+   and a Gmail compose carrying the text bio — was removed on
+   Nov 20, 2026 when the send became a true PDF sent by itself:
+   no text paths remain. playerExportText survives only as the
+   test suite's content gate, via the PortalExport hook.) */
 
 /* The picture: the export model drawn on canvas in the page's
-   dark look — same palette and two-pass measure-then-draw walk
-   as the class board picture, with the headshot drawn into the
-   header (initials where he has none, or the photo fails). */
+   dark look — same palette as the class board picture, one
+   layout pass (see below), with the headshot drawn into the
+   header (initials where he has none, or the photo fails).
+   This canvas is the visual source of the PDF. */
 function playerExportCanvas(p, img) {
   const model = playerExportModel(p);
   const head = model.head;
@@ -3356,52 +3355,44 @@ function playerExportCanvas(p, img) {
     + (head.secondLine ? 18 : 0) + (head.statLine ? 18 : 0)
     + (head.screenLine ? 18 : 0) + (head.eligWord ? 18 : 0);
   const HEADH = Math.max(20 + 104 + 14, headBottom + 16);
-  const walk = (ctx, draw) => {
+  /* Layout before paint — ONE pass that fixes every block's
+     place, and a draw pass that paints exactly those places.
+     Each block is wrapped here, with the exact font and width it
+     will be drawn in, and its height is the lines it will really
+     occupy; measure and draw read the same numbers, so they
+     cannot drift apart. Every heading also carries an explicit
+     gap before it. The first version let a sub-heading sit 6px
+     under the line above — less than the heading's own rise —
+     so WEAKNESSES / CASE AGAINST / P4 FITS struck through the
+     last line of the block above them on the rendered picture
+     (Tommy's Marvin Hall phone test, Nov 20, 2026). The layout
+     is stashed on the canvas (cv.__layout) so the render proof
+     in tests/test_render.mjs can assert the spacing on a real
+     canvas, not a stub. */
+  const GAP_SEC = 16, GAP_KV = 14, GAP_FOOT = 16;
+  const FONT_PX = { sec: 14, kv: 11.5, p: 12.5, note: 10.5, li: 12.5, row: 12, foot: 10.5 };
+  const layout = [];
+  {
     let y = HEADH + 6;
+    const push = e => { e.top = y; e.bottom = y + e.pre + e.body + e.post; y = e.bottom; layout.push(e); };
     for (const b of model.blocks) {
-      if (b.t === 'sec') {
-        y += 16;
-        if (draw) {
-          ctx.fillStyle = '#2dd4bf'; ctx.font = F.sec;
-          ctx.fillText(b.s.toUpperCase(), PAD, y);
-          ctx.strokeStyle = '#263449'; ctx.beginPath();
-          ctx.moveTo(PAD, y + 7); ctx.lineTo(W - PAD, y + 7); ctx.stroke();
-        }
-        y += 20;
-      } else if (b.t === 'kv') {
-        y += 6;
-        if (draw) { ctx.fillStyle = '#a8b3c5'; ctx.font = F.kv; ctx.fillText(b.s.toUpperCase(), PAD, y); }
-        y += 15;
-      } else if (b.t === 'p' || b.t === 'note') {
-        ctx.font = b.t === 'note' ? F.note : F.body;
-        const lines = wrapLines(ctx, b.s, MAXW);
+      if (b.t === 'sec') push({ b, pre: GAP_SEC, body: 0, post: 20, lh: 0, lines: null, base: y + GAP_SEC, lastBase: y + GAP_SEC });
+      else if (b.t === 'kv') push({ b, pre: GAP_KV, body: 0, post: 15, lh: 0, lines: null, base: y + GAP_KV, lastBase: y + GAP_KV });
+      else if (b.t === 'p' || b.t === 'note') {
+        pctx.font = b.t === 'note' ? F.note : F.body;
+        const lines = wrapLines(pctx, b.s, MAXW);
         const lh = b.t === 'note' ? 14 : 18;
-        if (draw) {
-          ctx.fillStyle = b.t === 'note' ? '#7d8aa0' : '#f1f5f9';
-          for (const L of lines) { y += lh; ctx.fillText(L, PAD, y); }
-        } else y += lines.length * lh;
-        y += 4;
+        push({ b, pre: 0, body: lines.length * lh, post: 4, lh, lines, base: y + lh, lastBase: y + lines.length * lh });
       } else if (b.t === 'li') {
-        ctx.font = F.body;
-        const lines = wrapLines(ctx, b.s, MAXW - 14);
-        if (draw) {
-          ctx.fillStyle = '#f1f5f9';
-          lines.forEach((L, i) => { y += 18; if (i === 0) ctx.fillText('•', PAD, y); ctx.fillText(L, PAD + 14, y); });
-        } else y += lines.length * 18;
-        y += 2;
-      } else if (b.t === 'row') {
-        ctx.font = F.row;
-        y += 17;
-        if (draw) { ctx.fillStyle = '#f1f5f9'; ctx.fillText(fitLine(ctx, b.s, MAXW), PAD, y); }
-      } else if (b.t === 'foot') {
-        y += 16;
-        if (draw) { ctx.fillStyle = '#7d8aa0'; ctx.font = F.foot; ctx.fillText(b.s, PAD, y); }
-        y += 4;
-      }
+        pctx.font = F.body;
+        const lines = wrapLines(pctx, b.s, MAXW - 14);
+        push({ b, pre: 0, body: lines.length * 18, post: 4, lh: 18, lines, base: y + 18, lastBase: y + lines.length * 18 });
+      } else if (b.t === 'row') push({ b, pre: 0, body: 17, post: 4, lh: 0, lines: null, base: y + 17, lastBase: y + 17 });
+      else if (b.t === 'foot') push({ b, pre: GAP_FOOT, body: 0, post: 4, lh: 0, lines: null, base: y + GAP_FOOT, lastBase: y + GAP_FOOT });
     }
-    return y + 18;
-  };
-  const H = walk(pctx, false);
+    var totalH = y + 18;
+  }
+  const H = totalH;
   let S = 2;
   if (H * S > 15000) S = 1;   // stay under the canvas height ceilings (Safari)
   const cv = document.createElement('canvas');
@@ -3452,21 +3443,119 @@ function playerExportCanvas(p, img) {
       ctx.fillText(fitLine(ctx, 'Key plays to watch — on PFF', TW - ew), TX + ew, ty);
     }
   }
-  walk(ctx, true);
+  for (const e of layout) {
+    const b = e.b;
+    if (b.t === 'sec') {
+      ctx.fillStyle = '#2dd4bf'; ctx.font = F.sec;
+      ctx.fillText(b.s.toUpperCase(), PAD, e.base);
+      ctx.strokeStyle = '#263449'; ctx.beginPath();
+      ctx.moveTo(PAD, e.base + 7); ctx.lineTo(W - PAD, e.base + 7); ctx.stroke();
+    } else if (b.t === 'kv') {
+      ctx.fillStyle = '#a8b3c5'; ctx.font = F.kv;
+      ctx.fillText(b.s.toUpperCase(), PAD, e.base);
+    } else if (b.t === 'p' || b.t === 'note') {
+      ctx.font = b.t === 'note' ? F.note : F.body;
+      ctx.fillStyle = b.t === 'note' ? '#7d8aa0' : '#f1f5f9';
+      e.lines.forEach((L, i) => ctx.fillText(L, PAD, e.top + (i + 1) * e.lh));
+    } else if (b.t === 'li') {
+      ctx.font = F.body; ctx.fillStyle = '#f1f5f9';
+      e.lines.forEach((L, i) => {
+        const ly = e.top + (i + 1) * e.lh;
+        if (i === 0) ctx.fillText('•', PAD, ly);
+        ctx.fillText(L, PAD + 14, ly);
+      });
+    } else if (b.t === 'row') {
+      ctx.font = F.row; ctx.fillStyle = '#f1f5f9';
+      ctx.fillText(fitLine(ctx, b.s, MAXW), PAD, e.base);
+    } else if (b.t === 'foot') {
+      ctx.fillStyle = '#7d8aa0'; ctx.font = F.foot;
+      ctx.fillText(b.s, PAD, e.base);
+    }
+  }
+  cv.__layout = { headH: HEADH, totalH: H, fontPx: FONT_PX, entries: layout };
   return cv;
 }
-function playerExportBlob(p, cb) {
-  const finish = img => {
-    const cv = playerExportCanvas(p, img);
-    if (!cv) { cb(null); return; }
-    if (cv.toBlob) { cv.toBlob(b => cb(b), 'image/png'); return; }
-    try {
-      const bin = atob(cv.toDataURL('image/png').split(',')[1]);
-      const arr = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-      cb(new Blob([arr], { type: 'image/png' }));
-    } catch (err) { cb(null); }
-  };
+/* The export as a true PDF (Tommy's call, Nov 20, 2026: "a true
+   pdf send with no additional text"). The fixed canvas render
+   above is the only visual source. It is sliced into US Letter
+   pages at BLOCK boundaries — the breaks come from the render's
+   own layout, so no line of text is ever cut in half by a page
+   turn — and each slice becomes one full-bleed Letter page:
+   680x880 canvas units map exactly onto 612x792 pt, and the
+   slice is padded with the export's own dark ground, so every
+   page looks deliberate. pdf-lib is vendored beside this file
+   (site/pdf-lib.min.js, loaded by index.html before app.js);
+   nothing is fetched from a CDN, ever. The PDF is the whole
+   send: it carries no accompanying text anywhere. */
+const PDF_PAGE_W_PT = 612, PDF_PAGE_H_PT = 792;   // US Letter
+const PAGE_UNITS_H = 880;                          // canvas units per page, full-bleed
+function playerPdfName(p) {
+  return `${String(p.name).replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}.pdf`;
+}
+function playerExportSlices(p, img) {
+  const full = playerExportCanvas(p, img);
+  if (!full) return null;
+  const L = full.__layout;
+  const S = full.width / 680;
+  const breaks = [0];
+  {
+    // Breaks fall between blocks — and never directly after a
+    // heading: a section or sub-heading left as the last block
+    // of a page, with its body over the turn, reads as an
+    // accident, so the break moves back to the heading's top
+    // and the heading opens the next page with its body.
+    const entries = L.entries;
+    let startIdx = 0, startY = 0, limit = PAGE_UNITS_H;
+    for (let i = 0; i < entries.length; i++) {
+      const e = entries[i];
+      if (i > startIdx && e.bottom > startY + limit) {
+        let bi = i;
+        while (bi - 1 > startIdx && (entries[bi - 1].b.t === 'sec' || entries[bi - 1].b.t === 'kv')) bi--;
+        breaks.push(entries[bi].top);
+        startIdx = bi; startY = entries[bi].top; limit = PAGE_UNITS_H - 28 - 24;
+        i = bi - 1;   // re-check the page's entries against its own limit
+      }
+    }
+  }
+  const slices = [];
+  for (let i = 0; i < breaks.length; i++) {
+    const srcY = breaks[i];
+    const srcEnd = i + 1 < breaks.length ? breaks[i + 1] : L.totalH;
+    const dstY = i === 0 ? 0 : 28;
+    const cv = document.createElement('canvas');
+    cv.width = 680 * S; cv.height = PAGE_UNITS_H * S;
+    const c2 = cv.getContext('2d');
+    if (!c2) return null;
+    c2.fillStyle = '#0d1526'; c2.fillRect(0, 0, cv.width, cv.height);
+    c2.drawImage(full, 0, srcY * S, 680 * S, (srcEnd - srcY) * S, 0, dstY * S, 680 * S, (srcEnd - srcY) * S);
+    slices.push(cv);
+  }
+  return slices;
+}
+function canvasPngBytes(cv) {
+  const bin = atob(cv.toDataURL('image/png').split(',')[1]);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return arr;
+}
+async function buildPlayerPdf(p, img) {
+  if (!window.PDFLib) return null;
+  const slices = playerExportSlices(p, img);
+  if (!slices) return null;
+  try {
+    const doc = await window.PDFLib.PDFDocument.create();
+    doc.setTitle(`Player bio — ${p.name} (${p.position}, ${p.school})`);
+    for (const cv of slices) {
+      const png = await doc.embedPng(canvasPngBytes(cv));
+      const page = doc.addPage([PDF_PAGE_W_PT, PDF_PAGE_H_PT]);
+      page.drawImage(png, { x: 0, y: 0, width: PDF_PAGE_W_PT, height: PDF_PAGE_H_PT });
+    }
+    const bytes = await doc.save();
+    return new Blob([bytes], { type: 'application/pdf' });
+  } catch (err) { return null; }
+}
+function playerExportPdf(p, cb) {
+  const finish = img => { buildPlayerPdf(p, img).then(b => cb(b), () => cb(null)); };
   if (!p.headshot) { finish(null); return; }
   let done = false;
   const img = new Image();
@@ -3476,50 +3565,63 @@ function playerExportBlob(p, cb) {
   img.src = 'headshots/' + String(p.headshot).replace(/^headshots\//, '');
   setTimeout(() => once(false), 2500);
 }
-function playerImageName() {
-  const snap = playerExportSnapshot;
-  return `${snap ? snap.p.id : 'player'}-bio.png`;
-}
-function downloadPlayerImage() {
+function downloadPlayerPdf() {
   const snap = playerExportSnapshot;
   if (!snap) return;
-  playerExportBlob(snap.p, b => {
-    if (!b) return;
+  primePlayerExportFile(snap.p).then(file => {
+    if (!file) { sendNote('The PDF could not be made on this device.'); return; }
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(b);
-    a.download = playerImageName();
+    a.href = URL.createObjectURL(file);
+    a.download = playerPdfName(snap.p);
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   });
 }
-function copyPlayerImage() {
+/* The PDF as a shareable File, built ahead of the tap (the
+   strip primes it on render). Two lessons from Tommy's iPhone
+   test of the first version (Nov 20, 2026): a share sheet handed
+   a file AND text together sent the text and dropped the file —
+   his own bio arrived in Messages as a text bubble with no
+   picture at all — and a sheet asked to wait while a file is
+   built can lose the tap that summoned it. So the PDF is built
+   before anyone taps, and it travels ALONE: the payload is the
+   file and nothing else — no text, no title, no URL. */
+let playerExportFileCache = null;   // {id, file, promise}
+function primePlayerExportFile(p) {
+  if (playerExportFileCache && playerExportFileCache.id === p.id) return playerExportFileCache.promise;
+  const cache = { id: p.id, file: null, promise: null };
+  cache.promise = new Promise(resolve => {
+    playerExportPdf(p, b => {
+      if (b) { try { cache.file = new File([b], playerPdfName(p), { type: 'application/pdf' }); } catch (err) {} }
+      resolve(cache.file);
+    });
+  });
+  playerExportFileCache = cache;
+  return cache.promise;
+}
+function playerShareData(file) { return { files: [file] }; }
+function sendNote(msg) {
+  const panel = document.querySelector('[data-sendpanel]');
+  if (panel) panel.hidden = false;
+  const note = document.querySelector('[data-sendnote]');
+  if (note) { note.hidden = false; note.textContent = msg; }
+}
+function sharePlayerPdf() {
   const snap = playerExportSnapshot;
   if (!snap) return;
-  const note = document.querySelector('[data-sendnote]');
-  const say = msg => { if (note) { note.hidden = false; note.textContent = msg; } };
-  playerExportBlob(snap.p, b => {
-    if (!b) { say('The picture could not be made on this device — use Download instead, then attach the file.'); return; }
+  const fallback = () => sendNote('Sharing didn’t open on this device — download his PDF below, then attach it in your mail or messages app yourself.');
+  primePlayerExportFile(snap.p).then(file => {
+    if (!file || !navigator.share) { fallback(); return; }
+    const data = playerShareData(file);
+    try { if (navigator.canShare && !navigator.canShare(data)) { fallback(); return; } }
+    catch (err) { fallback(); return; }
     try {
-      const pr = navigator.clipboard.write([new ClipboardItem({ 'image/png': b })]);
-      if (pr && typeof pr.then === 'function') pr.then(
-        () => say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).'),
-        () => say('The browser blocked the copy — use Download instead, then attach the file to the draft.'));
-      else say('Picture copied — open an email draft below and paste it in (Ctrl+V, or Cmd+V on a Mac).');
-    } catch (err) { say('The browser blocked the copy — use Download instead, then attach the file to the draft.'); }
-  });
-}
-function sharePlayerExport() {
-  const snap = playerExportSnapshot;
-  if (!snap || !snap.mail) return;
-  playerExportBlob(snap.p, b => {
-    const data = { title: snap.mail.subject, text: snap.mail.body };
-    if (b) {
-      try {
-        const file = new File([b], playerImageName(), { type: 'image/png' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) data.files = [file];
-      } catch (err) {}
-    }
-    try { navigator.share(data).catch(() => {}); } catch (err) {}
+      const pr = navigator.share(data);
+      if (pr && typeof pr.catch === 'function') pr.catch(err => {
+        if (err && err.name === 'AbortError') return;   // he changed his mind — nothing to fix
+        fallback();
+      });
+    } catch (err) { fallback(); }
   });
 }
 function toggleSendPanel() {
@@ -3527,35 +3629,39 @@ function toggleSendPanel() {
   if (panel) panel.hidden = !panel.hidden;
 }
 function sendPlayerMain() {
-  // the share sheet is the one route that attaches the picture by
-  // itself; everywhere else the button opens the ways-to-send panel
-  if (canShareFiles()) { sharePlayerExport(); return; }
+  // where the browser can share a file, the button shares the
+  // PDF alone; everywhere else it opens the ways-to-send panel,
+  // which leads with Download and says why, plainly
+  if (canShareFiles()) { sharePlayerPdf(); return; }
   toggleSendPanel();
 }
 function sendStrip(p) {
-  const mail = playerEmailText(p);
-  playerExportSnapshot = { p, mail };
+  playerExportSnapshot = { p };
+  primePlayerExportFile(p);   // the PDF is ready before the tap — see sharePlayerPdf
+  const shareable = canShareFiles();
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Send this player</h2>
-    <p class="p-sub">For a coach who doesn’t have the site: his page goes out as a <b>picture of his bio</b> with the <b>full text underneath it</b> — a file that opens anywhere, no site password, and no link back to the site is ever created. The picture carries the look of the page; the text carries everything in it, his PFF key-plays link included.</p>
+    <p class="p-sub">For a coach who doesn’t have the site: his page goes out as a <b>PDF of his bio</b> — one file that opens anywhere, no site password, and no link back to the site is ever created. <b>The PDF is the whole message</b>: it carries the whole page, his PFF key-plays link included, and nothing else is attached or added — no covering text, no draft, nothing.</p>
     <div class="email-btns">
       <button type="button" class="btn-save" data-sendplayer="${esc(p.id)}">Send this player</button>
       <button type="button" class="btn-ghost" data-sendpaneltoggle>Other ways to send</button>
     </div>
     <div class="email-panel" data-sendpanel hidden>
-      <p class="p-sub" style="margin-top:0">The picture is the file to send. Get the picture first, then open a draft for the text — a web page can’t attach the picture to a draft by itself. On a phone, <b>Send this player</b> above drops the picture straight into your mail or messages app with the text under it.</p>
+      ${shareable
+        ? `<p class="p-sub" style="margin-top:0"><b>Send this player</b> above opens the share sheet with <b>just his PDF</b> — pick Mail or Messages and the PDF goes as the attachment, by itself. Nothing is added to it: no text goes with the file.</p>`
+        : `<p class="p-sub" style="margin-top:0">This browser can’t hand a file to an app by itself — no share sheet here carries one. <b>Download his PDF</b>, then attach it in Mail or Messages yourself. The PDF is the whole message — nothing else needs to go with it.</p>`}
       <div class="email-btns">
-        ${canShareFiles() ? '<button type="button" class="btn-save" data-sendshare>Share — picture + text</button>' : ''}
-        <button type="button" class="btn-ghost" data-senddl>Download his picture</button>
-        ${canCopyImage() ? '<button type="button" class="btn-ghost" data-sendcopy>Copy his picture</button>' : ''}
+        ${shareable ? '<button type="button" class="btn-save" data-sendshare>Share his PDF</button>' : ''}
+        <button type="button" class="btn-ghost" data-senddl>Download his PDF</button>
       </div>
       <p class="p-sub" data-sendnote hidden></p>
-      <p class="p-sub">Email drafts open with the text only — download or copy the picture first, then attach or paste it into the draft.</p>
-      <div class="email-btns">
-        <a class="btn-ghost mail-btn" href="${playerMailto(p)}">Email this player — text only</a>
-        <a class="btn-ghost mail-btn" href="${playerGmail(p)}" target="_blank" rel="noopener">Open in Gmail — text only</a>
-      </div>
     </div></div>`;
 }
+/* Test hook (tests/test_render.mjs, tests/test_send.mjs): the app
+   runs in strict mode, so its internals stay private to this
+   script; these read-only handles let the suite drive the real
+   canvas render, the PDF page slices and the share payload.
+   The page never calls them. */
+window.PortalExport = { playerExportModel, playerExportCanvas, playerExportText, playerExportSlices, playerShareData, primePlayerExportFile, playerPdfName };
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
@@ -4629,9 +4735,8 @@ Promise.all([loadPlayers('players.json'), loadPlayers('players_down.json'), load
   $('playerBody').addEventListener('click', e => {
     if (e.target.closest('[data-sendplayer]')) { sendPlayerMain(); return; }
     if (e.target.closest('[data-sendpaneltoggle]')) { toggleSendPanel(); return; }
-    if (e.target.closest('[data-sendshare]')) { sharePlayerExport(); return; }
-    if (e.target.closest('[data-senddl]')) { downloadPlayerImage(); return; }
-    if (e.target.closest('[data-sendcopy]')) { copyPlayerImage(); return; }
+    if (e.target.closest('[data-sendshare]')) { sharePlayerPdf(); return; }
+    if (e.target.closest('[data-senddl]')) { downloadPlayerPdf(); return; }
     const pr = e.target.closest('[data-prospect]');
     if (pr) { toggleProspect(pr.dataset.prospect); return; }
     const go = e.target.closest('[data-goclass]');
