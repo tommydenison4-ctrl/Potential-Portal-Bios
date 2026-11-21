@@ -1,9 +1,9 @@
 {
- "core_evaluated": 2371,
- "universe": 16013,
+ "core_evaluated": 2788,
+ "universe": 15596,
  "total_listed": 18384,
  "by_level": {
-  "FCS": 7018,
+  "FCS": 6601,
   "G6": 4908,
   "P4": 4087
  },
@@ -17,7 +17,6 @@
   "Conference USA": 719,
   "Independent": 125,
   "MAC": 936,
-  "MEAC": 417,
   "MVFC": 614,
   "Mountain West": 654,
   "NEC": 518,
