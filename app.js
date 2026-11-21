@@ -1043,7 +1043,7 @@ function applyFilters() {
       <td>${esc(p.position)}</td>
       <td>${esc(p.school)}</td>
       <td>${esc(p.conference_book)}</td>
-      <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
+      <td class="num">${qbPairCell(p)}${qbDual(p) ? `<div class="qb-rush">${esc(qbRushText(p))}</div>` : ''}</td>
       <td class="num">${p.blended_score == null ? '—' : blendVal(p)}</td>
       <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
       <td>${eligChip(p.elig_qualified)}</td>
@@ -1534,9 +1534,9 @@ function renderPlayer(p) {
         ${home ? `<p class="p-home">Hometown: <b>${esc(home)}</b></p>` : ''}
         <p class="p-sub">${vitals.map(v => `${esc(v[0])}: <b>${esc(v[1])}</b>`).join(' &nbsp;·&nbsp; ')}</p>
         ${skillsStrip(p)}
-        <p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>
+        ${qbDual(p) ? `<p class="qb-head"><span class="qb-hg"><i>PASS</i><span class="grade-big">${p.headline_grade.toFixed(1)}</span></span><span class="qb-hg"><i>RUN</i><span class="grade-big">${p.rush_grade.toFixed(1)}</span></span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')} — two grades: every price on this page reads off the passing grade</span></p>` : `<p><span class="grade-big">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</span> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span></p>`}
         ${p.blended_score != null ? `<p class="p-sub">Second score — Blended ${blendVal(p)}: grades, production, honours and market combined, where that data exists.</p>` : ''}
-        ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
+        ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}${qbDual(p) ? ` · ${esc(qbRushText(p))}` : ''}</p>` : (qbDual(p) ? `<p class="p-sub">${esc(qbRushText(p))}</p>` : '')}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
         ${p.pff_id ? `<p><a href="https://ultimate.pff.com/ncaa/players/${esc(p.pff_id)}" target="_blank" rel="noopener"><b>Watch his film — on PFF Ultimate ↗</b></a> <span class="p-sub">His PFF Ultimate player page — the link opens PFF in a new tab, on your own PFF login. Tap his snap count on that page and every one of his plays comes up on film.</span></p>` : ''}
@@ -1676,6 +1676,24 @@ const blendLevel = p => p.conference_book === 'P4 Down' ? 'P4'
   : (p.conference_book === 'ULM' || p.conference_book === 'UTEP') ? 'G6' : 'FCS';
 const blendVal = p => `<b>${p.blended_score.toFixed(1)}</b> <span class="p-sub">${blendLevel(p)}</span>`;
 
+/* QB dual score (Tommy, Nov 21, 2026): a quarterback shows BOTH grades —
+   PASS first, RUN second — wherever his headline prints, so a dual-threat
+   QB is never missed because his headline is passing-only. DISPLAY ONLY:
+   fits, benchmarks, Will Contribute, bands, The Call and the Blended
+   Score all still price off the passing grade, grade-to-grade. The RUN
+   grade shows only where he has a published rushing grade AND at least
+   20 rushing attempts in 2026; below that, PASS alone — no placeholder,
+   no zero. */
+const qbDual = p => (p && (p.position === 'QB' || p.screen_position === 'QB')
+  && p.headline_grade != null && p.rush_grade != null
+  && p.rush_att != null && p.rush_att >= 20)
+  ? { pass: p.headline_grade, run: p.rush_grade, att: p.rush_att, yds: p.rush_yds } : null;
+const qbPairCell = p => { const d = qbDual(p); return d
+  ? `<span class="qb-pair"><span class="qb-g"><i>PASS</i>${d.pass.toFixed(1)}</span><span class="qb-g"><i>RUN</i>${d.run.toFixed(1)}</span></span>`
+  : (p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)); };
+const qbRushText = p => { const d = qbDual(p); return d
+  ? `Rushing ${d.att} att${d.yds != null ? ` · ${d.yds} yds` : ''}` : null; };
+
 function renderCompare(players) {
   /* Apples to apples (Tommy, Nov 19, 2026): a Blended Score is only ever
      compared against another Blended Score. If any player shown lacks
@@ -1693,9 +1711,13 @@ function renderCompare(players) {
     ['Height', p => esc(p.height || '—')],
     ['Weight', p => esc(p.weight == null ? '—' : p.weight)],
     ['Hometown', p => esc(p.hometown || '—')],
-    ['Headline grade', p => p.universe
-      ? (p.grade == null ? '—' : `<b>${f1(p.grade)}</b> <span class="p-sub">${esc(p.grade_col)}</span>`)
-      : (p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`)],
+    ['Headline grade', p => {
+      const base = p.universe
+        ? (p.grade == null ? '—' : `<b>${f1(p.grade)}</b> <span class="p-sub">${esc(p.grade_col)}</span>`)
+        : (p.headline_grade == null ? '—' : `<b>${p.headline_grade.toFixed(1)}</b> <span class="p-sub">${esc(p.headline_grade_col || 'grade')}</span>`);
+      const d = p.universe ? null : qbDual(p);
+      return d ? `${base}<br><b>${d.run.toFixed(1)}</b> <span class="p-sub">RUN GRD · ${esc(qbRushText(p))}</span>` : base;
+    }],
     ['Blended Score', p => !allBlended ? '—' : blendVal(p)],
     ['Stat line', p => esc(p.stat_line || '—')],
     ['Eligibility', p => p.universe ? '—' : `${eligChip(p.elig_qualified)}${p.elig_track ? `<br><span class="p-sub">${esc(p.elig_track)}</span>` : ''}`],
@@ -3219,6 +3241,7 @@ function playerExportModel(p) {
     homeLine: home ? `Hometown: ${home}` : null,
     gradeVal: p.headline_grade == null ? '—' : p.headline_grade.toFixed(1),
     gradeCol: p.headline_grade_col || 'grade',
+    rushLine: qbDual(p) ? `Rushing grade ${p.rush_grade.toFixed(1)} — ${p.rush_att} att${p.rush_yds != null ? ` · ${p.rush_yds} yds` : ''} on the ground` : null,
     secondLine: p.blended_score != null
       ? `Second score — Blended ${p.blended_score.toFixed(1)} ${blendLevel(p)}: grades, production, honours and market combined, where that data exists.` : null,
     statLine: p.stat_line || null,
@@ -3329,6 +3352,7 @@ function playerExportText(p) {
   const lines = [h.nameLine, h.vitalsLine];
   if (h.homeLine) lines.push(h.homeLine);
   lines.push(`Grade: ${h.gradeVal} (${h.gradeCol})`);
+  if (h.rushLine) lines.push(h.rushLine);
   if (h.secondLine) lines.push(h.secondLine);
   if (h.statLine) lines.push(h.statLine);
   if (h.screenLine) lines.push(h.screenLine);
@@ -3370,6 +3394,7 @@ function playerExportCanvas(p, img) {
   // header height: the headshot's 104px governs unless the text
   // column runs taller — the steps mirror the drawing walk below
   let headBottom = 42 + 20 + (head.homeLine ? 18 : 0) + 24
+    + (head.rushLine ? 18 : 0)
     + (head.secondLine ? 18 : 0) + (head.statLine ? 18 : 0)
     + (head.screenLine ? 18 : 0) + (head.eligWord ? 18 : 0);
   const HEADH = Math.max(20 + 104 + 14, headBottom + 16);
@@ -3447,6 +3472,7 @@ function playerExportCanvas(p, img) {
   const gw = ctx.measureText(head.gradeVal + ' ').width;
   ctx.font = F.sub; ctx.fillStyle = '#a8b3c5';
   ctx.fillText(fitLine(ctx, head.gradeCol, TW - gw), TX + gw, ty);
+  if (head.rushLine) { ty += 18; ctx.fillStyle = '#cbd5e1'; ctx.fillText(fitLine(ctx, head.rushLine, TW), TX, ty); }
   if (head.secondLine) { ty += 18; ctx.fillStyle = '#cbd5e1'; ctx.fillText(fitLine(ctx, head.secondLine, TW), TX, ty); }
   if (head.statLine) { ty += 18; ctx.fillStyle = '#a8b3c5'; ctx.fillText(fitLine(ctx, head.statLine, TW), TX, ty); }
   if (head.screenLine) { ty += 18; ctx.fillText(fitLine(ctx, head.screenLine, TW), TX, ty); }

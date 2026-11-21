@@ -146,6 +146,15 @@ tbody tr:hover{background:#0e1626}
 .p-home{font-size:16px;margin:4px 0 1px;color:var(--ink)}
 .p-sub{color:var(--mut);margin:3px 0}
 .grade-big{font-size:24px;font-weight:700}
+/* QB dual score (Nov 21, 2026): PASS and RUN side by side, small-caps
+   labels over equal-weight numbers — directory cells stack the pair,
+   the player page runs it at headline size. */
+.qb-pair{display:inline-flex;gap:14px}
+.qb-g{display:inline-flex;flex-direction:column;line-height:1.2}
+.qb-g i{font-style:normal;font-size:8.5px;font-weight:700;letter-spacing:.1em;color:var(--mut)}
+.qb-rush{font-size:10.5px;color:var(--mut);margin-top:3px}
+.qb-head .qb-hg{display:inline-flex;flex-direction:column;line-height:1.15;margin-right:20px;vertical-align:top}
+.qb-head .qb-hg i{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--mut)}
 .blend-num{font-size:20px;font-weight:700;color:var(--accent)}
 h2.sec{font-size:16px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);border-bottom:2px solid var(--line);padding-bottom:5px;margin:22px 0 10px}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
