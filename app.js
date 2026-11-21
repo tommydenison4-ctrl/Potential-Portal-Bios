@@ -1181,38 +1181,24 @@ function skillsStrip(p) {
   return `<div class="skills-strip"><span class="skills-label">Skills — what he does best</span><p class="skills-explainer">Every skill is measured against the other players at his position and his level in this library — “Top 10%” means he sits in the best tenth of that group. Red skills showed up in limited action: the number is real, the sample is small, and the sample is printed on the pill.</p><div class="skills-pills">${tagHtml}${traitHtml}${flashHtml}</div>${glosses ? `<div class="skills-glosses">${glosses}</div>` : ''}</div>`;
 }
 
-const PRO_LADDER = ['No verified look', 'Showcase invite', 'Signed', 'Practice squad', 'Roster appearance', 'NFL starter'];
-
-function proLadder(band) {
-  const pos = [band.floor_pos, band.likely_pos, band.ceiling_pos];
-  if (pos.some(x => x == null)) return '';
-  const lo = Math.min(...pos), hi = Math.max(...pos);
-  const tags = i => [['Floor', band.floor_pos], ['Likely', band.likely_pos], ['Ceiling', band.ceiling_pos]]
-    .filter(t => t[1] === i).map(t => `<span class="pl-tag">${t[0]}</span>`).join('');
-  return `<div class="pro-ladder">${PRO_LADDER.map((r, i) =>
-    `<div class="pl-rung${i >= lo && i <= hi ? ' in' : ''}${i === band.likely_pos ? ' likely' : ''}"><span class="pl-name">${esc(r)}</span><span class="pl-tags">${tags(i)}</span></div>`).join('')}</div>`;
-}
-
 function proSection(p) {
-  const pr = p.pro;
-  if (!pr) return '';
-  const b = pr.band;
-  let h = `<div class="card"><h2 class="sec" style="margin-top:2px">Pro track — the two baselines</h2>`;
-  /* Pro-only players carry no college band, so the outlook's home
-     is the top of this card; banded players get it in the band
-     card. One home per page — it never prints twice. */
-  if (!p.band) h += proOutlookHTML(p);
-  if (b) {
-    h += proLadder(b);
-    h += `<p class="pro-caption"><b>Floor:</b> ${esc(pr.floor_caption || b.floor)} &nbsp;·&nbsp; <b>Most likely:</b> ${esc(b.likely)} &nbsp;·&nbsp; <b>Ceiling:</b> ${esc(b.ceiling)}</p>`;
-  }
-  if (pr.band_plain) h += `<p class="p-sub">${esc(pr.band_plain)}</p>`;
-  if (pr.band_note) h += `<div class="pro-note">${esc(pr.band_note)}</div>`;
-  if (pr.baseline1) h += `<p><b>Baseline 1 — production.</b> ${esc(pr.baseline1)}</p>`;
-  if (pr.baseline1_note) h += `<p class="p-sub">${esc(pr.baseline1_note)}</p>`;
-  if (pr.baseline2) h += `<p><b>Baseline 2 — pedigree.</b> ${esc(pr.baseline2)}</p>`;
-  if (pr.baseline2_note) h += `<p>${esc(pr.baseline2_note)}</p>`;
-  return h + '</div>';
+  /* Pro outlook (Tommy, Nov 21, 2026): the weighted ladder is the
+     ONLY pro model on the page. The old two-baselines card that
+     used to render here — the six-rung ladder (No verified look,
+     Showcase invite, Signed, Practice squad, Roster appearance,
+     NFL starter) with its Floor / Most likely / Ceiling caption
+     and the Baseline 1 / Baseline 2 paragraphs — is RETIRED: it
+     printed a second, competing pro vocabulary beside the
+     outlook, different rungs and different percentages for the
+     same player. Pro-only players (no college band) get the
+     outlook here, as their pro section; banded players get it in
+     the band card. One home per page — it never prints twice.
+     The elite pro track (closest matches, The Call) renders in
+     its own cards, unchanged. */
+  if (p.band) return '';
+  const body = proOutlookHTML(p);
+  if (!body) return '';
+  return `<div class="card"><h2 class="sec" style="margin-top:2px">Pro outlook</h2>${body}</div>`;
 }
 
 function classOf(teamName) {
@@ -1716,9 +1702,11 @@ const qbRushText = p => { const d = qbDual(p); return d
    descending weight, and an "All other outcomes" bucket, rounded
    by largest remainder so the printed percentages sum to exactly
    100. The CFL/UFL tag prints only at 10% or better. The elite
-   pro track (comps, The Call) and the pro baselines card are
-   unchanged; this replaces the old generic pro paragraph in the
-   projection band. Method: PRO_LADDER_METHOD.md. */
+   pro track (comps, The Call) is unchanged. The old
+   two-baselines card was retired the same day (see proSection):
+   this ladder is the only pro model on the page and in the PDF,
+   and every outlook carries one source line naming the group
+   it was counted from. Method: PRO_LADDER_METHOD.md. */
 const PRO_RUNGS = ['Not a prospect', 'Camp invite', 'UDFA signing', 'Practice squad',
   'Day 3 pick', 'Day 2 pick', 'Day 1 pick', 'Roster member', 'Starter', 'All-Pro'];
 function proOutlookLines(po) {
@@ -1746,20 +1734,51 @@ function proOutlookLines(po) {
    pro outlook, the old generic pro paragraph is superseded by the
    outlook lines and comes out. Two shapes exist in the books: the
    "Pro, in plain words:" paragraph, and the UTEP book's second
-   "In plain words:" paragraph (the one about the pro look). */
+   "In plain words:" paragraph (the one about the pro look).
+   The baselines pointer comes out for EVERY player, outlook or
+   not (Nov 21, 2026): the college paragraph's closing sentence
+   sent the reader to the pro track card — "His pro read is built
+   from the two denominator baselines — see the pro track section
+   below." (3,569 records) or "His pro read is on this page — see
+   the pro track section below." (38) — and that card is retired,
+   so the sentence would point at a section that is not there.
+   736 of the records carrying it never had a pro section at all;
+   the sentence was book boilerplate. The books keep their text;
+   the site and the PDF stop printing the pointer. */
 function collegePlain(p) {
-  const pp = p.projection_plain || '';
+  let pp = p.projection_plain || '';
+  pp = pp.replace(/\s*His pro read is built from the two denominator baselines — see the pro track section below\./, '');
+  pp = pp.replace(/\s*His pro read is on this page — see the pro track section below\./, '');
   if (!p.pro_outlook) return pp;
   const cut = pp.indexOf('\n\nPro, in plain words:');
   if (cut >= 0) return pp.slice(0, cut);
   return pp.split('\n\n').filter(par => !(par.startsWith('In plain words:') && par.includes('pro look'))).join('\n\n');
 }
+/* The source line under every outlook: who he was counted
+   against — position group x level x production third, the
+   group size and the classes — so the number keeps its
+   credibility. Derived from the record's own outlook stamp,
+   so the group size printed is always the group counted. */
+const PRO_GROUP_NAMES = { QB: 'quarterbacks', RB: 'running backs', WR: 'wide receivers',
+  TE: 'tight ends', OL: 'offensive linemen', ED: 'edge rushers',
+  DI: 'interior defensive linemen', LB: 'linebackers', CB: 'cornerbacks', S: 'safeties' };
+function proOutlookSource(p) {
+  const po = p && p.pro_outlook;
+  if (!po || !po.cell || !po.n || !po.level) return null;
+  const cut = po.cell.lastIndexOf('|');
+  if (cut < 0) return null;
+  const group = PRO_GROUP_NAMES[po.cell.slice(0, cut)] || po.cell.slice(0, cut);
+  const third = po.cell.slice(cut + 1).toLowerCase();
+  return `Counted from ${po.n} ${po.level} ${group} in his production group (${third}), classes 2021–24.`;
+}
 function proOutlookHTML(p) {
   const ol = proOutlookLines(p.pro_outlook);
   if (!ol) return '';
+  const src = proOutlookSource(p);
   return `<div class="pro-outlook"><p class="po-head">Pro outlook: <b>${esc(ol.seat)}</b> — ${ol.seatPct}%</p>`
     + (ol.rest ? `<p class="po-rest">${esc(ol.rest)}</p>` : '')
-    + (ol.tag ? `<p class="po-tag">${esc(ol.tag)}</p>` : '') + `</div>`;
+    + (ol.tag ? `<p class="po-tag">${esc(ol.tag)}</p>` : '')
+    + (src ? `<p class="po-src">${esc(src)}</p>` : '') + `</div>`;
 }
 
 function renderCompare(players) {
@@ -3361,8 +3380,10 @@ function playerExportModel(p) {
       b.para(`Pro outlook: ${ol.seat} — ${ol.seatPct}%`);
       if (ol.rest) b.para(ol.rest);
       if (ol.tag) b.para(ol.tag);
+      const src = proOutlookSource(p);
+      if (src) b.para(src);
     } else {
-      b.para(p.projection_plain);
+      b.para(collegePlain(p));
     }
   });
 
@@ -3387,6 +3408,8 @@ function playerExportModel(p) {
       b.para(`Pro outlook: ${ol.seat} — ${ol.seatPct}%`);
       if (ol.rest) b.para(ol.rest);
       if (ol.tag) b.para(ol.tag);
+      const src = proOutlookSource(p);
+      if (src) b.para(src);
     });
   }
 
@@ -3792,7 +3815,7 @@ function sendStrip(p) {
    script; these read-only handles let the suite drive the real
    canvas render, the PDF page slices and the share payload.
    The page never calls them. */
-window.PortalExport = { playerExportModel, playerExportCanvas, playerExportText, playerExportSlices, playerShareData, primePlayerExportFile, playerPdfName, proOutlookLines };
+window.PortalExport = { playerExportModel, playerExportCanvas, playerExportText, playerExportSlices, playerShareData, primePlayerExportFile, playerPdfName, proOutlookLines, proOutlookSource };
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
