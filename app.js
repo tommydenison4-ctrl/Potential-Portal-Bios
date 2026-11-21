@@ -1067,10 +1067,17 @@ const offerCell = r => r.offer === 'Scholarship only' ? '<b>Scholarship only</b>
   : r.offer ? esc(r.offer) : '';
 const moveCell = r => r.move ? esc(r.move) : '';
 
+/* FIT MARGIN (Tommy, Nov 21, 2026): by how much he clears the room —
+   the grade the fit test used minus the displaced man's grade,
+   stamped on every fit row by apply_fit_margin_join.py. A row with
+   no margin (a replacee with no grade on record) prints a dash:
+   no point-worth is claimed against an ungraded man. */
+const marginCell = r => r.margin == null ? '—' : `<b>+${Number(r.margin).toFixed(1)}</b>`;
+
 function fitsTable(title, rows) {
   if (!rows || !rows.length) return '';
-  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr>
-    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
+  return `<p class="kv">${esc(title)}</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Clears by</th><th>Move</th><th>Offer</th></tr>
+    ${rows.map(r => `<tr><td>${logoImg(r)}${esc(r.school)}</td><td>${esc(r.conf || '')}</td><td>${esc(r.incumbent || '')}</td><td class="num">${r.inc_grade == null ? '—' : Number(r.inc_grade).toFixed(1)}</td><td class="num">${marginCell(r)}</td><td>${moveCell(r)}</td><td>${offerCell(r)}</td></tr>`).join('')}</table></div>`;
 }
 
 /* WILL CONTRIBUTE (Tommy, Nov 20, 2026) — the secondary list on the
@@ -1601,12 +1608,12 @@ function renderPlayer(p) {
 
   if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit)) {
     h += `<div class="card"><h2 class="sec" style="margin-top:2px">Fits — rooms he would upgrade</h2>
-      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent. The schools where he wouldn't clear the room but would still land in the rotation are listed under <b>Will contribute</b>, below.</p>
+      ${p.fits.benchmark != null ? `<p class="p-sub">Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent. <b>Clears by</b> is by how many grade points he beats that incumbent. The schools where he wouldn't clear the room but would still land in the rotation are listed under <b>Will contribute</b>, below.</p>
       <p class="p-sub">Every row also carries the <b>move</b> it is from where he plays now — Up, Lateral or Down — and the <b>offer</b> the school should make on that fit: on a fit, his NIL band applies.</p>
       ${p.direction === 'down' ? `<p class="p-sub">His P4 fits are read off his headline grade, ${Number(p.headline_grade).toFixed(1)} — same level, no translation adjustment.</p>` : ''}` : ''}
       ${fitsTable('Top G6 fits', p.fits.g6)}
       ${fitsTable(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits', p.fits.p4)}
-      ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th>Move</th><th>Offer</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td><td>${moveCell(p.fits.ulm_fit)}</td><td>${offerCell(p.fits.ulm_fit)}</td></tr></table></div>` : ''}
+      ${p.fits.ulm_fit ? `<p class="kv">Louisiana-Monroe</p><div class="fits-scroll"><table class="fits"><tr><th>School</th><th>Conference</th><th>Incumbent</th><th class="num">Inc. grade</th><th class="num">Clears by</th><th>Move</th><th>Offer</th></tr><tr><td>${logoImg(p.fits.ulm_fit)}${esc(p.fits.ulm_fit.school)} <span class="ulm-badge">QUALIFIES</span></td><td>${esc(p.fits.ulm_fit.conf || '')}</td><td>${esc(p.fits.ulm_fit.incumbent || '')}</td><td class="num">${p.fits.ulm_fit.inc_grade == null ? '—' : Number(p.fits.ulm_fit.inc_grade).toFixed(1)}</td><td class="num">${marginCell(p.fits.ulm_fit)}</td><td>${moveCell(p.fits.ulm_fit)}</td><td>${offerCell(p.fits.ulm_fit)}</td></tr></table></div>` : ''}
     </div>`;
   }
 
@@ -2453,6 +2460,7 @@ function champPlayerLine(c) {
   return `<div class="path-cell">${photo(c)}
     <div><a href="#/player/${esc(encodeURIComponent(c.id))}"><span class="pname">${esc(c.name)}</span></a>${c.hv ? '<span class="hv">Hidden Value</span>' : ''}${c.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${tagBadges(c.id)}
     <br><span class="p-sub">${esc(c.school)} · benchmark <b>${f1(c.benchmark)}</b></span>
+    ${c.margin != null ? `<br><span class="p-sub">Clears ${c.starter ? 'the room’s top man' : 'the room’s bottom man'} by <b>+${f1(c.margin)}</b></span>` : ''}
     <br><span class="p-sub">${nilRange(c) ? `Est. NIL <b>${nilRange(c)}</b> a year` : 'Est. NIL — no estimate'}</span>
     <br>${eligChip(c.elig)}${c.elig === 'Unsettled' ? '<span class="p-sub"> eligibility unsettled</span>' : ''}
     <br><button type="button" class="btn-add" data-add="${esc(c.id)}">+ Save to class</button></div></div>`;
@@ -2484,8 +2492,8 @@ function champRoomRow(x, confName) {
     const c = x.path;
     const shownGet = x.getableShown || r.getable || [];
     const more = shownGet.length > 1 || (x.archOn && r.getable_total > 0) ? `<details class="getable-more"><summary>${x.archOn ? `Getable players holding a ticked archetype (${shownGet.length} of ${r.getable_total})` : `All getable players (${r.getable_total})`}</summary>
-      <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th>Est. NIL</th><th>Eligibility</th></tr>
-      ${shownGet.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}${o.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${o.depth_ungraded ? '<span class="p-sub">replaces an ungraded man</span>' : ''}${tagBadges(o.id)}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
+      <div class="fits-scroll"><table class="fits"><tr><th>Player</th><th>School</th><th class="num">Grade</th><th class="num">Benchmark</th><th class="num">Clears by</th><th>Est. NIL</th><th>Eligibility</th></tr>
+      ${shownGet.map(o => `<tr draggable="true" data-dragpid="${esc(o.id)}"><td><a href="#/player/${esc(encodeURIComponent(o.id))}"><span class="pname">${esc(o.name)}</span></a>${o.hv ? '<span class="hv">Hidden Value</span>' : ''}${o.starter ? '<span class="starter-badge">Beats your starter</span>' : ''}${o.depth_ungraded ? '<span class="p-sub">replaces an ungraded man</span>' : ''}${tagBadges(o.id)}</td><td>${esc(o.school)}</td><td class="num">${f1(o.grade)}</td><td class="num"><b>${f1(o.benchmark)}</b></td><td class="num">${o.margin == null ? '—' : `<b>+${f1(o.margin)}</b>`}</td><td>${nilRange(o) || 'no estimate'}</td><td>${eligChip(o.elig)}</td></tr>`).join('')}
       </table></div></details>` : '';
     pathCell = `${champPlayerLine(c)}<p class="path-status"><span class="chip ${CHAMP_STATUS_CLS[x.status]}">${x.status}</span>${
       x.status === 'PARTIAL' ? (x.bar != null && c.benchmark >= x.bar - 1e-9
@@ -3266,6 +3274,7 @@ function playerSkillLines(p) {
 const fitRowText = r => [
   r.school + (r.conf ? ` (${r.conf})` : ''),
   r.incumbent ? `incumbent ${r.incumbent}${r.inc_grade != null ? ` (${Number(r.inc_grade).toFixed(1)})` : ''}` : '',
+  r.margin != null ? `clears by +${Number(r.margin).toFixed(1)}` : '',
   r.move || '', r.offer || '',
 ].filter(Boolean).join(' · ');
 
@@ -3393,7 +3402,7 @@ function playerExportModel(p) {
 
   if (p.fits && ((p.fits.g6 && p.fits.g6.length) || (p.fits.p4 && p.fits.p4.length) || p.fits.ulm_fit)) {
     section('Fits — rooms he would upgrade', b => {
-      if (p.fits.benchmark != null) b.para(`Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent.`);
+      if (p.fits.benchmark != null) b.para(`Benchmark (his grade after the level-translation adjustment): ${Number(p.fits.benchmark).toFixed(1)}. A fit = he clears the room: his benchmark beats the room's top-graded volume-qualified incumbent. Clears by is by how many grade points he beats that incumbent.`);
       if (p.fits.g6 && p.fits.g6.length) { b.kv('Top G6 fits'); p.fits.g6.forEach(r => b.row(fitRowText(r))); }
       if (p.fits.p4 && p.fits.p4.length) { b.kv(p.conference_book === 'ULM' ? 'P4 fits (as printed)' : 'Top P4 fits'); p.fits.p4.forEach(r => b.row(fitRowText(r))); }
       if (p.fits.ulm_fit) { b.kv('Louisiana-Monroe'); b.row(fitRowText(p.fits.ulm_fit) + ' · QUALIFIES'); }
