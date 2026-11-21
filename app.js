@@ -1539,7 +1539,7 @@ function renderPlayer(p) {
         ${p.stat_line ? `<p class="p-sub">${esc(p.stat_line)}</p>` : ''}
         ${p.screen_label ? `<p class="p-sub">${esc(p.screen_label)}</p>` : ''}
         <p>${eligChip(p.elig_qualified)} <span class="p-sub">eligibility — qualified determination</span></p>
-        ${p.pff_id ? `<p><a href="https://premium.pff.com/ncaa/players/2026/REGPO/player/${esc(p.pff_id)}" target="_blank" rel="noopener"><b>Key plays to watch — on PFF ↗</b></a> <span class="p-sub">His key plays and film live on his PFF page — the link opens PFF in a new tab, on your own PFF login.</span></p>` : ''}
+        ${p.pff_id ? `<p><a href="https://ultimate.pff.com/ncaa/players/${esc(p.pff_id)}" target="_blank" rel="noopener"><b>Watch his film — on PFF Ultimate ↗</b></a> <span class="p-sub">His PFF Ultimate player page — the link opens PFF in a new tab, on your own PFF login. Tap his snap count on that page and every one of his plays comes up on film.</span></p>` : ''}
       </div>
     </div></div>`;
 
@@ -3193,6 +3193,19 @@ const fitRowText = r => [
    sec (section heading), kv (sub-heading), p (paragraph),
    li (bullet), row (one table row), note (small print),
    foot (the footer line). */
+
+/* The export draws plain text on canvas — it cannot render the
+   badge markup the page renderers deliberately embed in strings
+   (topHtml's <span class="badge-sub"> inside plainTagStat's
+   rewrites, which the web page shows as a styled badge). Left in,
+   the markup printed literally in the PDF (Cole Molina's skill
+   lines, Nov 20, 2026). So every string the model carries is
+   stripped of tags here, at the export layer — inner text kept
+   ("Top 1% 99th pct") — and the web page rendering is untouched.
+   The pattern requires a letter after "<" or "</", so plain text
+   that merely contains "<" (a "counted 3 <= 3" basis line) is
+   never eaten. */
+const stripTags = s => typeof s === 'string' ? s.replace(/<\/?[a-zA-Z][^>]*>/g, '') : s;
 function playerExportModel(p) {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const vitals = [
@@ -3211,7 +3224,7 @@ function playerExportModel(p) {
     statLine: p.stat_line || null,
     screenLine: p.screen_label || null,
     eligWord: p.elig_qualified || null,
-    pffUrl: p.pff_id ? `https://premium.pff.com/ncaa/players/2026/REGPO/player/${p.pff_id}` : null,
+    pffUrl: p.pff_id ? `https://ultimate.pff.com/ncaa/players/${p.pff_id}` : null,
   };
   const blocks = [];
   const section = (title, fill) => {
@@ -3297,6 +3310,11 @@ function playerExportModel(p) {
   });
 
   blocks.push({ t: 'foot', s: `${p.name} · Prepared ${date}` });
+
+  // plain-text guarantee for everything the export renders —
+  // see stripTags above
+  for (const k of Object.keys(head)) head[k] = stripTags(head[k]);
+  for (const b of blocks) b.s = stripTags(b.s);
   return { head, blocks, date };
 }
 
@@ -3315,7 +3333,7 @@ function playerExportText(p) {
   if (h.statLine) lines.push(h.statLine);
   if (h.screenLine) lines.push(h.screenLine);
   if (h.eligWord) lines.push(`Eligibility: ${h.eligWord} — qualified determination`);
-  if (h.pffUrl) lines.push(`Key plays to watch — on PFF: ${h.pffUrl}`, 'His key plays and film live on his PFF page — the link opens PFF on your own PFF login.');
+  if (h.pffUrl) lines.push(`Watch his film — on PFF Ultimate: ${h.pffUrl}`, 'His PFF Ultimate player page — opens PFF on your own PFF login. Tap his snap count on that page and every one of his plays comes up on film.');
   for (const b of m.blocks) {
     if (b.t === 'sec') lines.push('', b.s.toUpperCase());
     else if (b.t === 'kv') lines.push(b.s);
@@ -3440,7 +3458,7 @@ function playerExportCanvas(p, img) {
     if (head.pffUrl) {
       const ew = ctx.measureText(et + '  ·  ').width;
       ctx.fillStyle = '#2dd4bf'; ctx.font = `700 12.5px ${FONT}`;
-      ctx.fillText(fitLine(ctx, 'Key plays to watch — on PFF', TW - ew), TX + ew, ty);
+      ctx.fillText(fitLine(ctx, 'Watch his film — on PFF Ultimate', TW - ew), TX + ew, ty);
     }
   }
   for (const e of layout) {
@@ -3640,7 +3658,7 @@ function sendStrip(p) {
   primePlayerExportFile(p);   // the PDF is ready before the tap — see sharePlayerPdf
   const shareable = canShareFiles();
   return `<div class="card"><h2 class="sec" style="margin-top:2px">Send this player</h2>
-    <p class="p-sub">For a coach who doesn’t have the site: his page goes out as a <b>PDF of his bio</b> — one file that opens anywhere, no site password, and no link back to the site is ever created. <b>The PDF is the whole message</b>: it carries the whole page, his PFF key-plays link included, and nothing else is attached or added — no covering text, no draft, nothing.</p>
+    <p class="p-sub">For a coach who doesn’t have the site: his page goes out as a <b>PDF of his bio</b> — one file that opens anywhere, no site password, and no link back to the site is ever created. <b>The PDF is the whole message</b>: it carries the whole page, his PFF Ultimate film link included, and nothing else is attached or added — no covering text, no draft, nothing.</p>
     <div class="email-btns">
       <button type="button" class="btn-save" data-sendplayer="${esc(p.id)}">Send this player</button>
       <button type="button" class="btn-ghost" data-sendpaneltoggle>Other ways to send</button>
