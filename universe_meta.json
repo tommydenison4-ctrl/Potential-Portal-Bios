@@ -1,10 +1,10 @@
 {
- "core_evaluated": 2788,
- "universe": 15596,
- "total_listed": 18384,
+ "core_evaluated": 3723,
+ "universe": 14612,
+ "total_listed": 18335,
  "by_level": {
   "FCS": 6601,
-  "G6": 4908,
+  "G6": 3924,
   "P4": 4087
  },
  "by_conference": {
@@ -27,8 +27,7 @@
   "SEC": 913,
   "SWAC": 835,
   "SoCon": 648,
-  "Southland": 673,
-  "Sun Belt": 984
+  "Southland": 673
  },
  "fcs_conferences": [
   "Big Sky",
