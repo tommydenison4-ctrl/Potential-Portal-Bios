@@ -165,6 +165,10 @@ ul.tight li{margin:4px 0}
 .band .rung{flex:1 1 150px;border:1px solid var(--line);border-radius:8px;padding:8px 11px}
 .band .rung b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
 .band .rung.likely{border-color:var(--accent);background:var(--raise)}
+.pro-outlook{margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
+.po-head{margin:2px 0}
+.po-rest{margin:2px 0;color:var(--mut)}
+.po-tag{display:inline-block;margin:4px 0 2px;padding:2px 8px;border:1px solid var(--accent);border-radius:999px;font-size:12px;color:var(--accent)}
 table.fits{border-collapse:collapse;width:100%;min-width:0;margin:6px 0 12px}
 table.fits th,table.fits td{padding:6px 9px;border-bottom:1px solid var(--line);font-size:14px}
 table.fits th{text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}

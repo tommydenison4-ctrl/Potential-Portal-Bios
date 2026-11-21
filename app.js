@@ -1191,6 +1191,10 @@ function proSection(p) {
   if (!pr) return '';
   const b = pr.band;
   let h = `<div class="card"><h2 class="sec" style="margin-top:2px">Pro track — the two baselines</h2>`;
+  /* Pro-only players carry no college band, so the outlook's home
+     is the top of this card; banded players get it in the band
+     card. One home per page — it never prints twice. */
+  if (!p.band) h += proOutlookHTML(p);
   if (b) {
     h += proLadder(b);
     h += `<p class="pro-caption"><b>Floor:</b> ${esc(pr.floor_caption || b.floor)} &nbsp;·&nbsp; <b>Most likely:</b> ${esc(b.likely)} &nbsp;·&nbsp; <b>Ceiling:</b> ${esc(b.ceiling)}</p>`;
@@ -1572,7 +1576,7 @@ function renderPlayer(p) {
       <div class="rung"><b>Floor</b>${esc(p.band.floor)}</div>
       <div class="rung likely"><b>Likely</b>${esc(p.band.likely)}</div>
       <div class="rung"><b>Ceiling</b>${esc(p.band.ceiling)}</div></div>
-      ${p.projection_plain ? `<p>${esc(p.projection_plain)}</p>` : ''}</div>`;
+      ${collegePlain(p) ? `<p>${esc(collegePlain(p))}</p>` : ''}${proOutlookHTML(p)}</div>`;
   }
 
   h += nilSection(p);
@@ -1693,6 +1697,63 @@ const qbPairCell = p => { const d = qbDual(p); return d
   : (p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)); };
 const qbRushText = p => { const d = qbDual(p); return d
   ? `Rushing ${d.att} att${d.yds != null ? ` · ${d.yds} yds` : ''}` : null; };
+
+/* Pro outlook (Tommy, Nov 21, 2026): the weighted ladder. A player
+   with a pro cell carries pro_outlook — the full rung distribution
+   of his cohort (position group x level x production third,
+   classes 2021–24) re-coded to the ladder: Not a prospect, Camp
+   invite, UDFA signing, Practice squad, Day 3 / Day 2 / Day 1
+   pick, Roster member, Starter, All-Pro — plus the parallel
+   CFL/UFL lane, which never enters the NFL tally. Display is just
+   where the guy sits: a headline seat line, the next rungs in
+   descending weight, and an "All other outcomes" bucket, rounded
+   by largest remainder so the printed percentages sum to exactly
+   100. The CFL/UFL tag prints only at 10% or better. The elite
+   pro track (comps, The Call) and the pro baselines card are
+   unchanged; this replaces the old generic pro paragraph in the
+   projection band. Method: PRO_LADDER_METHOD.md. */
+const PRO_RUNGS = ['Not a prospect', 'Camp invite', 'UDFA signing', 'Practice squad',
+  'Day 3 pick', 'Day 2 pick', 'Day 1 pick', 'Roster member', 'Starter', 'All-Pro'];
+function proOutlookLines(po) {
+  if (!po || !po.counts || !po.n) return null;
+  const ents = PRO_RUNGS.map((r, i) => ({ rung: r, idx: i, count: po.counts[r] || 0 }))
+    .filter(e => e.count > 0);
+  if (!ents.length) return null;
+  ents.forEach(e => { const raw = e.count / po.n * 100; e.pct = Math.floor(raw); e.rem = raw - e.pct; });
+  let deficit = 100 - ents.reduce((s, e) => s + e.pct, 0);
+  const byRem = [...ents].sort((a, b) => b.rem - a.rem || b.count - a.count || b.idx - a.idx);
+  for (let k = 0; deficit > 0; k++, deficit--) byRem[k % byRem.length].pct++;
+  const ordered = [...ents].sort((a, b) => b.pct - a.pct || b.count - a.count || b.idx - a.idx);
+  const seat = ordered[0];
+  const named = ordered.slice(1, 4).filter(e => e.pct > 0);
+  const bucket = 100 - seat.pct - named.reduce((s, e) => s + e.pct, 0);
+  const parts = named.map(e => `${e.rung} — ${e.pct}%`);
+  if (bucket > 0) parts.push(`All other outcomes — ${bucket}%`);
+  return {
+    seat: seat.rung, seatPct: seat.pct,
+    rest: parts.length ? parts.join(' · ') : null,
+    tag: (po.cfl_ufl_pct != null && po.cfl_ufl_pct >= 10) ? `CFL/UFL — ${Math.round(po.cfl_ufl_pct)}%` : null,
+  };
+}
+/* The college half of projection_plain: where a player carries a
+   pro outlook, the old generic pro paragraph is superseded by the
+   outlook lines and comes out. Two shapes exist in the books: the
+   "Pro, in plain words:" paragraph, and the UTEP book's second
+   "In plain words:" paragraph (the one about the pro look). */
+function collegePlain(p) {
+  const pp = p.projection_plain || '';
+  if (!p.pro_outlook) return pp;
+  const cut = pp.indexOf('\n\nPro, in plain words:');
+  if (cut >= 0) return pp.slice(0, cut);
+  return pp.split('\n\n').filter(par => !(par.startsWith('In plain words:') && par.includes('pro look'))).join('\n\n');
+}
+function proOutlookHTML(p) {
+  const ol = proOutlookLines(p.pro_outlook);
+  if (!ol) return '';
+  return `<div class="pro-outlook"><p class="po-head">Pro outlook: <b>${esc(ol.seat)}</b> — ${ol.seatPct}%</p>`
+    + (ol.rest ? `<p class="po-rest">${esc(ol.rest)}</p>` : '')
+    + (ol.tag ? `<p class="po-tag">${esc(ol.tag)}</p>` : '') + `</div>`;
+}
 
 function renderCompare(players) {
   /* Apples to apples (Tommy, Nov 19, 2026): a Blended Score is only ever
@@ -3285,7 +3346,15 @@ function playerExportModel(p) {
 
   if (p.band) section('Projection band', b => {
     b.para(`Floor: ${p.band.floor} · Likely: ${p.band.likely} · Ceiling: ${p.band.ceiling}`);
-    b.para(p.projection_plain);
+    const ol = proOutlookLines(p.pro_outlook);
+    if (ol) {
+      b.para(collegePlain(p));
+      b.para(`Pro outlook: ${ol.seat} — ${ol.seatPct}%`);
+      if (ol.rest) b.para(ol.rest);
+      if (ol.tag) b.para(ol.tag);
+    } else {
+      b.para(p.projection_plain);
+    }
   });
 
   if (p.nil_status) section('Estimated NIL projection', b => {
@@ -3302,6 +3371,15 @@ function playerExportModel(p) {
     }
     b.note(NIL_LABEL);
   });
+
+  if (!p.band) {
+    const ol = proOutlookLines(p.pro_outlook);
+    if (ol) section('Pro outlook', b => {
+      b.para(`Pro outlook: ${ol.seat} — ${ol.seatPct}%`);
+      if (ol.rest) b.para(ol.rest);
+      if (ol.tag) b.para(ol.tag);
+    });
+  }
 
   if (p.call) section('The Call', b => {
     const c = p.call;
@@ -3705,7 +3783,7 @@ function sendStrip(p) {
    script; these read-only handles let the suite drive the real
    canvas render, the PDF page slices and the share payload.
    The page never calls them. */
-window.PortalExport = { playerExportModel, playerExportCanvas, playerExportText, playerExportSlices, playerShareData, primePlayerExportFile, playerPdfName };
+window.PortalExport = { playerExportModel, playerExportCanvas, playerExportText, playerExportSlices, playerShareData, primePlayerExportFile, playerPdfName, proOutlookLines };
 function renderClassBoard(t, m) {
   const idx = availIdx();
   const ct = classTotals();
