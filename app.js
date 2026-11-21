@@ -545,7 +545,7 @@ function renderProspects() {
       <td>${esc(p.school)}</td>
       <td class="num">${p.headline_grade == null ? '—' : p.headline_grade.toFixed(1)}</td>
       <td class="num">${p.blended_score == null ? '—' : blendVal(p)}</td>
-      <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
+      <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}${proOutlookCardLine(p)}</td>
       <td>${eligChip(p.elig_qualified)}</td>
       <td class="num">${nilRange(p) || '—'}</td>
       <td><button type="button" class="btn-remove" data-unprospect="${esc(p.id)}" aria-label="Remove ${esc(p.name)} from your prospect list">×</button></td>
@@ -1045,7 +1045,7 @@ function applyFilters() {
       <td>${esc(p.conference_book)}</td>
       <td class="num">${qbPairCell(p)}${qbDual(p) ? `<div class="qb-rush">${esc(qbRushText(p))}</div>` : ''}</td>
       <td class="num">${p.blended_score == null ? '—' : blendVal(p)}</td>
-      <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}</td>
+      <td>${p.band ? esc(p.band.likely) : 'Pro evaluation only'}${proOutlookCardLine(p)}</td>
       <td>${eligChip(p.elig_qualified)}</td>
     </tr>`).join('');
 }
@@ -1779,6 +1779,17 @@ function proOutlookHTML(p) {
     + (ol.rest ? `<p class="po-rest">${esc(ol.rest)}</p>` : '')
     + (ol.tag ? `<p class="po-tag">${esc(ol.tag)}</p>` : '')
     + (src ? `<p class="po-src">${esc(src)}</p>` : '') + `</div>`;
+}
+
+/* CONSISTENCY (Tommy, Nov 21, 2026): the Pro outlook headline prints
+   in the same places everywhere — the player page, his PDF, and every
+   listing card/row that carries his band. Headline only: the seat and
+   its percentage, in the same words as the page. The outcome split
+   stays on the page and in the PDF. No stamp on the record -> no
+   line, never invented. */
+function proOutlookCardLine(p) {
+  const ol = p && p.pro_outlook ? proOutlookLines(p.pro_outlook) : null;
+  return ol ? `<div class="po-line">Pro outlook: <b>${esc(ol.seat)}</b> — ${ol.seatPct}%</div>` : '';
 }
 
 function renderCompare(players) {
@@ -4101,7 +4112,7 @@ function renderValue() {
       <td>${esc(p.school)}</td>
       <td>${esc(v.position)}</td>
       <td class="num">${f1(v.grade_used)}</td>
-      <td>${esc(v.ceiling_level)}</td>
+      <td>${esc(v.ceiling_level)}${proOutlookCardLine(p)}</td>
       <td class="num">${fmtMoney(v.nil_low)}–${fmtMoney(v.nil_high)}</td>
       <td class="num${valueLens === 'steady' ? ' v-on' : ''}">${f1(v.steady_value)}</td>
       <td class="num${valueLens === 'ceiling' ? ' v-on' : ''}">${f1(v.ceiling_value)}</td>
@@ -4398,7 +4409,7 @@ function runPrototype() {
       <td>—</td>
       <td>—</td>
       <td><span class="p-sub">Not evaluated</span></td></tr>` : `<tr>
-      <td>${prospectStar(p)}<a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a>${tagBadges(p.id)}${flashBadges(p.id)}</td>
+      <td>${prospectStar(p)}<a href="#/player/${esc(encodeURIComponent(p.id))}"><span class="pname">${esc(p.name)}</span></a>${tagBadges(p.id)}${flashBadges(p.id)}${proOutlookCardLine(p)}</td>
       <td>${esc(p.position)}</td><td>${esc(p.school)}</td><td>${esc(p.conference_book)}${p.direction === 'down' ? ' · P4 Down' : ''}</td>
       <td class="num"><b>${protoBench(p) == null ? '—' : f1(protoBench(p))}</b></td>
       <td>${esc(p.height || '—')} · ${p.weight == null ? '—' : esc(p.weight) + ' lb'}</td>
